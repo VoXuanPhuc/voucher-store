@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="voucher">
+      <h2 data-cy="voucherDetailsHeading"><span>Voucher</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ voucher.id }}</span>
+        </dd>
+        <dt><span>Price</span></dt>
+        <dd>
+          <span>{{ voucher.price }}</span>
+        </dd>
+        <dt><span>Quantity</span></dt>
+        <dd>
+          <span>{{ voucher.quantity }}</span>
+        </dd>
+        <dt><span>Start Time</span></dt>
+        <dd>
+          <span>{{ voucher.startTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Expried Time</span></dt>
+        <dd>
+          <span>{{ voucher.expriedTime | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Product</span></dt>
+        <dd>
+          <span *ngFor="let product of voucher.products; let last = last">
+            <a [routerLink]="['/product', product?.id, 'view']">{{ product.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Event</span></dt>
+        <dd>
+          <div *ngIf="voucher.event">
+            <a [routerLink]="['/event', voucher.event?.id, 'view']">{{ voucher.event?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+          <div *ngIf="voucher.type">
+            <a [routerLink]="['/service-type', voucher.type?.id, 'view']">{{ voucher.type?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Status</span></dt>
+        <dd>
+          <div *ngIf="voucher.status">
+            <a [routerLink]="['/voucher-status', voucher.status?.id, 'view']">{{ voucher.status?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/voucher', voucher.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

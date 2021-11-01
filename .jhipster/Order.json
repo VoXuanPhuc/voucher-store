@@ -1,0 +1,45 @@
+{
+  "name": "Order",
+  "fields": [
+    {
+      "fieldName": "totalCost",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "paymentTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "voucherCode",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "voucherCode"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "myUser",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "user"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "orderStatus",
+      "otherEntityRelationshipName": "order",
+      "relationshipName": "status"
+    }
+  ],
+  "entityTableName": "jhi_order",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211101082326"
+}

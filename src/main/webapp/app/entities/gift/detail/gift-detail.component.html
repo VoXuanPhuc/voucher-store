@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="gift">
+      <h2 data-cy="giftDetailsHeading"><span>Gift</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ gift.id }}</span>
+        </dd>
+        <dt><span>Message</span></dt>
+        <dd>
+          <span>{{ gift.message }}</span>
+        </dd>
+        <dt><span>Giver</span></dt>
+        <dd>
+          <div *ngIf="gift.giver">
+            <a [routerLink]="['/my-user', gift.giver?.id, 'view']">{{ gift.giver?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Voucher</span></dt>
+        <dd>
+          <div *ngIf="gift.voucher">
+            <a [routerLink]="['/voucher-code', gift.voucher?.id, 'view']">{{ gift.voucher?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/gift', gift.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

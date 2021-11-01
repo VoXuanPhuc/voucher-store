@@ -1,0 +1,64 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="store">
+      <h2 data-cy="storeDetailsHeading"><span>Store</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ store.id }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ store.name }}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+          <span>{{ store.description }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ store.email }}</span>
+        </dd>
+        <dt><span>Phone</span></dt>
+        <dd>
+          <span>{{ store.phone }}</span>
+        </dd>
+        <dt><span>Avartar</span></dt>
+        <dd>
+          <span>{{ store.avartar }}</span>
+        </dd>
+        <dt><span>Background</span></dt>
+        <dd>
+          <span>{{ store.background }}</span>
+        </dd>
+        <dt><span>Address</span></dt>
+        <dd>
+          <div *ngIf="store.address">
+            <a [routerLink]="['/address', store.address?.id, 'view']">{{ store.address?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Pack</span></dt>
+        <dd>
+          <div *ngIf="store.pack">
+            <a [routerLink]="['/benifit-package', store.pack?.id, 'view']">{{ store.pack?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/store', store.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

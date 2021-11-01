@@ -1,0 +1,28 @@
+{
+  "name": "VoucherImage",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "voucher",
+      "otherEntityRelationshipName": "voucherImage",
+      "relationshipName": "voucher"
+    }
+  ],
+  "entityTableName": "voucher_image",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211101082322"
+}

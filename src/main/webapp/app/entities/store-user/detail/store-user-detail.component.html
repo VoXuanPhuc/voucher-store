@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="storeUser">
+      <h2 data-cy="storeUserDetailsHeading"><span>Store User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ storeUser.id }}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+          <div *ngIf="storeUser.type">
+            <a [routerLink]="['/relationship-type', storeUser.type?.id, 'view']">{{ storeUser.type?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+          <div *ngIf="storeUser.user">
+            <a [routerLink]="['/my-user', storeUser.user?.id, 'view']">{{ storeUser.user?.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Store</span></dt>
+        <dd>
+          <div *ngIf="storeUser.store">
+            <a [routerLink]="['/store', storeUser.store?.id, 'view']">{{ storeUser.store?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/store-user', storeUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

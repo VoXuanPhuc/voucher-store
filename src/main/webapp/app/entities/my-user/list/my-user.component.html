@@ -1,0 +1,102 @@
+<div>
+  <h2 id="page-heading" data-cy="MyUserHeading">
+    <span>My Users</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-my-user"
+        [routerLink]="['/my-user/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new My User </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="myUsers?.length === 0">
+    <span>No myUsers found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="myUsers && myUsers.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Username</span></th>
+          <th scope="col"><span>Password</span></th>
+          <th scope="col"><span>First Name</span></th>
+          <th scope="col"><span>Last Name</span></th>
+          <th scope="col"><span>Gender</span></th>
+          <th scope="col"><span>Phone</span></th>
+          <th scope="col"><span>Email</span></th>
+          <th scope="col"><span>Address</span></th>
+          <th scope="col"><span>Role</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let myUser of myUsers; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/my-user', myUser.id, 'view']">{{ myUser.id }}</a>
+          </td>
+          <td>{{ myUser.username }}</td>
+          <td>{{ myUser.password }}</td>
+          <td>{{ myUser.firstName }}</td>
+          <td>{{ myUser.lastName }}</td>
+          <td>{{ myUser.gender }}</td>
+          <td>{{ myUser.phone }}</td>
+          <td>{{ myUser.email }}</td>
+          <td>
+            <div *ngIf="myUser.address">
+              <a [routerLink]="['/address', myUser.address?.id, 'view']">{{ myUser.address?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="myUser.role">
+              <a [routerLink]="['/role', myUser.role?.id, 'view']">{{ myUser.role?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/my-user', myUser.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/my-user', myUser.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(myUser)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

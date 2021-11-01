@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity Voucher.
+    -->
+    <changeSet id="20211101082323-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="voucher_id"
+                                 baseTableName="rel_voucher__product"
+                                 constraintName="fk_rel_voucher__product__voucher_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="voucher"/>
+
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="rel_voucher__product"
+                                 constraintName="fk_rel_voucher__product__product_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+
+        <addForeignKeyConstraint baseColumnNames="event_id"
+                                 baseTableName="voucher"
+                                 constraintName="fk_voucher__event_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="event"/>
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="voucher"
+                                 constraintName="fk_voucher__type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="service_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="voucher"
+                                 constraintName="fk_voucher__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="voucher_status"/>
+    </changeSet>
+</databaseChangeLog>
