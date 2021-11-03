@@ -1,0 +1,40 @@
+{
+  "name": "VoucherCode",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "gift",
+      "otherEntityRelationshipName": "voucher",
+      "relationshipName": "gift"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "voucher",
+      "otherEntityRelationshipName": "voucherCode",
+      "relationshipName": "voucher"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "myOrder",
+      "otherEntityRelationshipName": "voucherCode",
+      "relationshipName": "order"
+    }
+  ],
+  "entityTableName": "voucher_code",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211102075516"
+}

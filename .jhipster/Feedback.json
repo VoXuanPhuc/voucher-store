@@ -1,0 +1,44 @@
+{
+  "name": "Feedback",
+  "fields": [
+    {
+      "fieldName": "rate",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "detail",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "feedbackImage",
+      "otherEntityRelationshipName": "feedback",
+      "relationshipName": "feedbackImage"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "myUser",
+      "otherEntityRelationshipName": "feedback",
+      "relationshipName": "user"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "voucher",
+      "otherEntityRelationshipName": "feedback",
+      "relationshipName": "voucher"
+    }
+  ],
+  "entityTableName": "feedback",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211102075520"
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity VoucherCode.
+    -->
+    <changeSet id="20211102075516-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="voucher_id"
+                                 baseTableName="voucher_code"
+                                 constraintName="fk_voucher_code__voucher_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="voucher"/>
+
+        <addForeignKeyConstraint baseColumnNames="order_id"
+                                 baseTableName="voucher_code"
+                                 constraintName="fk_voucher_code__order_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="my_order"/>
+    </changeSet>
+</databaseChangeLog>

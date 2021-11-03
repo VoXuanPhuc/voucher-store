@@ -1,0 +1,89 @@
+{
+  "name": "MyUser",
+  "fields": [
+    {
+      "fieldName": "username",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "firstName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lastName",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "address",
+      "otherEntityRelationshipName": "myUser",
+      "relationshipName": "address",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "storeUser",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "storeUser"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "myOrder",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "myOrder"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "feedback",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "feedback"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "gift",
+      "otherEntityRelationshipName": "giver",
+      "relationshipName": "gift"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "role",
+      "otherEntityRelationshipName": "myUser",
+      "relationshipName": "role"
+    }
+  ],
+  "entityTableName": "my_user",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211102075505"
+}

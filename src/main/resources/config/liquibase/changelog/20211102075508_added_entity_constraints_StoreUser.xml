@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <!--
+        Added the constraints for entity StoreUser.
+    -->
+    <changeSet id="20211102075508-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="store_user"
+                                 constraintName="fk_store_user__type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="relationship_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="store_user"
+                                 constraintName="fk_store_user__user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="my_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="store_id"
+                                 baseTableName="store_user"
+                                 constraintName="fk_store_user__store_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="store"/>
+    </changeSet>
+</databaseChangeLog>

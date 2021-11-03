@@ -1,0 +1,162 @@
+entity Province{
+    name String required
+}
+
+entity District{
+    name String required
+}
+
+entity Village{
+    name String required
+}
+
+entity Address{
+    street String,
+    zipCode Integer required
+}
+
+entity Role {
+    name String required,
+    code String required
+}
+
+entity MyUser {
+    username String required,
+    password String required,
+    firstName String required,
+    lastName String required,
+    gender String required,
+    phone String required,
+    email String required,
+}
+
+entity Store{
+    name String required,
+    description String,
+    email String required,
+    phone String required,
+    avartar String,
+    background String
+}
+
+entity RelationshipType{
+    name String required
+}
+
+entity StoreUser{
+}
+
+entity BenifitPackage{
+    name String required,
+    description String,
+    cost Long required,
+    time String required
+}
+
+entity Category{
+    name String required
+}
+
+entity Product{
+    code String required,
+    image String
+}
+
+entity Event{
+    title String required,
+    description String
+}
+
+entity ServiceType{
+    name String required
+}
+
+entity VoucherImage{
+    name String required
+}
+
+entity Voucher{
+    price Double required,
+    quantity Integer required,
+    startTime Instant required,
+    expriedTime Instant required
+}
+
+entity VoucherCode{
+    code String required
+}
+
+
+entity VoucherStatus{
+    name String required
+}
+
+entity MyOrder{
+    totalCost Double required,
+    paymentTime Instant required,
+}
+
+entity OrderStatus{
+    name String required
+}
+
+entity Feedback{
+    rate Integer required,
+    detail String
+}
+
+entity FeedbackImage{
+	content String required
+}
+
+entity Gift{
+    message String
+}
+
+relationship OneToOne {
+    MyUser{address} to Address,
+    Store{address} to Address,
+}
+
+relationship ManyToMany {
+    Voucher{product} to Product{voucher}
+}
+
+relationship OneToMany{
+	Province to District{province},
+    District to Village{district},
+    Village to Address{village},
+    Role to MyUser{role},
+    RelationshipType to StoreUser{type},
+
+    MyUser to StoreUser{user},
+    MyUser to MyOrder{user},
+    MyUser to Feedback{user},
+    MyUser to Gift{giver},
+
+    Store to StoreUser{store},
+    Store to Category{store},
+    Store to Event{store},
+    BenifitPackage to Store{benifit},
+
+    Category to Product{category},
+
+    Event to Voucher{event},
+    ServiceType to Voucher{type},
+    VoucherStatus to Voucher{status}
+
+    Voucher to VoucherImage{voucher},
+    Voucher to VoucherCode{voucher},
+    Voucher to Feedback{voucher}
+
+    VoucherCode to Gift{voucher},
+
+    MyOrder to VoucherCode{order},
+    OrderStatus to MyOrder{status}
+    
+    Feedback to FeedbackImage{feedback}
+}
+
+dto * with mapstruct
+
+service all with serviceImpl

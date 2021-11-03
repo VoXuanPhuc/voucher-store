@@ -1,0 +1,145 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-voucher-heading" data-cy="VoucherCreateUpdateHeading">Create or edit a Voucher</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_price">Price</label>
+          <input type="number" class="form-control" name="price" id="field_price" data-cy="price" formControlName="price" />
+          <div *ngIf="editForm.get('price')!.invalid && (editForm.get('price')!.dirty || editForm.get('price')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('price')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('price')?.errors?.number"> This field should be a number. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_quantity">Quantity</label>
+          <input type="number" class="form-control" name="quantity" id="field_quantity" data-cy="quantity" formControlName="quantity" />
+          <div *ngIf="editForm.get('quantity')!.invalid && (editForm.get('quantity')!.dirty || editForm.get('quantity')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('quantity')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('quantity')?.errors?.number">
+              This field should be a number.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_startTime">Start Time</label>
+          <div class="d-flex">
+            <input
+              id="field_startTime"
+              data-cy="startTime"
+              type="datetime-local"
+              class="form-control"
+              name="startTime"
+              formControlName="startTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('startTime')!.invalid && (editForm.get('startTime')!.dirty || editForm.get('startTime')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('startTime')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('startTime')?.errors?.ZonedDateTimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_expriedTime">Expried Time</label>
+          <div class="d-flex">
+            <input
+              id="field_expriedTime"
+              data-cy="expriedTime"
+              type="datetime-local"
+              class="form-control"
+              name="expriedTime"
+              formControlName="expriedTime"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('expriedTime')!.invalid && (editForm.get('expriedTime')!.dirty || editForm.get('expriedTime')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('expriedTime')?.errors?.required"> This field is required. </small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('expriedTime')?.errors?.ZonedDateTimelocal">
+              This field should be a date and time.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="field_products">Product</label>
+          <select class="form-control" id="field_products" data-cy="product" multiple name="products" formControlName="products">
+            <option
+              [ngValue]="getSelectedProduct(productOption, editForm.get('products')!.value)"
+              *ngFor="let productOption of productsSharedCollection; trackBy: trackProductById"
+            >
+              {{ productOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_event">Event</label>
+          <select class="form-control" id="field_event" data-cy="event" name="event" formControlName="event">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="eventOption.id === editForm.get('event')!.value?.id ? editForm.get('event')!.value : eventOption"
+              *ngFor="let eventOption of eventsSharedCollection; trackBy: trackEventById"
+            >
+              {{ eventOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_type">Type</label>
+          <select class="form-control" id="field_type" data-cy="type" name="type" formControlName="type">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="serviceTypeOption.id === editForm.get('type')!.value?.id ? editForm.get('type')!.value : serviceTypeOption"
+              *ngFor="let serviceTypeOption of serviceTypesSharedCollection; trackBy: trackServiceTypeById"
+            >
+              {{ serviceTypeOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_status">Status</label>
+          <select class="form-control" id="field_status" data-cy="status" name="status" formControlName="status">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="voucherStatusOption.id === editForm.get('status')!.value?.id ? editForm.get('status')!.value : voucherStatusOption"
+              *ngFor="let voucherStatusOption of voucherStatusesSharedCollection; trackBy: trackVoucherStatusById"
+            >
+              {{ voucherStatusOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

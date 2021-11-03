@@ -1,0 +1,34 @@
+{
+  "name": "District",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "village",
+      "otherEntityRelationshipName": "district",
+      "relationshipName": "village"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "province",
+      "otherEntityRelationshipName": "district",
+      "relationshipName": "province"
+    }
+  ],
+  "entityTableName": "district",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211102075501"
+}

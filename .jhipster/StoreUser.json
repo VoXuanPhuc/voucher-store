@@ -1,0 +1,34 @@
+{
+  "name": "StoreUser",
+  "fields": [],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "relationshipType",
+      "otherEntityRelationshipName": "storeUser",
+      "relationshipName": "type"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "myUser",
+      "otherEntityRelationshipName": "storeUser",
+      "relationshipName": "user"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "store",
+      "otherEntityRelationshipName": "storeUser",
+      "relationshipName": "store"
+    }
+  ],
+  "entityTableName": "store_user",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211102075508"
+}

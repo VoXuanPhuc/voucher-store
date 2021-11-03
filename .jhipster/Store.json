@@ -1,0 +1,75 @@
+{
+  "name": "Store",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "avartar",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "background",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "address",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "address",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "storeUser",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "storeUser"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "category"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "event",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "event"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "benifitPackage",
+      "otherEntityRelationshipName": "store",
+      "relationshipName": "benifit"
+    }
+  ],
+  "entityTableName": "store",
+  "dto": "mapstruct",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20211102075506"
+}

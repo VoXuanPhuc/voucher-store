@@ -1,0 +1,92 @@
+<div>
+  <h2 id="page-heading" data-cy="MyOrderHeading">
+    <span>My Orders</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-my-order"
+        [routerLink]="['/my-order/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new My Order </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="myOrders?.length === 0">
+    <span>No myOrders found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="myOrders && myOrders.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Total Cost</span></th>
+          <th scope="col"><span>Payment Time</span></th>
+          <th scope="col"><span>User</span></th>
+          <th scope="col"><span>Status</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let myOrder of myOrders; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/my-order', myOrder.id, 'view']">{{ myOrder.id }}</a>
+          </td>
+          <td>{{ myOrder.totalCost }}</td>
+          <td>{{ myOrder.paymentTime | formatMediumDatetime }}</td>
+          <td>
+            <div *ngIf="myOrder.user">
+              <a [routerLink]="['/my-user', myOrder.user?.id, 'view']">{{ myOrder.user?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="myOrder.status">
+              <a [routerLink]="['/order-status', myOrder.status?.id, 'view']">{{ myOrder.status?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/my-order', myOrder.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/my-order', myOrder.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(myOrder)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
