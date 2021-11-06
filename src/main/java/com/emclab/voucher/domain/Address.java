@@ -1,9 +1,14 @@
 package com.emclab.voucher.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -13,7 +18,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "address")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Address extends AbstractAuditingEntity implements Serializable {
+public class Address extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -85,7 +90,8 @@ public class Address extends AbstractAuditingEntity implements Serializable {
         this.village = village;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -100,17 +106,14 @@ public class Address extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Address{" +
-            "id=" + getId() +
-            ", street='" + getStreet() + "'" +
-            ", zipCode=" + getZipCode() +
-            "}";
+        return "Address{" + "id=" + getId() + ", street='" + getStreet() + "'" + ", zipCode=" + getZipCode() + "}";
     }
 }

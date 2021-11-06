@@ -15,7 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "category")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Category extends AbstractAuditingEntity implements Serializable {
+public class Category extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -107,7 +107,8 @@ public class Category extends AbstractAuditingEntity implements Serializable {
         this.store = store;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -122,16 +123,14 @@ public class Category extends AbstractAuditingEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Category{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            "}";
+        return "Category{" + "id=" + getId() + ", name='" + getName() + "'" + "}";
     }
 }
