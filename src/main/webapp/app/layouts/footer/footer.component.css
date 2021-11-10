@@ -1,0 +1,59 @@
+/* Footer */
+.container-fluid.footer {
+  margin: auto;
+  background-color: #0f3460;
+}
+.row.row_footer {
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.frame {
+  height: 100%;
+  width: 80%;
+}
+.logo_footer {
+  width: 80%;
+  height: 180px;
+}
+.text-uppercase {
+  margin-top: 20px;
+  font-family: 'Varela Round', sans-serif;
+  color: white;
+  font-size: 20px;
+}
+.text_reset {
+  font-family: 'Varela Round', sans-serif;
+  color: #aeb4be !important;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+.footer_icon {
+  height: 20px;
+  margin-bottom: 20px;
+}
+.footer_icon a,
+.footer_icon a:hover {
+  text-decoration: none;
+}
+.footer_icon .iconify {
+  margin-right: 20px;
+  width: 20px;
+  height: 20px;
+  color: white !important;
+}
+.footer_icon .iconify:hover {
+  opacity: 0.6;
+}
+
+.contract,
+.aboutus,
+.image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
