@@ -26,6 +26,7 @@ describe('Service Tests', () => {
 
       elemDefault = {
         id: 0,
+        name: 'AAAAAAA',
         price: 0,
         quantity: 0,
         startTime: currentDate,
@@ -79,6 +80,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
+            name: 'BBBBBB',
             price: 1,
             quantity: 1,
             startTime: currentDate.format(DATE_TIME_FORMAT),
@@ -105,8 +107,8 @@ describe('Service Tests', () => {
       it('should partial update a Voucher', () => {
         const patchObject = Object.assign(
           {
-            quantity: 1,
-            expriedTime: currentDate.format(DATE_TIME_FORMAT),
+            price: 1,
+            startTime: currentDate.format(DATE_TIME_FORMAT),
           },
           new Voucher()
         );
@@ -132,6 +134,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
+            name: 'BBBBBB',
             price: 1,
             quantity: 1,
             startTime: currentDate.format(DATE_TIME_FORMAT),
@@ -193,7 +196,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Voucher to an array', () => {
-          const voucherArray: IVoucher[] = [{ id: 123 }, { id: 456 }, { id: 32369 }];
+          const voucherArray: IVoucher[] = [{ id: 123 }, { id: 456 }, { id: 57139 }];
           const voucherCollection: IVoucher[] = [{ id: 123 }];
           expectedResult = service.addVoucherToCollectionIfMissing(voucherCollection, ...voucherArray);
           expect(expectedResult).toHaveLength(3);

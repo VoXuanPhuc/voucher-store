@@ -5,11 +5,10 @@ import { StoreDetailComponent } from './detail/store-detail.component';
 import { StoreUpdateComponent } from './update/store-update.component';
 import { StoreDeleteDialogComponent } from './delete/store-delete-dialog.component';
 import { StoreRoutingModule } from './route/store-routing.module';
-import { TopStoreComponent } from './top-store/top-store.component';
 
 @NgModule({
   imports: [SharedModule, StoreRoutingModule],
-  declarations: [StoreComponent, StoreDetailComponent, StoreUpdateComponent, StoreDeleteDialogComponent, TopStoreComponent],
+  declarations: [StoreComponent, StoreDetailComponent, StoreUpdateComponent, StoreDeleteDialogComponent],
   entryComponents: [StoreDeleteDialogComponent],
 })
 export class StoreModule {}

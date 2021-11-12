@@ -24,7 +24,9 @@
 
   <jhi-alert></jhi-alert>
 
-  <div class="alert alert-warning" id="no-result" *ngI="products?.length === 0"><span>No products found</span>f</div>
+  <div class="alert alert-warning" id="no-result" *ngIf="products?.length === 0">
+    <span>No products found</span>
+  </div>
 
   <div class="table-responsive" id="entities" *ngIf="products && products.length > 0">
     <table class="table table-striped" aria-describedby="page-heading">

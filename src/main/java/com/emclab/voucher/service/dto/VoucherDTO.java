@@ -15,6 +15,9 @@ public class VoucherDTO implements Serializable {
     private Long id;
 
     @NotNull
+    private String name;
+
+    @NotNull
     private Double price;
 
     @NotNull
@@ -40,6 +43,14 @@ public class VoucherDTO implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getPrice() {
@@ -132,6 +143,7 @@ public class VoucherDTO implements Serializable {
     public String toString() {
         return "VoucherDTO{" +
             "id=" + getId() +
+            ", name='" + getName() + "'" +
             ", price=" + getPrice() +
             ", quantity=" + getQuantity() +
             ", startTime='" + getStartTime() + "'" +

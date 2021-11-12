@@ -33,6 +33,7 @@
       <thead>
         <tr>
           <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Number</span></th>
           <th scope="col"><span>Street</span></th>
           <th scope="col"><span>Zip Code</span></th>
           <th scope="col"><span>Village</span></th>
@@ -44,6 +45,7 @@
           <td>
             <a [routerLink]="['/address', address.id, 'view']">{{ address.id }}</a>
           </td>
+          <td>{{ address.number }}</td>
           <td>{{ address.street }}</td>
           <td>{{ address.zipCode }}</td>
           <td>

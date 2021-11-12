@@ -6,7 +6,6 @@ import { StoreComponent } from '../list/store.component';
 import { StoreDetailComponent } from '../detail/store-detail.component';
 import { StoreUpdateComponent } from '../update/store-update.component';
 import { StoreRoutingResolveService } from './store-routing-resolve.service';
-import { TopStoreComponent } from '../top-store/top-store.component';
 
 const storeRoute: Routes = [
   {
@@ -33,14 +32,6 @@ const storeRoute: Routes = [
   {
     path: ':id/edit',
     component: StoreUpdateComponent,
-    resolve: {
-      store: StoreRoutingResolveService,
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: 'top-store',
-    component: TopStoreComponent,
     resolve: {
       store: StoreRoutingResolveService,
     },
