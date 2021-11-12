@@ -19,5 +19,6 @@ import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
     SellVoucherComponent,
   ],
   entryComponents: [VoucherDeleteDialogComponent],
+  exports: [HotVoucherComponent],
 })
 export class VoucherModule {}

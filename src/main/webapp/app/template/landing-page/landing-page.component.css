@@ -1,0 +1,8 @@
+.container-fluid.hot_voucher {
+  position: relative;
+  /* top: 150px; */
+  background: #ebf2f5;
+}
+.container-fluid.hot_voucher .row.hot_voucher {
+  background: #ebf2f5;
+}

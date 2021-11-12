@@ -26,7 +26,7 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { MyHeaderComponent } from './layouts/my-header/my-header.component';
-import { TemplateRoutingModule } from './template/template-routing.module';
+import { TemplateModule } from './template/template.module';
 
 @NgModule({
   imports: [
@@ -35,9 +35,10 @@ import { TemplateRoutingModule } from './template/template-routing.module';
     HomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     EntityRoutingModule,
+    TemplateModule,
     AppRoutingModule,
 
-    TemplateRoutingModule,
+    // TemplateRoutingModule,
     // Set this to true to enable service worker (PWA)
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: false }),
     HttpClientModule,
