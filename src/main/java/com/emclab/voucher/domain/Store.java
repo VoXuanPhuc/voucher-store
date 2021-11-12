@@ -1,19 +1,11 @@
 package com.emclab.voucher.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -23,7 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "store")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Store extends AbstractAuditingEntity {
+public class Store implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -287,8 +279,7 @@ public class Store extends AbstractAuditingEntity {
         this.benifit = benifitPackage;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-    // setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -303,16 +294,21 @@ public class Store extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see
-        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Store{" + "id=" + getId() + ", name='" + getName() + "'" + ", description='" + getDescription() + "'"
-                + ", email='" + getEmail() + "'" + ", phone='" + getPhone() + "'" + ", avartar='" + getAvartar() + "'"
-                + ", background='" + getBackground() + "'" + "}";
+        return "Store{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", description='" + getDescription() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", phone='" + getPhone() + "'" +
+            ", avartar='" + getAvartar() + "'" +
+            ", background='" + getBackground() + "'" +
+            "}";
     }
 }

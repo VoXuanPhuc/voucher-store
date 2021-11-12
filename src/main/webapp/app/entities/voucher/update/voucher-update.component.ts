@@ -33,6 +33,7 @@ export class VoucherUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
+    name: [null, [Validators.required]],
     price: [null, [Validators.required]],
     quantity: [null, [Validators.required]],
     startTime: [null, [Validators.required]],
@@ -130,6 +131,7 @@ export class VoucherUpdateComponent implements OnInit {
   protected updateForm(voucher: IVoucher): void {
     this.editForm.patchValue({
       id: voucher.id,
+      name: voucher.name,
       price: voucher.price,
       quantity: voucher.quantity,
       startTime: voucher.startTime ? voucher.startTime.format(DATE_TIME_FORMAT) : null,
@@ -197,6 +199,7 @@ export class VoucherUpdateComponent implements OnInit {
     return {
       ...new Voucher(),
       id: this.editForm.get(['id'])!.value,
+      name: this.editForm.get(['name'])!.value,
       price: this.editForm.get(['price'])!.value,
       quantity: this.editForm.get(['quantity'])!.value,
       startTime: this.editForm.get(['startTime'])!.value ? dayjs(this.editForm.get(['startTime'])!.value, DATE_TIME_FORMAT) : undefined,

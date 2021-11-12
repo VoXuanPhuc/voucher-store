@@ -1,34 +1,29 @@
 entity Province{
     name String required
 }
-
 entity District{
     name String required
 }
-
 entity Village{
     name String required
 }
-
 entity Address{
+    number Integer,
     street String,
     zipCode Integer required
 }
-
 entity Role {
     name String required,
     code String required
 }
-
 entity MyUser {
-    username String required,
+username String required,
     password String required,
     firstName String required,
     lastName String required,
     gender String required,
     phone String required,
-    email String required,
-}
+    email String required, }
 
 entity Store{
     name String required,
@@ -42,7 +37,6 @@ entity Store{
 entity RelationshipType{
     name String required
 }
-
 entity StoreUser{
 }
 
@@ -76,6 +70,7 @@ entity VoucherImage{
 }
 
 entity Voucher{
+    name String required,
     price Double required,
     quantity Integer required,
     startTime Instant required,

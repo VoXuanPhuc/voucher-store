@@ -2,6 +2,10 @@
   "name": "Address",
   "fields": [
     {
+      "fieldName": "number",
+      "fieldType": "Integer"
+    },
+    {
       "fieldName": "street",
       "fieldType": "String"
     },

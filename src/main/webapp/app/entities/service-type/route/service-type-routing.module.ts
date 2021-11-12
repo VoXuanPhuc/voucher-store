@@ -6,7 +6,6 @@ import { ServiceTypeComponent } from '../list/service-type.component';
 import { ServiceTypeDetailComponent } from '../detail/service-type-detail.component';
 import { ServiceTypeUpdateComponent } from '../update/service-type-update.component';
 import { ServiceTypeRoutingResolveService } from './service-type-routing-resolve.service';
-import { CustomServiceComponent } from '../custom-service/custom-service.component';
 
 const serviceTypeRoute: Routes = [
   {
@@ -33,14 +32,6 @@ const serviceTypeRoute: Routes = [
   {
     path: ':id/edit',
     component: ServiceTypeUpdateComponent,
-    resolve: {
-      serviceType: ServiceTypeRoutingResolveService,
-    },
-    canActivate: [UserRouteAccessService],
-  },
-  {
-    path: 'custom',
-    component: CustomServiceComponent,
     resolve: {
       serviceType: ServiceTypeRoutingResolveService,
     },
