@@ -1,6 +1,11 @@
 ######################
 # Project Specific
 ######################
+
+/src/main/resources/config/application-dev.yml
+/src/main/resources/config/application-prod.yml
+/src/main/resources/config/application-tls.yml
+/src/main/resources/config/application.yml
 /src/main/webapp/content/css/main.css
 /target/classes/static/**
 /src/test/javascript/coverage/
