@@ -1,21 +1,12 @@
 package com.emclab.voucher.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -25,13 +16,17 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "voucher")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Voucher extends AbstractAuditingEntity {
+public class Voucher implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
+    @Column(name = "name", nullable = false)
+    private String name;
 
     @NotNull
     @Column(name = "price", nullable = false)
@@ -98,6 +93,19 @@ public class Voucher extends AbstractAuditingEntity {
     public Voucher id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Voucher name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Double getPrice() {
@@ -309,8 +317,7 @@ public class Voucher extends AbstractAuditingEntity {
         this.status = voucherStatus;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-    // setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -325,15 +332,20 @@ public class Voucher extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see
-        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Voucher{" + "id=" + getId() + ", price=" + getPrice() + ", quantity=" + getQuantity() + ", startTime='"
-                + getStartTime() + "'" + ", expriedTime='" + getExpriedTime() + "'" + "}";
+        return "Voucher{" +
+            "id=" + getId() +
+            ", name='" + getName() + "'" +
+            ", price=" + getPrice() +
+            ", quantity=" + getQuantity() +
+            ", startTime='" + getStartTime() + "'" +
+            ", expriedTime='" + getExpriedTime() + "'" +
+            "}";
     }
 }

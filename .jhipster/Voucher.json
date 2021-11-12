@@ -2,6 +2,11 @@
   "name": "Voucher",
   "fields": [
     {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
       "fieldName": "price",
       "fieldType": "Double",
       "fieldValidateRules": ["required"]

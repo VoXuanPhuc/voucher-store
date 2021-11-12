@@ -31,6 +31,9 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class AddressResourceIT {
 
+    private static final Integer DEFAULT_NUMBER = 1;
+    private static final Integer UPDATED_NUMBER = 2;
+
     private static final String DEFAULT_STREET = "AAAAAAAAAA";
     private static final String UPDATED_STREET = "BBBBBBBBBB";
 
@@ -64,7 +67,7 @@ class AddressResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Address createEntity(EntityManager em) {
-        Address address = new Address().street(DEFAULT_STREET).zipCode(DEFAULT_ZIP_CODE);
+        Address address = new Address().number(DEFAULT_NUMBER).street(DEFAULT_STREET).zipCode(DEFAULT_ZIP_CODE);
         return address;
     }
 
@@ -75,7 +78,7 @@ class AddressResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Address createUpdatedEntity(EntityManager em) {
-        Address address = new Address().street(UPDATED_STREET).zipCode(UPDATED_ZIP_CODE);
+        Address address = new Address().number(UPDATED_NUMBER).street(UPDATED_STREET).zipCode(UPDATED_ZIP_CODE);
         return address;
     }
 
@@ -98,6 +101,7 @@ class AddressResourceIT {
         List<Address> addressList = addressRepository.findAll();
         assertThat(addressList).hasSize(databaseSizeBeforeCreate + 1);
         Address testAddress = addressList.get(addressList.size() - 1);
+        assertThat(testAddress.getNumber()).isEqualTo(DEFAULT_NUMBER);
         assertThat(testAddress.getStreet()).isEqualTo(DEFAULT_STREET);
         assertThat(testAddress.getZipCode()).isEqualTo(DEFAULT_ZIP_CODE);
     }
@@ -151,6 +155,7 @@ class AddressResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(address.getId().intValue())))
+            .andExpect(jsonPath("$.[*].number").value(hasItem(DEFAULT_NUMBER)))
             .andExpect(jsonPath("$.[*].street").value(hasItem(DEFAULT_STREET)))
             .andExpect(jsonPath("$.[*].zipCode").value(hasItem(DEFAULT_ZIP_CODE)));
     }
@@ -167,6 +172,7 @@ class AddressResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(address.getId().intValue()))
+            .andExpect(jsonPath("$.number").value(DEFAULT_NUMBER))
             .andExpect(jsonPath("$.street").value(DEFAULT_STREET))
             .andExpect(jsonPath("$.zipCode").value(DEFAULT_ZIP_CODE));
     }
@@ -190,7 +196,7 @@ class AddressResourceIT {
         Address updatedAddress = addressRepository.findById(address.getId()).get();
         // Disconnect from session so that the updates on updatedAddress are not directly saved in db
         em.detach(updatedAddress);
-        updatedAddress.street(UPDATED_STREET).zipCode(UPDATED_ZIP_CODE);
+        updatedAddress.number(UPDATED_NUMBER).street(UPDATED_STREET).zipCode(UPDATED_ZIP_CODE);
         AddressDTO addressDTO = addressMapper.toDto(updatedAddress);
 
         restAddressMockMvc
@@ -205,6 +211,7 @@ class AddressResourceIT {
         List<Address> addressList = addressRepository.findAll();
         assertThat(addressList).hasSize(databaseSizeBeforeUpdate);
         Address testAddress = addressList.get(addressList.size() - 1);
+        assertThat(testAddress.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testAddress.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testAddress.getZipCode()).isEqualTo(UPDATED_ZIP_CODE);
     }
@@ -286,7 +293,7 @@ class AddressResourceIT {
         Address partialUpdatedAddress = new Address();
         partialUpdatedAddress.setId(address.getId());
 
-        partialUpdatedAddress.zipCode(UPDATED_ZIP_CODE);
+        partialUpdatedAddress.street(UPDATED_STREET).zipCode(UPDATED_ZIP_CODE);
 
         restAddressMockMvc
             .perform(
@@ -300,7 +307,8 @@ class AddressResourceIT {
         List<Address> addressList = addressRepository.findAll();
         assertThat(addressList).hasSize(databaseSizeBeforeUpdate);
         Address testAddress = addressList.get(addressList.size() - 1);
-        assertThat(testAddress.getStreet()).isEqualTo(DEFAULT_STREET);
+        assertThat(testAddress.getNumber()).isEqualTo(DEFAULT_NUMBER);
+        assertThat(testAddress.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testAddress.getZipCode()).isEqualTo(UPDATED_ZIP_CODE);
     }
 
@@ -316,7 +324,7 @@ class AddressResourceIT {
         Address partialUpdatedAddress = new Address();
         partialUpdatedAddress.setId(address.getId());
 
-        partialUpdatedAddress.street(UPDATED_STREET).zipCode(UPDATED_ZIP_CODE);
+        partialUpdatedAddress.number(UPDATED_NUMBER).street(UPDATED_STREET).zipCode(UPDATED_ZIP_CODE);
 
         restAddressMockMvc
             .perform(
@@ -330,6 +338,7 @@ class AddressResourceIT {
         List<Address> addressList = addressRepository.findAll();
         assertThat(addressList).hasSize(databaseSizeBeforeUpdate);
         Address testAddress = addressList.get(addressList.size() - 1);
+        assertThat(testAddress.getNumber()).isEqualTo(UPDATED_NUMBER);
         assertThat(testAddress.getStreet()).isEqualTo(UPDATED_STREET);
         assertThat(testAddress.getZipCode()).isEqualTo(UPDATED_ZIP_CODE);
     }

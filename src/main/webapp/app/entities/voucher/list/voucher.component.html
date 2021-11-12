@@ -33,6 +33,7 @@
       <thead>
         <tr>
           <th scope="col"><span>ID</span></th>
+          <th scope="col"><span>Name</span></th>
           <th scope="col"><span>Price</span></th>
           <th scope="col"><span>Quantity</span></th>
           <th scope="col"><span>Start Time</span></th>
@@ -49,6 +50,7 @@
           <td>
             <a [routerLink]="['/voucher', voucher.id, 'view']">{{ voucher.id }}</a>
           </td>
+          <td>{{ voucher.name }}</td>
           <td>{{ voucher.price }}</td>
           <td>{{ voucher.quantity }}</td>
           <td>{{ voucher.startTime | formatMediumDatetime }}</td>

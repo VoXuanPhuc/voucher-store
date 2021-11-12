@@ -9,6 +9,7 @@ import { IVoucherStatus } from 'app/entities/voucher-status/voucher-status.model
 
 export interface IVoucher {
   id?: number;
+  name?: string;
   price?: number;
   quantity?: number;
   startTime?: dayjs.Dayjs;
@@ -25,6 +26,7 @@ export interface IVoucher {
 export class Voucher implements IVoucher {
   constructor(
     public id?: number,
+    public name?: string,
     public price?: number,
     public quantity?: number,
     public startTime?: dayjs.Dayjs,

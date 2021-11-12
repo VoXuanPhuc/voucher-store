@@ -1,0 +1,22 @@
+// .container-fluid.category-slide {
+//     top: 117px;
+//     position: relative;
+// }
+
+.container-fluid.category-slide.carousel-inner img {
+  object-fit: cover;
+}
+.container-fluid.category-slide ul li .iconify.ml-2.mr-5 {
+  color: #e94560;
+}
+.container-fluid.category-slide ul li:hover .iconify.ml-2.mr-5 {
+  color: #ffffff;
+}
+.container-fluid.category-slide ul li:hover {
+  cursor: pointer;
+  color: #ffffff;
+}
+.container-fluid.category-slide ul li:hover {
+  background-color: #dc3545;
+  opacity: 0.8;
+}
