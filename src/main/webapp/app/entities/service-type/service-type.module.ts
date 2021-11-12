@@ -5,10 +5,17 @@ import { ServiceTypeDetailComponent } from './detail/service-type-detail.compone
 import { ServiceTypeUpdateComponent } from './update/service-type-update.component';
 import { ServiceTypeDeleteDialogComponent } from './delete/service-type-delete-dialog.component';
 import { ServiceTypeRoutingModule } from './route/service-type-routing.module';
+import { CustomServiceComponent } from './custom-service/custom-service.component';
 
 @NgModule({
   imports: [SharedModule, ServiceTypeRoutingModule],
-  declarations: [ServiceTypeComponent, ServiceTypeDetailComponent, ServiceTypeUpdateComponent, ServiceTypeDeleteDialogComponent],
+  declarations: [
+    ServiceTypeComponent,
+    ServiceTypeDetailComponent,
+    ServiceTypeUpdateComponent,
+    ServiceTypeDeleteDialogComponent,
+    CustomServiceComponent,
+  ],
   entryComponents: [ServiceTypeDeleteDialogComponent],
 })
 export class ServiceTypeModule {}
