@@ -1,3 +1,4 @@
+import { EntityResponseType } from './../../relationship-type/service/relationship-type.service';
 import { IAddress } from 'app/entities/address/address.model';
 import { IStore } from './../store.model';
 import { StoreService } from './../service/store.service';
@@ -23,7 +24,10 @@ export class TopStoreComponent implements OnInit {
       (res: HttpResponse<IStore[]>) => {
         this.isLoading = false;
         this.stores = res.body ?? [];
-        window.console.log('Tesssssssssssssssss ', this.getAddressById(1));
+
+        // window.console.log("1. Duonggggggggggggggggggggg", this.stores);
+
+        this.setAddressDetail(this.stores);
       },
       () => {
         this.isLoading = false;
@@ -31,14 +35,27 @@ export class TopStoreComponent implements OnInit {
     );
   }
 
-  public getAddressById(id: number): IAddress {
+  public getAddressById(id: number): IAddress | null {
     let address!: IAddress;
 
-    this.addressService.find(id).subscribe((res: HttpResponse<IAddress>) => {
+    this.addressService.find(id).subscribe((res: EntityResponseType) => {
       address = res.body!;
+
+      return address;
     });
 
-    return address;
+    return null;
+  }
+
+  public setAddressDetail(stores: IStore[]): void {
+    stores.forEach(store => {
+      // window.console.log("Duonggggggggggggggggggggg", store.address?.id);
+      const address: IAddress | null = this.getAddressById(store.address?.id ?? 1);
+      store.address = address;
+      window.console.log('Address: ', address);
+    });
+
+    // window.console.log("111111111111Duonggggggggggggggggggggg", stores);
   }
 
   trackId(index: number, item: IStore): number {
