@@ -22,6 +22,7 @@ describe('Service Tests', () => {
 
       elemDefault = {
         id: 0,
+        number: 0,
         street: 'AAAAAAA',
         zipCode: 0,
       };
@@ -59,6 +60,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
+            number: 1,
             street: 'BBBBBB',
             zipCode: 1,
           },
@@ -92,6 +94,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 1,
+            number: 1,
             street: 'BBBBBB',
             zipCode: 1,
           },
@@ -145,7 +148,7 @@ describe('Service Tests', () => {
         });
 
         it('should add only unique Address to an array', () => {
-          const addressArray: IAddress[] = [{ id: 123 }, { id: 456 }, { id: 3164 }];
+          const addressArray: IAddress[] = [{ id: 123 }, { id: 456 }, { id: 48212 }];
           const addressCollection: IAddress[] = [{ id: 123 }];
           expectedResult = service.addAddressToCollectionIfMissing(addressCollection, ...addressArray);
           expect(expectedResult).toHaveLength(3);

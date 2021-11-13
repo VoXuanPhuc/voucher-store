@@ -42,6 +42,9 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class VoucherResourceIT {
 
+    private static final String DEFAULT_NAME = "AAAAAAAAAA";
+    private static final String UPDATED_NAME = "BBBBBBBBBB";
+
     private static final Double DEFAULT_PRICE = 1D;
     private static final Double UPDATED_PRICE = 2D;
 
@@ -88,6 +91,7 @@ class VoucherResourceIT {
      */
     public static Voucher createEntity(EntityManager em) {
         Voucher voucher = new Voucher()
+            .name(DEFAULT_NAME)
             .price(DEFAULT_PRICE)
             .quantity(DEFAULT_QUANTITY)
             .startTime(DEFAULT_START_TIME)
@@ -103,6 +107,7 @@ class VoucherResourceIT {
      */
     public static Voucher createUpdatedEntity(EntityManager em) {
         Voucher voucher = new Voucher()
+            .name(UPDATED_NAME)
             .price(UPDATED_PRICE)
             .quantity(UPDATED_QUANTITY)
             .startTime(UPDATED_START_TIME)
@@ -129,6 +134,7 @@ class VoucherResourceIT {
         List<Voucher> voucherList = voucherRepository.findAll();
         assertThat(voucherList).hasSize(databaseSizeBeforeCreate + 1);
         Voucher testVoucher = voucherList.get(voucherList.size() - 1);
+        assertThat(testVoucher.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testVoucher.getPrice()).isEqualTo(DEFAULT_PRICE);
         assertThat(testVoucher.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
         assertThat(testVoucher.getStartTime()).isEqualTo(DEFAULT_START_TIME);
@@ -152,6 +158,24 @@ class VoucherResourceIT {
         // Validate the Voucher in the database
         List<Voucher> voucherList = voucherRepository.findAll();
         assertThat(voucherList).hasSize(databaseSizeBeforeCreate);
+    }
+
+    @Test
+    @Transactional
+    void checkNameIsRequired() throws Exception {
+        int databaseSizeBeforeTest = voucherRepository.findAll().size();
+        // set the field null
+        voucher.setName(null);
+
+        // Create the Voucher, which fails.
+        VoucherDTO voucherDTO = voucherMapper.toDto(voucher);
+
+        restVoucherMockMvc
+            .perform(post(ENTITY_API_URL).contentType(MediaType.APPLICATION_JSON).content(TestUtil.convertObjectToJsonBytes(voucherDTO)))
+            .andExpect(status().isBadRequest());
+
+        List<Voucher> voucherList = voucherRepository.findAll();
+        assertThat(voucherList).hasSize(databaseSizeBeforeTest);
     }
 
     @Test
@@ -238,6 +262,7 @@ class VoucherResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(voucher.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].price").value(hasItem(DEFAULT_PRICE.doubleValue())))
             .andExpect(jsonPath("$.[*].quantity").value(hasItem(DEFAULT_QUANTITY)))
             .andExpect(jsonPath("$.[*].startTime").value(hasItem(DEFAULT_START_TIME.toString())))
@@ -274,6 +299,7 @@ class VoucherResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(voucher.getId().intValue()))
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.price").value(DEFAULT_PRICE.doubleValue()))
             .andExpect(jsonPath("$.quantity").value(DEFAULT_QUANTITY))
             .andExpect(jsonPath("$.startTime").value(DEFAULT_START_TIME.toString()))
@@ -299,7 +325,12 @@ class VoucherResourceIT {
         Voucher updatedVoucher = voucherRepository.findById(voucher.getId()).get();
         // Disconnect from session so that the updates on updatedVoucher are not directly saved in db
         em.detach(updatedVoucher);
-        updatedVoucher.price(UPDATED_PRICE).quantity(UPDATED_QUANTITY).startTime(UPDATED_START_TIME).expriedTime(UPDATED_EXPRIED_TIME);
+        updatedVoucher
+            .name(UPDATED_NAME)
+            .price(UPDATED_PRICE)
+            .quantity(UPDATED_QUANTITY)
+            .startTime(UPDATED_START_TIME)
+            .expriedTime(UPDATED_EXPRIED_TIME);
         VoucherDTO voucherDTO = voucherMapper.toDto(updatedVoucher);
 
         restVoucherMockMvc
@@ -314,6 +345,7 @@ class VoucherResourceIT {
         List<Voucher> voucherList = voucherRepository.findAll();
         assertThat(voucherList).hasSize(databaseSizeBeforeUpdate);
         Voucher testVoucher = voucherList.get(voucherList.size() - 1);
+        assertThat(testVoucher.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testVoucher.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testVoucher.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testVoucher.getStartTime()).isEqualTo(UPDATED_START_TIME);
@@ -397,7 +429,7 @@ class VoucherResourceIT {
         Voucher partialUpdatedVoucher = new Voucher();
         partialUpdatedVoucher.setId(voucher.getId());
 
-        partialUpdatedVoucher.quantity(UPDATED_QUANTITY).expriedTime(UPDATED_EXPRIED_TIME);
+        partialUpdatedVoucher.price(UPDATED_PRICE).startTime(UPDATED_START_TIME).expriedTime(UPDATED_EXPRIED_TIME);
 
         restVoucherMockMvc
             .perform(
@@ -411,9 +443,10 @@ class VoucherResourceIT {
         List<Voucher> voucherList = voucherRepository.findAll();
         assertThat(voucherList).hasSize(databaseSizeBeforeUpdate);
         Voucher testVoucher = voucherList.get(voucherList.size() - 1);
-        assertThat(testVoucher.getPrice()).isEqualTo(DEFAULT_PRICE);
-        assertThat(testVoucher.getQuantity()).isEqualTo(UPDATED_QUANTITY);
-        assertThat(testVoucher.getStartTime()).isEqualTo(DEFAULT_START_TIME);
+        assertThat(testVoucher.getName()).isEqualTo(DEFAULT_NAME);
+        assertThat(testVoucher.getPrice()).isEqualTo(UPDATED_PRICE);
+        assertThat(testVoucher.getQuantity()).isEqualTo(DEFAULT_QUANTITY);
+        assertThat(testVoucher.getStartTime()).isEqualTo(UPDATED_START_TIME);
         assertThat(testVoucher.getExpriedTime()).isEqualTo(UPDATED_EXPRIED_TIME);
     }
 
@@ -430,6 +463,7 @@ class VoucherResourceIT {
         partialUpdatedVoucher.setId(voucher.getId());
 
         partialUpdatedVoucher
+            .name(UPDATED_NAME)
             .price(UPDATED_PRICE)
             .quantity(UPDATED_QUANTITY)
             .startTime(UPDATED_START_TIME)
@@ -447,6 +481,7 @@ class VoucherResourceIT {
         List<Voucher> voucherList = voucherRepository.findAll();
         assertThat(voucherList).hasSize(databaseSizeBeforeUpdate);
         Voucher testVoucher = voucherList.get(voucherList.size() - 1);
+        assertThat(testVoucher.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testVoucher.getPrice()).isEqualTo(UPDATED_PRICE);
         assertThat(testVoucher.getQuantity()).isEqualTo(UPDATED_QUANTITY);
         assertThat(testVoucher.getStartTime()).isEqualTo(UPDATED_START_TIME);

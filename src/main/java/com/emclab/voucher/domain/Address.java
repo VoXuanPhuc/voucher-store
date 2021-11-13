@@ -1,14 +1,9 @@
 package com.emclab.voucher.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import javax.persistence.*;
+import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -18,13 +13,16 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "address")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Address extends AbstractAuditingEntity {
+public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "number")
+    private Integer number;
 
     @Column(name = "street")
     private String street;
@@ -49,6 +47,19 @@ public class Address extends AbstractAuditingEntity {
     public Address id(Long id) {
         this.id = id;
         return this;
+    }
+
+    public Integer getNumber() {
+        return this.number;
+    }
+
+    public Address number(Integer number) {
+        this.number = number;
+        return this;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getStreet() {
@@ -90,8 +101,7 @@ public class Address extends AbstractAuditingEntity {
         this.village = village;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
-    // setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -106,14 +116,18 @@ public class Address extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see
-        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Address{" + "id=" + getId() + ", street='" + getStreet() + "'" + ", zipCode=" + getZipCode() + "}";
+        return "Address{" +
+            "id=" + getId() +
+            ", number=" + getNumber() +
+            ", street='" + getStreet() + "'" +
+            ", zipCode=" + getZipCode() +
+            "}";
     }
 }
