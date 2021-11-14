@@ -12,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "gift")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Gift implements Serializable {
+public class Gift extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 

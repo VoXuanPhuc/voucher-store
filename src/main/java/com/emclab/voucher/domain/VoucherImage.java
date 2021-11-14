@@ -13,7 +13,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "voucher_image")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class VoucherImage implements Serializable {
+public class VoucherImage extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 

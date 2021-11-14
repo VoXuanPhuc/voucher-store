@@ -13,7 +13,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "feedback_image")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class FeedbackImage implements Serializable {
+public class FeedbackImage extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 

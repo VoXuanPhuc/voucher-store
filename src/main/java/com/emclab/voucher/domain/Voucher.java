@@ -16,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "voucher")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Voucher implements Serializable {
+public class Voucher extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
