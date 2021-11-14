@@ -15,7 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "service_type")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ServiceType implements Serializable {
+public class ServiceType extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 

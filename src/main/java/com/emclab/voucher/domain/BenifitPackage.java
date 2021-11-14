@@ -15,7 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "benifit_package")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class BenifitPackage implements Serializable {
+public class BenifitPackage extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 

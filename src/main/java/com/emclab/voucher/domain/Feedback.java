@@ -15,7 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "feedback")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Feedback implements Serializable {
+public class Feedback extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
