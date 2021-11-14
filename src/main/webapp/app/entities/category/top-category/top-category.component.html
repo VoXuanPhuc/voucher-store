@@ -6,72 +6,13 @@
   </div>
 </div>
 <!-- Part 4.2: Category -->
-
 <div class="container category-list">
   <div class="row category-list-row mx-0">
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
+    <div *ngFor="let category of categories; trackBy: trackId" class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
       <div class="catetory_shared">
-        <img src="image/landing/category/h1.png" alt="" class="category_img" />
+        <img src="../../../../content/images/landingpage/category/{{ category.name }}.png" alt="" class="category_img" />
         <a href="" class="category_item">
-          <p class="category_name">Cosmestics</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
-      <div class="catetory_shared">
-        <img src="image/landing/category/h2.png" alt="" class="category_img" />
-        <a href="" class="category_item">
-          <p class="category_name">Electronice</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
-      <div class="catetory_shared">
-        <img src="image/landing/category/h3.png" alt="" class="category_img" />
-        <a href="" class="category_item">
-          <p class="category_name">Fashion</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
-      <div class="catetory_shared">
-        <img src="image/landing/category/h4.png" alt="" class="category_img" />
-        <a href="" class="category_item">
-          <p class="category_name">Smartphone</p>
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="row category-list-row mx-0">
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
-      <div class="catetory_shared">
-        <img src="image/landing/category/h5.png" alt="" class="category_img" />
-        <a href="" class="category_item">
-          <p class="category_name">Vehicles</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
-      <div class="catetory_shared">
-        <img src="image/landing/category/h6.png" alt="" class="category_img" />
-        <a href="" class="category_item">
-          <p class="category_name">Houseware</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
-      <div class="catetory_shared">
-        <img src="image/landing/category/h7.png" alt="" class="category_img" />
-        <a href="" class="category_item">
-          <p class="category_name">School things</p>
-        </a>
-      </div>
-    </div>
-    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12 category-list-col">
-      <div class="catetory_shared">
-        <img src="image/landing/category/h8.png" alt="" class="category_img" />
-        <a href="" class="category_item">
-          <p class="category_name">Market</p>
+          <p class="category_name">{{ category.name }}</p>
         </a>
       </div>
     </div>

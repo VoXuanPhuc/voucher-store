@@ -9,7 +9,7 @@ import { CategoryService } from '../service/category.service';
   styleUrls: ['./top-category.component.scss'],
 })
 export class TopCategoryComponent implements OnInit {
-  categorys?: ICategory[];
+  categories?: ICategory[];
   constructor(protected categoryService: CategoryService) {}
 
   ngOnInit(): void {
@@ -18,7 +18,11 @@ export class TopCategoryComponent implements OnInit {
 
   loadHotCategory(): void {
     this.categoryService.query().subscribe((res: HttpResponse<ICategory[]>) => {
-      this.categorys = res.body ?? [];
+      this.categories = res.body ?? [];
     });
+  }
+
+  trackId(index: number, item: ICategory): number {
+    return item.id!;
   }
 }
