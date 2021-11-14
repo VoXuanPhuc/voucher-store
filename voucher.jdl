@@ -138,7 +138,9 @@ relationship OneToMany{
 
     Event to Voucher{event},
     ServiceType to Voucher{type},
-    VoucherStatus to Voucher{status}
+	
+	
+    VoucherStatus to VoucherCode{status}
 
     Voucher to VoucherImage{voucher},
     Voucher to VoucherCode{voucher},

@@ -64,12 +64,6 @@
       "otherEntityName": "serviceType",
       "otherEntityRelationshipName": "voucher",
       "relationshipName": "type"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "voucherStatus",
-      "otherEntityRelationshipName": "voucher",
-      "relationshipName": "status"
     }
   ],
   "entityTableName": "voucher",

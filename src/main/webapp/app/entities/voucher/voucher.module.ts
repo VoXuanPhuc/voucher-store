@@ -5,20 +5,10 @@ import { VoucherDetailComponent } from './detail/voucher-detail.component';
 import { VoucherUpdateComponent } from './update/voucher-update.component';
 import { VoucherDeleteDialogComponent } from './delete/voucher-delete-dialog.component';
 import { VoucherRoutingModule } from './route/voucher-routing.module';
-import { HotVoucherComponent } from './hot-voucher/hot-voucher.component';
-import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
 
 @NgModule({
   imports: [SharedModule, VoucherRoutingModule],
-  declarations: [
-    VoucherComponent,
-    VoucherDetailComponent,
-    VoucherUpdateComponent,
-    VoucherDeleteDialogComponent,
-    HotVoucherComponent,
-    SellVoucherComponent,
-  ],
+  declarations: [VoucherComponent, VoucherDetailComponent, VoucherUpdateComponent, VoucherDeleteDialogComponent],
   entryComponents: [VoucherDeleteDialogComponent],
-  exports: [HotVoucherComponent],
 })
 export class VoucherModule {}

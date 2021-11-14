@@ -41,7 +41,6 @@
           <th scope="col"><span>Product</span></th>
           <th scope="col"><span>Event</span></th>
           <th scope="col"><span>Type</span></th>
-          <th scope="col"><span>Status</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -69,11 +68,6 @@
           <td>
             <div *ngIf="voucher.type">
               <a [routerLink]="['/service-type', voucher.type?.id, 'view']">{{ voucher.type?.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="voucher.status">
-              <a [routerLink]="['/voucher-status', voucher.status?.id, 'view']">{{ voucher.status?.id }}</a>
             </div>
           </td>
           <td class="text-right">

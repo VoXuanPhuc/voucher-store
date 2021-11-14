@@ -8,12 +8,11 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Voucher} and its DTO {@link VoucherDTO}.
  */
-@Mapper(componentModel = "spring", uses = { ProductMapper.class, EventMapper.class, ServiceTypeMapper.class, VoucherStatusMapper.class })
+@Mapper(componentModel = "spring", uses = { ProductMapper.class, EventMapper.class, ServiceTypeMapper.class })
 public interface VoucherMapper extends EntityMapper<VoucherDTO, Voucher> {
     @Mapping(target = "products", source = "products", qualifiedByName = "idSet")
     @Mapping(target = "event", source = "event", qualifiedByName = "id")
     @Mapping(target = "type", source = "type", qualifiedByName = "id")
-    @Mapping(target = "status", source = "status", qualifiedByName = "id")
     VoucherDTO toDto(Voucher s);
 
     @Named("id")

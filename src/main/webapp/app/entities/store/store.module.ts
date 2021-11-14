@@ -1,4 +1,3 @@
-import { TopStoreComponent } from './top-store/top-store.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'app/shared/shared.module';
 import { StoreComponent } from './list/store.component';
@@ -9,7 +8,7 @@ import { StoreRoutingModule } from './route/store-routing.module';
 
 @NgModule({
   imports: [SharedModule, StoreRoutingModule],
-  declarations: [StoreComponent, StoreDetailComponent, StoreUpdateComponent, StoreDeleteDialogComponent, TopStoreComponent],
+  declarations: [StoreComponent, StoreDetailComponent, StoreUpdateComponent, StoreDeleteDialogComponent],
   entryComponents: [StoreDeleteDialogComponent],
 })
 export class StoreModule {}

@@ -16,6 +16,12 @@
     },
     {
       "relationshipType": "many-to-one",
+      "otherEntityName": "voucherStatus",
+      "otherEntityRelationshipName": "voucherCode",
+      "relationshipName": "status"
+    },
+    {
+      "relationshipType": "many-to-one",
       "otherEntityName": "voucher",
       "otherEntityRelationshipName": "voucherCode",
       "relationshipName": "voucher"

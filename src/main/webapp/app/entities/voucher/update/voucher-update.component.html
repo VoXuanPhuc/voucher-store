@@ -118,19 +118,6 @@
             </option>
           </select>
         </div>
-
-        <div class="form-group">
-          <label class="form-control-label" for="field_status">Status</label>
-          <select class="form-control" id="field_status" data-cy="status" name="status" formControlName="status">
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="voucherStatusOption.id === editForm.get('status')!.value?.id ? editForm.get('status')!.value : voucherStatusOption"
-              *ngFor="let voucherStatusOption of voucherStatusesSharedCollection; trackBy: trackVoucherStatusById"
-            >
-              {{ voucherStatusOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

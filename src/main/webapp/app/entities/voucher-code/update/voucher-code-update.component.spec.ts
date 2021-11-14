@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { VoucherCodeService } from '../service/voucher-code.service';
 import { IVoucherCode, VoucherCode } from '../voucher-code.model';
+import { IVoucherStatus } from 'app/entities/voucher-status/voucher-status.model';
+import { VoucherStatusService } from 'app/entities/voucher-status/service/voucher-status.service';
 import { IVoucher } from 'app/entities/voucher/voucher.model';
 import { VoucherService } from 'app/entities/voucher/service/voucher.service';
 import { IMyOrder } from 'app/entities/my-order/my-order.model';
@@ -22,6 +24,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<VoucherCodeUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let voucherCodeService: VoucherCodeService;
+    let voucherStatusService: VoucherStatusService;
     let voucherService: VoucherService;
     let myOrderService: MyOrderService;
 
@@ -37,6 +40,7 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(VoucherCodeUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       voucherCodeService = TestBed.inject(VoucherCodeService);
+      voucherStatusService = TestBed.inject(VoucherStatusService);
       voucherService = TestBed.inject(VoucherService);
       myOrderService = TestBed.inject(MyOrderService);
 
@@ -44,6 +48,28 @@ describe('Component Tests', () => {
     });
 
     describe('ngOnInit', () => {
+      it('Should call VoucherStatus query and add missing value', () => {
+        const voucherCode: IVoucherCode = { id: 456 };
+        const status: IVoucherStatus = { id: 13351 };
+        voucherCode.status = status;
+
+        const voucherStatusCollection: IVoucherStatus[] = [{ id: 65313 }];
+        jest.spyOn(voucherStatusService, 'query').mockReturnValue(of(new HttpResponse({ body: voucherStatusCollection })));
+        const additionalVoucherStatuses = [status];
+        const expectedCollection: IVoucherStatus[] = [...additionalVoucherStatuses, ...voucherStatusCollection];
+        jest.spyOn(voucherStatusService, 'addVoucherStatusToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ voucherCode });
+        comp.ngOnInit();
+
+        expect(voucherStatusService.query).toHaveBeenCalled();
+        expect(voucherStatusService.addVoucherStatusToCollectionIfMissing).toHaveBeenCalledWith(
+          voucherStatusCollection,
+          ...additionalVoucherStatuses
+        );
+        expect(comp.voucherStatusesSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should call Voucher query and add missing value', () => {
         const voucherCode: IVoucherCode = { id: 456 };
         const voucher: IVoucher = { id: 92936 };
@@ -84,6 +110,8 @@ describe('Component Tests', () => {
 
       it('Should update editForm', () => {
         const voucherCode: IVoucherCode = { id: 456 };
+        const status: IVoucherStatus = { id: 8802 };
+        voucherCode.status = status;
         const voucher: IVoucher = { id: 63084 };
         voucherCode.voucher = voucher;
         const order: IMyOrder = { id: 17771 };
@@ -93,6 +121,7 @@ describe('Component Tests', () => {
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(voucherCode));
+        expect(comp.voucherStatusesSharedCollection).toContain(status);
         expect(comp.vouchersSharedCollection).toContain(voucher);
         expect(comp.myOrdersSharedCollection).toContain(order);
       });
@@ -163,6 +192,14 @@ describe('Component Tests', () => {
     });
 
     describe('Tracking relationships identifiers', () => {
+      describe('trackVoucherStatusById', () => {
+        it('Should return tracked VoucherStatus primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackVoucherStatusById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+
       describe('trackVoucherById', () => {
         it('Should return tracked Voucher primary key', () => {
           const entity = { id: 123 };

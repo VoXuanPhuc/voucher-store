@@ -51,7 +51,7 @@ public class Voucher implements Serializable {
 
     @OneToMany(mappedBy = "voucher")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "gifts", "voucher", "order" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "gifts", "status", "voucher", "order" }, allowSetters = true)
     private Set<VoucherCode> voucherCodes = new HashSet<>();
 
     @OneToMany(mappedBy = "voucher")
@@ -76,10 +76,6 @@ public class Voucher implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = { "vouchers" }, allowSetters = true)
     private ServiceType type;
-
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "vouchers" }, allowSetters = true)
-    private VoucherStatus status;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -302,19 +298,6 @@ public class Voucher implements Serializable {
 
     public void setType(ServiceType serviceType) {
         this.type = serviceType;
-    }
-
-    public VoucherStatus getStatus() {
-        return this.status;
-    }
-
-    public Voucher status(VoucherStatus voucherStatus) {
-        this.setStatus(voucherStatus);
-        return this;
-    }
-
-    public void setStatus(VoucherStatus voucherStatus) {
-        this.status = voucherStatus;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

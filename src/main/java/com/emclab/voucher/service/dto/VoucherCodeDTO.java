@@ -14,6 +14,8 @@ public class VoucherCodeDTO implements Serializable {
     @NotNull
     private String code;
 
+    private VoucherStatusDTO status;
+
     private VoucherDTO voucher;
 
     private MyOrderDTO order;
@@ -32,6 +34,14 @@ public class VoucherCodeDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public VoucherStatusDTO getStatus() {
+        return status;
+    }
+
+    public void setStatus(VoucherStatusDTO status) {
+        this.status = status;
     }
 
     public VoucherDTO getVoucher() {
@@ -77,6 +87,7 @@ public class VoucherCodeDTO implements Serializable {
         return "VoucherCodeDTO{" +
             "id=" + getId() +
             ", code='" + getCode() + "'" +
+            ", status=" + getStatus() +
             ", voucher=" + getVoucher() +
             ", order=" + getOrder() +
             "}";

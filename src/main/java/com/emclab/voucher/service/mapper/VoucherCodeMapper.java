@@ -7,8 +7,9 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link VoucherCode} and its DTO {@link VoucherCodeDTO}.
  */
-@Mapper(componentModel = "spring", uses = { VoucherMapper.class, MyOrderMapper.class })
+@Mapper(componentModel = "spring", uses = { VoucherStatusMapper.class, VoucherMapper.class, MyOrderMapper.class })
 public interface VoucherCodeMapper extends EntityMapper<VoucherCodeDTO, VoucherCode> {
+    @Mapping(target = "status", source = "status", qualifiedByName = "id")
     @Mapping(target = "voucher", source = "voucher", qualifiedByName = "id")
     @Mapping(target = "order", source = "order", qualifiedByName = "id")
     VoucherCodeDTO toDto(VoucherCode s);

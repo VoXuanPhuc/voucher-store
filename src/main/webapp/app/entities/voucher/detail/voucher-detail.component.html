@@ -53,12 +53,6 @@
             <a [routerLink]="['/service-type', voucher.type?.id, 'view']">{{ voucher.type?.id }}</a>
           </div>
         </dd>
-        <dt><span>Status</span></dt>
-        <dd>
-          <div *ngIf="voucher.status">
-            <a [routerLink]="['/voucher-status', voucher.status?.id, 'view']">{{ voucher.status?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
