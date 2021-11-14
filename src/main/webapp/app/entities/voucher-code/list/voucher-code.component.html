@@ -34,6 +34,7 @@
         <tr>
           <th scope="col"><span>ID</span></th>
           <th scope="col"><span>Code</span></th>
+          <th scope="col"><span>Status</span></th>
           <th scope="col"><span>Voucher</span></th>
           <th scope="col"><span>Order</span></th>
           <th scope="col"></th>
@@ -45,6 +46,11 @@
             <a [routerLink]="['/voucher-code', voucherCode.id, 'view']">{{ voucherCode.id }}</a>
           </td>
           <td>{{ voucherCode.code }}</td>
+          <td>
+            <div *ngIf="voucherCode.status">
+              <a [routerLink]="['/voucher-status', voucherCode.status?.id, 'view']">{{ voucherCode.status?.id }}</a>
+            </div>
+          </td>
           <td>
             <div *ngIf="voucherCode.voucher">
               <a [routerLink]="['/voucher', voucherCode.voucher?.id, 'view']">{{ voucherCode.voucher?.id }}</a>

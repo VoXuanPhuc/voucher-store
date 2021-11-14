@@ -35,8 +35,6 @@ public class VoucherDTO implements Serializable {
 
     private ServiceTypeDTO type;
 
-    private VoucherStatusDTO status;
-
     public Long getId() {
         return id;
     }
@@ -109,14 +107,6 @@ public class VoucherDTO implements Serializable {
         this.type = type;
     }
 
-    public VoucherStatusDTO getStatus() {
-        return status;
-    }
-
-    public void setStatus(VoucherStatusDTO status) {
-        this.status = status;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -151,7 +141,6 @@ public class VoucherDTO implements Serializable {
             ", products=" + getProducts() +
             ", event=" + getEvent() +
             ", type=" + getType() +
-            ", status=" + getStatus() +
             "}";
     }
 }

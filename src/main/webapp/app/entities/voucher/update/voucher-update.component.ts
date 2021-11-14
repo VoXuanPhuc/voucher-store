@@ -16,8 +16,6 @@ import { IEvent } from 'app/entities/event/event.model';
 import { EventService } from 'app/entities/event/service/event.service';
 import { IServiceType } from 'app/entities/service-type/service-type.model';
 import { ServiceTypeService } from 'app/entities/service-type/service/service-type.service';
-import { IVoucherStatus } from 'app/entities/voucher-status/voucher-status.model';
-import { VoucherStatusService } from 'app/entities/voucher-status/service/voucher-status.service';
 
 @Component({
   selector: 'jhi-voucher-update',
@@ -29,7 +27,6 @@ export class VoucherUpdateComponent implements OnInit {
   productsSharedCollection: IProduct[] = [];
   eventsSharedCollection: IEvent[] = [];
   serviceTypesSharedCollection: IServiceType[] = [];
-  voucherStatusesSharedCollection: IVoucherStatus[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -41,7 +38,6 @@ export class VoucherUpdateComponent implements OnInit {
     products: [],
     event: [],
     type: [],
-    status: [],
   });
 
   constructor(
@@ -49,7 +45,6 @@ export class VoucherUpdateComponent implements OnInit {
     protected productService: ProductService,
     protected eventService: EventService,
     protected serviceTypeService: ServiceTypeService,
-    protected voucherStatusService: VoucherStatusService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -94,10 +89,6 @@ export class VoucherUpdateComponent implements OnInit {
     return item.id!;
   }
 
-  trackVoucherStatusById(index: number, item: IVoucherStatus): number {
-    return item.id!;
-  }
-
   getSelectedProduct(option: IProduct, selectedVals?: IProduct[]): IProduct {
     if (selectedVals) {
       for (const selectedVal of selectedVals) {
@@ -139,7 +130,6 @@ export class VoucherUpdateComponent implements OnInit {
       products: voucher.products,
       event: voucher.event,
       type: voucher.type,
-      status: voucher.status,
     });
 
     this.productsSharedCollection = this.productService.addProductToCollectionIfMissing(
@@ -150,10 +140,6 @@ export class VoucherUpdateComponent implements OnInit {
     this.serviceTypesSharedCollection = this.serviceTypeService.addServiceTypeToCollectionIfMissing(
       this.serviceTypesSharedCollection,
       voucher.type
-    );
-    this.voucherStatusesSharedCollection = this.voucherStatusService.addVoucherStatusToCollectionIfMissing(
-      this.voucherStatusesSharedCollection,
-      voucher.status
     );
   }
 
@@ -183,16 +169,6 @@ export class VoucherUpdateComponent implements OnInit {
         )
       )
       .subscribe((serviceTypes: IServiceType[]) => (this.serviceTypesSharedCollection = serviceTypes));
-
-    this.voucherStatusService
-      .query()
-      .pipe(map((res: HttpResponse<IVoucherStatus[]>) => res.body ?? []))
-      .pipe(
-        map((voucherStatuses: IVoucherStatus[]) =>
-          this.voucherStatusService.addVoucherStatusToCollectionIfMissing(voucherStatuses, this.editForm.get('status')!.value)
-        )
-      )
-      .subscribe((voucherStatuses: IVoucherStatus[]) => (this.voucherStatusesSharedCollection = voucherStatuses));
   }
 
   protected createFromForm(): IVoucher {
@@ -209,7 +185,6 @@ export class VoucherUpdateComponent implements OnInit {
       products: this.editForm.get(['products'])!.value,
       event: this.editForm.get(['event'])!.value,
       type: this.editForm.get(['type'])!.value,
-      status: this.editForm.get(['status'])!.value,
     };
   }
 }

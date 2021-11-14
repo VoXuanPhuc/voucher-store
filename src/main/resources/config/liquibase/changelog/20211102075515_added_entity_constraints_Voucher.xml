@@ -31,11 +31,5 @@
                                  constraintName="fk_voucher__type_id"
                                  referencedColumnNames="id"
                                  referencedTableName="service_type"/>
-
-        <addForeignKeyConstraint baseColumnNames="status_id"
-                                 baseTableName="voucher"
-                                 constraintName="fk_voucher__status_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="voucher_status"/>
     </changeSet>
 </databaseChangeLog>

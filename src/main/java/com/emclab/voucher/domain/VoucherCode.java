@@ -33,10 +33,11 @@ public class VoucherCode implements Serializable {
     private Set<Gift> gifts = new HashSet<>();
 
     @ManyToOne
-    @JsonIgnoreProperties(
-        value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type", "status" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "voucherCodes" }, allowSetters = true)
+    private VoucherStatus status;
+
+    @ManyToOne
+    @JsonIgnoreProperties(value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type" }, allowSetters = true)
     private Voucher voucher;
 
     @ManyToOne
@@ -99,6 +100,19 @@ public class VoucherCode implements Serializable {
             gifts.forEach(i -> i.setVoucher(this));
         }
         this.gifts = gifts;
+    }
+
+    public VoucherStatus getStatus() {
+        return this.status;
+    }
+
+    public VoucherCode status(VoucherStatus voucherStatus) {
+        this.setStatus(voucherStatus);
+        return this;
+    }
+
+    public void setStatus(VoucherStatus voucherStatus) {
+        this.status = voucherStatus;
     }
 
     public Voucher getVoucher() {

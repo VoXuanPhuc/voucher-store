@@ -32,10 +32,7 @@ public class Event implements Serializable {
 
     @OneToMany(mappedBy = "event")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type", "status" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type" }, allowSetters = true)
     private Set<Voucher> vouchers = new HashSet<>();
 
     @ManyToOne

@@ -15,8 +15,6 @@ import { IEvent } from 'app/entities/event/event.model';
 import { EventService } from 'app/entities/event/service/event.service';
 import { IServiceType } from 'app/entities/service-type/service-type.model';
 import { ServiceTypeService } from 'app/entities/service-type/service/service-type.service';
-import { IVoucherStatus } from 'app/entities/voucher-status/voucher-status.model';
-import { VoucherStatusService } from 'app/entities/voucher-status/service/voucher-status.service';
 
 import { VoucherUpdateComponent } from './voucher-update.component';
 
@@ -29,7 +27,6 @@ describe('Component Tests', () => {
     let productService: ProductService;
     let eventService: EventService;
     let serviceTypeService: ServiceTypeService;
-    let voucherStatusService: VoucherStatusService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -46,7 +43,6 @@ describe('Component Tests', () => {
       productService = TestBed.inject(ProductService);
       eventService = TestBed.inject(EventService);
       serviceTypeService = TestBed.inject(ServiceTypeService);
-      voucherStatusService = TestBed.inject(VoucherStatusService);
 
       comp = fixture.componentInstance;
     });
@@ -112,28 +108,6 @@ describe('Component Tests', () => {
         expect(comp.serviceTypesSharedCollection).toEqual(expectedCollection);
       });
 
-      it('Should call VoucherStatus query and add missing value', () => {
-        const voucher: IVoucher = { id: 456 };
-        const status: IVoucherStatus = { id: 31175 };
-        voucher.status = status;
-
-        const voucherStatusCollection: IVoucherStatus[] = [{ id: 20315 }];
-        jest.spyOn(voucherStatusService, 'query').mockReturnValue(of(new HttpResponse({ body: voucherStatusCollection })));
-        const additionalVoucherStatuses = [status];
-        const expectedCollection: IVoucherStatus[] = [...additionalVoucherStatuses, ...voucherStatusCollection];
-        jest.spyOn(voucherStatusService, 'addVoucherStatusToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-        activatedRoute.data = of({ voucher });
-        comp.ngOnInit();
-
-        expect(voucherStatusService.query).toHaveBeenCalled();
-        expect(voucherStatusService.addVoucherStatusToCollectionIfMissing).toHaveBeenCalledWith(
-          voucherStatusCollection,
-          ...additionalVoucherStatuses
-        );
-        expect(comp.voucherStatusesSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const voucher: IVoucher = { id: 456 };
         const products: IProduct = { id: 65524 };
@@ -142,8 +116,6 @@ describe('Component Tests', () => {
         voucher.event = event;
         const type: IServiceType = { id: 19020 };
         voucher.type = type;
-        const status: IVoucherStatus = { id: 65 };
-        voucher.status = status;
 
         activatedRoute.data = of({ voucher });
         comp.ngOnInit();
@@ -152,7 +124,6 @@ describe('Component Tests', () => {
         expect(comp.productsSharedCollection).toContain(products);
         expect(comp.eventsSharedCollection).toContain(event);
         expect(comp.serviceTypesSharedCollection).toContain(type);
-        expect(comp.voucherStatusesSharedCollection).toContain(status);
       });
     });
 
@@ -241,14 +212,6 @@ describe('Component Tests', () => {
         it('Should return tracked ServiceType primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackServiceTypeById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
-      });
-
-      describe('trackVoucherStatusById', () => {
-        it('Should return tracked VoucherStatus primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackVoucherStatusById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

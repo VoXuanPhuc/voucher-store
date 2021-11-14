@@ -8,6 +8,12 @@
     -->
     <changeSet id="20211102075516-2" author="jhipster">
 
+        <addForeignKeyConstraint baseColumnNames="status_id"
+                                 baseTableName="voucher_code"
+                                 constraintName="fk_voucher_code__status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="voucher_status"/>
+
         <addForeignKeyConstraint baseColumnNames="voucher_id"
                                  baseTableName="voucher_code"
                                  constraintName="fk_voucher_code__voucher_id"

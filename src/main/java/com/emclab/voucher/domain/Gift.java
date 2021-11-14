@@ -28,7 +28,7 @@ public class Gift implements Serializable {
     private MyUser giver;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "gifts", "voucher", "order" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "gifts", "status", "voucher", "order" }, allowSetters = true)
     private VoucherCode voucher;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

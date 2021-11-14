@@ -29,11 +29,8 @@ public class VoucherStatus implements Serializable {
 
     @OneToMany(mappedBy = "status")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type", "status" },
-        allowSetters = true
-    )
-    private Set<Voucher> vouchers = new HashSet<>();
+    @JsonIgnoreProperties(value = { "gifts", "status", "voucher", "order" }, allowSetters = true)
+    private Set<VoucherCode> voucherCodes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -62,35 +59,35 @@ public class VoucherStatus implements Serializable {
         this.name = name;
     }
 
-    public Set<Voucher> getVouchers() {
-        return this.vouchers;
+    public Set<VoucherCode> getVoucherCodes() {
+        return this.voucherCodes;
     }
 
-    public VoucherStatus vouchers(Set<Voucher> vouchers) {
-        this.setVouchers(vouchers);
+    public VoucherStatus voucherCodes(Set<VoucherCode> voucherCodes) {
+        this.setVoucherCodes(voucherCodes);
         return this;
     }
 
-    public VoucherStatus addVoucher(Voucher voucher) {
-        this.vouchers.add(voucher);
-        voucher.setStatus(this);
+    public VoucherStatus addVoucherCode(VoucherCode voucherCode) {
+        this.voucherCodes.add(voucherCode);
+        voucherCode.setStatus(this);
         return this;
     }
 
-    public VoucherStatus removeVoucher(Voucher voucher) {
-        this.vouchers.remove(voucher);
-        voucher.setStatus(null);
+    public VoucherStatus removeVoucherCode(VoucherCode voucherCode) {
+        this.voucherCodes.remove(voucherCode);
+        voucherCode.setStatus(null);
         return this;
     }
 
-    public void setVouchers(Set<Voucher> vouchers) {
-        if (this.vouchers != null) {
-            this.vouchers.forEach(i -> i.setStatus(null));
+    public void setVoucherCodes(Set<VoucherCode> voucherCodes) {
+        if (this.voucherCodes != null) {
+            this.voucherCodes.forEach(i -> i.setStatus(null));
         }
-        if (vouchers != null) {
-            vouchers.forEach(i -> i.setStatus(this));
+        if (voucherCodes != null) {
+            voucherCodes.forEach(i -> i.setStatus(this));
         }
-        this.vouchers = vouchers;
+        this.voucherCodes = voucherCodes;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

@@ -5,7 +5,6 @@ import { IFeedback } from 'app/entities/feedback/feedback.model';
 import { IProduct } from 'app/entities/product/product.model';
 import { IEvent } from 'app/entities/event/event.model';
 import { IServiceType } from 'app/entities/service-type/service-type.model';
-import { IVoucherStatus } from 'app/entities/voucher-status/voucher-status.model';
 
 export interface IVoucher {
   id?: number;
@@ -20,7 +19,6 @@ export interface IVoucher {
   products?: IProduct[] | null;
   event?: IEvent | null;
   type?: IServiceType | null;
-  status?: IVoucherStatus | null;
 }
 
 export class Voucher implements IVoucher {
@@ -36,8 +34,7 @@ export class Voucher implements IVoucher {
     public feedbacks?: IFeedback[] | null,
     public products?: IProduct[] | null,
     public event?: IEvent | null,
-    public type?: IServiceType | null,
-    public status?: IVoucherStatus | null
+    public type?: IServiceType | null
   ) {}
 }
 

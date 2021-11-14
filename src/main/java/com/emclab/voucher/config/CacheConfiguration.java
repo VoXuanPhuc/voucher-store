@@ -97,6 +97,7 @@ public class CacheConfiguration {
             createCache(cm, com.emclab.voucher.domain.Feedback.class.getName() + ".feedbackImages");
             createCache(cm, com.emclab.voucher.domain.FeedbackImage.class.getName());
             createCache(cm, com.emclab.voucher.domain.Gift.class.getName());
+            createCache(cm, com.emclab.voucher.domain.VoucherStatus.class.getName() + ".voucherCodes");
             // jhipster-needle-ehcache-add-entry
         };
     }

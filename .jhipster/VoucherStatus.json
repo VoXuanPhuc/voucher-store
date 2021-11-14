@@ -10,9 +10,9 @@
   "relationships": [
     {
       "relationshipType": "one-to-many",
-      "otherEntityName": "voucher",
+      "otherEntityName": "voucherCode",
       "otherEntityRelationshipName": "status",
-      "relationshipName": "voucher"
+      "relationshipName": "voucherCode"
     }
   ],
   "entityTableName": "voucher_status",

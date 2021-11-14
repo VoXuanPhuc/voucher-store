@@ -40,10 +40,7 @@ public class Feedback implements Serializable {
     private MyUser user;
 
     @ManyToOne
-    @JsonIgnoreProperties(
-        value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type", "status" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type" }, allowSetters = true)
     private Voucher voucher;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

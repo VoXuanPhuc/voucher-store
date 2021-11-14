@@ -29,10 +29,7 @@ public class ServiceType implements Serializable {
 
     @OneToMany(mappedBy = "type")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(
-        value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type", "status" },
-        allowSetters = true
-    )
+    @JsonIgnoreProperties(value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type" }, allowSetters = true)
     private Set<Voucher> vouchers = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
