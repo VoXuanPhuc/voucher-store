@@ -8,9 +8,10 @@ import { VoucherModule } from 'app/entities/voucher/voucher.module';
 import { CategoryModule } from 'app/entities/category/category.module';
 import { ServiceTypeModule } from 'app/entities/service-type/service-type.module';
 import { OtherModule } from 'app/entities/others/other.module';
+import { StoreModule } from 'app/entities/store/store.module';
 
 @NgModule({
   declarations: [LandingPageComponent],
-  imports: [CommonModule, TemplateRoutingModule, SharedModule, VoucherModule, ServiceTypeModule, CategoryModule, OtherModule],
+  imports: [CommonModule, TemplateRoutingModule, SharedModule, VoucherModule, ServiceTypeModule, CategoryModule, OtherModule, StoreModule],
 })
 export class TemplateModule {}

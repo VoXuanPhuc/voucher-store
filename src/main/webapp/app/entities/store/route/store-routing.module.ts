@@ -1,3 +1,4 @@
+import { TopStoreComponent } from './../top-store/top-store.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -32,6 +33,14 @@ const storeRoute: Routes = [
   {
     path: ':id/edit',
     component: StoreUpdateComponent,
+    resolve: {
+      store: StoreRoutingResolveService,
+    },
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'top',
+    component: TopStoreComponent,
     resolve: {
       store: StoreRoutingResolveService,
     },
