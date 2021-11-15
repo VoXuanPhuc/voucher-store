@@ -27,6 +27,8 @@ import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ErrorComponent } from './layouts/error/error.component';
 import { MyHeaderComponent } from './layouts/my-header/my-header.component';
 import { TemplateModule } from './template/template.module';
+import { CategoryModule } from './entities/category/category.module';
+import { ServiceTypeModule } from './entities/service-type/service-type.module';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { TemplateModule } from './template/template.module';
     SharedModule,
     HomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
+    CategoryModule,
+    // ServiceTypeModule,
     EntityRoutingModule,
     TemplateModule,
     AppRoutingModule,

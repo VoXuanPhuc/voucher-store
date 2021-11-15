@@ -8,5 +8,6 @@ import { SlideComponent } from './slide/slide.component';
 @NgModule({
   declarations: [SlideComponent],
   imports: [CommonModule, SharedModule, OtherRoutingModule],
+  exports: [SlideComponent],
 })
 export class OtherModule {}
