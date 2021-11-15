@@ -10,6 +10,8 @@ import { IVoucher } from '../voucher.model';
 })
 export class HotVoucherComponent implements OnInit {
   vouchers?: IVoucher[];
+  isLoading = false;
+
   constructor(protected voucherService: VoucherService) {}
 
   ngOnInit(): void {
@@ -17,8 +19,20 @@ export class HotVoucherComponent implements OnInit {
   }
 
   loadHotVoucher(): void {
-    this.voucherService.query().subscribe((res: HttpResponse<IVoucher[]>) => {
-      this.vouchers = res.body ?? [];
-    });
+    this.isLoading = true;
+
+    this.voucherService.query().subscribe(
+      (res: HttpResponse<IVoucher[]>) => {
+        this.isLoading = false;
+        this.vouchers = res.body ?? [];
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
+  }
+
+  trackId(index: number, item: IVoucher): number {
+    return item.id!;
   }
 }
