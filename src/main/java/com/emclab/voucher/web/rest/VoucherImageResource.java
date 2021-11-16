@@ -1,5 +1,6 @@
 package com.emclab.voucher.web.rest;
 
+import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.repository.VoucherImageRepository;
 import com.emclab.voucher.service.VoucherImageService;
 import com.emclab.voucher.service.dto.VoucherImageDTO;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -171,5 +173,12 @@ public class VoucherImageResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/voucher-images-by-voucher")
+    public List<VoucherImageDTO> getVoucherImagesByVoucher(@RequestBody Voucher voucher) {
+        log.debug("REST request to get all VoucherImages");
+        List<VoucherImageDTO> voucherImageByVoucher = voucherImageService.findByVoucher(voucher);
+        return voucherImageByVoucher;
     }
 }

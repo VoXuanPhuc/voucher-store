@@ -1,5 +1,6 @@
 package com.emclab.voucher.service;
 
+import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.service.dto.VoucherImageDTO;
 import java.util.List;
 import java.util.Optional;
@@ -45,4 +46,10 @@ public interface VoucherImageService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    /**
+     * Get all voucherImage for voucher
+     * */
+
+    List<VoucherImageDTO> findByVoucher(Voucher voucher);
 }

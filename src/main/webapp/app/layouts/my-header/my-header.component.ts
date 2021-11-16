@@ -13,10 +13,12 @@ export class MyHeaderComponent {
 
   toggleDisplayLogin(): void {
     this.isDisplayLogin = !this.isDisplayLogin;
+    this.isDisplayCategory = false;
   }
 
   toggleDisplayCategory(): void {
     this.isDisplayCategory = !this.isDisplayCategory;
+    this.isDisplayLogin = false;
   }
 
   @HostListener('window:scroll', ['$event']) onScroll(): void {

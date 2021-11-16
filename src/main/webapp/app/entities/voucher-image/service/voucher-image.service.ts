@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IVoucherImage, getVoucherImageIdentifier } from '../voucher-image.model';
+import { IVoucher, Voucher } from 'app/entities/voucher/voucher.model';
 
 export type EntityResponseType = HttpResponse<IVoucherImage>;
 export type EntityArrayResponseType = HttpResponse<IVoucherImage[]>;

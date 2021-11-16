@@ -1,6 +1,8 @@
 package com.emclab.voucher.repository;
 
+import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.domain.VoucherImage;
+import java.util.List;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +11,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface VoucherImageRepository extends JpaRepository<VoucherImage, Long> {}
+public interface VoucherImageRepository extends JpaRepository<VoucherImage, Long> {
+    List<VoucherImage> findByVoucher(Voucher voucher);
+}
