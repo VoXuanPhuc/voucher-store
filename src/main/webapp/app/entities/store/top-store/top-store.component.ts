@@ -20,42 +20,31 @@ export class TopStoreComponent implements OnInit {
   public loadAll(): void {
     this.isLoading = true;
 
-    this.storeService.query().subscribe(
-      (res: HttpResponse<IStore[]>) => {
-        this.isLoading = false;
-        this.stores = res.body ?? [];
-
-        // window.console.log("1. Duonggggggggggggggggggggg", this.stores);
-
-        this.setAddressDetail(this.stores);
-      },
-      () => {
-        this.isLoading = false;
-      }
-    );
+    this.getAllStore();
   }
 
-  public getAddressById(id: number): IAddress | null {
-    let address!: IAddress;
+  public async getAllStore(): Promise<void> {
+    const promise = await this.storeService.query().toPromise();
+    this.stores = promise.body ?? [];
 
-    this.addressService.find(id).subscribe((res: EntityResponseType) => {
-      address = res.body!;
+    this.setAddressDetail(this.stores);
+  }
 
-      return address;
-    });
+  public async getAddressById(id: number): Promise<EntityResponseType> {
+    const promise = await this.addressService.find(id).toPromise();
 
-    return null;
+    return promise;
   }
 
   public setAddressDetail(stores: IStore[]): void {
     stores.forEach(store => {
-      // window.console.log("Duonggggggggggggggggggggg", store.address?.id);
-      const address: IAddress | null = this.getAddressById(store.address?.id ?? 1);
-      store.address = address;
-      window.console.log('Address: ', address);
-    });
+      const promise = this.getAddressById(store.address?.id ?? 1);
 
-    // window.console.log("111111111111Duonggggggggggggggggggggg", stores);
+      promise.then(data => {
+        const address = data.body;
+        store.address = address;
+      });
+    });
   }
 
   trackId(index: number, item: IStore): number {

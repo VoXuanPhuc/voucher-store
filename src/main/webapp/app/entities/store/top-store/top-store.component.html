@@ -2,7 +2,7 @@
   <!-- Part 4.1: title store ratings -->
   <div class="container title_topratings_voucher d-flex mb-1">
     <span class="iconify mt-2 ml-2" data-icon="fluent:globe-star-16-filled" style="color: #ffba57; font-size: 38px"></span>
-    <h4 class="pt-3 pl-4"><b>Top ratings</b></h4>
+    <h4 class="pt-3 pl-4"><b>Top stores</b></h4>
   </div>
 
   <div class="container">
@@ -22,7 +22,10 @@
               <span class="iconify" data-icon="emojione:star"></span>
               <span class="iconify" data-icon="emojione:star"></span>
             </div>
-            <span> <span class="iconify mr-2" data-icon="carbon:location-heart-filled" style="color: #df2f4c"> </span>48 Cao Thắng</span>
+            <span>
+              <span class="iconify mr-2" data-icon="carbon:location-heart-filled" style="color: #df2f4c"> </span
+              >{{ store.address?.number }} {{ store.address?.street }}</span
+            >
             <span> <span class="iconify mr-2" data-icon="bx:bxs-phone" style="color: #df2f4c"> </span>{{ store.phone }}</span>
           </div>
         </div>
