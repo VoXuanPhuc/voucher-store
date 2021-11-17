@@ -1,5 +1,6 @@
 package com.emclab.voucher.web.rest;
 
+import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.repository.VoucherImageRepository;
 import com.emclab.voucher.service.VoucherImageService;
 import com.emclab.voucher.service.dto.VoucherImageDTO;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
@@ -46,7 +48,9 @@ public class VoucherImageResource {
      * {@code POST  /voucher-images} : Create a new voucherImage.
      *
      * @param voucherImageDTO the voucherImageDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new voucherImageDTO, or with status {@code 400 (Bad Request)} if the voucherImage has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new voucherImageDTO, or with status
+     *         {@code 400 (Bad Request)} if the voucherImage has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/voucher-images")
@@ -66,11 +70,13 @@ public class VoucherImageResource {
     /**
      * {@code PUT  /voucher-images/:id} : Updates an existing voucherImage.
      *
-     * @param id the id of the voucherImageDTO to save.
+     * @param id              the id of the voucherImageDTO to save.
      * @param voucherImageDTO the voucherImageDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated voucherImageDTO,
-     * or with status {@code 400 (Bad Request)} if the voucherImageDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the voucherImageDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated voucherImageDTO, or with status {@code 400 (Bad Request)}
+     *         if the voucherImageDTO is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the voucherImageDTO couldn't
+     *         be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/voucher-images/{id}")
@@ -98,14 +104,17 @@ public class VoucherImageResource {
     }
 
     /**
-     * {@code PATCH  /voucher-images/:id} : Partial updates given fields of an existing voucherImage, field will ignore if it is null
+     * {@code PATCH  /voucher-images/:id} : Partial updates given fields of an
+     * existing voucherImage, field will ignore if it is null
      *
-     * @param id the id of the voucherImageDTO to save.
+     * @param id              the id of the voucherImageDTO to save.
      * @param voucherImageDTO the voucherImageDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated voucherImageDTO,
-     * or with status {@code 400 (Bad Request)} if the voucherImageDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the voucherImageDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the voucherImageDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated voucherImageDTO, or with status {@code 400 (Bad Request)}
+     *         if the voucherImageDTO is not valid, or with status
+     *         {@code 404 (Not Found)} if the voucherImageDTO is not found, or with
+     *         status {@code 500 (Internal Server Error)} if the voucherImageDTO
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/voucher-images/{id}", consumes = "application/merge-patch+json")
@@ -136,7 +145,8 @@ public class VoucherImageResource {
     /**
      * {@code GET  /voucher-images} : get all the voucherImages.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of voucherImages in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of voucherImages in body.
      */
     @GetMapping("/voucher-images")
     public List<VoucherImageDTO> getAllVoucherImages() {
@@ -148,7 +158,8 @@ public class VoucherImageResource {
      * {@code GET  /voucher-images/:id} : get the "id" voucherImage.
      *
      * @param id the id of the voucherImageDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the voucherImageDTO, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the voucherImageDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/voucher-images/{id}")
     public ResponseEntity<VoucherImageDTO> getVoucherImage(@PathVariable Long id) {
@@ -171,5 +182,12 @@ public class VoucherImageResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping(path = "/voucher-images", params = "voucherId")
+    public List<VoucherImageDTO> getByVoucher(@RequestParam Long voucherId) {
+        log.debug("REST request to get all VoucherImages");
+        List<VoucherImageDTO> imageList = voucherImageService.findByVoucherId(voucherId);
+        return imageList;
     }
 }
