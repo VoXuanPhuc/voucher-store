@@ -54,7 +54,7 @@
   flex-direction: column;
   margin-left: 15px;
   position: relative;
-  top: -20px;
+  top: -5px;
 }
 .deltail_infor a,
 .deltail_infor a:hover {
@@ -74,7 +74,7 @@
   .toprating-list-col {
     margin-bottom: 20px;
     margin-right: 20px;
-    height: 170px;
+    height: 130px;
     min-width: 250px;
     background-color: white;
   }
@@ -83,16 +83,17 @@
   }
   .toprating-list-col .info_store {
     position: relative;
-    top: -30px;
+    top: -25px;
     left: 30px;
     width: 100%;
   }
 }
+
 @media only screen and (max-width: 576px) {
   .toprating-list-col {
     margin-bottom: 20px;
     margin-right: 20px;
-    height: 170px;
+    height: 130px;
     min-width: 200px;
     background-color: white;
   }
@@ -128,6 +129,6 @@
     flex-direction: column;
     margin-left: 5px;
     position: relative;
-    top: -20px;
+    top: -5px;
   }
 }
