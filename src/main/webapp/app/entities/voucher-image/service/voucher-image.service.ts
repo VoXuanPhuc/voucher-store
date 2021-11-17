@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
@@ -38,8 +38,18 @@ export class VoucherImageService {
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
+    // alert("alo");
     const options = createRequestOption(req);
     return this.http.get<IVoucherImage[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  queryByVoucherId(id: number): Observable<EntityArrayResponseType> {
+    // alert("alo");
+
+    let myParams = new HttpParams();
+    myParams = myParams.set('voucherId', id);
+
+    return this.http.get<IVoucherImage[]>(this.resourceUrl, { params: myParams, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

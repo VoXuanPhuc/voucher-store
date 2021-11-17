@@ -9,7 +9,16 @@
       class="col-12 col-lg-3 col-xl-3 col-md-6 col-sm-6 col-xs-12 card_voucher pd-0 mt-4"
     >
       <div class="card" style="width: auto; height: 400px">
-        <img class="card-img-top" src="../../../content/images/landingpage/img_card_01.png" alt="Card image cap" />
+        <img
+          *ngIf="voucher.voucherImages; else elseBlock"
+          class="card-img-top"
+          src="../../../content/images/landingpage/card/{{ voucher.voucherImages[0].name }}"
+          alt="Card image cap"
+        />
+        <ng-template #elseBlock>
+          <img class="card-img-top" src="../../../content/images/landingpage/card/img_card_01.png" alt="Card image cap" />
+        </ng-template>
+
         <div class="middle">
           <div class="text_middle d-flex">
             <input class="icon_heart mx-1 mt-2" type="radio" name="icon_heart" id="icon_heart" />

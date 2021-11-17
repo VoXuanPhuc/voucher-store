@@ -51,5 +51,5 @@ public interface VoucherImageService {
      * Get all voucherImage for voucher
      * */
 
-    List<VoucherImageDTO> findByVoucher(Voucher voucher);
+    List<VoucherImageDTO> findByVoucherId(Long id);
 }

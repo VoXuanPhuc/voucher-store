@@ -28,8 +28,13 @@ export class HotVoucherComponent implements OnInit {
         this.isLoading = false;
         this.vouchers = res.body ?? [];
 
-        this.vouchers.forEach(item => {
-          this.voucherImageService.find(1).subscribe((resImage: HttpResponse<IVoucherImage>) => {});
+        this.vouchers.forEach(voucher => {
+          this.voucherImageService.queryByVoucherId(voucher.id ?? 1).subscribe((resImages: HttpResponse<IVoucherImage[]>) => {
+            voucher.voucherImages = resImages.body ?? [];
+          }),
+            () => {
+              alert('Error');
+            };
         });
       },
       () => {
