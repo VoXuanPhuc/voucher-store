@@ -28,6 +28,8 @@ export class MyHeaderComponent {
 
     if (srcollTop > this.lastScrollTop) {
       this.isHeaderFix = false;
+      this.isDisplayCategory = false;
+      this.isDisplayLogin = false;
     } else {
       this.isHeaderFix = true;
     }

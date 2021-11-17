@@ -15,6 +15,11 @@
   transition: all 0.2s ease;
 }
 
+.hot_voucher .card_voucher .card-body input,
+label {
+  color: #fd4;
+}
+
 .hot_voucher .card_voucher .card-body input:not(:checked) ~ label:hover,
 .hot_voucher .card_voucher .card-body input:not(:checked) ~ label:hover ~ label {
   color: #fd4;
@@ -71,6 +76,11 @@
 
 .middle .text_middle input {
   display: none;
+}
+.middle .text_middle .icon_hover,
+.icon_heart,
+.icon_cart {
+  color: #474141;
 }
 .middle .text_middle input:not(:checked) ~ label:hover {
   color: #e94560;
