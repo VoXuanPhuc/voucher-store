@@ -31,10 +31,11 @@ public class Role extends AbstractAuditingEntity {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @OneToMany(mappedBy = "role")
+    @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "address", "storeUsers", "myOrders", "feedbacks", "gifts", "role" }, allowSetters = true)
-    private Set<MyUser> myUsers = new HashSet<>();
+    @JoinTable(name = "rel_role__user", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JsonIgnoreProperties(value = { "address", "storeUsers", "myOrders", "feedbacks", "gifts", "roles" }, allowSetters = true)
+    private Set<MyUser> users = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -76,38 +77,33 @@ public class Role extends AbstractAuditingEntity {
         this.code = code;
     }
 
-    public Set<MyUser> getMyUsers() {
-        return this.myUsers;
+    public Set<MyUser> getUsers() {
+        return this.users;
     }
 
-    public Role myUsers(Set<MyUser> myUsers) {
-        this.setMyUsers(myUsers);
+    public Role users(Set<MyUser> myUsers) {
+        this.setUsers(myUsers);
         return this;
     }
 
-    public Role addMyUser(MyUser myUser) {
-        this.myUsers.add(myUser);
-        myUser.setRole(this);
+    public Role addUser(MyUser myUser) {
+        this.users.add(myUser);
+        myUser.getRoles().add(this);
         return this;
     }
 
-    public Role removeMyUser(MyUser myUser) {
-        this.myUsers.remove(myUser);
-        myUser.setRole(null);
+    public Role removeUser(MyUser myUser) {
+        this.users.remove(myUser);
+        myUser.getRoles().remove(this);
         return this;
     }
 
-    public void setMyUsers(Set<MyUser> myUsers) {
-        if (this.myUsers != null) {
-            this.myUsers.forEach(i -> i.setRole(null));
-        }
-        if (myUsers != null) {
-            myUsers.forEach(i -> i.setRole(this));
-        }
-        this.myUsers = myUsers;
+    public void setUsers(Set<MyUser> myUsers) {
+        this.users = myUsers;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -122,17 +118,14 @@ public class Role extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Role{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", code='" + getCode() + "'" +
-            "}";
+        return "Role{" + "id=" + getId() + ", name='" + getName() + "'" + ", code='" + getCode() + "'" + "}";
     }
 }

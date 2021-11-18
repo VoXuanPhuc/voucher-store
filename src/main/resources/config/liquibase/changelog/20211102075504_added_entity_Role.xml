@@ -24,6 +24,20 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="20211102075504-1-relations" author="jhipster">
+
+        <createTable tableName="rel_role__user">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="role_id, user_id" tableName="rel_role__user"/>
+    </changeSet>
+
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
 
     <!--
