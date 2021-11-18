@@ -41,7 +41,6 @@
           <th scope="col"><span>Phone</span></th>
           <th scope="col"><span>Email</span></th>
           <th scope="col"><span>Address</span></th>
-          <th scope="col"><span>Role</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -60,11 +59,6 @@
           <td>
             <div *ngIf="myUser.address">
               <a [routerLink]="['/address', myUser.address?.id, 'view']">{{ myUser.address?.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="myUser.role">
-              <a [routerLink]="['/role', myUser.role?.id, 'view']">{{ myUser.role?.id }}</a>
             </div>
           </td>
           <td class="text-right">

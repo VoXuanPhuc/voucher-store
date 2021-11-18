@@ -35,6 +35,7 @@
           <th scope="col"><span>ID</span></th>
           <th scope="col"><span>Name</span></th>
           <th scope="col"><span>Code</span></th>
+          <th scope="col"><span>User</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -45,6 +46,12 @@
           </td>
           <td>{{ role.name }}</td>
           <td>{{ role.code }}</td>
+          <td>
+            <span *ngFor="let user of role.users; let last = last">
+              <a class="form-control-static" [routerLink]="['/my-user', user.id, 'view']">{{ user.id }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="['/role', role.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">

@@ -2,22 +2,30 @@ package com.emclab.voucher.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.emclab.voucher.IntegrationTest;
 import com.emclab.voucher.domain.Role;
 import com.emclab.voucher.repository.RoleRepository;
+import com.emclab.voucher.service.RoleService;
 import com.emclab.voucher.service.dto.RoleDTO;
 import com.emclab.voucher.service.mapper.RoleMapper;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link RoleResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class RoleResourceIT {
@@ -46,8 +55,14 @@ class RoleResourceIT {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Mock
+    private RoleRepository roleRepositoryMock;
+
     @Autowired
     private RoleMapper roleMapper;
+
+    @Mock
+    private RoleService roleServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -171,6 +186,24 @@ class RoleResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllRolesWithEagerRelationshipsIsEnabled() throws Exception {
+        when(roleServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restRoleMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(roleServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllRolesWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(roleServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restRoleMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(roleServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

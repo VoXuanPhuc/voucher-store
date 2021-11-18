@@ -19,7 +19,7 @@ export interface IMyUser {
   myOrders?: IMyOrder[] | null;
   feedbacks?: IFeedback[] | null;
   gifts?: IGift[] | null;
-  role?: IRole | null;
+  roles?: IRole[] | null;
 }
 
 export class MyUser implements IMyUser {
@@ -37,7 +37,7 @@ export class MyUser implements IMyUser {
     public myOrders?: IMyOrder[] | null,
     public feedbacks?: IFeedback[] | null,
     public gifts?: IGift[] | null,
-    public role?: IRole | null
+    public roles?: IRole[] | null
   ) {}
 }
 

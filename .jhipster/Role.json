@@ -14,10 +14,11 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
+      "relationshipType": "many-to-many",
       "otherEntityName": "myUser",
       "otherEntityRelationshipName": "role",
-      "relationshipName": "myUser"
+      "relationshipName": "user",
+      "ownerSide": true
     }
   ],
   "entityTableName": "role",

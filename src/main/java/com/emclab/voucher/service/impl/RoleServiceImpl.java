@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,14 +63,22 @@ public class RoleServiceImpl implements RoleService {
     @Transactional(readOnly = true)
     public List<RoleDTO> findAll() {
         log.debug("Request to get all Roles");
-        return roleRepository.findAll().stream().map(roleMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+        return roleRepository
+            .findAllWithEagerRelationships()
+            .stream()
+            .map(roleMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public Page<RoleDTO> findAllWithEagerRelationships(Pageable pageable) {
+        return roleRepository.findAllWithEagerRelationships(pageable).map(roleMapper::toDto);
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<RoleDTO> findOne(Long id) {
         log.debug("Request to get Role : {}", id);
-        return roleRepository.findById(id).map(roleMapper::toDto);
+        return roleRepository.findOneWithEagerRelationships(id).map(roleMapper::toDto);
     }
 
     @Override
