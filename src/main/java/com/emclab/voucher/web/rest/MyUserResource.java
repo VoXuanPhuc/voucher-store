@@ -65,11 +65,9 @@ public class MyUserResource {
         if (myUserDTO.getId() != null) {
             throw new BadRequestAlertException("A new myUser cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        //        String passWordEndcoding = passwordEncoder.encode(myUserDTO.getPassword());
-        //        myUserDTO.setPassword(passWordEndcoding);
-        //        MyUser u = myUserMapperImpl.toEntity(myUserDTO);
-        //        MyUserDTO result = myUserMapperImpl.toDto(myUserService.save(u));
+
         MyUserDTO result = myUserService.save(myUserDTO);
+
         return ResponseEntity
             .created(new URI("/api/my-users/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))

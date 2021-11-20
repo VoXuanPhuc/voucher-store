@@ -1,5 +1,6 @@
 package com.emclab.voucher.service.impl;
 
+import com.emclab.voucher.domain.MyUser;
 import com.emclab.voucher.domain.Role;
 import com.emclab.voucher.repository.RoleRepository;
 import com.emclab.voucher.service.RoleService;
@@ -38,7 +39,6 @@ public class RoleServiceImpl implements RoleService {
     public RoleDTO save(RoleDTO roleDTO) {
         log.debug("Request to save Role : {}", roleDTO);
         Role role = roleMapper.toEntity(roleDTO);
-        role = roleRepository.save(role);
         return roleMapper.toDto(role);
     }
 

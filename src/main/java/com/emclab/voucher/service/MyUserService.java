@@ -17,7 +17,7 @@ public interface MyUserService {
      */
     MyUserDTO save(MyUserDTO myUserDTO);
 
-    MyUser save(MyUser myUser);
+    //    MyUser save(MyUser myUser);
 
     /**
      * Partially updates a myUser.

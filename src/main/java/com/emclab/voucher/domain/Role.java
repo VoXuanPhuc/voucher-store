@@ -31,9 +31,8 @@ public class Role extends AbstractAuditingEntity {
     @Column(name = "code", nullable = false)
     private String code;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "roles")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "rel_role__user", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @JsonIgnoreProperties(value = { "address", "storeUsers", "myOrders", "feedbacks", "gifts", "roles" }, allowSetters = true)
     private Set<MyUser> users = new HashSet<>();
 

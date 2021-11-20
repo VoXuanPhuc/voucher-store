@@ -76,7 +76,8 @@ public class MyUser extends AbstractAuditingEntity {
     @JsonIgnoreProperties(value = { "giver", "voucher" }, allowSetters = true)
     private Set<Gift> gifts = new HashSet<>();
 
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany
+    @JoinTable(name = "rel_user_role", inverseJoinColumns = @JoinColumn(name = "role_id"), joinColumns = @JoinColumn(name = "user_id"))
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
     private Set<Role> roles = new HashSet<>();

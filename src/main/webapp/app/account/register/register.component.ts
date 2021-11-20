@@ -6,6 +6,7 @@ import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/config/err
 import { RegisterService } from './register.service';
 import { IMyUser } from 'app/entities/my-user/my-user.model';
 import { MyUserService } from 'app/entities/my-user/service/my-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-register',
@@ -24,7 +25,7 @@ export class RegisterComponent {
     phone: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254)]],
   });
 
-  constructor(private formBuilder: FormBuilder, private myUserService: MyUserService) {}
+  constructor(private formBuilder: FormBuilder, private myUserService: MyUserService, private router: Router) {}
 
   register(): void {
     const password = this.inforUserSignup.get(['password'])!.value;
@@ -49,11 +50,12 @@ export class RegisterComponent {
         .create(this.user)
         .pipe()
         .subscribe(
-          () => window.console.log('success'),
-          () => window.console.log('faild')
+          () => {
+            this.router.navigate(['/login']);
+            return;
+          },
+          () => window.alert('Thông tin chưa chính xác')
         );
     }
-
-    window.console.log(this.user);
   }
 }
