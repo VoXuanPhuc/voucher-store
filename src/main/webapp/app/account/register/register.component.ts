@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  dontMatchPassword = false;
+  MatchPassword = false;
   user?: IMyUser;
 
   inforUserSignup = this.formBuilder.group({
@@ -27,35 +27,39 @@ export class RegisterComponent {
 
   constructor(private formBuilder: FormBuilder, private myUserService: MyUserService, private router: Router) {}
 
+  onCheckPassword(): void {
+    const confirmPassword = this.inforUserSignup.get(['confirmPassword'])!.value;
+    if (confirmPassword === this.inforUserSignup.get(['password'])!.value) {
+      this.MatchPassword = true;
+    } else {
+      this.MatchPassword = false;
+    }
+  }
+
   register(): void {
     const password = this.inforUserSignup.get(['password'])!.value;
-    const confirmPassword = this.inforUserSignup.get(['confirmPassword'])!.value;
-    if (password !== confirmPassword) {
-      this.dontMatchPassword = true;
-    } else {
-      const username = this.inforUserSignup.get(['username'])!.value;
-      const email = this.inforUserSignup.get(['email'])!.value;
-      const phone = this.inforUserSignup.get(['phone'])!.value;
-      const userObject = {
-        username,
-        password,
-        firstName: '',
-        lastName: '',
-        gender: '',
-        phone,
-        email,
-      };
-      this.user = userObject;
-      this.myUserService
-        .create(this.user)
-        .pipe()
-        .subscribe(
-          () => {
-            this.router.navigate(['/login']);
-            return;
-          },
-          () => window.alert('Thông tin chưa chính xác')
-        );
-    }
+    const username = this.inforUserSignup.get(['username'])!.value;
+    const email = this.inforUserSignup.get(['email'])!.value;
+    const phone = this.inforUserSignup.get(['phone'])!.value;
+    const userObject = {
+      username,
+      password,
+      firstName: '',
+      lastName: '',
+      gender: '',
+      phone,
+      email,
+    };
+    this.user = userObject;
+    this.myUserService
+      .create(this.user)
+      .pipe()
+      .subscribe(
+        () => {
+          this.router.navigate(['/login']);
+          return;
+        },
+        () => window.alert('Thông tin chưa chính xác')
+      );
   }
 }

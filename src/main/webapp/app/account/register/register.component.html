@@ -18,10 +18,20 @@
       </div>
       <div class="row form-haft">
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 form-pass">
-          <input type="password" placeholder="Password" name="Password" required id="" class="form-control" formControlName="password" />
+          <input
+            type="password"
+            placeholder="Password"
+            name="Password"
+            required
+            id=""
+            class="form-control"
+            formControlName="password"
+            (input)="onCheckPassword()"
+          />
         </div>
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 form-pass1">
           <input
+            (input)="onCheckPassword()"
             type="password"
             placeholder="Repeat Password"
             name="Password"
@@ -48,7 +58,7 @@
       </div>
 
       <div class="btn-signin">
-        <button [disabled]="inforUserSignup.invalid" class="btn btn-danger btn-signin-item">SIGN IN</button>
+        <button [disabled]="!inforUserSignup.valid || !MatchPassword" class="btn btn-danger btn-signin-item">SIGN IN</button>
       </div>
     </form>
   </div>
