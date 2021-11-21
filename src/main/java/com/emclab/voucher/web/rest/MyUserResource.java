@@ -1,8 +1,10 @@
 package com.emclab.voucher.web.rest;
 
+import com.emclab.voucher.domain.MyUser;
 import com.emclab.voucher.repository.MyUserRepository;
 import com.emclab.voucher.service.MyUserService;
 import com.emclab.voucher.service.dto.MyUserDTO;
+import com.emclab.voucher.service.mapper.MyUserMapperImpl;
 import com.emclab.voucher.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,8 +15,10 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -35,7 +39,13 @@ public class MyUserResource {
 
     private final MyUserService myUserService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     private final MyUserRepository myUserRepository;
+
+    @Autowired
+    MyUserMapperImpl myUserMapperImpl;
 
     public MyUserResource(MyUserService myUserService, MyUserRepository myUserRepository) {
         this.myUserService = myUserService;
@@ -55,7 +65,9 @@ public class MyUserResource {
         if (myUserDTO.getId() != null) {
             throw new BadRequestAlertException("A new myUser cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         MyUserDTO result = myUserService.save(myUserDTO);
+
         return ResponseEntity
             .created(new URI("/api/my-users/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
