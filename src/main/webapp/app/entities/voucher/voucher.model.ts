@@ -13,7 +13,7 @@ export interface IVoucher {
   quantity?: number;
   startTime?: dayjs.Dayjs;
   expriedTime?: dayjs.Dayjs;
-  voucherImages?: IVoucherImage[];
+  voucherImages?: IVoucherImage[] | null;
   voucherCodes?: IVoucherCode[] | null;
   feedbacks?: IFeedback[] | null;
   products?: IProduct[] | null;
@@ -29,7 +29,7 @@ export class Voucher implements IVoucher {
     public quantity?: number,
     public startTime?: dayjs.Dayjs,
     public expriedTime?: dayjs.Dayjs,
-    public voucherImages?: IVoucherImage[],
+    public voucherImages?: IVoucherImage[] | null,
     public voucherCodes?: IVoucherCode[] | null,
     public feedbacks?: IFeedback[] | null,
     public products?: IProduct[] | null,

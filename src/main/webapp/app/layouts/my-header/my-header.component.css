@@ -61,16 +61,22 @@
   margin-top: -20px;
   right: -10%;
 }
+
 #listview-user li {
   border: none;
   background: #fcd0d0;
+}
+#listview-user li a {
   color: #dc3545;
+  text-decoration: none;
 }
 #listview-user li:hover {
   background: #ffffff;
-  color: #dc3545;
 }
-
+#listview-user li:hover a {
+  color: #dc3545;
+  text-decoration: none;
+}
 @media only screen and (max-width: 767px) {
   #listview-user {
     position: relative;

@@ -28,6 +28,7 @@ import { ErrorComponent } from './layouts/error/error.component';
 import { MyHeaderComponent } from './layouts/my-header/my-header.component';
 import { TemplateModule } from './template/template.module';
 import { ServiceTypeModule } from './entities/service-type/service-type.module';
+import { AccountModule } from './account/account.module';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { ServiceTypeModule } from './entities/service-type/service-type.module';
     // ServiceTypeModule,
     EntityRoutingModule,
     TemplateModule,
+    AccountModule,
     AppRoutingModule,
 
     // TemplateRoutingModule,

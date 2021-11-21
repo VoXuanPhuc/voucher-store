@@ -1,0 +1,167 @@
+/* content */
+/* content left */
+.container {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+.login-content {
+  margin-top: 150px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.login-content-itemone,
+.login-content-itemtwo {
+  margin-top: 30px;
+  height: 100%;
+}
+.login-content-item-introduce {
+  margin-left: 20px;
+}
+.content-item-heading {
+  font-size: 30px;
+  color: #df2f4c;
+}
+.content-img-introduce {
+  width: 100%;
+  height: 100%;
+}
+.img-introduce {
+  margin-top: 30px;
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* content right */
+.content-heading-signin {
+  font-size: 30px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #df2f4c;
+  text-shadow: 5px 2px 4px #ff8b8b;
+  margin-bottom: 20px;
+}
+.form-email,
+.form-user,
+.form-haft,
+.form-address {
+  /* position: relative; */
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.btn-signin {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+.btn-signin-item {
+  margin: 20px 0;
+  width: 50%;
+  padding: 3px 8px;
+}
+
+/* reponsive */
+
+/* Tablet */
+@media (max-width: 1023px) {
+  .login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-content-itemone {
+    display: none;
+  }
+  .login-content-itemtwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-haft {
+    width: 100%;
+    margin: 0;
+  }
+  .form-email,
+  .form-user,
+  .form-address {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .form-pass,
+  .form-pass1,
+  .form-date,
+  .form-phone {
+    margin-bottom: 15px;
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .form-control {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .btn-signin {
+    width: 100%;
+    padding: 3px;
+  }
+  .btn-signin-item {
+    width: 100%;
+    padding: 5px;
+  }
+}
+
+/* mobile */
+@media (max-width: 740px) {
+  .login-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .login-content-itemone {
+    display: none;
+  }
+  .login-content-itemone,
+  .login-content-itemtwo {
+    margin-top: 20px;
+  }
+  .login-content-itemtwo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .form-haft {
+    width: 100%;
+  }
+  .form-email,
+  .form-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .form-pass,
+  .form-pass1,
+  .form-address,
+  .form-date,
+  .form-phone {
+    margin-bottom: 15px;
+    padding-left: 0;
+  }
+  .form-control {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
