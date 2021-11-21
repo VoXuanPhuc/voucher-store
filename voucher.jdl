@@ -114,14 +114,15 @@ relationship OneToOne {
 }
 
 relationship ManyToMany {
-    Voucher{product} to Product{voucher}
+    Voucher{product} to Product{voucher},
+    
+    Role{user} to MyUser{role}
 }
 
 relationship OneToMany{
 	Province to District{province},
     District to Village{district},
     Village to Address{village},
-    Role to MyUser{role},
     RelationshipType to StoreUser{type},
 
     MyUser to StoreUser{user},

@@ -65,7 +65,11 @@
   </ul>
 
   <ul [hidden]="!isDisplayLogin" class="container list-group border-0 w-100 border-0 col-md-3 offset-md-8 text-center" id="listview-user">
-    <li class="list-group-item border-0">Log In</li>
-    <li class="list-group-item border-0">Register</li>
+    <li class="list-group-item border-0">
+      <a [routerLink]="['/login']">Log In</a>
+    </li>
+    <li class="list-group-item border-0">
+      <a [routerLink]="['/register']">Register</a>
+    </li>
   </ul>
 </div>

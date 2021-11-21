@@ -25,7 +25,7 @@ public class StoreUser extends AbstractAuditingEntity {
     private RelationshipType type;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = { "address", "storeUsers", "myOrders", "feedbacks", "gifts", "role" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "address", "storeUsers", "myOrders", "feedbacks", "gifts", "roles" }, allowSetters = true)
     private MyUser user;
 
     @ManyToOne
@@ -85,7 +85,8 @@ public class StoreUser extends AbstractAuditingEntity {
         this.store = store;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -100,15 +101,14 @@ public class StoreUser extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "StoreUser{" +
-            "id=" + getId() +
-            "}";
+        return "StoreUser{" + "id=" + getId() + "}";
     }
 }

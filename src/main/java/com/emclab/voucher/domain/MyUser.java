@@ -76,9 +76,11 @@ public class MyUser extends AbstractAuditingEntity {
     @JsonIgnoreProperties(value = { "giver", "voucher" }, allowSetters = true)
     private Set<Gift> gifts = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "myUsers" }, allowSetters = true)
-    private Role role;
+    @ManyToMany
+    @JoinTable(name = "rel_user_role", inverseJoinColumns = @JoinColumn(name = "role_id"), joinColumns = @JoinColumn(name = "user_id"))
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @JsonIgnoreProperties(value = { "users" }, allowSetters = true)
+    private Set<Role> roles = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -322,20 +324,39 @@ public class MyUser extends AbstractAuditingEntity {
         this.gifts = gifts;
     }
 
-    public Role getRole() {
-        return this.role;
+    public Set<Role> getRoles() {
+        return this.roles;
     }
 
-    public MyUser role(Role role) {
-        this.setRole(role);
+    public MyUser roles(Set<Role> roles) {
+        this.setRoles(roles);
         return this;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public MyUser addRole(Role role) {
+        this.roles.add(role);
+        role.getUsers().add(this);
+        return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    public MyUser removeRole(Role role) {
+        this.roles.remove(role);
+        role.getUsers().remove(this);
+        return this;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        if (this.roles != null) {
+            this.roles.forEach(i -> i.removeUser(this));
+        }
+        if (roles != null) {
+            roles.forEach(i -> i.addUser(this));
+        }
+        this.roles = roles;
+    }
+
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -350,22 +371,16 @@ public class MyUser extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "MyUser{" +
-            "id=" + getId() +
-            ", username='" + getUsername() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", gender='" + getGender() + "'" +
-            ", phone='" + getPhone() + "'" +
-            ", email='" + getEmail() + "'" +
-            "}";
+        return "MyUser{" + "id=" + getId() + ", username='" + getUsername() + "'" + ", password='" + getPassword() + "'"
+                + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", gender='"
+                + getGender() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + "}";
     }
 }

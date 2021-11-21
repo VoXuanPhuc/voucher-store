@@ -9,6 +9,8 @@ import { of, Subject } from 'rxjs';
 
 import { RoleService } from '../service/role.service';
 import { IRole, Role } from '../role.model';
+import { IMyUser } from 'app/entities/my-user/my-user.model';
+import { MyUserService } from 'app/entities/my-user/service/my-user.service';
 
 import { RoleUpdateComponent } from './role-update.component';
 
@@ -18,6 +20,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<RoleUpdateComponent>;
     let activatedRoute: ActivatedRoute;
     let roleService: RoleService;
+    let myUserService: MyUserService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -31,18 +34,41 @@ describe('Component Tests', () => {
       fixture = TestBed.createComponent(RoleUpdateComponent);
       activatedRoute = TestBed.inject(ActivatedRoute);
       roleService = TestBed.inject(RoleService);
+      myUserService = TestBed.inject(MyUserService);
 
       comp = fixture.componentInstance;
     });
 
     describe('ngOnInit', () => {
+      it('Should call MyUser query and add missing value', () => {
+        const role: IRole = { id: 456 };
+        const users: IMyUser[] = [{ id: 64042 }];
+        role.users = users;
+
+        const myUserCollection: IMyUser[] = [{ id: 55540 }];
+        jest.spyOn(myUserService, 'query').mockReturnValue(of(new HttpResponse({ body: myUserCollection })));
+        const additionalMyUsers = [...users];
+        const expectedCollection: IMyUser[] = [...additionalMyUsers, ...myUserCollection];
+        jest.spyOn(myUserService, 'addMyUserToCollectionIfMissing').mockReturnValue(expectedCollection);
+
+        activatedRoute.data = of({ role });
+        comp.ngOnInit();
+
+        expect(myUserService.query).toHaveBeenCalled();
+        expect(myUserService.addMyUserToCollectionIfMissing).toHaveBeenCalledWith(myUserCollection, ...additionalMyUsers);
+        expect(comp.myUsersSharedCollection).toEqual(expectedCollection);
+      });
+
       it('Should update editForm', () => {
         const role: IRole = { id: 456 };
+        const users: IMyUser = { id: 80172 };
+        role.users = [users];
 
         activatedRoute.data = of({ role });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(role));
+        expect(comp.myUsersSharedCollection).toContain(users);
       });
     });
 
@@ -107,6 +133,44 @@ describe('Component Tests', () => {
         expect(roleService.update).toHaveBeenCalledWith(role);
         expect(comp.isSaving).toEqual(false);
         expect(comp.previousState).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('Tracking relationships identifiers', () => {
+      describe('trackMyUserById', () => {
+        it('Should return tracked MyUser primary key', () => {
+          const entity = { id: 123 };
+          const trackResult = comp.trackMyUserById(0, entity);
+          expect(trackResult).toEqual(entity.id);
+        });
+      });
+    });
+
+    describe('Getting selected relationships', () => {
+      describe('getSelectedMyUser', () => {
+        it('Should return option if no MyUser is selected', () => {
+          const option = { id: 123 };
+          const result = comp.getSelectedMyUser(option);
+          expect(result === option).toEqual(true);
+        });
+
+        it('Should return selected MyUser for according option', () => {
+          const option = { id: 123 };
+          const selected = { id: 123 };
+          const selected2 = { id: 456 };
+          const result = comp.getSelectedMyUser(option, [selected2, selected]);
+          expect(result === selected).toEqual(true);
+          expect(result === selected2).toEqual(false);
+          expect(result === option).toEqual(false);
+        });
+
+        it('Should return option if this MyUser is not selected', () => {
+          const option = { id: 123 };
+          const selected = { id: 456 };
+          const result = comp.getSelectedMyUser(option, [selected]);
+          expect(result === option).toEqual(true);
+          expect(result === selected).toEqual(false);
+        });
       });
     });
   });

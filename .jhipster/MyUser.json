@@ -70,10 +70,11 @@
       "relationshipName": "gift"
     },
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "many-to-many",
       "otherEntityName": "role",
-      "otherEntityRelationshipName": "myUser",
-      "relationshipName": "role"
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "role",
+      "ownerSide": false
     }
   ],
   "entityTableName": "my_user",
