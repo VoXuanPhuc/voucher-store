@@ -11,8 +11,6 @@ import { MyUserService } from '../service/my-user.service';
 import { IMyUser, MyUser } from '../my-user.model';
 import { IAddress } from 'app/entities/address/address.model';
 import { AddressService } from 'app/entities/address/service/address.service';
-import { IRole } from 'app/entities/role/role.model';
-import { RoleService } from 'app/entities/role/service/role.service';
 
 import { MyUserUpdateComponent } from './my-user-update.component';
 
@@ -23,7 +21,6 @@ describe('Component Tests', () => {
     let activatedRoute: ActivatedRoute;
     let myUserService: MyUserService;
     let addressService: AddressService;
-    let roleService: RoleService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -38,7 +35,6 @@ describe('Component Tests', () => {
       activatedRoute = TestBed.inject(ActivatedRoute);
       myUserService = TestBed.inject(MyUserService);
       addressService = TestBed.inject(AddressService);
-      roleService = TestBed.inject(RoleService);
 
       comp = fixture.componentInstance;
     });
@@ -62,38 +58,16 @@ describe('Component Tests', () => {
         expect(comp.addressesCollection).toEqual(expectedCollection);
       });
 
-      it('Should call Role query and add missing value', () => {
-        const myUser: IMyUser = { id: 456 };
-        const role: IRole = { id: 17837 };
-        myUser.role = role;
-
-        const roleCollection: IRole[] = [{ id: 16867 }];
-        jest.spyOn(roleService, 'query').mockReturnValue(of(new HttpResponse({ body: roleCollection })));
-        const additionalRoles = [role];
-        const expectedCollection: IRole[] = [...additionalRoles, ...roleCollection];
-        jest.spyOn(roleService, 'addRoleToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-        activatedRoute.data = of({ myUser });
-        comp.ngOnInit();
-
-        expect(roleService.query).toHaveBeenCalled();
-        expect(roleService.addRoleToCollectionIfMissing).toHaveBeenCalledWith(roleCollection, ...additionalRoles);
-        expect(comp.rolesSharedCollection).toEqual(expectedCollection);
-      });
-
       it('Should update editForm', () => {
         const myUser: IMyUser = { id: 456 };
         const address: IAddress = { id: 29126 };
         myUser.address = address;
-        const role: IRole = { id: 32111 };
-        myUser.role = role;
 
         activatedRoute.data = of({ myUser });
         comp.ngOnInit();
 
         expect(comp.editForm.value).toEqual(expect.objectContaining(myUser));
         expect(comp.addressesCollection).toContain(address);
-        expect(comp.rolesSharedCollection).toContain(role);
       });
     });
 
@@ -166,14 +140,6 @@ describe('Component Tests', () => {
         it('Should return tracked Address primary key', () => {
           const entity = { id: 123 };
           const trackResult = comp.trackAddressById(0, entity);
-          expect(trackResult).toEqual(entity.id);
-        });
-      });
-
-      describe('trackRoleById', () => {
-        it('Should return tracked Role primary key', () => {
-          const entity = { id: 123 };
-          const trackResult = comp.trackRoleById(0, entity);
           expect(trackResult).toEqual(entity.id);
         });
       });

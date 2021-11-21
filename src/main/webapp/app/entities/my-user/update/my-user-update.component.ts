@@ -9,8 +9,6 @@ import { IMyUser, MyUser } from '../my-user.model';
 import { MyUserService } from '../service/my-user.service';
 import { IAddress } from 'app/entities/address/address.model';
 import { AddressService } from 'app/entities/address/service/address.service';
-import { IRole } from 'app/entities/role/role.model';
-import { RoleService } from 'app/entities/role/service/role.service';
 
 @Component({
   selector: 'jhi-my-user-update',
@@ -20,7 +18,6 @@ export class MyUserUpdateComponent implements OnInit {
   isSaving = false;
 
   addressesCollection: IAddress[] = [];
-  rolesSharedCollection: IRole[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -32,13 +29,11 @@ export class MyUserUpdateComponent implements OnInit {
     phone: [null, [Validators.required]],
     email: [null, [Validators.required]],
     address: [],
-    role: [],
   });
 
   constructor(
     protected myUserService: MyUserService,
     protected addressService: AddressService,
-    protected roleService: RoleService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -66,10 +61,6 @@ export class MyUserUpdateComponent implements OnInit {
   }
 
   trackAddressById(index: number, item: IAddress): number {
-    return item.id!;
-  }
-
-  trackRoleById(index: number, item: IRole): number {
     return item.id!;
   }
 
@@ -103,11 +94,9 @@ export class MyUserUpdateComponent implements OnInit {
       phone: myUser.phone,
       email: myUser.email,
       address: myUser.address,
-      role: myUser.role,
     });
 
     this.addressesCollection = this.addressService.addAddressToCollectionIfMissing(this.addressesCollection, myUser.address);
-    this.rolesSharedCollection = this.roleService.addRoleToCollectionIfMissing(this.rolesSharedCollection, myUser.role);
   }
 
   protected loadRelationshipsOptions(): void {
@@ -118,12 +107,6 @@ export class MyUserUpdateComponent implements OnInit {
         map((addresses: IAddress[]) => this.addressService.addAddressToCollectionIfMissing(addresses, this.editForm.get('address')!.value))
       )
       .subscribe((addresses: IAddress[]) => (this.addressesCollection = addresses));
-
-    this.roleService
-      .query()
-      .pipe(map((res: HttpResponse<IRole[]>) => res.body ?? []))
-      .pipe(map((roles: IRole[]) => this.roleService.addRoleToCollectionIfMissing(roles, this.editForm.get('role')!.value)))
-      .subscribe((roles: IRole[]) => (this.rolesSharedCollection = roles));
   }
 
   protected createFromForm(): IMyUser {
@@ -138,7 +121,6 @@ export class MyUserUpdateComponent implements OnInit {
       phone: this.editForm.get(['phone'])!.value,
       email: this.editForm.get(['email'])!.value,
       address: this.editForm.get(['address'])!.value,
-      role: this.editForm.get(['role'])!.value,
     };
   }
 }

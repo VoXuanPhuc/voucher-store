@@ -34,8 +34,6 @@ public class MyUserDTO implements Serializable {
 
     private AddressDTO address;
 
-    private RoleDTO role;
-
     public Long getId() {
         return id;
     }
@@ -108,14 +106,6 @@ public class MyUserDTO implements Serializable {
         this.address = address;
     }
 
-    public RoleDTO getRole() {
-        return role;
-    }
-
-    public void setRole(RoleDTO role) {
-        this.role = role;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -150,7 +140,6 @@ public class MyUserDTO implements Serializable {
             ", phone='" + getPhone() + "'" +
             ", email='" + getEmail() + "'" +
             ", address=" + getAddress() +
-            ", role=" + getRole() +
             "}";
     }
 }
