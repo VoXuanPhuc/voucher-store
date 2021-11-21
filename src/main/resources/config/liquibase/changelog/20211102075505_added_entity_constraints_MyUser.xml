@@ -13,11 +13,5 @@
                                  constraintName="fk_my_user__address_id"
                                  referencedColumnNames="id"
                                  referencedTableName="address"/>
-
-        <addForeignKeyConstraint baseColumnNames="role_id"
-                                 baseTableName="my_user"
-                                 constraintName="fk_my_user__role_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="role"/>
     </changeSet>
 </databaseChangeLog>

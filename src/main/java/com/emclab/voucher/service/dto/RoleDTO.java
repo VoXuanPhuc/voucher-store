@@ -1,7 +1,9 @@
 package com.emclab.voucher.service.dto;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.validation.constraints.*;
 
 /**
@@ -16,6 +18,8 @@ public class RoleDTO implements Serializable {
 
     @NotNull
     private String code;
+
+    private Set<MyUserDTO> users = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -39,6 +43,14 @@ public class RoleDTO implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Set<MyUserDTO> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<MyUserDTO> users) {
+        this.users = users;
     }
 
     @Override
@@ -69,6 +81,7 @@ public class RoleDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", code='" + getCode() + "'" +
+            ", users=" + getUsers() +
             "}";
     }
 }

@@ -26,6 +26,18 @@
             <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> This field is required. </small>
           </div>
         </div>
+
+        <div class="form-group">
+          <label for="field_users">User</label>
+          <select class="form-control" id="field_users" data-cy="user" multiple name="users" formControlName="users">
+            <option
+              [ngValue]="getSelectedMyUser(myUserOption, editForm.get('users')!.value)"
+              *ngFor="let myUserOption of myUsersSharedCollection; trackBy: trackMyUserById"
+            >
+              {{ myUserOption.id }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <div>

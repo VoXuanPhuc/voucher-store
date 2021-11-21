@@ -48,12 +48,6 @@
             <a [routerLink]="['/address', myUser.address?.id, 'view']">{{ myUser.address?.id }}</a>
           </div>
         </dd>
-        <dt><span>Role</span></dt>
-        <dd>
-          <div *ngIf="myUser.role">
-            <a [routerLink]="['/role', myUser.role?.id, 'view']">{{ myUser.role?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
