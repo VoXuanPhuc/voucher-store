@@ -1,6 +1,7 @@
 package com.emclab.voucher.service.dto;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Objects;
 import javax.validation.constraints.*;
 
@@ -32,6 +33,12 @@ public class MyUserDTO implements Serializable {
     @NotNull
     private String email;
 
+    @NotNull
+    private String avatar;
+
+    @NotNull
+    private Date dob;
+
     private AddressDTO address;
 
     public Long getId() {
@@ -50,8 +57,24 @@ public class MyUserDTO implements Serializable {
         this.username = username;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+
+    public Date getDob() {
+        return dob;
     }
 
     public void setPassword(String password) {

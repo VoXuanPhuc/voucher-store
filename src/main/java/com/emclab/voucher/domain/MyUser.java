@@ -2,6 +2,7 @@ package com.emclab.voucher.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -50,6 +51,14 @@ public class MyUser extends AbstractAuditingEntity {
     @NotNull
     @Column(name = "email", nullable = false)
     private String email;
+
+    @NotNull
+    @Column(name = "dob", nullable = false)
+    private Date dob;
+
+    @NotNull
+    @Column(name = "avatar", nullable = false)
+    private String avatar;
 
     @JsonIgnoreProperties(value = { "village" }, allowSetters = true)
     @OneToOne
@@ -107,6 +116,32 @@ public class MyUser extends AbstractAuditingEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAvatar() {
+        return this.avatar;
+    }
+
+    public MyUser avatar(String avatar) {
+        this.avatar = avatar;
+        return this;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Date getDob() {
+        return this.dob;
+    }
+
+    public MyUser dob(Date dob) {
+        this.dob = dob;
+        return this;
+    }
+
+    public void setDob(Date Dob) {
+        this.dob = Dob;
     }
 
     public String getPassword() {
