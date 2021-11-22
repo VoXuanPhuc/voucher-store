@@ -1,7 +1,7 @@
 package com.emclab.voucher.service.dto;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.Objects;
 import javax.validation.constraints.*;
 
@@ -153,16 +153,9 @@ public class MyUserDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "MyUserDTO{" +
-            "id=" + getId() +
-            ", username='" + getUsername() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", gender='" + getGender() + "'" +
-            ", phone='" + getPhone() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", address=" + getAddress() +
-            "}";
+        return "MyUserDTO{" + "id=" + getId() + ", username='" + getUsername() + "'" + ", password='" + getPassword()
+                + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", gender='"
+                + getGender() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + ", address="
+                + getAddress() + "}";
     }
 }

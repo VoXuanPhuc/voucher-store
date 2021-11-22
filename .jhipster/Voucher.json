@@ -1,79 +1,96 @@
 {
-  "name": "Voucher",
-  "fields": [
-    {
-      "fieldName": "name",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "price",
-      "fieldType": "Double",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "quantity",
-      "fieldType": "Integer",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "startTime",
-      "fieldType": "Instant",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "expriedTime",
-      "fieldType": "Instant",
-      "fieldValidateRules": ["required"]
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "voucherImage",
-      "otherEntityRelationshipName": "voucher",
-      "relationshipName": "voucherImage"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "voucherCode",
-      "otherEntityRelationshipName": "voucher",
-      "relationshipName": "voucherCode"
-    },
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "feedback",
-      "otherEntityRelationshipName": "voucher",
-      "relationshipName": "feedback"
-    },
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "product",
-      "otherEntityRelationshipName": "voucher",
-      "relationshipName": "product",
-      "ownerSide": true
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "event",
-      "otherEntityRelationshipName": "voucher",
-      "relationshipName": "event"
-    },
-    {
-      "relationshipType": "many-to-one",
-      "otherEntityName": "serviceType",
-      "otherEntityRelationshipName": "voucher",
-      "relationshipName": "type"
-    }
-  ],
-  "entityTableName": "voucher",
-  "dto": "mapstruct",
-  "pagination": "no",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": "*",
-  "changelogDate": "20211102075515"
+    "name": "Voucher",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "price",
+            "fieldType": "Double",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "startTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "expriedTime",
+            "fieldType": "Instant",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "voucherImage",
+            "otherEntityRelationshipName": "voucher",
+            "relationshipName": "voucherImage"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "voucherCode",
+            "otherEntityRelationshipName": "voucher",
+            "relationshipName": "voucherCode"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "feedback",
+            "otherEntityRelationshipName": "voucher",
+            "relationshipName": "feedback"
+        },
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "voucher",
+            "relationshipName": "product",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "event",
+            "otherEntityRelationshipName": "voucher",
+            "relationshipName": "event"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "serviceType",
+            "otherEntityRelationshipName": "voucher",
+            "relationshipName": "type"
+        }
+    ],
+    "entityTableName": "voucher",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "applications": "*",
+    "changelogDate": "20211102075515"
 }

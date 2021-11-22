@@ -44,6 +44,10 @@ public class Voucher extends AbstractAuditingEntity {
     @Column(name = "expried_time", nullable = false)
     private Instant expriedTime;
 
+    @NotNull
+    @Column(name = "description", nullable = false)
+    private String description;
+
     @OneToMany(mappedBy = "voucher")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "voucher" }, allowSetters = true)
@@ -102,6 +106,19 @@ public class Voucher extends AbstractAuditingEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Voucher description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
@@ -300,7 +317,8 @@ public class Voucher extends AbstractAuditingEntity {
         this.type = serviceType;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -315,20 +333,16 @@ public class Voucher extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Voucher{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", price=" + getPrice() +
-            ", quantity=" + getQuantity() +
-            ", startTime='" + getStartTime() + "'" +
-            ", expriedTime='" + getExpriedTime() + "'" +
-            "}";
+        return "Voucher{" + "id=" + getId() + ", name='" + getName() + "'" + ", price=" + getPrice() + ", quantity="
+                + getQuantity() + ", startTime='" + getStartTime() + "'" + ", expriedTime='" + getExpriedTime() + "'"
+                + "}";
     }
 }
