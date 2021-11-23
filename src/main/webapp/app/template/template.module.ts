@@ -11,9 +11,10 @@ import { SharedModule } from 'app/shared/shared.module';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
 import { TemplateRoutingModule } from './template-routing.module';
+import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
 
 @NgModule({
-  declarations: [LandingPageComponent, SellVoucherComponent],
+  declarations: [LandingPageComponent, SellVoucherComponent, DetailVoucherComponent],
   imports: [
     CommonModule,
     TemplateRoutingModule,
@@ -25,6 +26,7 @@ import { TemplateRoutingModule } from './template-routing.module';
     StoreModule,
     ProvinceModule,
     FeedbackModule,
+    StoreModule,
   ],
 })
 export class TemplateModule {}

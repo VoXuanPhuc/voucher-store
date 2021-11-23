@@ -7,6 +7,8 @@ import { RegisterService } from './register.service';
 import { IMyUser } from 'app/entities/my-user/my-user.model';
 import { MyUserService } from 'app/entities/my-user/service/my-user.service';
 import { Router } from '@angular/router';
+import { DATE_TIME_FORMAT } from 'app/config/input.constants';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'jhi-register',
@@ -23,6 +25,7 @@ export class RegisterComponent {
     confirmPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(50)]],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     phone: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254)]],
+    ngaysinh: [''],
   });
 
   constructor(private formBuilder: FormBuilder, private myUserService: MyUserService, private router: Router) {}
@@ -41,6 +44,7 @@ export class RegisterComponent {
     const username = this.inforUserSignup.get(['username'])!.value;
     const email = this.inforUserSignup.get(['email'])!.value;
     const phone = this.inforUserSignup.get(['phone'])!.value;
+    const dob = dayjs().startOf(this.inforUserSignup.get(['ngaysinh'])!.value);
     const userObject = {
       username,
       password,
@@ -49,6 +53,8 @@ export class RegisterComponent {
       gender: '',
       phone,
       email,
+      avatar: '',
+      dob,
     };
     this.user = userObject;
     this.myUserService
