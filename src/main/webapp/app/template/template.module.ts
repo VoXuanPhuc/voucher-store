@@ -9,9 +9,10 @@ import { CategoryModule } from 'app/entities/category/category.module';
 import { ServiceTypeModule } from 'app/entities/service-type/service-type.module';
 import { OtherModule } from 'app/entities/others/other.module';
 import { StoreModule } from 'app/entities/store/store.module';
+import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
 
 @NgModule({
-  declarations: [LandingPageComponent],
+  declarations: [LandingPageComponent, DetailVoucherComponent],
   imports: [CommonModule, TemplateRoutingModule, SharedModule, VoucherModule, ServiceTypeModule, CategoryModule, OtherModule, StoreModule],
 })
 export class TemplateModule {}

@@ -1,0 +1,203 @@
+:root {
+  --0-color-button: #e94560;
+  --color-gray: #7a7873;
+  --color-star: #ffcd4e;
+}
+
+.button_of_this_page {
+  box-shadow: 0px 0px 12px -5px #000000;
+  border-radius: 9px;
+  font-size: 20px;
+  color: white;
+  background-color: #e94560;
+}
+
+.color-gray {
+  color: #7a7873;
+}
+
+.color-buttom {
+  color: #e94560;
+}
+
+/* font-size */
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+.mg_top_50 {
+  margin-top: 50px;
+}
+
+.mg_top_40 {
+  margin-top: 40px;
+}
+
+.mg_top_30 {
+  margin-top: 30px;
+}
+
+.mg_top_20 {
+  margin-top: 20px;
+}
+
+.mg_top_10 {
+  margin-top: 10px;
+}
+
+/* Text */
+
+.text_bold {
+  font-weight: bold;
+}
+
+/* abc xyz */
+
+.container-profile-voucher {
+  width: 89%;
+  margin: auto;
+}
+
+.path :first-child {
+  color: #e94560;
+}
+
+.path {
+  font-size: 20px;
+}
+
+/* Silde */
+
+.carousel-inner {
+  border-radius: 10px;
+}
+
+.carousel-indicators li img {
+  border-radius: 10px;
+}
+
+/* DETAIL */
+
+#store_name {
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#unit_price {
+  font-size: 25px;
+  color: #e94560;
+}
+
+#list-star-rated {
+  display: inline-block;
+}
+
+#list-star-rated #stars {
+  display: inline-block;
+  color: #ffcd4e;
+}
+
+#emaining_amount {
+  font-size: 17px;
+  margin-left: 20px;
+}
+
+.date-time {
+  margin-left: 15px;
+  font-size: 18px;
+}
+
+#button_add_cart {
+  margin-top: 50px;
+  width: 160px;
+  height: 56px;
+}
+
+/* Descriptsion */
+
+#see_more {
+  width: 211px;
+  height: 50px;
+}
+.center {
+  width: 211px;
+  height: auto;
+  margin: auto;
+}
+
+#detail-description {
+  margin-top: 20px;
+  border: #df2f4c 1px solid;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  border-radius: 4px;
+}
+
+#detail-description .event:first-child {
+  font-size: 24px;
+  color: #df2f4c;
+  font-weight: bold;
+}
+#detail label {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000000;
+}
+
+/* Rating */
+.col-left b {
+  color: #ffcd4e;
+  font-size: 24px;
+}
+.col-right button {
+  margin: 10px;
+  color: #df2f4c;
+  background-color: white;
+  width: 100px;
+  height: 40px;
+  font-size: 18px;
+  margin-top: 20px;
+}
+@media only screen and (max-width: 600px) {
+  body {
+    background-color: lightblue;
+  }
+  #dropdown {
+    display: block;
+  }
+}
+
+/* short-description */
+
+.short-description {
+  padding-top: 15px;
+  padding-left: 5%;
+}
+
+.btn:hover {
+  color: white;
+}
+
+/* COMMENT */
+#comment {
+  width: 100%;
+}
+
+.item-comment {
+  margin-top: 25px;
+}
+
+.box-around {
+  width: 92%;
+  margin: auto;
+}

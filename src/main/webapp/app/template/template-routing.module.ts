@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
@@ -8,6 +9,13 @@ const routes: Routes = [
     component: LandingPageComponent,
     data: {
       pageTitle: 'Voucher',
+    },
+  },
+  {
+    path: 'detailVoucher',
+    component: DetailVoucherComponent,
+    data: {
+      pageTitle: 'DetailVoucher',
     },
   },
 ];
