@@ -1,0 +1,40 @@
+/* css for star checkbox */
+
+.rating .checkbox input[type='checkbox'] {
+  display: none;
+}
+.rating .checkbox i {
+  height: 18px;
+  width: 18px;
+  display: inline-block;
+  border: 2px solid #dc3545;
+  border-radius: 2px;
+  position: relative;
+}
+.rating .checkbox:hover {
+  cursor: pointer;
+}
+
+.rating .checkbox:hover i {
+  border-color: #dc3545;
+}
+
+.rating .checkbox input[type='checkbox']:checked + i::after {
+  content: '';
+  position: absolute;
+  height: 9.5px;
+  width: 10px;
+  background: #dc3545;
+  top: 2.2px;
+  left: 2px;
+  border-radius: 2px 2px;
+}
+.rating .checkbox i:checked i {
+  background-color: #dc3545;
+  margin: 2px 2px;
+}
+.rating .checkbox .iconify {
+  font-size: 20px;
+  position: relative;
+  top: -3.5px;
+}

@@ -1,34 +1,32 @@
-import { NgModule, LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import locale from '@angular/common/locales/en';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { NgxWebstorageModule } from 'ngx-webstorage';
-import * as dayjs from 'dayjs';
 import { NgbDateAdapter, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-
-import { SERVER_API_URL } from './app.constants';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
-import './config/dayjs';
+import { httpInterceptorProviders } from 'app/core/interceptor/index';
 import { SharedModule } from 'app/shared/shared.module';
+import * as dayjs from 'dayjs';
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { AccountModule } from './account/account.module';
 import { AppRoutingModule } from './app-routing.module';
-// import { HomeModule } from './home/home.module';
-import { EntityRoutingModule } from './entities/entity-routing.module';
+import { SERVER_API_URL } from './app.constants';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { NgbDateDayjsAdapter } from './config/datepicker-adapter';
+import './config/dayjs';
 import { fontAwesomeIcons } from './config/font-awesome-icons';
-import { httpInterceptorProviders } from 'app/core/interceptor/index';
-import { MainComponent } from './layouts/main/main.component';
-import { NavbarComponent } from './layouts/navbar/navbar.component';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
+// import { HomeModule } from './home/home.module';
+import { EntityRoutingModule } from './entities/entity-routing.module';
 import { ErrorComponent } from './layouts/error/error.component';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { MainComponent } from './layouts/main/main.component';
 import { MyHeaderComponent } from './layouts/my-header/my-header.component';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { TemplateModule } from './template/template.module';
-import { ServiceTypeModule } from './entities/service-type/service-type.module';
-import { AccountModule } from './account/account.module';
 
 @NgModule({
   imports: [

@@ -6,6 +6,7 @@ import { ServiceTypeUpdateComponent } from './update/service-type-update.compone
 import { ServiceTypeDeleteDialogComponent } from './delete/service-type-delete-dialog.component';
 import { ServiceTypeRoutingModule } from './route/service-type-routing.module';
 import { CustomServiceComponent } from './custom-service/custom-service.component';
+import { VoucherServiceComponent } from './voucher-service/voucher-service.component';
 
 @NgModule({
   imports: [SharedModule, ServiceTypeRoutingModule],
@@ -15,8 +16,9 @@ import { CustomServiceComponent } from './custom-service/custom-service.componen
     ServiceTypeUpdateComponent,
     ServiceTypeDeleteDialogComponent,
     CustomServiceComponent,
+    VoucherServiceComponent,
   ],
-  exports: [CustomServiceComponent],
+  exports: [CustomServiceComponent, VoucherServiceComponent],
   entryComponents: [ServiceTypeDeleteDialogComponent],
 })
 export class ServiceTypeModule {}

@@ -1,0 +1,36 @@
+/* css for checkbox */
+.salesroom .checkbox input[type='checkbox'] {
+  display: none;
+}
+.salesroom .checkbox i {
+  height: 18px;
+  width: 18px;
+  display: inline-block;
+  border: 2px solid #dc3545;
+  border-radius: 2px;
+  position: relative;
+}
+
+/* hover checkbox */
+.salesroom .checkbox:hover {
+  cursor: pointer;
+}
+
+.salesroom .checkbox:hover i {
+  border-color: #dc3545;
+}
+
+.salesroom .checkbox input[type='checkbox']:checked + i::after {
+  content: '';
+  position: absolute;
+  height: 9.5px;
+  width: 10px;
+  background: #dc3545;
+  top: 2.2px;
+  left: 2px;
+  border-radius: 2px 2px;
+}
+.salesroom .checkbox i:checked i {
+  background-color: #dc3545;
+  margin: 2px 2px;
+}
