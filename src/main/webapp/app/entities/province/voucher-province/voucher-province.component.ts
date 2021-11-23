@@ -1,3 +1,5 @@
+import { ProvinceService } from 'app/entities/province/service/province.service';
+import { IProvince } from 'app/entities/province/province.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,11 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./voucher-province.component.scss'],
 })
 export class VoucherProvinceComponent implements OnInit {
-  constructor() {
-    return;
-  }
+  provinces?: IProvince[];
+  isLoading = false;
+
+  constructor(private provinceService: ProvinceService) {}
 
   ngOnInit(): void {
-    return;
+    this.loadAll();
+  }
+
+  loadAll(): void {
+    this.provinceService.query().subscribe(
+      res => {
+        this.isLoading = true;
+        this.provinces = res.body ?? [];
+      },
+      () => window.alert('An error occurs when loading data!')
+    );
   }
 }

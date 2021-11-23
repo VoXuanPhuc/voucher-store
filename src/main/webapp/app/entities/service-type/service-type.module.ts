@@ -7,9 +7,10 @@ import { ServiceTypeDeleteDialogComponent } from './delete/service-type-delete-d
 import { ServiceTypeRoutingModule } from './route/service-type-routing.module';
 import { CustomServiceComponent } from './custom-service/custom-service.component';
 import { VoucherServiceComponent } from './voucher-service/voucher-service.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  imports: [SharedModule, ServiceTypeRoutingModule],
+  imports: [SharedModule, ServiceTypeRoutingModule, FontAwesomeModule],
   declarations: [
     ServiceTypeComponent,
     ServiceTypeDetailComponent,

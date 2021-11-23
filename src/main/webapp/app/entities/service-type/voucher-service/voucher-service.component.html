@@ -2,29 +2,8 @@
 <div class="list_service">
   <p class="text-danger ml-4 mt-3"><strong>Service</strong></p>
   <ul class="list-group border-0 w-100 border-0 bg-transparent" id="">
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="akar-icons:shopping-bag" style="font-size: 15px"></span>Fashion
-    </li>
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="dashicons:food" style="font-size: 15px"></span>Food
-    </li>
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="ion:fitness" style="font-size: 15px"> </span>Fitness
-    </li>
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="bi:gift-fill" style="font-size: 14px"> </span>Gifts
-    </li>
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="simple-icons:yourtraveldottv" style="font-size: 15px"></span>Travel
-    </li>
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="clarity:car-solid" style="font-size: 17px"></span>Bike
-    </li>
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="fa-solid:headphones" style="font-size: 15px"></span>Technological
-    </li>
-    <li class="list-group-item py-2 border-0">
-      <span class="iconify ml-2 mr-5" data-icon="bx:bxs-baby-carriage" style="font-size: 15px"></span>Baby
+    <li *ngFor="let type of serviceTypes" class="list-group-item py-2 border-0">
+      {{ type.name }}
     </li>
   </ul>
 </div>

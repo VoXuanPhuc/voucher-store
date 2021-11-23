@@ -1,22 +1,9 @@
 <!-- item-3: Salesroom -->
 <div class="salesroom">
-  <p class="text-danger ml-4 my-3"><strong>Salesroom</strong></p>
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3 text-danger" type="checkbox" id="checkbox_address_HaNoi" name="scales" style="background: #e94560" />
-    <i class="mr-3 icon-checkbox"></i>Hà Nội
+  <p class="text-danger ml-4 my-3"><strong>Area</strong></p>
+  <label *ngFor="let province of provinces" class="checkbox mx-4 mb-3">
+    <input class="mr-3 text-danger" type="checkbox" id="checkbox_area_{{ province.id }}" name="scales" style="background: #e94560" />
+    <i class="mr-3 icon-checkbox"></i>{{ province.name }}
     <!-- <label class="state p-dange" for="checkbox_address_HaNoi">Hà Nội</label> -->
-  </label>
-
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3" type="checkbox" id="checkbox_address_DaNang" name="horns" />
-    <i class="mr-3 icon-checkbox"></i>Đà Nẵng
-  </label>
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3" type="checkbox" id="checkbox_address_HoChiMinh" name="horns" />
-    <i class="mr-3 icon-checkbox"></i>Cần Thơ
-  </label>
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3" type="checkbox" id="checkbox_address_CanTho" name="horns" />
-    <i class="mr-3 icon-checkbox"></i>Hồ Chí Minh
   </label>
 </div>

@@ -1,28 +1,37 @@
 {
-  "name": "ServiceType",
-  "fields": [
-    {
-      "fieldName": "name",
-      "fieldType": "String",
-      "fieldValidateRules": ["required"]
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "one-to-many",
-      "otherEntityName": "voucher",
-      "otherEntityRelationshipName": "type",
-      "relationshipName": "voucher"
-    }
-  ],
-  "entityTableName": "service_type",
-  "dto": "mapstruct",
-  "pagination": "no",
-  "service": "serviceImpl",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "embedded": false,
-  "applications": "*",
-  "changelogDate": "20211102075513"
+    "name": "ServiceType",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "icon",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "voucher",
+            "otherEntityRelationshipName": "type",
+            "relationshipName": "voucher"
+        }
+    ],
+    "entityTableName": "service_type",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "applications": "*",
+    "changelogDate": "20211102075513"
 }
