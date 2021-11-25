@@ -27,6 +27,7 @@ import { DetailVoucherComponent } from './detail-voucher/detail-voucher.componen
     ProvinceModule,
     FeedbackModule,
     StoreModule,
+    SharedModule,
   ],
 })
 export class TemplateModule {}

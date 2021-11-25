@@ -1,6 +1,8 @@
 package com.emclab.voucher.service.impl;
 
+import com.emclab.voucher.domain.ServiceType;
 import com.emclab.voucher.domain.Voucher;
+import com.emclab.voucher.repository.ServiceTypeRepository;
 import com.emclab.voucher.repository.VoucherRepository;
 import com.emclab.voucher.service.VoucherService;
 import com.emclab.voucher.service.dto.VoucherDTO;
@@ -27,11 +29,14 @@ public class VoucherServiceImpl implements VoucherService {
 
     private final VoucherRepository voucherRepository;
 
+    private final ServiceTypeRepository typeReponsitory;
+
     private final VoucherMapper voucherMapper;
 
-    public VoucherServiceImpl(VoucherRepository voucherRepository, VoucherMapper voucherMapper) {
+    public VoucherServiceImpl(VoucherRepository voucherRepository, VoucherMapper voucherMapper, ServiceTypeRepository typeReponsitory) {
         this.voucherRepository = voucherRepository;
         this.voucherMapper = voucherMapper;
+        this.typeReponsitory = typeReponsitory;
     }
 
     @Override
@@ -68,6 +73,15 @@ public class VoucherServiceImpl implements VoucherService {
             .stream()
             .map(voucherMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public List<VoucherDTO> findByTypeId(Long id) {
+        log.debug("Request to get vouchers by type");
+
+        ServiceType type = typeReponsitory.findById(id).get();
+
+        return voucherRepository.findByType(type).stream().map(voucherMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
     }
 
     public Page<VoucherDTO> findAllWithEagerRelationships(Pageable pageable) {

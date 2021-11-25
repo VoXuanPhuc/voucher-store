@@ -1,5 +1,5 @@
 import { ServiceTypeService } from './../service/service-type.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { IServiceType } from '../service-type.model';
 import { faFilm, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,6 +12,8 @@ export class VoucherServiceComponent implements OnInit {
   serviceTypes?: IServiceType[];
   isLoading = false;
 
+  @Output() findVoucherByType: EventEmitter<number> = new EventEmitter();
+
   constructor(private serviceTypeService: ServiceTypeService) {}
 
   ngOnInit(): void {
@@ -23,9 +25,12 @@ export class VoucherServiceComponent implements OnInit {
       res => {
         this.isLoading = true;
         this.serviceTypes = res.body ?? [];
-        window.console.log(this.serviceTypes);
       },
       error => window.console.log('An error occurred while loading data')
     );
+  }
+
+  findVoucherbyTypeId(typeId: number): void {
+    this.findVoucherByType.emit(typeId);
   }
 }

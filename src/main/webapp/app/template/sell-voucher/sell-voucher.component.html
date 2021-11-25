@@ -6,7 +6,7 @@
     <!-- Part 2.2.1: Service-left -->
     <div class="service_left">
       <!-- item-1: list service -->
-      <jhi-voucher-service></jhi-voucher-service>
+      <jhi-voucher-service (findVoucherByType)="loadVoucherByTypeId($event)"></jhi-voucher-service>
 
       <!-- item-2: Price range -->
       <jhi-price-range></jhi-price-range>
@@ -19,6 +19,9 @@
     </div>
 
     <!-- Part 2.2.2: Card-product-right -->
-    <jhi-sell-voucher-item></jhi-sell-voucher-item>
+    <div class="card_product_right">
+      <jhi-sell-voucher-item [vouchers]="vouchers" [isLoading]="isVoucherLoading"></jhi-sell-voucher-item>
+      <jhi-my-pagination></jhi-my-pagination>
+    </div>
   </div>
 </div>

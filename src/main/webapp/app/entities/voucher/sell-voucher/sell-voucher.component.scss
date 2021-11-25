@@ -1,18 +1,15 @@
-.card_product_right {
-  margin: 0 auto;
-  font-size: 13px;
-}
 /* set css for col card */
-.card_product_right .child-1 {
+.child-1 {
+  width: 270px !important;
   height: 340px;
   /* margin-left: 0px;
     margin-right: 1px; */
   margin-bottom: 10px;
   border-radius: 5px;
-  padding-left: 30px;
+  padding: 0 20px;
 }
 /* css for card */
-.card_product_right .child-1 .card {
+.child-1 .card {
   width: 100%;
   height: 100%;
   margin-left: 0px;
@@ -21,39 +18,54 @@
   box-shadow: rgb(182, 178, 174, 0.2) 1px 1px;
 }
 /* css for card body */
-.card_product_right .card-body {
+.card-body {
   position: relative;
   top: -15px;
 }
 
-.card_product_right .card-body a {
+.card-body a {
   position: relative;
-  top: -10px;
+  bottom: -10px;
 }
 
-.card_product_right .card-body .star-widget {
+.card-body .star-widget {
   position: relative;
-  top: -5px;
+  bottom: -5px;
+}
+
+.card-body .discount_title {
+  position: relative;
+  bottom: -5px;
+}
+
+.cover {
+  position: absolute;
+  bottom: -7px;
+}
+
+.cover .card-text {
+  font-size: 1.15em;
 }
 
 /* card */
-.card_product_right .star-widget input {
+.star-widget input {
   display: none;
 }
 
-.card_product_right .card .card-body label {
+.card .card-body label {
   transition: all 0.2s ease;
-}
-
-.card_product_right .card .card-body input:not(:checked) ~ label:hover,
-.card_product_right .card .card-body input:not(:checked) ~ label:hover ~ label {
-  color: #fd4;
-}
-.card_product_right .card .card-body input:checked ~ label {
   color: #fd4;
 }
 
-.card_product_right .card img {
+.card .card-body input:not(:checked) ~ label:hover,
+.card .card-body input:not(:checked) ~ label:hover ~ label {
+  color: #fd4;
+}
+.card .card-body input:checked ~ label {
+  color: #fd4;
+}
+
+.card img {
   object-fit: cover;
   width: 100%;
   height: 60%;
@@ -100,33 +112,4 @@
 }
 .middle .text_middle input:not(:checked) ~ label:hover {
   color: #e94560;
-}
-
-/*Pagination // phân trang button  */
-.container.pagination.d-flex {
-  justify-content: center;
-  margin-top: 23px;
-  font-size: 15px;
-}
-
-.container.pagination .pagination li a {
-  color: #e56773;
-}
-
-/* hover */
-.container.pagination .pagination li:nth-of-type(2) a {
-  background-color: #e94560;
-  color: #ffff;
-}
-/* responsive card_voucher */
-@media only screen and (max-width: 599px) {
-  .card_product_right .child-1 {
-    margin: 10px auto;
-  }
-}
-
-//modify
-.card-title b:hover {
-  cursor: pointer;
-  color: #645b5b;
 }

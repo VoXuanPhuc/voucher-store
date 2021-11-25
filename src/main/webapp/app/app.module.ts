@@ -27,6 +27,7 @@ import { MyHeaderComponent } from './layouts/my-header/my-header.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { TemplateModule } from './template/template.module';
+import { MyPaginationComponent } from './shared/my-pagination/my-pagination.component';
 
 @NgModule({
   imports: [

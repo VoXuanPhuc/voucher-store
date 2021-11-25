@@ -33,6 +33,8 @@ public interface VoucherService {
      */
     List<VoucherDTO> findAll();
 
+    List<VoucherDTO> findByTypeId(Long id);
+
     /**
      * Get all the vouchers with eager load of many-to-many relationships.
      *
