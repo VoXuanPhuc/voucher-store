@@ -1,6 +1,8 @@
 package com.emclab.voucher.service.impl;
 
+import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.domain.VoucherCode;
+import com.emclab.voucher.domain.VoucherStatus;
 import com.emclab.voucher.repository.VoucherCodeRepository;
 import com.emclab.voucher.service.VoucherCodeService;
 import com.emclab.voucher.service.dto.VoucherCodeDTO;
@@ -75,5 +77,10 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
     public void delete(Long id) {
         log.debug("Request to delete VoucherCode : {}", id);
         voucherCodeRepository.deleteById(id);
+    }
+
+    @Override
+    public Long countVoucherCodeByVoucher(Voucher voucher, VoucherStatus voucherStatus) {
+        return voucherCodeRepository.countByVoucherAndStatus(voucher, voucherStatus);
     }
 }

@@ -29,7 +29,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'voucher-detail',
+    path: ':id/Voucher',
     component: DetailVoucherComponent,
     data: {
       pageTitle: 'DetailVoucher',

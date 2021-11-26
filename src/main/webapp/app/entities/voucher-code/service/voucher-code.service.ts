@@ -64,4 +64,8 @@ export class VoucherCodeService {
     }
     return voucherCodeCollection;
   }
+
+  countVoucherCode(id: number): Observable<EntityResponseType> {
+    return this.http.get(`${this.resourceUrl}/voucher/${id}`, { observe: 'response' });
+  }
 }

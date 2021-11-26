@@ -82,6 +82,11 @@
   color: #fd4;
 }
 
+.card .card-body .card-title:hover {
+  cursor: pointer;
+  color: #882828;
+}
+
 .card img {
   object-fit: cover;
   width: 100%;
