@@ -1,5 +1,7 @@
 package com.emclab.voucher.service;
 
+import com.emclab.voucher.domain.Voucher;
+import com.emclab.voucher.domain.VoucherStatus;
 import com.emclab.voucher.service.dto.VoucherCodeDTO;
 import java.util.List;
 import java.util.Optional;
@@ -45,4 +47,6 @@ public interface VoucherCodeService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    Long countVoucherCodeByVoucher(Voucher voucher, VoucherStatus voucherStatus);
 }

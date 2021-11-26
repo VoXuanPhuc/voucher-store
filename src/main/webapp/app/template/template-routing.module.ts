@@ -12,7 +12,7 @@ const routes: Routes = [
     },
   },
   {
-    path: 'detailVoucher',
+    path: ':id/Voucher',
     component: DetailVoucherComponent,
     data: {
       pageTitle: 'DetailVoucher',
