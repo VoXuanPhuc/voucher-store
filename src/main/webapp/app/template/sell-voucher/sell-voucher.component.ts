@@ -1,3 +1,4 @@
+import { FormArray, FormGroup } from '@angular/forms';
 import { EntityResponseType } from './../../entities/voucher-status/service/voucher-status.service';
 import { IVoucher } from './../../entities/voucher/voucher.model';
 import { Component, OnInit } from '@angular/core';
@@ -16,6 +17,8 @@ import { IVoucherImage } from 'app/entities/voucher-image/voucher-image.model';
 export class SellVoucherComponent implements OnInit {
   vouchers!: IVoucher[];
   isVoucherLoading = false;
+
+  provinces!: number[];
 
   constructor(
     private voucherService: VoucherService,
@@ -75,5 +78,19 @@ export class SellVoucherComponent implements OnInit {
         () => window.console.log('An error occurs when loading event data!')
       );
     });
+  }
+
+  areChangedHandler(form: Array<number>): void {
+    // this.provinces = new Array(form.length);
+    // window.console.log("1Formmmmmmmmmmmmmmmmm: ", form);
+    // const item = form.at(0);
+    // for (let i = 0; i < form.length; i++) {
+    //     // window.console.log("hahahhaha", form.at(i));
+    //     const element = form.at(i);
+    //     if (element.valid) {
+    //         this.provinces.push(element.value);
+    //         window.console.log(element.value, "hihi ");
+    //     }
+    // }
   }
 }
