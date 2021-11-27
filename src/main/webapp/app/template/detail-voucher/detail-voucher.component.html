@@ -60,7 +60,13 @@
           {{ Voucher.event!.store!.name }}
         </label>
         <br />
-        <label id="unit_price" for=" ">{{ Voucher.price }}</label
+        <label id="unit_price" for=" ">
+          {{
+            Voucher.price?.toLocaleString('en-US', {
+              style: 'currency',
+              currency: 'VND'
+            })
+          }} </label
         ><br />
         <label class="fs-18" for=" ">Rated : </label>
         <div id="list-star-rated">
@@ -74,7 +80,7 @@
         </div>
         <br />
         <div id="select-quantity ">
-          <button id="cong" class="btn btn-light btn_sl" disabled style="">-</button>
+          <button id="cong" class="btn btn-light btn_sl" disabled>-</button>
 
           <label id="inout_quantity" for=" ">1</label>
           <button id="tru" class="btn btn-light btn_sl">+</button>
@@ -83,11 +89,11 @@
         </div>
 
         <label class="fs-20" style="width: 110px; margin-top: 20px; color: #df2f4c" for=" ">Start time </label
-        ><label id="start_day" class="date-time" for=" "> {{ Voucher.startTime }} </label
-        ><label id="start_time-day" class="date-time" for=" ">06:00 AM</label> <br />
+        ><label id="start_day" class="date-time" for=" ">
+          {{ Voucher.startTime?.format('MM D, YYYY h:mm A') }} </label
+        ><br />
         <label class="fs-20" style="width: 120px; margin-top: 17px; color: #df2f4c" for=" ">Expried time </label
-        ><label id="end_day" class="date_time" for=" "> {{ Voucher.expriedTime }} </label
-        ><label id="end_time_day " class="date-time" for=" ">06:00 AM</label> <br />
+        ><label id="end_day" class="date_time" for=" "> {{ Voucher.expriedTime?.format('MM D, YYYY h:mm A') }} </label><br />
         <button id="button_add_cart" type="button " class="btn button_of_this_page" style="width: 130px; font-size: 15px; height: 45px">
           Add To Cart
         </button>
@@ -121,7 +127,7 @@
     </div>
   </div>
   <div id="rated" class="row">
-    <div style="">
+    <div>
       <label for="" style="font-size: 24px; font-weight: bold; padding: 30px">Product Reviews</label>
 
       <div id="overall_review" class="row">
@@ -139,11 +145,11 @@
           </div>
         </div>
         <div class="col-md-9 col-right pull-right">
-          <button type=" button " class="btn" style="">5 star</button>
-          <button type=" button " class="btn" style="">4 star</button>
-          <button type=" button " class="btn" style="">3 star</button>
-          <button type=" button " class="btn" style="">2 star</button>
-          <button type=" button " class="btn" style="">1 star</button>
+          <button type=" button " class="btn">5 star</button>
+          <button type=" button " class="btn">4 star</button>
+          <button type=" button " class="btn">3 star</button>
+          <button type=" button " class="btn">2 star</button>
+          <button type=" button " class="btn">1 star</button>
         </div>
       </div>
 
@@ -172,7 +178,7 @@
                 <label for=" ">Amazing good job</label>
               </div>
 
-              <label class="date_rate" style="" for=" ">21/10/2021</label>
+              <label class="date_rate" for=" ">21/10/2021</label>
             </div>
           </div>
           <div class="item-comment">
@@ -197,7 +203,7 @@
                 <label for=" ">Amazing good job</label>
               </div>
 
-              <label class="date_rate" style="" for=" ">21/10/2021</label>
+              <label class="date_rate" for=" ">21/10/2021</label>
             </div>
           </div>
           <div class="item-comment">
@@ -222,7 +228,7 @@
                 <label for=" ">Amazing good job</label>
               </div>
 
-              <label class="date_rate" style="" for=" ">21/10/2021</label>
+              <label class="date_rate" for=" ">21/10/2021</label>
             </div>
           </div>
           <div class="item-comment">
@@ -247,7 +253,7 @@
                 <label for=" ">Amazing good job</label>
               </div>
 
-              <label class="date_rate" style="" for=" ">21/10/2021</label>
+              <label class="date_rate" for=" ">21/10/2021</label>
             </div>
           </div>
 

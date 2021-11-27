@@ -411,6 +411,23 @@ $--color-star: #ffcd4e;
   align-items: center;
 }
 
+/*Pagination // phÃ¢n trang button  */
+.container.pagination.d-flex {
+  justify-content: center;
+  margin-top: 23px;
+  font-size: 15px;
+}
+
+.container.pagination .pagination li a {
+  color: #e56773;
+}
+
+/* hover */
+.container.pagination .pagination li:nth-of-type(2) a {
+  background-color: #e94560;
+  color: #ffff;
+}
+
 @media only screen and (max-width: 991px) {
   .category-list-col {
     margin: 7px 0;

@@ -171,4 +171,10 @@ public class FeedbackResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/feedbacks-voucher/{idVoucher}")
+    public List<FeedbackDTO> getFeedbyVoucher(@PathVariable Long idVoucher, @RequestParam(defaultValue = "0") int page) {
+        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucher(idVoucher, page);
+        return feedbacksResult;
+    }
 }

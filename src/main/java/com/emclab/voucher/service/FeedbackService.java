@@ -8,6 +8,8 @@ import java.util.Optional;
  * Service Interface for managing {@link com.emclab.voucher.domain.Feedback}.
  */
 public interface FeedbackService {
+    List<FeedbackDTO> findByVoucher(long idVoucher, int page);
+
     /**
      * Save a feedback.
      *
