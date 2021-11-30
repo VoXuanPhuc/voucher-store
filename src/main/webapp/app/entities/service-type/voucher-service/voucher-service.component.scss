@@ -3,7 +3,7 @@
   background-color: transparent;
   margin-left: 10px;
   padding-left: 40px;
-  border: 1px solid;
+  margin-top: 1px;
 }
 .list_service li .iconify.ml-2.mr-5 {
   color: #464444;
@@ -11,6 +11,13 @@
 .list_service li:hover .iconify.ml-2.mr-5 {
   color: #dc3545;
 }
+
+.list_service .li_active {
+  background-color: #ffdce0;
+  color: #dc3545;
+  cursor: pointer;
+}
+
 .list_service li:hover {
   background-color: #ffdce0;
   color: #dc3545;

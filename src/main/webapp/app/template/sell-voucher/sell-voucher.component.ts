@@ -1,13 +1,13 @@
-import { FormArray, FormGroup } from '@angular/forms';
-import { EntityResponseType } from './../../entities/voucher-status/service/voucher-status.service';
-import { IVoucher } from './../../entities/voucher/voucher.model';
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { VoucherService } from 'app/entities/voucher/service/voucher.service';
-import { VoucherImageService } from 'app/entities/voucher-image/service/voucher-image.service';
 import { EventService } from 'app/entities/event/service/event.service';
 import { StoreService } from 'app/entities/store/service/store.service';
-import { HttpResponse } from '@angular/common/http';
+import { VoucherImageService } from 'app/entities/voucher-image/service/voucher-image.service';
 import { IVoucherImage } from 'app/entities/voucher-image/voucher-image.model';
+import { VoucherService } from 'app/entities/voucher/service/voucher.service';
+import { IVoucher } from 'app/entities/voucher/voucher.model';
+import { EntityResponseType } from './../../entities/voucher-status/service/voucher-status.service';
+import { PriceRange } from './model';
 
 @Component({
   selector: 'jhi-sell-voucher',
@@ -16,9 +16,17 @@ import { IVoucherImage } from 'app/entities/voucher-image/voucher-image.model';
 })
 export class SellVoucherComponent implements OnInit {
   vouchers!: IVoucher[];
+  backupVouchers!: IVoucher[];
+
   isVoucherLoading = false;
 
-  provinces!: number[];
+  typeId?: number | null;
+
+  provinceIds = new Array(0);
+
+  ratings = new Array(0);
+
+  priceRange?: PriceRange = new PriceRange(0, 1000000);
 
   constructor(
     private voucherService: VoucherService,
@@ -43,7 +51,8 @@ export class SellVoucherComponent implements OnInit {
     );
   }
 
-  loadVoucherByTypeId(id: number): void {
+  loadVoucherByTypeIdByApi(id: number): void {
+    this.typeId = id;
     this.voucherService.findByTypeId(id).subscribe(
       res => {
         this.isVoucherLoading = true;
@@ -53,6 +62,24 @@ export class SellVoucherComponent implements OnInit {
       },
       () => window.console.log('An error occurs when loading voucher data!')
     );
+  }
+
+  loadVoucherByTypeId(): void {
+    this.vouchers = this.backupVouchers.filter((voucher: IVoucher) => voucher.type?.id === this.typeId);
+  }
+
+  loadVoucherByPriceRange(): void {
+    this.vouchers = this.vouchers.filter(
+      (voucher: IVoucher) =>
+        voucher.price! >= (this.priceRange?.minPrice ?? 0) * 1000 && voucher.price! <= (this.priceRange?.maxPrice ?? 10000000) * 1000
+    );
+  }
+
+  loadVoucherByMutipleCriteria(): void {
+    if (typeof this.typeId === 'number') {
+      this.loadVoucherByTypeId();
+    }
+    this.loadVoucherByPriceRange();
   }
 
   loadImageAndStoreForVoucher(): void {
@@ -67,7 +94,6 @@ export class SellVoucherComponent implements OnInit {
       this.eventService.find(voucher.event?.id ?? 0).subscribe(
         (eventRes: EntityResponseType) => {
           voucher.event = eventRes.body;
-
           this.storeService.find(voucher.event?.store?.id ?? 1).subscribe(
             (storeRes: EntityResponseType) => {
               voucher.event!.store = storeRes.body;
@@ -78,19 +104,26 @@ export class SellVoucherComponent implements OnInit {
         () => window.console.log('An error occurs when loading event data!')
       );
     });
+    this.backupVouchers = this.vouchers;
   }
 
-  areChangedHandler(form: Array<number>): void {
-    // this.provinces = new Array(form.length);
-    // window.console.log("1Formmmmmmmmmmmmmmmmm: ", form);
-    // const item = form.at(0);
-    // for (let i = 0; i < form.length; i++) {
-    //     // window.console.log("hahahhaha", form.at(i));
-    //     const element = form.at(i);
-    //     if (element.valid) {
-    //         this.provinces.push(element.value);
-    //         window.console.log(element.value, "hihi ");
-    //     }
-    // }
+  serviceTypeChangedHandler(id: number): void {
+    this.typeId = id;
+    this.loadVoucherByMutipleCriteria();
+  }
+
+  areaChangedHandler(ids: Array<number>): void {
+    this.provinceIds = [];
+    ids.forEach(id => this.provinceIds.push(id));
+  }
+
+  priceRangeChangedHandler(data: PriceRange): void {
+    this.priceRange = new PriceRange(data.minPrice, data.maxPrice);
+    this.loadVoucherByMutipleCriteria();
+  }
+
+  ratingChangedHandler(items: Array<number>): void {
+    this.ratings = [];
+    items.forEach(value => this.ratings.push(value));
   }
 }

@@ -28,6 +28,9 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { TemplateModule } from './template/template.module';
 import { MyPaginationComponent } from './shared/my-pagination/my-pagination.component';
+import localeVi from '@angular/common/locales/vi';
+
+registerLocaleData(localeVi, 'vi-VN');
 
 @NgModule({
   imports: [

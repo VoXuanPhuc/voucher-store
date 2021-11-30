@@ -11,13 +11,23 @@ import { faFilm, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
 export class VoucherServiceComponent implements OnInit {
   serviceTypes?: IServiceType[];
   isLoading = false;
+  selectedIndex?: number = -1;
+  typeId?: number;
 
-  @Output() findVoucherByType: EventEmitter<number> = new EventEmitter();
+  @Output() typeChanged: EventEmitter<number> = new EventEmitter();
 
   constructor(private serviceTypeService: ServiceTypeService) {}
 
   ngOnInit(): void {
     this.loadAll();
+  }
+
+  setIndex(index: number): void {
+    this.selectedIndex = index;
+  }
+
+  trackId(index: number, item: IServiceType): number {
+    return item.id!;
   }
 
   public loadAll(): void {
@@ -26,11 +36,12 @@ export class VoucherServiceComponent implements OnInit {
         this.isLoading = true;
         this.serviceTypes = res.body ?? [];
       },
-      error => window.console.log('An error occurred while loading data')
+      error => window.console.log('An error occurred while loading data ', error)
     );
   }
 
-  findVoucherbyTypeId(typeId: number): void {
-    this.findVoucherByType.emit(typeId);
+  onTypeChanged(id: number): void {
+    this.typeId = id;
+    this.typeChanged.emit(id);
   }
 }

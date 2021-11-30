@@ -47,14 +47,12 @@ export class VoucherProvinceComponent implements OnInit {
       province.removeAt(index);
     }
 
-    // window.console.log("AAAAAAAAAAAAAAAA", province.length);
+    const provinceIds = new Array(0);
 
-    const provinceIds = new Array(province.length);
     for (let i = 0; i < province.length; i++) {
       provinceIds.push(province.at(i).value);
     }
 
     this.checkboxChanged.emit(provinceIds);
-    // window.console.log("AAAAAAAAAAAAAAAA", provinceIds);
   }
 }

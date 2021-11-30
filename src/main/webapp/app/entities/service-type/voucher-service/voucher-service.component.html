@@ -2,7 +2,12 @@
 <div class="list_service">
   <p class="text-danger ml-4 mt-3"><strong>Service</strong></p>
   <ul class="list-group border-0 w-100 border-0 bg-transparent" id="">
-    <li *ngFor="let type of serviceTypes" class="list-group-item py-2 border-0" (click)="findVoucherbyTypeId(type.id!)">
+    <li
+      *ngFor="let type of serviceTypes; let i = index"
+      class="list-group-item py-2 border-0"
+      [class.li_active]="selectedIndex === i"
+      (click)="onTypeChanged(type.id!); setIndex(i)"
+    >
       {{ type.name }}
     </li>
   </ul>

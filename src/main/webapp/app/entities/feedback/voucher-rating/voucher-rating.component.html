@@ -1,51 +1,53 @@
 <!-- item-4: Ratings -->
 <div class="rating">
   <p class="text-danger ml-4 my-3"><strong>Rating</strong></p>
-  <label class="checkbox mx-4 mb-3" style="">
-    <input class="mr-3" type="checkbox" id="checkbox_rating_01" name="scales" checked />
-    <i class="mr-2 icon-checkbox"></i>
+  <form [formGroup]="form!">
+    <label class="checkbox mx-4 mb-3" style="">
+      <input class="mr-3" type="checkbox" id="checkbox_rating_01" name="scales" value="1" (change)="onCheckboxChange($event)" />
+      <i class="mr-2 icon-checkbox"></i>
 
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-  </label>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+    </label>
 
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3" type="checkbox" id="checkbox_rating_02" name="horns" />
-    <i class="mr-2 icon-checkbox"></i>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-  </label>
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3" type="checkbox" id="checkbox_rating_03" name="horns" />
-    <i class="mr-2 icon-checkbox"></i>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-  </label>
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3" type="checkbox" id="checkbox_rating_04" name="horns" />
-    <i class="mr-2 icon-checkbox"></i>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
-  </label>
-  <label class="checkbox mx-4 mb-3">
-    <input class="mr-3" type="checkbox" id="checkbox_rating_05" name="horns" />
-    <i class="mr-2 icon-checkbox"></i>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-    <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
-  </label>
+    <label class="checkbox mx-4 mb-3">
+      <input class="mr-3" type="checkbox" id="checkbox_rating_02" name="horns" value="2" (change)="onCheckboxChange($event)" />
+      <i class="mr-2 icon-checkbox"></i>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+    </label>
+    <label class="checkbox mx-4 mb-3">
+      <input class="mr-3" type="checkbox" id="checkbox_rating_03" name="horns" value="3" (change)="onCheckboxChange($event)" />
+      <i class="mr-2 icon-checkbox"></i>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+    </label>
+    <label class="checkbox mx-4 mb-3">
+      <input class="mr-3" type="checkbox" id="checkbox_rating_04" name="horns" value="4" (change)="onCheckboxChange($event)" />
+      <i class="mr-2 icon-checkbox"></i>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #c0c0c0; font-size: 20px"></span>
+    </label>
+    <label class="checkbox mx-4 mb-3">
+      <input class="mr-3" type="checkbox" id="checkbox_rating_05" name="horns" value="5" (change)="onCheckboxChange($event)" />
+      <i class="mr-2 icon-checkbox"></i>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+      <span class="iconify" data-icon="ant-design:star-filled" style="color: #fb0; font-size: 20px"></span>
+    </label>
+  </form>
 </div>
