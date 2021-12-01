@@ -15,6 +15,7 @@ export class DetailVoucherComponent implements OnInit {
   Voucher!: IVoucher;
   availableVoucher: any;
   id: any;
+  selectedVoucher: number;
   constructor(
     private voucherServie: VoucherService,
     private route: ActivatedRoute,
@@ -23,6 +24,7 @@ export class DetailVoucherComponent implements OnInit {
     private eventService: EventService
   ) {
     this.availableVoucher = 0;
+    this.selectedVoucher = 1;
   }
 
   ngOnInit(): void {
@@ -43,5 +45,18 @@ export class DetailVoucherComponent implements OnInit {
         });
       });
     });
+  }
+
+  increment(): void {
+    if (this.selectedVoucher >= this.availableVoucher) {
+      return;
+    }
+    this.selectedVoucher = this.selectedVoucher + 1;
+  }
+  decrement(): void {
+    if (this.selectedVoucher === 1) {
+      return;
+    }
+    this.selectedVoucher = this.selectedVoucher - 1;
   }
 }

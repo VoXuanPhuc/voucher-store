@@ -80,10 +80,10 @@
         </div>
         <br />
         <div id="select-quantity ">
-          <button id="cong" class="btn btn-light btn_sl" disabled>-</button>
+          <button id="tru" class="btn btn-light btn_sl" [disabled]="selectedVoucher == 1" (click)="decrement()">-</button>
 
-          <label id="inout_quantity" for=" ">1</label>
-          <button id="tru" class="btn btn-light btn_sl">+</button>
+          <label id="inout_quantity" for=" ">{{ selectedVoucher }}</label>
+          <button id="cong" class="btn btn-light btn_sl" [disabled]="selectedVoucher == availableVoucher" (click)="increment()">+</button>
 
           <label id="emaining_amount" for=" "> There are {{ availableVoucher }} products left </label>
         </div>

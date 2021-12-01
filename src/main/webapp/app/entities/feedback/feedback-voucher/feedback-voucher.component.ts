@@ -42,12 +42,18 @@ export class FeedbackVoucherComponent implements OnInit {
 
   nextPage(event: any): void {
     event.preventDefault();
+    if (this.currentPage >= this.pages.length - 1) {
+      return;
+    }
     this.currentPage = this.currentPage + 1;
     this.loadFeedBackByVoucher();
   }
 
   previousPage(event: any): void {
     event.preventDefault();
+    if (this.currentPage === 0) {
+      return;
+    }
     this.currentPage = this.currentPage - 1;
     this.loadFeedBackByVoucher();
   }
@@ -103,7 +109,7 @@ export class FeedbackVoucherComponent implements OnInit {
     } else {
       this.pageNumbers = this.feedBackNumber / 6;
     }
-    this.pages = new Array(this.pageNumbers);
+    this.pages = new Array(this.pageNumbers + 1);
   }
 
   trackId(index: number, item: IFeedback): number {

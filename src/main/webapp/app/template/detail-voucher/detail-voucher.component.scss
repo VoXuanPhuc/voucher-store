@@ -186,10 +186,15 @@ $--color-star: #ffcd4e;
   padding-bottom: 4px;
 }
 
-#tru {
+#cong {
   margin-left: -5px;
 }
-
+#cong:hover {
+  color: #df2f4c;
+}
+#tru:hover {
+  color: #df2f4c;
+}
 #inout_quantity {
   margin-left: -5px;
   margin-top: 5px;
