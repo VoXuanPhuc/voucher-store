@@ -89,9 +89,16 @@ public class FeedbackServiceImpl implements FeedbackService {
     @Override
     public List<FeedbackDTO> findByVoucher(long idVoucher, int page) {
         Voucher voucher = voucherRepository.findById(idVoucher).get();
-        Pageable paging = PageRequest.of(page, 6);
+        Pageable paging = PageRequest.of(page, 5);
         Page<Feedback> feedbackPage = feedbackRepository.findByVoucher(voucher, paging);
         List<FeedbackDTO> feedBackResult = feedbackMapper.toDto(feedbackPage.getContent());
         return feedBackResult;
+    }
+
+    @Override
+    public Long countByVoucher(long idVoucher) {
+        Voucher voucher = voucherRepository.findById(idVoucher).get();
+        List<Feedback> feedbacks = feedbackRepository.findByVoucher(voucher);
+        return (long) feedbacks.size();
     }
 }

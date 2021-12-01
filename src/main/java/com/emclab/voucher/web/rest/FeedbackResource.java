@@ -1,5 +1,6 @@
 package com.emclab.voucher.web.rest;
 
+import com.emclab.voucher.domain.Feedback;
 import com.emclab.voucher.repository.FeedbackRepository;
 import com.emclab.voucher.service.FeedbackService;
 import com.emclab.voucher.service.dto.FeedbackDTO;
@@ -162,7 +163,7 @@ public class FeedbackResource {
      * @param id the id of the feedbackDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/feedbacks/{id}")
+    @DeleteMapping("/feedbacks/count-feedback-by-voucher/{id}")
     public ResponseEntity<Void> deleteFeedback(@PathVariable Long id) {
         log.debug("REST request to delete Feedback : {}", id);
         feedbackService.delete(id);
@@ -176,5 +177,10 @@ public class FeedbackResource {
     public List<FeedbackDTO> getFeedbyVoucher(@PathVariable Long idVoucher, @RequestParam(defaultValue = "0") int page) {
         List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucher(idVoucher, page);
         return feedbacksResult;
+    }
+
+    @GetMapping("/feedbacks/count-feedback-by-voucher/{id}")
+    public Long countFeedbackbyVoucher(@PathVariable Long id) {
+        return feedbackService.countByVoucher(id);
     }
 }

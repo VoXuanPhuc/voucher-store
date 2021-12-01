@@ -16,6 +16,9 @@ public interface FeedbackService {
      * @param feedbackDTO the entity to save.
      * @return the persisted entity.
      */
+
+    Long countByVoucher(long idVoucher);
+
     FeedbackDTO save(FeedbackDTO feedbackDTO);
 
     /**

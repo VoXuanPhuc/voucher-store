@@ -281,7 +281,7 @@ $--color-star: #ffcd4e;
 }
 
 .btn:hover {
-  color: white;
+  color: $--0-color-button;
 }
 
 /* COMMENT */
@@ -326,9 +326,9 @@ $--color-star: #ffcd4e;
 .rated_by_users {
   margin-left: 40px;
 }
-.rated_by_users > label :first-child {
-  color: #ffcd4e;
-}
+// .rated_by_users > label :first-child {
+//   color: #ffcd4e;
+// }
 .date_rate {
   margin-top: 25px;
   font-size: 13px;
@@ -337,4 +337,25 @@ $--color-star: #ffcd4e;
 .box-around {
   width: 92%;
   margin: auto;
+}
+
+.middle .text_middle input:not(:checked) ~ label:hover {
+  color: #e94560;
+}
+
+/*Pagination // phÃ¢n trang button  */
+.container.pagination.d-flex {
+  justify-content: center;
+  margin-top: 23px;
+  font-size: 15px;
+}
+
+.container.pagination .pagination li a {
+  color: #e56773;
+}
+
+/* hover */
+.container.pagination .pagination .active {
+  background-color: #e94560;
+  color: #ffff !important;
 }

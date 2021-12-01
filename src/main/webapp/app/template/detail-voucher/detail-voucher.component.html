@@ -62,7 +62,7 @@
         <br />
         <label id="unit_price" for=" ">
           {{
-            Voucher.price?.toLocaleString('en-US', {
+            Voucher.price?.toLocaleString('vi-VN', {
               style: 'currency',
               currency: 'VND'
             })
@@ -89,11 +89,9 @@
         </div>
 
         <label class="fs-20" style="width: 110px; margin-top: 20px; color: #df2f4c" for=" ">Start time </label
-        ><label id="start_day" class="date-time" for=" ">
-          {{ Voucher.startTime?.format('MM D, YYYY h:mm A') }} </label
-        ><br />
+        ><label id="start_day" class="date-time" for=" "> {{ Voucher.startTime?.format('DD/MM/YYYY h:mm A') }} </label><br />
         <label class="fs-20" style="width: 120px; margin-top: 17px; color: #df2f4c" for=" ">Expried time </label
-        ><label id="end_day" class="date_time" for=" "> {{ Voucher.expriedTime?.format('MM D, YYYY h:mm A') }} </label><br />
+        ><label id="end_day" class="date_time" for=" "> {{ Voucher.expriedTime?.format('DD/MM/YYYY h:mm A') }} </label><br />
         <button id="button_add_cart" type="button " class="btn button_of_this_page" style="width: 130px; font-size: 15px; height: 45px">
           Add To Cart
         </button>
@@ -126,152 +124,7 @@
       </div>
     </div>
   </div>
-  <div id="rated" class="row">
-    <div>
-      <label for="" style="font-size: 24px; font-weight: bold; padding: 30px">Product Reviews</label>
 
-      <div id="overall_review" class="row">
-        <div class="col-md-3 col-left">
-          <label for=" ">5 out of 5</label>
-
-          <div id=" list-star-rated " class="" style="margin: auto">
-            <b>
-              <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-              <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-              <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-              <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-              <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-            </b>
-          </div>
-        </div>
-        <div class="col-md-9 col-right pull-right">
-          <button type=" button " class="btn">5 star</button>
-          <button type=" button " class="btn">4 star</button>
-          <button type=" button " class="btn">3 star</button>
-          <button type=" button " class="btn">2 star</button>
-          <button type=" button " class="btn">1 star</button>
-        </div>
-      </div>
-
-      <!-- COMMENT -->
-      <div id="comment">
-        <div>
-          <div class="item-comment">
-            <div class="user-name">
-              <div class="rounded-circle">
-                <img class="" style="width: 30px" src="../image/detail-voucher/image-u.png" alt=" " />
-              </div>
-              <div class="name">
-                <label for=" ">Huy Phú</label>
-              </div>
-            </div>
-            <div class="rated_by_users">
-              <label for=" ">
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span> </label
-              ><br />
-
-              <div>
-                <label for=" ">Amazing good job</label>
-              </div>
-
-              <label class="date_rate" for=" ">21/10/2021</label>
-            </div>
-          </div>
-          <div class="item-comment">
-            <div class="user-name">
-              <div class="rounded-circle">
-                <img class="" style="width: 30px" src="../image/detail-voucher/image-u.png" alt=" " />
-              </div>
-              <div class="name">
-                <label for=" ">Huy Phú</label>
-              </div>
-            </div>
-            <div class="rated_by_users">
-              <label for=" ">
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span> </label
-              ><br />
-
-              <div>
-                <label for=" ">Amazing good job</label>
-              </div>
-
-              <label class="date_rate" for=" ">21/10/2021</label>
-            </div>
-          </div>
-          <div class="item-comment">
-            <div class="user-name">
-              <div class="rounded-circle">
-                <img class="" style="width: 30px" src="../image/detail-voucher/image-u.png" alt=" " />
-              </div>
-              <div class="name">
-                <label for=" ">Huy Phú</label>
-              </div>
-            </div>
-            <div class="rated_by_users">
-              <label for=" ">
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span> </label
-              ><br />
-
-              <div>
-                <label for=" ">Amazing good job</label>
-              </div>
-
-              <label class="date_rate" for=" ">21/10/2021</label>
-            </div>
-          </div>
-          <div class="item-comment">
-            <div class="user-name">
-              <div class="rounded-circle">
-                <img class="" style="width: 30px" src="../image/detail-voucher/image-u.png" alt=" " />
-              </div>
-              <div class="name">
-                <label for=" ">Huy Phú</label>
-              </div>
-            </div>
-            <div class="rated_by_users">
-              <label for=" ">
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
-                <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span> </label
-              ><br />
-
-              <div>
-                <label for=" ">Amazing good job</label>
-              </div>
-
-              <label class="date_rate" for=" ">21/10/2021</label>
-            </div>
-          </div>
-
-          <div class="container pagination d-flex">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
+  <jhi-feedback-voucher></jhi-feedback-voucher>
 </div>
