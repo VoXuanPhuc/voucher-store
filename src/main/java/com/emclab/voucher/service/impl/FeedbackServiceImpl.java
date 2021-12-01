@@ -38,6 +38,8 @@ public class FeedbackServiceImpl implements FeedbackService {
         this.feedbackMapper = feedbackMapper;
     }
 
+    private Voucher voucher;
+
     @Autowired
     VoucherRepository voucherRepository;
 
@@ -88,7 +90,7 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public List<FeedbackDTO> findByVoucher(long idVoucher, int page) {
-        Voucher voucher = voucherRepository.findById(idVoucher).get();
+        this.voucher = voucherRepository.findById(idVoucher).get();
         Pageable paging = PageRequest.of(page, 5);
         Page<Feedback> feedbackPage = feedbackRepository.findByVoucher(voucher, paging);
         List<FeedbackDTO> feedBackResult = feedbackMapper.toDto(feedbackPage.getContent());
@@ -97,8 +99,13 @@ public class FeedbackServiceImpl implements FeedbackService {
 
     @Override
     public Long countByVoucher(long idVoucher) {
-        Voucher voucher = voucherRepository.findById(idVoucher).get();
-        List<Feedback> feedbacks = feedbackRepository.findByVoucher(voucher);
+        List<Feedback> feedbacks = feedbackRepository.findByVoucher(this.voucher);
         return (long) feedbacks.size();
+    }
+
+    @Override
+    public List<FeedbackDTO> findByVoucherAndRate(int rate) {
+        List<FeedbackDTO> result = feedbackMapper.toDto(feedbackRepository.findByVoucherAndRate(this.voucher, rate));
+        return result;
     }
 }

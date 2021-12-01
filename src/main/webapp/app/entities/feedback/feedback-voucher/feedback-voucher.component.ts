@@ -18,7 +18,7 @@ export class FeedbackVoucherComponent implements OnInit {
   idVoucher: number;
 
   constructor(private feedbackService: FeedbackService, private myuserService: MyUserService, private activatedRoute: ActivatedRoute) {
-    this.pageNumbers = 1;
+    this.pageNumbers = 0;
     this.currentPage = 0;
     this.feedBackNumber = 0;
     this.pages = [];
@@ -69,17 +69,41 @@ export class FeedbackVoucherComponent implements OnInit {
     );
   }
 
+  // load feedback by voucher and rate
+  loadFeedBackByVoucherAndRate(rate: number): void {
+    this.feedbackService.getFeedbacksByVoucherAndRate(rate).subscribe(
+      data => {
+        this.feedbacks = data.body ?? [];
+        this.countPageFeedback(this.feedbacks.length);
+
+        this.feedbacks.forEach(feedback => {
+          this.myuserService.find(feedback.user?.id ?? 1).subscribe(user => {
+            feedback.user = user.body;
+          });
+        });
+      },
+      error => {
+        window.console.log(error);
+      }
+    );
+  }
+
   // call api count total feedback of voucherid
   countFeedBackByVoucher(): void {
     this.feedbackService.countVoucherCode(this.idVoucher).subscribe(data => {
       this.feedBackNumber = data.body;
-      if (this.feedBackNumber % 6 !== 0) {
-        this.pageNumbers = this.feedBackNumber / 6 + 1;
-      } else {
-        this.pageNumbers = this.feedBackNumber / 6;
-      }
-      this.pages = new Array(this.pageNumbers);
+      this.countPageFeedback(this.feedBackNumber);
     });
+  }
+
+  // count total page of feedback
+  countPageFeedback(feedbackNumber: number): void {
+    if (this.feedBackNumber % 6 !== 0) {
+      this.pageNumbers = this.feedBackNumber / 6 + 1;
+    } else {
+      this.pageNumbers = this.feedBackNumber / 6;
+    }
+    this.pages = new Array(this.pageNumbers);
   }
 
   trackId(index: number, item: IFeedback): number {

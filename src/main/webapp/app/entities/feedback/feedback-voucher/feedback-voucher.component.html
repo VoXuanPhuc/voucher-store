@@ -17,7 +17,9 @@
         </div>
       </div>
       <div class="col-md-9 col-right pull-right">
-        <button type=" button " class="btn" *ngFor="let start of [5, 4, 3, 2, 1]">{{ start }} star</button>
+        <button type=" button " class="btn" *ngFor="let star of [5, 4, 3, 2, 1]" (click)="loadFeedBackByVoucherAndRate(star)">
+          {{ star }} star
+        </button>
       </div>
     </div>
 

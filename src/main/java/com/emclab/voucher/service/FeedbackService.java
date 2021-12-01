@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface FeedbackService {
     List<FeedbackDTO> findByVoucher(long idVoucher, int page);
 
+    List<FeedbackDTO> findByVoucherAndRate(int rate);
+
     /**
      * Save a feedback.
      *

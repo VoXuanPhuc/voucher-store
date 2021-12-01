@@ -16,4 +16,6 @@ import org.springframework.stereotype.Repository;
 public interface FeedbackRepository extends JpaRepository<Feedback, Long> {
     Page<Feedback> findByVoucher(Voucher voucher, Pageable pageable);
     List<Feedback> findByVoucher(Voucher voucher);
+
+    List<Feedback> findByVoucherAndRate(Voucher voucher, Integer rate);
 }

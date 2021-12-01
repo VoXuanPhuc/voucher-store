@@ -1,6 +1,5 @@
 package com.emclab.voucher.web.rest;
 
-import com.emclab.voucher.domain.Feedback;
 import com.emclab.voucher.repository.FeedbackRepository;
 import com.emclab.voucher.service.FeedbackService;
 import com.emclab.voucher.service.dto.FeedbackDTO;
@@ -16,7 +15,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -182,5 +190,11 @@ public class FeedbackResource {
     @GetMapping("/feedbacks/count-feedback-by-voucher/{id}")
     public Long countFeedbackbyVoucher(@PathVariable Long id) {
         return feedbackService.countByVoucher(id);
+    }
+
+    @GetMapping("/feedbacks/feedbacks-voucher")
+    public List<FeedbackDTO> getFeedbackByVoucherAndRate(@RequestParam(defaultValue = "5") int rate) {
+        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucherAndRate(rate);
+        return feedbacksResult;
     }
 }

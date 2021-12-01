@@ -64,7 +64,12 @@ export class FeedbackService {
   getFeedbacksByVoucher(idVoucher: number, page: number): Observable<EntityArrayResponseType> {
     return this.http.get<IFeedback[]>(`${this.resourceFeedBackByVoucher}/${idVoucher}?page=${page}`, { observe: 'response' });
   }
+
   countVoucherCode(id: number): Observable<EntityResponseType> {
     return this.http.get(`${this.resourceUrl}/count-feedback-by-voucher/${id}`, { observe: 'response' });
+  }
+
+  getFeedbacksByVoucherAndRate(rate: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IFeedback[]>(`${this.resourceUrl}/feedbacks-voucher?rate=${rate}`, { observe: 'response' });
   }
 }
