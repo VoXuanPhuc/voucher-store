@@ -48,7 +48,7 @@
             </div>
 
             <p class="discount_title ml-4 mt-1 ml-lg-4 ml-md-5 ml-sm-5 text-danger">
-              <b>{{ voucher.price }} đ</b>
+              <b>{{ voucher.price | currency: 'VND':'symbol':'1.0-0':'vi-VN' }}</b>
             </p>
           </div>
         </div>

@@ -31,6 +31,12 @@ label {
 .hot_voucher {
   height: auto;
 }
+
+.hot_voucher .card_voucher:hover {
+  transform: scale(1.03);
+  transition: all 0.8s;
+}
+
 .hot_voucher .card_voucher img {
   object-fit: cover;
   width: 100%;

@@ -8,13 +8,14 @@ import { ServiceTypeModule } from 'app/entities/service-type/service-type.module
 import { StoreModule } from 'app/entities/store/store.module';
 import { VoucherModule } from 'app/entities/voucher/voucher.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { AllStoresComponent } from './all-stores/all-stores.component';
+import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
 import { TemplateRoutingModule } from './template-routing.module';
-import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
 
 @NgModule({
-  declarations: [LandingPageComponent, SellVoucherComponent, DetailVoucherComponent],
+  declarations: [LandingPageComponent, SellVoucherComponent, DetailVoucherComponent, AllStoresComponent],
   imports: [
     CommonModule,
     TemplateRoutingModule,
