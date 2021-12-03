@@ -1,6 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import locale from '@angular/common/locales/en';
+import localeVi from '@angular/common/locales/vi';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -27,8 +28,6 @@ import { MyHeaderComponent } from './layouts/my-header/my-header.component';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { TemplateModule } from './template/template.module';
-import { MyPaginationComponent } from './shared/my-pagination/my-pagination.component';
-import localeVi from '@angular/common/locales/vi';
 
 registerLocaleData(localeVi, 'vi-VN');
 

@@ -1,3 +1,4 @@
+import { AllStoreComponent } from './../entities/store/all-store/all-store.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
@@ -33,6 +34,13 @@ const routes: Routes = [
     component: DetailVoucherComponent,
     data: {
       pageTitle: 'DetailVoucher',
+    },
+  },
+  {
+    path: 'stores',
+    component: AllStoreComponent,
+    data: {
+      pageTitle: 'Stores',
     },
   },
 ];
