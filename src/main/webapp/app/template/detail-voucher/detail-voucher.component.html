@@ -88,10 +88,16 @@
           <label id="emaining_amount" for=" "> There are {{ availableVoucher }} products left </label>
         </div>
 
-        <label class="fs-20" style="width: 110px; margin-top: 20px; color: #df2f4c" for=" ">Start time </label
-        ><label id="start_day" class="date-time" for=" "> {{ Voucher.startTime?.format('DD/MM/YYYY h:mm A') }} </label><br />
-        <label class="fs-20" style="width: 120px; margin-top: 17px; color: #df2f4c" for=" ">Expried time </label
-        ><label id="end_day" class="date_time" for=" "> {{ Voucher.expriedTime?.format('DD/MM/YYYY h:mm A') }} </label><br />
+        <label class="fs-20" style="width: 110px; margin-top: 20px; color: #df2f4c; font-size: 17px" for=" ">Start time </label>
+        <label id="start_day" class="date-time" style="font-size: 17px" for=" ">
+          {{ Voucher.startTime?.format('DD/MM/YYYY h:mm A') }}
+        </label>
+        <br />
+        <label class="fs-20" style="width: 130px; margin-top: 17px; color: #df2f4c; font-size: 17px" for=" "> Expried time </label
+        ><label id="end_day" class="date_time" style="font-size: 17px" for=" ">
+          {{ Voucher.expriedTime?.format('DD/MM/YYYY h:mm A') }} </label
+        ><br />
+
         <button id="button_add_cart" type="button " class="btn button_of_this_page" style="width: 130px; font-size: 15px; height: 45px">
           Add To Cart
         </button>

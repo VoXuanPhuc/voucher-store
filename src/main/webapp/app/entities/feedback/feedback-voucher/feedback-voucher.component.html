@@ -17,6 +17,7 @@
         </div>
       </div>
       <div class="col-md-9 col-right pull-right">
+        <button type=" button " class="btn" (click)="loadFeedBackByVoucher()">All star</button>
         <button type=" button " class="btn" *ngFor="let star of [5, 4, 3, 2, 1]" (click)="loadFeedBackByVoucherAndRate(star)">
           {{ star }} star
         </button>

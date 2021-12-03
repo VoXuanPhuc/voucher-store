@@ -182,8 +182,12 @@ public class FeedbackResource {
     }
 
     @GetMapping("/feedbacks-voucher/{idVoucher}")
-    public List<FeedbackDTO> getFeedbyVoucher(@PathVariable Long idVoucher, @RequestParam(defaultValue = "0") int page) {
-        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucher(idVoucher, page);
+    public List<FeedbackDTO> getFeedbyVoucher(
+        @PathVariable Long idVoucher,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "0") int rate
+    ) {
+        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucher(idVoucher, rate, page);
         return feedbacksResult;
     }
 
@@ -192,9 +196,13 @@ public class FeedbackResource {
         return feedbackService.countByVoucher(id);
     }
 
-    @GetMapping("/feedbacks/feedbacks-voucher")
-    public List<FeedbackDTO> getFeedbackByVoucherAndRate(@RequestParam(defaultValue = "5") int rate) {
-        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucherAndRate(rate);
-        return feedbacksResult;
+    @GetMapping("/feedbacks/count-feedback-by-voucher/{id}/{rate}")
+    public Long countFeedbackbyVoucherAndRate(@PathVariable Long id, @PathVariable int rate) {
+        return feedbackService.countByVoucherAndRate(id, rate);
     }
+    //    @GetMapping("/feedbacks/feedbacks-voucher")
+    //    public List<FeedbackDTO> getFeedbackByVoucherAndRate(@RequestParam(defaultValue = "5") int rate) {
+    //        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucherAndRate(rate);
+    //        return feedbacksResult;
+    //    }
 }
