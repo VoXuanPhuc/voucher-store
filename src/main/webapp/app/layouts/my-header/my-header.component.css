@@ -89,3 +89,9 @@
 .container_menu_header ul li {
   list-style-type: none;
 }
+
+#btn-cart,
+#btn-user02 {
+  width: 45px;
+  height: 45px;
+}

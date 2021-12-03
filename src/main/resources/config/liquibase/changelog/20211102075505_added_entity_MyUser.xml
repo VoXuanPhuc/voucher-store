@@ -29,6 +29,12 @@
             <column name="gender" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="avatar" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="dob" type="timestamp">
+                <constraints nullable="false" />
+            </column>
             <column name="phone" type="varchar(255)">
                 <constraints nullable="false" />
             </column>

@@ -4,7 +4,7 @@ import com.emclab.voucher.domain.MyUser;
 import com.emclab.voucher.repository.MyUserRepository;
 import com.emclab.voucher.service.MyUserService;
 import com.emclab.voucher.service.dto.MyUserDTO;
-import com.emclab.voucher.service.mapper.MyUserMapperImpl;
+import com.emclab.voucher.service.mapper.MyUserMapper;
 import com.emclab.voucher.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -45,7 +45,7 @@ public class MyUserResource {
     private final MyUserRepository myUserRepository;
 
     @Autowired
-    MyUserMapperImpl myUserMapperImpl;
+    MyUserMapper myUserMapperImpl;
 
     public MyUserResource(MyUserService myUserService, MyUserRepository myUserRepository) {
         this.myUserService = myUserService;
@@ -56,7 +56,9 @@ public class MyUserResource {
      * {@code POST  /my-users} : Create a new myUser.
      *
      * @param myUserDTO the myUserDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new myUserDTO, or with status {@code 400 (Bad Request)} if the myUser has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new myUserDTO, or with status {@code 400 (Bad Request)} if
+     *         the myUser has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/my-users")
@@ -77,11 +79,13 @@ public class MyUserResource {
     /**
      * {@code PUT  /my-users/:id} : Updates an existing myUser.
      *
-     * @param id the id of the myUserDTO to save.
+     * @param id        the id of the myUserDTO to save.
      * @param myUserDTO the myUserDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated myUserDTO,
-     * or with status {@code 400 (Bad Request)} if the myUserDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the myUserDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated myUserDTO, or with status {@code 400 (Bad Request)} if
+     *         the myUserDTO is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the myUserDTO couldn't be
+     *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/my-users/{id}")
@@ -109,14 +113,17 @@ public class MyUserResource {
     }
 
     /**
-     * {@code PATCH  /my-users/:id} : Partial updates given fields of an existing myUser, field will ignore if it is null
+     * {@code PATCH  /my-users/:id} : Partial updates given fields of an existing
+     * myUser, field will ignore if it is null
      *
-     * @param id the id of the myUserDTO to save.
+     * @param id        the id of the myUserDTO to save.
      * @param myUserDTO the myUserDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated myUserDTO,
-     * or with status {@code 400 (Bad Request)} if the myUserDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the myUserDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the myUserDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated myUserDTO, or with status {@code 400 (Bad Request)} if
+     *         the myUserDTO is not valid, or with status {@code 404 (Not Found)} if
+     *         the myUserDTO is not found, or with status
+     *         {@code 500 (Internal Server Error)} if the myUserDTO couldn't be
+     *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/my-users/{id}", consumes = "application/merge-patch+json")
@@ -147,7 +154,8 @@ public class MyUserResource {
     /**
      * {@code GET  /my-users} : get all the myUsers.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of myUsers in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of myUsers in body.
      */
     @GetMapping("/my-users")
     public List<MyUserDTO> getAllMyUsers() {
@@ -159,7 +167,8 @@ public class MyUserResource {
      * {@code GET  /my-users/:id} : get the "id" myUser.
      *
      * @param id the id of the myUserDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the myUserDTO, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the myUserDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/my-users/{id}")
     public ResponseEntity<MyUserDTO> getMyUser(@PathVariable Long id) {

@@ -27,6 +27,10 @@ public class ServiceType extends AbstractAuditingEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotNull
+    @Column(name = "icon", nullable = false)
+    private String icon;
+
     @OneToMany(mappedBy = "type")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     @JsonIgnoreProperties(value = { "voucherImages", "voucherCodes", "feedbacks", "products", "event", "type" }, allowSetters = true)
@@ -57,6 +61,19 @@ public class ServiceType extends AbstractAuditingEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIcon() {
+        return this.icon;
+    }
+
+    public ServiceType icon(String icon) {
+        this.icon = icon;
+        return this;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public Set<Voucher> getVouchers() {
@@ -90,7 +107,8 @@ public class ServiceType extends AbstractAuditingEntity {
         this.vouchers = vouchers;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -105,16 +123,14 @@ public class ServiceType extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "ServiceType{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            "}";
+        return "ServiceType{" + "id=" + getId() + ", name='" + getName() + "'" + "}";
     }
 }

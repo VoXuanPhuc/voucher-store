@@ -29,6 +29,7 @@ export class Voucher implements IVoucher {
     public quantity?: number,
     public startTime?: dayjs.Dayjs,
     public expriedTime?: dayjs.Dayjs,
+    public description?: string,
     public voucherImages?: IVoucherImage[] | null,
     public voucherCodes?: IVoucherCode[] | null,
     public feedbacks?: IFeedback[] | null,

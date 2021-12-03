@@ -1,8 +1,13 @@
 package com.emclab.voucher.web.rest;
 
+import com.emclab.voucher.domain.Voucher;
+import com.emclab.voucher.domain.VoucherStatus;
 import com.emclab.voucher.repository.VoucherCodeRepository;
 import com.emclab.voucher.service.VoucherCodeService;
+import com.emclab.voucher.service.VoucherService;
 import com.emclab.voucher.service.dto.VoucherCodeDTO;
+import com.emclab.voucher.service.dto.VoucherDTO;
+import com.emclab.voucher.service.mapper.VoucherMapper;
 import com.emclab.voucher.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -13,9 +18,18 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -36,6 +50,12 @@ public class VoucherCodeResource {
     private final VoucherCodeService voucherCodeService;
 
     private final VoucherCodeRepository voucherCodeRepository;
+
+    @Autowired
+    VoucherService voucherService;
+
+    @Autowired
+    VoucherMapper voucherMapper;
 
     public VoucherCodeResource(VoucherCodeService voucherCodeService, VoucherCodeRepository voucherCodeRepository) {
         this.voucherCodeService = voucherCodeService;
@@ -170,5 +190,14 @@ public class VoucherCodeResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/voucher-codes/voucher/{id}")
+    public Long countVoucherCode(@PathVariable Long id) {
+        VoucherDTO voucherDTO = voucherService.findOne(id).get();
+        VoucherStatus voucherStatus = new VoucherStatus();
+        voucherStatus.setId(1l);
+        voucherStatus.setName("available");
+        return voucherCodeService.countVoucherCodeByVoucher(voucherMapper.toEntity(voucherDTO), voucherStatus);
     }
 }

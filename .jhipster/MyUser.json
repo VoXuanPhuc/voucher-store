@@ -35,6 +35,16 @@
       "fieldName": "email",
       "fieldType": "String",
       "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "avatar",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dob",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
     }
   ],
   "relationships": [
