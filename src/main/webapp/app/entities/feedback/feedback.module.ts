@@ -6,6 +6,7 @@ import { FeedbackUpdateComponent } from './update/feedback-update.component';
 import { FeedbackDeleteDialogComponent } from './delete/feedback-delete-dialog.component';
 import { FeedbackRoutingModule } from './route/feedback-routing.module';
 import { VoucherRatingComponent } from './voucher-rating/voucher-rating.component';
+import { FeedbackVoucherComponent } from './feedback-voucher/feedback-voucher.component';
 
 @NgModule({
   imports: [SharedModule, FeedbackRoutingModule],
@@ -15,8 +16,9 @@ import { VoucherRatingComponent } from './voucher-rating/voucher-rating.componen
     FeedbackUpdateComponent,
     FeedbackDeleteDialogComponent,
     VoucherRatingComponent,
+    FeedbackVoucherComponent,
   ],
   entryComponents: [FeedbackDeleteDialogComponent],
-  exports: [VoucherRatingComponent],
+  exports: [VoucherRatingComponent, FeedbackVoucherComponent],
 })
 export class FeedbackModule {}

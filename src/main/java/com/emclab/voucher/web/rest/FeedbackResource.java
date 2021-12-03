@@ -15,7 +15,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -162,7 +171,7 @@ public class FeedbackResource {
      * @param id the id of the feedbackDTO to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-    @DeleteMapping("/feedbacks/{id}")
+    @DeleteMapping("/feedbacks/count-feedback-by-voucher/{id}")
     public ResponseEntity<Void> deleteFeedback(@PathVariable Long id) {
         log.debug("REST request to delete Feedback : {}", id);
         feedbackService.delete(id);
@@ -171,4 +180,29 @@ public class FeedbackResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+
+    @GetMapping("/feedbacks-voucher/{idVoucher}")
+    public List<FeedbackDTO> getFeedbyVoucher(
+        @PathVariable Long idVoucher,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "0") int rate
+    ) {
+        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucher(idVoucher, rate, page);
+        return feedbacksResult;
+    }
+
+    @GetMapping("/feedbacks/count-feedback-by-voucher/{id}")
+    public Long countFeedbackbyVoucher(@PathVariable Long id) {
+        return feedbackService.countByVoucher(id);
+    }
+
+    @GetMapping("/feedbacks/count-feedback-by-voucher/{id}/{rate}")
+    public Long countFeedbackbyVoucherAndRate(@PathVariable Long id, @PathVariable int rate) {
+        return feedbackService.countByVoucherAndRate(id, rate);
+    }
+    //    @GetMapping("/feedbacks/feedbacks-voucher")
+    //    public List<FeedbackDTO> getFeedbackByVoucherAndRate(@RequestParam(defaultValue = "5") int rate) {
+    //        List<FeedbackDTO> feedbacksResult = feedbackService.findByVoucherAndRate(rate);
+    //        return feedbacksResult;
+    //    }
 }

@@ -1,7 +1,9 @@
 package com.emclab.voucher.service.impl;
 
 import com.emclab.voucher.domain.Feedback;
+import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.repository.FeedbackRepository;
+import com.emclab.voucher.repository.VoucherRepository;
 import com.emclab.voucher.service.FeedbackService;
 import com.emclab.voucher.service.dto.FeedbackDTO;
 import com.emclab.voucher.service.mapper.FeedbackMapper;
@@ -11,6 +13,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +37,11 @@ public class FeedbackServiceImpl implements FeedbackService {
         this.feedbackRepository = feedbackRepository;
         this.feedbackMapper = feedbackMapper;
     }
+
+    private Voucher voucher;
+
+    @Autowired
+    VoucherRepository voucherRepository;
 
     @Override
     public FeedbackDTO save(FeedbackDTO feedbackDTO) {
@@ -75,5 +86,31 @@ public class FeedbackServiceImpl implements FeedbackService {
     public void delete(Long id) {
         log.debug("Request to delete Feedback : {}", id);
         feedbackRepository.deleteById(id);
+    }
+
+    @Override
+    public List<FeedbackDTO> findByVoucher(long idVoucher, int rate, int page) {
+        this.voucher = voucherRepository.findById(idVoucher).get();
+        Pageable paging = PageRequest.of(page, 5);
+        Page<Feedback> feedbackPage = null;
+        if (rate != 0) {
+            feedbackPage = feedbackRepository.findByVoucherAndRate(voucher, rate, paging);
+        } else {
+            feedbackPage = feedbackRepository.findByVoucher(voucher, paging);
+        }
+        List<FeedbackDTO> feedBackResult = feedbackMapper.toDto(feedbackPage.getContent());
+        return feedBackResult;
+    }
+
+    @Override
+    public Long countByVoucher(long idVoucher) {
+        List<Feedback> feedbacks = feedbackRepository.findByVoucher(this.voucher);
+        return (long) feedbacks.size();
+    }
+
+    @Override
+    public Long countByVoucherAndRate(long idVoucher, int rate) {
+        List<Feedback> feedbacks = feedbackRepository.findByVoucherAndRate(this.voucher, rate);
+        return (long) feedbacks.size();
     }
 }

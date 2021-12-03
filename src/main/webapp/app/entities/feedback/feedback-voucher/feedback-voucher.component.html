@@ -1,0 +1,82 @@
+<div id="rated" class="row">
+  <div>
+    <label for="" style="font-size: 24px; font-weight: bold; padding: 30px">Product Reviews</label>
+
+    <div id="overall_review" class="row">
+      <div class="col-md-3 col-left">
+        <label for=" ">5 out of 5</label>
+
+        <div id=" list-star-rated " class="" style="margin: auto">
+          <b>
+            <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
+            <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
+            <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
+            <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
+            <span class="iconify" data-icon="bx:bxs-star" data-width="20" data-height="20"></span>
+          </b>
+        </div>
+      </div>
+      <div class="col-md-9 col-right pull-right">
+        <button type=" button " class="btn" (click)="loadFeedBackByVoucher()">All star</button>
+        <button type=" button " class="btn" *ngFor="let star of [5, 4, 3, 2, 1]" (click)="loadFeedBackByVoucherAndRate(star)">
+          {{ star }} star
+        </button>
+      </div>
+    </div>
+
+    <!-- COMMENT -->
+    <div id="comment">
+      <div>
+        <div class="item-comment" *ngFor="let feedback of feedbacks; trackBy: trackId">
+          <div class="user-name">
+            <div class="rounded-circle">
+              <img class="" style="width: 30px" src="{{ feedback.user?.avatar }}" alt=" " />
+            </div>
+            <div class="name">
+              <label for=" ">{{ feedback.user?.firstName }} {{ feedback.user?.lastName }}</label>
+            </div>
+          </div>
+          <div class="rated_by_users">
+            <label for=" ">
+              <span
+                *ngFor="let start of [1, 2, 3, 4, 5]"
+                class="iconify"
+                data-icon="bx:bxs-star"
+                data-width="20"
+                data-height="20"
+                [style.color]="checkStart(start, feedback.rate) ? '' : '#ffcd4e'"
+              >
+              </span> </label
+            ><br />
+
+            <div>
+              <label for=" ">{{ feedback.detail }}</label>
+            </div>
+
+            <label class="date_rate" for=" ">21/10/2021</label>
+          </div>
+        </div>
+
+        <div class="container pagination d-flex">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link" href="#" (click)="previousPage($event)" [ngClass]="{ disable: currentPage == 0 }">Previous</a>
+              </li>
+              <li class="page-item" *ngFor="let page of pages; let i = index">
+                <a class="page-link" href="#" (click)="setPage(i, $event)" [ngClass]="{ 'active ': i == currentPage }">
+                  {{ i + 1 }}
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#" (click)="nextPage($event)" [ngClass]="{ disable: currentPage == this.pages.length - 1 }">
+                  Next</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

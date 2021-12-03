@@ -186,15 +186,10 @@ $--color-star: #ffcd4e;
   padding-bottom: 4px;
 }
 
-#cong {
+#tru {
   margin-left: -5px;
 }
-#cong:hover {
-  color: #df2f4c;
-}
-#tru:hover {
-  color: #df2f4c;
-}
+
 #inout_quantity {
   margin-left: -5px;
   margin-top: 5px;
@@ -255,6 +250,9 @@ $--color-star: #ffcd4e;
   color: #ffcd4e;
   font-size: 24px;
 }
+.col-right {
+  display: flex;
+}
 .col-right button {
   margin: 10px;
   color: #df2f4c;
@@ -286,7 +284,7 @@ $--color-star: #ffcd4e;
 }
 
 .btn:hover {
-  color: white;
+  color: $--0-color-button;
 }
 
 /* COMMENT */
@@ -331,9 +329,9 @@ $--color-star: #ffcd4e;
 .rated_by_users {
   margin-left: 40px;
 }
-.rated_by_users > label :first-child {
-  color: #ffcd4e;
-}
+// .rated_by_users > label :first-child {
+//   color: #ffcd4e;
+// }
 .date_rate {
   margin-top: 25px;
   font-size: 13px;
@@ -342,4 +340,29 @@ $--color-star: #ffcd4e;
 .box-around {
   width: 92%;
   margin: auto;
+}
+
+.middle .text_middle input:not(:checked) ~ label:hover {
+  color: #e94560;
+}
+
+/*Pagination // phÃ¢n trang button  */
+.container.pagination.d-flex {
+  justify-content: center;
+  margin-top: 23px;
+  font-size: 15px;
+}
+
+.container.pagination .pagination li a {
+  color: #e56773;
+}
+
+/* hover */
+.container.pagination .pagination .active {
+  background-color: #e94560;
+  color: #ffff !important;
+}
+
+.disable {
+  color: rgb(233, 229, 229) !important;
 }

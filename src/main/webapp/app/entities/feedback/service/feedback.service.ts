@@ -13,6 +13,7 @@ export type EntityArrayResponseType = HttpResponse<IFeedback[]>;
 @Injectable({ providedIn: 'root' })
 export class FeedbackService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/feedbacks');
+  protected resourceFeedBackByVoucher = this.applicationConfigService.getEndpointFor('api/feedbacks-voucher');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -58,5 +59,21 @@ export class FeedbackService {
       return [...feedbacksToAdd, ...feedbackCollection];
     }
     return feedbackCollection;
+  }
+
+  getFeedbacksByVoucher(idVoucher: number, page: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IFeedback[]>(`${this.resourceFeedBackByVoucher}/${idVoucher}?page=${page}`, { observe: 'response' });
+  }
+
+  countVoucherCode(id: number): Observable<EntityResponseType> {
+    return this.http.get(`${this.resourceUrl}/count-feedback-by-voucher/${id}`, { observe: 'response' });
+  }
+
+  countVoucherCodeAndRate(idVoucher: number, rate: number): Observable<EntityResponseType> {
+    return this.http.get(`${this.resourceUrl}/count-feedback-by-voucher/${idVoucher}/${rate}`, { observe: 'response' });
+  }
+
+  getFeedbacksByVoucherAndRate(idVoucher: number, rate: number, page: number): Observable<EntityArrayResponseType> {
+    return this.http.get<IFeedback[]>(`${this.resourceFeedBackByVoucher}/${idVoucher}?page=${page}&rate=${rate}`, { observe: 'response' });
   }
 }
