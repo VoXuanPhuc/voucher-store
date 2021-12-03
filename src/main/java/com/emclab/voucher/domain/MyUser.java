@@ -1,11 +1,21 @@
 package com.emclab.voucher.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -50,6 +60,14 @@ public class MyUser extends AbstractAuditingEntity {
     @NotNull
     @Column(name = "email", nullable = false)
     private String email;
+
+    @NotNull
+    @Column(name = "dob", nullable = false)
+    private Date dob;
+
+    @NotNull
+    @Column(name = "avatar", nullable = false)
+    private String avatar;
 
     @JsonIgnoreProperties(value = { "village" }, allowSetters = true)
     @OneToOne
@@ -107,6 +125,32 @@ public class MyUser extends AbstractAuditingEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getAvatar() {
+        return this.avatar;
+    }
+
+    public MyUser avatar(String avatar) {
+        this.avatar = avatar;
+        return this;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Date getDob() {
+        return this.dob;
+    }
+
+    public MyUser dob(Date dob) {
+        this.dob = dob;
+        return this;
+    }
+
+    public void setDob(Date Dob) {
+        this.dob = Dob;
     }
 
     public String getPassword() {

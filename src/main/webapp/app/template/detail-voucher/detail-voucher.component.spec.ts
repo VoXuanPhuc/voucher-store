@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SellVoucherComponent } from './sell-voucher.component';
+import { DetailVoucherComponent } from './detail-voucher.component';
 
-describe('SellVoucherComponent', () => {
-  let component: SellVoucherComponent;
-  let fixture: ComponentFixture<SellVoucherComponent>;
+describe('DetailVoucherComponent', () => {
+  let component: DetailVoucherComponent;
+  let fixture: ComponentFixture<DetailVoucherComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SellVoucherComponent],
+      declarations: [DetailVoucherComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SellVoucherComponent);
+    fixture = TestBed.createComponent(DetailVoucherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

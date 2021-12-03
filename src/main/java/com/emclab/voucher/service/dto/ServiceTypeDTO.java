@@ -14,6 +14,9 @@ public class ServiceTypeDTO implements Serializable {
     @NotNull
     private String name;
 
+    @NotNull
+    private String icon;
+
     public Long getId() {
         return id;
     }
@@ -28,6 +31,14 @@ public class ServiceTypeDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     @Override
@@ -54,9 +65,6 @@ public class ServiceTypeDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "ServiceTypeDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            "}";
+        return "ServiceTypeDTO{" + "id=" + getId() + ", name='" + getName() + "'" + "}";
     }
 }

@@ -4,6 +4,7 @@ import { IMyOrder } from 'app/entities/my-order/my-order.model';
 import { IFeedback } from 'app/entities/feedback/feedback.model';
 import { IGift } from 'app/entities/gift/gift.model';
 import { IRole } from 'app/entities/role/role.model';
+import * as dayjs from 'dayjs';
 
 export interface IMyUser {
   id?: number;
@@ -14,6 +15,8 @@ export interface IMyUser {
   gender?: string;
   phone?: string;
   email?: string;
+  avatar?: string;
+  dob?: dayjs.Dayjs;
   address?: IAddress | null;
   storeUsers?: IStoreUser[] | null;
   myOrders?: IMyOrder[] | null;
@@ -32,6 +35,8 @@ export class MyUser implements IMyUser {
     public gender?: string,
     public phone?: string,
     public email?: string,
+    public avatar?: string,
+    public dob?: dayjs.Dayjs,
     public address?: IAddress | null,
     public storeUsers?: IStoreUser[] | null,
     public myOrders?: IMyOrder[] | null,

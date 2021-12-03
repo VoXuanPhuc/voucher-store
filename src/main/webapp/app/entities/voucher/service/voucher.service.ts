@@ -45,6 +45,14 @@ export class VoucherService {
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
+  findByTypeId(id: number): Observable<EntityArrayResponseType> {
+    let params = new HttpParams();
+    params = params.set('type-id', id);
+    return this.http
+      .get<IVoucher[]>(this.resourceUrl, { params, observe: 'response' })
+      .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
+  }
+
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http

@@ -29,6 +29,9 @@ public class VoucherDTO implements Serializable {
     @NotNull
     private Instant expriedTime;
 
+    @NotNull
+    private String description;
+
     private Set<ProductDTO> products = new HashSet<>();
 
     private EventDTO event;
@@ -131,16 +134,8 @@ public class VoucherDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "VoucherDTO{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", price=" + getPrice() +
-            ", quantity=" + getQuantity() +
-            ", startTime='" + getStartTime() + "'" +
-            ", expriedTime='" + getExpriedTime() + "'" +
-            ", products=" + getProducts() +
-            ", event=" + getEvent() +
-            ", type=" + getType() +
-            "}";
+        return "VoucherDTO{" + "id=" + getId() + ", name='" + getName() + "'" + ", price=" + getPrice() + ", quantity="
+                + getQuantity() + ", startTime='" + getStartTime() + "'" + ", expriedTime='" + getExpriedTime() + "'"
+                + ", products=" + getProducts() + ", event=" + getEvent() + ", type=" + getType() + "}";
     }
 }

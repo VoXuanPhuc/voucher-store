@@ -1,12 +1,21 @@
 package com.emclab.voucher.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -43,6 +52,10 @@ public class Voucher extends AbstractAuditingEntity {
     @NotNull
     @Column(name = "expried_time", nullable = false)
     private Instant expriedTime;
+
+    @NotNull
+    @Column(name = "description", nullable = false)
+    private String description;
 
     @OneToMany(mappedBy = "voucher")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -102,6 +115,19 @@ public class Voucher extends AbstractAuditingEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public Voucher description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Double getPrice() {
@@ -300,7 +326,8 @@ public class Voucher extends AbstractAuditingEntity {
         this.type = serviceType;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -315,20 +342,16 @@ public class Voucher extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
     // prettier-ignore
     @Override
     public String toString() {
-        return "Voucher{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", price=" + getPrice() +
-            ", quantity=" + getQuantity() +
-            ", startTime='" + getStartTime() + "'" +
-            ", expriedTime='" + getExpriedTime() + "'" +
-            "}";
+        return "Voucher{" + "id=" + getId() + ", name='" + getName() + "'" + ", price=" + getPrice() + ", quantity="
+                + getQuantity() + ", startTime='" + getStartTime() + "'" + ", expriedTime='" + getExpriedTime() + "'"
+                + "}";
     }
 }

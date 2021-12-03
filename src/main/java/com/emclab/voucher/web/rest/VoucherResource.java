@@ -46,7 +46,9 @@ public class VoucherResource {
      * {@code POST  /vouchers} : Create a new voucher.
      *
      * @param voucherDTO the voucherDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new voucherDTO, or with status {@code 400 (Bad Request)} if the voucher has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new voucherDTO, or with status {@code 400 (Bad Request)} if
+     *         the voucher has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/vouchers")
@@ -65,11 +67,13 @@ public class VoucherResource {
     /**
      * {@code PUT  /vouchers/:id} : Updates an existing voucher.
      *
-     * @param id the id of the voucherDTO to save.
+     * @param id         the id of the voucherDTO to save.
      * @param voucherDTO the voucherDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated voucherDTO,
-     * or with status {@code 400 (Bad Request)} if the voucherDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the voucherDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated voucherDTO, or with status {@code 400 (Bad Request)} if
+     *         the voucherDTO is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the voucherDTO couldn't be
+     *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/vouchers/{id}")
@@ -97,14 +101,17 @@ public class VoucherResource {
     }
 
     /**
-     * {@code PATCH  /vouchers/:id} : Partial updates given fields of an existing voucher, field will ignore if it is null
+     * {@code PATCH  /vouchers/:id} : Partial updates given fields of an existing
+     * voucher, field will ignore if it is null
      *
-     * @param id the id of the voucherDTO to save.
+     * @param id         the id of the voucherDTO to save.
      * @param voucherDTO the voucherDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated voucherDTO,
-     * or with status {@code 400 (Bad Request)} if the voucherDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the voucherDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the voucherDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated voucherDTO, or with status {@code 400 (Bad Request)} if
+     *         the voucherDTO is not valid, or with status {@code 404 (Not Found)}
+     *         if the voucherDTO is not found, or with status
+     *         {@code 500 (Internal Server Error)} if the voucherDTO couldn't be
+     *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/vouchers/{id}", consumes = "application/merge-patch+json")
@@ -135,8 +142,10 @@ public class VoucherResource {
     /**
      * {@code GET  /vouchers} : get all the vouchers.
      *
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of vouchers in body.
+     * @param eagerload flag to eager load entities from relationships (This is
+     *                  applicable for many-to-many).
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of vouchers in body.
      */
     @GetMapping("/vouchers")
     public List<VoucherDTO> getAllVouchers(@RequestParam(required = false, defaultValue = "false") boolean eagerload) {
@@ -144,11 +153,18 @@ public class VoucherResource {
         return voucherService.findAll();
     }
 
+    @GetMapping(path = "vouchers", params = { "type-id" })
+    public List<VoucherDTO> getByTypeId(@RequestParam(name = "type-id") Long typeId) {
+        log.debug("REST request to get vouchers by type id: {}", typeId);
+        return voucherService.findByTypeId(typeId);
+    }
+
     /**
      * {@code GET  /vouchers/:id} : get the "id" voucher.
      *
      * @param id the id of the voucherDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the voucherDTO, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the voucherDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/vouchers/{id}")
     public ResponseEntity<VoucherDTO> getVoucher(@PathVariable Long id) {
