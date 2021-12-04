@@ -1,6 +1,6 @@
-import { AllStoreComponent } from './../entities/store/all-store/all-store.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AllStoresComponent } from './all-stores/all-stores.component';
 import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
   },
   {
     path: 'stores',
-    component: AllStoreComponent,
+    component: AllStoresComponent,
     data: {
       pageTitle: 'Stores',
     },

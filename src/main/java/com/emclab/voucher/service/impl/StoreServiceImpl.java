@@ -2,15 +2,22 @@ package com.emclab.voucher.service.impl;
 
 import com.emclab.voucher.domain.Store;
 import com.emclab.voucher.repository.StoreRepository;
+import com.emclab.voucher.service.CommonService;
 import com.emclab.voucher.service.StoreService;
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.StoreDTO;
 import com.emclab.voucher.service.mapper.StoreMapper;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +33,9 @@ public class StoreServiceImpl implements StoreService {
     private final StoreRepository storeRepository;
 
     private final StoreMapper storeMapper;
+
+    @Autowired
+    private CommonService commonService;
 
     public StoreServiceImpl(StoreRepository storeRepository, StoreMapper storeMapper) {
         this.storeRepository = storeRepository;
@@ -62,6 +72,30 @@ public class StoreServiceImpl implements StoreService {
     public List<StoreDTO> findAll() {
         log.debug("Request to get all Stores");
         return storeRepository.findAll().stream().map(storeMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public PaginationResponse findAllWithPaging(Map<String, Object> param) {
+        log.debug("Request to get all Stores with paging");
+
+        param = commonService.updateParam(param, 2);
+        int page = Integer.parseInt(param.get("page").toString());
+        int limit = Integer.parseInt(param.get("limit").toString());
+
+        int totalItems = findAll().size();
+
+        Pageable pageable = PageRequest.of(page - 1, limit);
+
+        List<StoreDTO> stores = storeRepository
+            .findAll(pageable)
+            .stream()
+            .map(storeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+
+        List<Object> items = new ArrayList<>(stores);
+
+        return commonService.findWithPaging(param, totalItems, items);
     }
 
     @Override

@@ -61,19 +61,3 @@
 .main-body .card_profile_shop .col-12.card_shop .card-img-overlay span {
   font-size: 14px;
 }
-
-/*Pagination // phân trang button  */
-.main-body .container.pagination.d-flex {
-  justify-content: flex-end;
-  margin-top: 23px;
-  font-size: 15px;
-}
-.main-body .container.pagination .pagination li a {
-  color: #e56773;
-}
-
-/* hover */
-.main-body .container.pagination .pagination li:nth-of-type(2) a {
-  background-color: #e94560;
-  color: #ffff;
-}

@@ -7,7 +7,7 @@ import { Village, IVillage } from './../../village/village.model';
 import { AddressService } from './../../address/service/address.service';
 import { Store, IStore } from './../store.model';
 import { StoreService } from './../service/store.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'jhi-all-store',
@@ -16,7 +16,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AllStoreComponent implements OnInit {
   isLoading = false;
-  stores?: Store[];
+  @Input() stores?: Store[];
 
   constructor(
     private storeService: StoreService,
@@ -27,7 +27,10 @@ export class AllStoreComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadAll();
+    // this.loadAll();
+    this.loadAddress(this.stores ?? []);
+
+    window.console.log('Stores: ', this.stores);
   }
 
   loadAll(): void {
@@ -45,22 +48,6 @@ export class AllStoreComponent implements OnInit {
       }
     );
   }
-
-  // getAddressById(id: number): IAddress | null {
-  //   let address: IAddress;
-
-  //   this.addressService.find(id).subscribe(
-  //     (res) => {
-  //       address = res.body!;
-  //       return address;
-  //     },
-  //     (error) => {
-  //       window.console.log("Error", error);
-  //       return null;
-  //     }
-  //   )
-
-  // }
 
   loadAddress(stores: IStore[]): void {
     stores.forEach(store => {

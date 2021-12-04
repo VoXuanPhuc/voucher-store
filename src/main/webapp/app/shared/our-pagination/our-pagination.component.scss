@@ -1,0 +1,29 @@
+/*Pagination // phân trang button  */
+.container.pagination.d-flex {
+  justify-content: center;
+  margin-top: 60px;
+  font-size: 15px;
+}
+
+.container.pagination .pagination li a {
+  color: #e56773;
+}
+
+/* hover */
+.container.pagination .pagination .active a {
+  background-color: #e94560;
+  color: #ffff;
+  border: #e56773;
+}
+
+.disabled {
+  pointer-events: none !important;
+  opacity: 0.6;
+}
+
+/* responsive card_voucher */
+@media only screen and (max-width: 599px) {
+  .card_product_right .child-1 {
+    margin: 10px auto;
+  }
+}

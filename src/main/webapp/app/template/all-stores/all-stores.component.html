@@ -13,6 +13,8 @@
   </head>
 
   <body>
-    <jhi-all-store></jhi-all-store>
+    <jhi-all-store [stores]="stores"></jhi-all-store>
+    <!-- <h1>Hello</h1> -->
+    <jhi-our-pagination [pagination]="pagination" (pageChanged)="pageChangedHandler($event)"></jhi-our-pagination>
   </body>
 </html>
