@@ -64,12 +64,32 @@
     </li>
   </ul>
 
-  <ul [hidden]="!isDisplayLogin" class="container list-group border-0 w-100 border-0 col-md-3 offset-md-8 text-center" id="listview-user">
-    <li class="list-group-item border-0">
-      <a [routerLink]="['/login']">Log In</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="['/register']">Register</a>
-    </li>
-  </ul>
+  <div
+    class="container col-md-2 col-lg-2 col-sm-3 col-sx-3 col-5"
+    id="listview-user-div"
+    *ngIf="isLogin(); then thenBlock; else elseBlock"
+  ></div>
+
+  <ng-template #thenBlock>
+    <ul [hidden]="!isDisplayLogin" class="list-group border-0 border-0 text-center" id="listview-user">
+      <li class="list-group-item">
+        <a [routerLink]="['/my-profile']" class="text-danger">Profile</a>
+      </li>
+      <li class="list-group-item"><a href="./profileShop.html" class="text-danger">My Store</a></li>
+      <li class="list-group-item">
+        <a (click)="logout()" class="text-danger">Log out</a>
+      </li>
+    </ul>
+  </ng-template>
+
+  <ng-template #elseBlock>
+    <ul [hidden]="!isDisplayLogin" class="list-group border-0 text-center" id="listview-user">
+      <li class="list-group-item border-0">
+        <a [routerLink]="['/login']">Log In</a>
+      </li>
+      <li class="list-group-item border-0">
+        <a [routerLink]="['/register']">Register</a>
+      </li>
+    </ul>
+  </ng-template>
 </div>

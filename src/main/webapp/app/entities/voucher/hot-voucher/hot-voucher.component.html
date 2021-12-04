@@ -32,7 +32,7 @@
           <h6 class="card-title">
             <b>{{ voucher.name }}</b>
           </h6>
-          <a href="#" class="card-text">Thu Hoa Store</a>
+          <a href="#" class="card-text">{{ voucher.event!.store!.name }}</a>
           <div class="star-widget d-flex">
             <div class="d-flex" style="flex-flow: row-reverse; justify-content: flex-start">
               <input class="mx-1 mt-2" type="radio" name="rate" id="rate-1" />
@@ -48,7 +48,14 @@
             </div>
 
             <p class="discount_title ml-4 mt-1 ml-lg-4 ml-md-5 ml-sm-5 text-danger">
-              <b>{{ voucher.price }} đ</b>
+              <b>
+                {{
+                  voucher.price?.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND'
+                  })
+                }}
+              </b>
             </p>
           </div>
         </div>

@@ -1,15 +1,28 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'jhi-my-header',
   templateUrl: './my-header.component.html',
   styleUrls: ['./my-header.component.css'],
 })
-export class MyHeaderComponent {
+export class MyHeaderComponent implements OnInit {
   isDisplayLogin = false;
   isDisplayCategory = false;
   isHeaderFix = true;
   lastScrollTop = 0;
+  jwtSession = '';
+
+  constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    const jwt = sessionStorage.getItem('jhi-authenticationToken');
+    this.jwtSession = jwt !== null ? jwt : '';
+  }
+
+  isLogin(): boolean {
+    return this.jwtSession !== '';
+  }
 
   toggleDisplayLogin(): void {
     this.isDisplayLogin = !this.isDisplayLogin;
@@ -34,5 +47,11 @@ export class MyHeaderComponent {
       this.isHeaderFix = true;
     }
     this.lastScrollTop = srcollTop;
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('jhi-authenticationToken');
+    this.jwtSession = '';
+    this.router.navigate(['']);
   }
 }

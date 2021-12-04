@@ -1,5 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'app/entities/event/service/event.service';
+import { StoreService } from 'app/entities/store/service/store.service';
 import { VoucherImageService } from 'app/entities/voucher-image/service/voucher-image.service';
 import { IVoucherImage, VoucherImage } from 'app/entities/voucher-image/voucher-image.model';
 import { VoucherService } from '../service/voucher.service';
@@ -15,7 +17,12 @@ export class HotVoucherComponent implements OnInit {
   isLoading = false;
   voucherImages?: IVoucherImage[];
 
-  constructor(protected voucherService: VoucherService, protected voucherImageService: VoucherImageService) {}
+  constructor(
+    protected voucherService: VoucherService,
+    protected voucherImageService: VoucherImageService,
+    protected storeService: StoreService,
+    protected eventService: EventService
+  ) {}
 
   ngOnInit(): void {
     this.loadHotVoucher();
@@ -35,6 +42,12 @@ export class HotVoucherComponent implements OnInit {
             () => {
               alert('Error');
             };
+          this.eventService.find(voucher.event?.id ?? 1).subscribe(resSer => {
+            voucher.event = resSer.body;
+            this.storeService.find(voucher.event?.store?.id ?? 5).subscribe(resStore => {
+              voucher.event!.store = resStore.body;
+            });
+          });
         });
       },
       () => {

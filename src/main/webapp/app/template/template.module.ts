@@ -12,9 +12,10 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
 import { TemplateRoutingModule } from './template-routing.module';
 import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
+import { ProfileUserComponent } from './profile-user/profile-user.component';
 
 @NgModule({
-  declarations: [LandingPageComponent, SellVoucherComponent, DetailVoucherComponent],
+  declarations: [LandingPageComponent, SellVoucherComponent, DetailVoucherComponent, ProfileUserComponent],
   imports: [
     CommonModule,
     TemplateRoutingModule,
