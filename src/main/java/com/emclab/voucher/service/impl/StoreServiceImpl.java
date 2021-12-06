@@ -79,7 +79,7 @@ public class StoreServiceImpl implements StoreService {
     public PaginationResponse findAllWithPaging(Map<String, Object> param) {
         log.debug("Request to get all Stores with paging");
 
-        param = commonService.updateParam(param, 2);
+        param = commonService.updateParam(param, 6);
         int page = Integer.parseInt(param.get("page").toString());
         int limit = Integer.parseInt(param.get("limit").toString());
 
