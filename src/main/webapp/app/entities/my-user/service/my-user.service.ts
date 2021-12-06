@@ -57,4 +57,8 @@ export class MyUserService {
     }
     return myUserCollection;
   }
+
+  getUserByJWT(): Observable<EntityResponseType> {
+    return this.http.get<IMyUser>(`${this.resourceUrl}/get-userByToken`, { observe: 'response' });
+  }
 }

@@ -6,7 +6,7 @@
       <ul class="list-group border-0 w-100 border-0 bg-transparent" id="">
         <li class="list-group-item py-2 border-0 d-flex justify-content-between; align-items-center active">
           <span
-            class="iconify ml-2 mr-5"
+            class="iconify ml-2 mr-4"
             data-icon="ant-design:user-outlined"
             data-width="24"
             data-height="24"
@@ -16,7 +16,7 @@
         </li>
         <li class="list-group-item py-2 border-0 d-flex justify-content-between; align-items-center">
           <span
-            class="iconify ml-2 mr-5"
+            class="iconify ml-2 mr-4"
             data-icon="ant-design:shopping-cart-outlined"
             data-width="24"
             data-height="24"
@@ -26,12 +26,12 @@
           <p style="margin-bottom: 0">12</p>
         </li>
         <li class="list-group-item py-2 border-0 d-flex justify-content-between; align-items-center">
-          <span class="iconify ml-2 mr-5" data-icon="carbon:favorite" data-width="24" data-height="24" style="font-size: 16px"></span>
+          <span class="iconify ml-2 mr-4" data-icon="carbon:favorite" data-width="24" data-height="24" style="font-size: 16px"></span>
           <p style="width: 150px; margin: 15px 100px 15px 0">Wishlist</p>
           <p style="margin-bottom: 0">12</p>
         </li>
         <li class="list-group-item py-2 border-0 d-flex justify-content-between; align-items-center">
-          <span class="iconify ml-2 mr-5" data-icon="bx:bxs-discount" data-width="24" data-height="24"></span>
+          <span class="iconify ml-2 mr-4" data-icon="bx:bxs-discount" data-width="24" data-height="24"></span>
           <p style="width: 150px; margin: 15px 100px 15px 0">My voucher</p>
           <p style="margin-bottom: 0">12</p>
         </li>
@@ -57,9 +57,9 @@
           <img src="../image/Userprofile/avatar.jpg" alt="" />
         </div>
         <div class="personal-information">
-          <b class="personal-name"> Nguyen Thi Thu Thuy </b>
-          <p class="personal-adress">48 - Cao Thang</p>
-          <p class="personal-email">thuthuyxh1311@gmail.com</p>
+          <b class="personal-name"> {{ myUser?.firstName }} </b>
+          <p class="personal-adress">{{ myUser?.address?.number }} - {{ myUser?.address?.street }}</p>
+          <p class="personal-email">{{ myUser?.email }}</p>
         </div>
       </div>
       <!-- Item 2 -->
@@ -71,10 +71,10 @@
           <p>Phone number</p>
         </div>
         <div class="personal-name-item">
-          <p>Nguyen Thi</p>
-          <p>Thu Thuy</p>
-          <p>16/01/2001</p>
-          <p>0382319028</p>
+          <p>{{ myUser?.firstName }}</p>
+          <p>{{ myUser?.lastName }}</p>
+          <p>{{ myUser?.dob }}</p>
+          <p>{{ myUser?.phone }}</p>
         </div>
       </div>
       <!-- Item 3  -->
@@ -83,7 +83,10 @@
           <p>Adress</p>
         </div>
         <div class="personal-adress-item">
-          <p>48 - Cao Thang- Hai Chau - Da Nang</p>
+          <p>
+            {{ myUser?.address?.number }} {{ myUser?.address?.street }}, {{ myUser?.address?.village?.name }}-
+            {{ myUser?.address?.village?.district?.name }}-{{ myUser?.address?.village?.district?.province?.name }}
+          </p>
         </div>
       </div>
     </div>
