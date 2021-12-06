@@ -1,6 +1,5 @@
 package com.emclab.voucher.service;
 
-import com.emclab.voucher.domain.MyUser;
 import com.emclab.voucher.service.dto.MyUserDTO;
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +15,8 @@ public interface MyUserService {
      * @return the persisted entity.
      */
     MyUserDTO save(MyUserDTO myUserDTO);
+
+    MyUserDTO findByUserName(String userName);
 
     //    MyUser save(MyUser myUser);
 

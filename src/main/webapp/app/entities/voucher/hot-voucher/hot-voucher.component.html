@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="card-body">
-          <h6 class="card-title">
+          <h6 class="card-title" [routerLink]="['/', voucher.id, 'Voucher']">
             <b>{{ voucher.name }}</b>
           </h6>
           <a href="#" class="card-text">{{ voucher.event!.store!.name }}</a>

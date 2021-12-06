@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoginService } from 'app/login/login.service';
 
 @Component({
   selector: 'jhi-my-header',
@@ -13,7 +14,7 @@ export class MyHeaderComponent implements OnInit {
   lastScrollTop = 0;
   jwtSession = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   ngOnInit(): void {
     const jwt = sessionStorage.getItem('jhi-authenticationToken');
@@ -50,8 +51,8 @@ export class MyHeaderComponent implements OnInit {
   }
 
   logout(): void {
-    sessionStorage.removeItem('jhi-authenticationToken');
-    this.jwtSession = '';
+    this.loginService.logout();
     this.router.navigate(['']);
+    window.location.reload();
   }
 }
