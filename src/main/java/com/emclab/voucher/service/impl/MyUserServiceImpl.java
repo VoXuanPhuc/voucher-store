@@ -7,7 +7,6 @@ import com.emclab.voucher.repository.RoleRepository;
 import com.emclab.voucher.service.MyUserService;
 import com.emclab.voucher.service.dto.MyUserDTO;
 import com.emclab.voucher.service.mapper.MyUserMapper;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -43,39 +42,10 @@ public class MyUserServiceImpl implements MyUserService {
         this.myUserMapper = myUserMapper;
     }
 
-    //    @Override
-    //    public MyUser save(MyUser myUser) {
-    //        MyUser newuser = new MyUser();
-    //        //    	HashSet<Role> roles = new HashSet<Role> ();
-    //
-    //        Role role = new Role();
-    //        role.setId((long) 2);
-    //        role.setName("ROLE_USER");
-    //        role.setCode("user");
-    //        //    	Role role1 = new Role();
-    //        //    	role.setId((long)2);
-    //        //    	role.setName("ROLE_ADMIN");
-    //        //    	role.setCode("admin");
-    //
-    //        //    	roles.add(role);
-    //        //    	roles.add(role1);
-    //        log.debug("Request to save MyUser : {}", myUser);
-    //
-    //        newuser.setUsername(myUser.getUsername());
-    //        newuser.setEmail(myUser.getEmail());
-    //        newuser.setPassword(myUser.getPassword());
-    //        newuser.setPhone(myUser.getPhone());
-    //        newuser.setFirstName("");
-    //        newuser.setLastName("");
-    //        newuser.setGender("");
-    //
-    //        //    	newuser.getRoles().add(role);
-    //
-    //        //    	role.getUsers().add(newuser);
-    //
-    //        MyUser user = myUserRepository.save(newuser);
-    //        return (user);
-    //    }
+    @Override
+    public MyUserDTO findByUserName(String userName) {
+        return myUserMapper.toDto(myUserRepository.findByUsername(userName).get());
+    }
 
     @Override
     public MyUserDTO save(MyUserDTO myUserDTO) {
