@@ -21,7 +21,7 @@
         <!-- Part 2.2.2: Card-product-right -->
         <div class="card_product_right">
             <jhi-sell-voucher-item [vouchers]="vouchers" [isLoading]="isVoucherLoading"></jhi-sell-voucher-item>
-            <jhi-our-pagination></jhi-our-pagination>
+            <jhi-our-pagination [pagination]="pagination" (pageChanged)="pageChangedHandler($event)"></jhi-our-pagination>
         </div>
     </div>
 </div>

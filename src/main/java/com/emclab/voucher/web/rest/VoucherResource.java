@@ -155,11 +155,11 @@ public class VoucherResource {
         return voucherService.findAll();
     }
 
-    @GetMapping(path = "vouchers", params = { "type-id" })
-    public List<VoucherDTO> getByTypeId(@RequestParam(name = "type-id") Long typeId) {
-        log.debug("REST request to get vouchers by type id: {}", typeId);
-        return voucherService.findByTypeId(typeId);
-    }
+    //    @GetMapping(path = "vouchers", params = { "type" })
+    //    public List<VoucherDTO> getByTypeId(@RequestParam(name = "type") Long typeId) {
+    //        log.debug("REST request to get vouchers by type id: {}", typeId);
+    //        return voucherService.findByTypeId(typeId);
+    //    }
 
     @GetMapping(path = "vouchers", params = { "page" })
     public PaginationResponse getWithPaging(@RequestParam Map<String, Object> params) {
