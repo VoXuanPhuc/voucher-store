@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AllStoresComponent } from './all-stores/all-stores.component';
 import { DetailVoucherComponent } from './detail-voucher/detail-voucher.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+
 import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
 
 const routes: Routes = [
@@ -42,6 +43,13 @@ const routes: Routes = [
     data: {
       pageTitle: 'Stores',
     },
+  },
+  {
+    path: 'my-profile',
+    data: {
+      pageTitle: 'My Profile',
+    },
+    loadChildren: () => import('./template-user/template-user.module').then(m => m.TemplateUserModule),
   },
 ];
 

@@ -60,6 +60,15 @@ label {
   text-align: center;
 }
 
+.card-title {
+  cursor: pointer;
+}
+
+.card_voucher:hover {
+  transform: scale(1.03);
+  transition: all 0.8s;
+}
+
 .card_voucher:hover img {
   opacity: 0.6;
 }
