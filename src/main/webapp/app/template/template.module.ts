@@ -13,11 +13,10 @@ import { DetailVoucherComponent } from './detail-voucher/detail-voucher.componen
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SellVoucherComponent } from './sell-voucher/sell-voucher.component';
 import { TemplateRoutingModule } from './template-routing.module';
-
-import { ProfileUserComponent } from './profile-user/profile-user.component';
+import { TemplateUserModule } from './template-user/template-user.module';
 
 @NgModule({
-  declarations: [LandingPageComponent, SellVoucherComponent, DetailVoucherComponent, ProfileUserComponent, AllStoresComponent],
+  declarations: [LandingPageComponent, SellVoucherComponent, DetailVoucherComponent, AllStoresComponent],
   imports: [
     CommonModule,
     TemplateRoutingModule,
@@ -31,6 +30,7 @@ import { ProfileUserComponent } from './profile-user/profile-user.component';
     FeedbackModule,
     StoreModule,
     SharedModule,
+    TemplateUserModule,
   ],
 })
 export class TemplateModule {}
