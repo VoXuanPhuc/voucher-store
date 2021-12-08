@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileUserComponent } from './profile-user/profile-user.component';
 import { TemplateUserComponent } from './template-user/template-user.component';
+import { VoucherUserComponent } from './voucher-user/voucher-user.component';
 
 const router: Routes = [
   {
@@ -14,7 +15,7 @@ const router: Routes = [
       },
       {
         path: 'voucher',
-        component: TemplateUserComponent,
+        component: VoucherUserComponent,
         data: {
           pageTile: 'My Profile',
         },

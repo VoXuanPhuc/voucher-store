@@ -3,6 +3,7 @@ package com.emclab.voucher.service;
 import com.emclab.voucher.service.dto.MyUserDTO;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.Authentication;
 
 /**
  * Service Interface for managing {@link com.emclab.voucher.domain.MyUser}.
@@ -18,6 +19,7 @@ public interface MyUserService {
 
     MyUserDTO findByUserName(String userName);
 
+    MyUserDTO getcurrentUser(Authentication authentication);
     //    MyUser save(MyUser myUser);
 
     /**

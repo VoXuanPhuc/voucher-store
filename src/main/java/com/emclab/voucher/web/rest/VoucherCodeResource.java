@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -199,5 +200,10 @@ public class VoucherCodeResource {
         voucherStatus.setId(1l);
         voucherStatus.setName("available");
         return voucherCodeService.countVoucherCodeByVoucher(voucherMapper.toEntity(voucherDTO), voucherStatus);
+    }
+
+    @GetMapping("/voucher-codes/voucher-codes-of-currentuser")
+    public List<VoucherCodeDTO> getVoucherCodeOfCurrentUser(Authentication authentication) {
+        return voucherCodeService.getVoucherCodeByOrderOfCurrentUser(authentication);
     }
 }

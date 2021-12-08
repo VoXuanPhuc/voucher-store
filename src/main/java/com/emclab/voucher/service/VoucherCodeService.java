@@ -5,6 +5,7 @@ import com.emclab.voucher.domain.VoucherStatus;
 import com.emclab.voucher.service.dto.VoucherCodeDTO;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.security.core.Authentication;
 
 /**
  * Service Interface for managing {@link com.emclab.voucher.domain.VoucherCode}.
@@ -16,6 +17,9 @@ public interface VoucherCodeService {
      * @param voucherCodeDTO the entity to save.
      * @return the persisted entity.
      */
+
+    List<VoucherCodeDTO> getVoucherCodeByOrderOfCurrentUser(Authentication authentication);
+
     VoucherCodeDTO save(VoucherCodeDTO voucherCodeDTO);
 
     /**
