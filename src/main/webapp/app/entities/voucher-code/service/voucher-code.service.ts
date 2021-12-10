@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IVoucherCode, getVoucherCodeIdentifier } from '../voucher-code.model';
+import { IOurPagination } from 'app/shared/our-pagination/pagination.model';
 
 export type EntityResponseType = HttpResponse<IVoucherCode>;
 export type EntityArrayResponseType = HttpResponse<IVoucherCode[]>;
@@ -67,5 +68,13 @@ export class VoucherCodeService {
 
   countVoucherCode(id: number): Observable<EntityResponseType> {
     return this.http.get(`${this.resourceUrl}/voucher/${id}`, { observe: 'response' });
+  }
+
+  queryWithPagingOfUser(page: number, limit: number): Observable<any> {
+    let param = new HttpParams();
+    param = param.set('page', page);
+    param = param.set('limit', limit);
+
+    return this.http.get<IOurPagination>(`${this.resourceUrl}/voucher-codes-of-currentuser`, { params: param, observe: 'response' });
   }
 }

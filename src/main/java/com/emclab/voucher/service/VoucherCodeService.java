@@ -2,8 +2,10 @@ package com.emclab.voucher.service;
 
 import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.domain.VoucherStatus;
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.VoucherCodeDTO;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.security.core.Authentication;
 
@@ -18,7 +20,7 @@ public interface VoucherCodeService {
      * @return the persisted entity.
      */
 
-    List<VoucherCodeDTO> getVoucherCodeByOrderOfCurrentUser(Authentication authentication);
+    PaginationResponse getVoucherCodeByOrderOfCurrentUser(Map<String, Object> param, Authentication authentication);
 
     VoucherCodeDTO save(VoucherCodeDTO voucherCodeDTO);
 

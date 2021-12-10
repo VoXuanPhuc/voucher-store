@@ -5,7 +5,6 @@ import { HasAnyAuthorityDirective } from './auth/has-any-authority.directive';
 import { DurationPipe } from './date/duration.pipe';
 import { FormatMediumDatePipe } from './date/format-medium-date.pipe';
 import { FormatMediumDatetimePipe } from './date/format-medium-datetime.pipe';
-import { MyPaginationComponent } from './my-pagination/my-pagination.component';
 import { OurPaginationComponent } from './our-pagination/our-pagination.component';
 import { ItemCountComponent } from './pagination/item-count.component';
 import { SharedLibsModule } from './shared-libs.module';
@@ -24,7 +23,6 @@ import { SortDirective } from './sort/sort.directive';
     SortByDirective,
     SortDirective,
     ItemCountComponent,
-    MyPaginationComponent,
     OurPaginationComponent,
   ],
   exports: [
@@ -38,7 +36,6 @@ import { SortDirective } from './sort/sort.directive';
     SortByDirective,
     SortDirective,
     ItemCountComponent,
-    MyPaginationComponent,
     OurPaginationComponent,
   ],
 })

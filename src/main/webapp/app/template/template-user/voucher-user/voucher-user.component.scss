@@ -1,13 +1,13 @@
 /* Right */
 /* title and button */
 .right_service {
-  width: 800px;
+  width: 802px;
+  /* padding-right: 40px; */
   margin-top: 30px;
   margin-left: 15px;
-  background: #ffffff;
+  background: #ebf2f5;
   border-radius: 5px;
-  height: 100%;
-  padding: 20px 0;
+  padding: 20px 0 0 0;
 }
 .my-profile {
   margin-left: 20px;
@@ -25,11 +25,16 @@
 
 .my-voucher-item {
   /* display: flex; */
-  width: 97%;
+  width: 100%;
+  background: #ffffff;
   margin: 30px 0 0 20px;
   padding: 20px 0;
   border-radius: 10px;
   box-shadow: -1px -1px 1px #ccc, 1px 1px 1px #ccc;
+}
+.voucher-notavailable {
+  opacity: 0.7;
+  background: #c4c4c4;
 }
 .voucher-item-img {
   width: 100px;
@@ -58,18 +63,33 @@
 .item-content-item a {
   width: 23%;
 }
+.item-content-tilte p {
+  color: #5555;
+}
 .item-content-remove {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.style-available {
+  color: #df2f4c;
+}
 .item-content-remove .iconify {
   margin-bottom: 12px;
 }
 
-/* Reponsive content */
-/* Tablet and mobile */
+/*Pagination // phân trang button  */
+.container.pagination.d-flex {
+  justify-content: center;
+  margin-top: 23px;
+  font-size: 15px;
+}
+
+.container.pagination .pagination li a {
+  color: #df2f4c;
+}
+
 @media only screen and (max-width: 1200px) {
   .left-service {
     display: none;

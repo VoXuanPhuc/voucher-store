@@ -5,9 +5,10 @@ import { TemplateUserRoutingModule } from './template-user-routing.module';
 import { TemplateUserComponent } from './template-user/template-user.component';
 import { SildebarUserComponent } from './sildebar-user/sildebar-user.component';
 import { VoucherUserComponent } from './voucher-user/voucher-user.component';
+import { SharedModule } from 'app/shared/shared.module';
 
 @NgModule({
   declarations: [ProfileUserComponent, TemplateUserComponent, SildebarUserComponent, VoucherUserComponent],
-  imports: [CommonModule, TemplateUserRoutingModule],
+  imports: [CommonModule, TemplateUserRoutingModule, SharedModule],
 })
 export class TemplateUserModule {}

@@ -9,19 +9,25 @@ import com.emclab.voucher.domain.VoucherStatus;
 import com.emclab.voucher.repository.MyOrderRepository;
 import com.emclab.voucher.repository.OrderStatusRepository;
 import com.emclab.voucher.repository.VoucherCodeRepository;
+import com.emclab.voucher.service.CommonService;
 import com.emclab.voucher.service.MyUserService;
 import com.emclab.voucher.service.VoucherCodeService;
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.VoucherCodeDTO;
 import com.emclab.voucher.service.mapper.MyUserMapper;
 import com.emclab.voucher.service.mapper.VoucherCodeMapper;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +56,9 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
 
     @Autowired
     OrderStatusRepository orderStatusRepository;
+
+    @Autowired
+    CommonService commonService;
 
     public VoucherCodeServiceImpl(VoucherCodeRepository voucherCodeRepository, VoucherCodeMapper voucherCodeMapper) {
         this.voucherCodeRepository = voucherCodeRepository;
@@ -107,23 +116,32 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
     }
 
     @Override
-    public List<VoucherCodeDTO> getVoucherCodeByOrderOfCurrentUser(Authentication authentication) {
+    public PaginationResponse getVoucherCodeByOrderOfCurrentUser(Map<String, Object> param, Authentication authentication) {
+        // update param map in header
+        param = commonService.updateParam(param, 3);
+        int page = Integer.parseInt(param.get("page").toString());
+        int limit = Integer.parseInt(param.get("limit").toString());
+        // get current user
         MyUser myUser = myUserMapper.toEntity(myUserService.getcurrentUser(authentication));
 
+        // get status (đã thanh toán) of order
         String orderStatusname = "Đã thanh toán";
         OrderStatus orderStatus = orderStatusRepository.findByName(orderStatusname).get(0);
+        //
         List<MyOrder> myOrders = myOrderRepository.findByUserAndStatus(myUser, orderStatus);
 
-        List<VoucherCodeDTO> resultVoucherCodeDTOs = new ArrayList<VoucherCodeDTO>();
+        // make page and page able
 
-        for (MyOrder myOrder : myOrders) {
-            List<VoucherCode> voucherCodes = voucherCodeRepository.findByOrder(myOrder);
+        Pageable pageRequest = PageRequest.of(page - 1, limit);
 
-            for (VoucherCode voucherCode : voucherCodes) {
-                resultVoucherCodeDTOs.add(voucherCodeMapper.toDto(voucherCode));
-            }
-        }
+        Page<VoucherCode> itemPaging = voucherCodeRepository.findByOrderIn(myOrders, pageRequest);
 
-        return resultVoucherCodeDTOs;
+        int totalPage = (int) itemPaging.getTotalElements();
+
+        List<VoucherCodeDTO> resultVoucherCodeDTOs = voucherCodeMapper.toDto(itemPaging.getContent());
+
+        List<Object> result = new ArrayList<Object>(resultVoucherCodeDTOs);
+
+        return commonService.findWithPaging(param, totalPage, result);
     }
 }
