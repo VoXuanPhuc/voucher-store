@@ -1,0 +1,55 @@
+<!-- right -->
+<div class="right_service">
+  <div class="my-profile">
+    <div class="my-profile-heading d-flex">
+      <span class="iconify" data-icon="bx:bxs-discount" data-width="60" data-height="60"></span>
+      <h1>My voucher</h1>
+    </div>
+  </div>
+
+  <!-- item -->
+  <div
+    *ngFor="let voucherCode of voucherCodes"
+    class="row my-voucher-item"
+    [ngClass]="{ 'voucher-notavailable': isAvailable(voucherCode.status?.id ?? 3) }"
+  >
+    <div class="col-lg-2 voucher-item-img">
+      <img
+        src="https://vi.qr-code-generator.com/wp-content/themes/qr/new_structure/markets/basic_market/generator/dist/generator/assets/images/websiteQRCode_noFrame.png"
+        alt=""
+      />
+    </div>
+    <div class="col-lg-10 voucher-item-content">
+      <div class="row voucher-name">
+        <b>{{ voucherCode.voucher?.name }}</b>
+      </div>
+      <div class="row voucher-detail">
+        <div class="col-lg-10 voucher-detail-col p-0 mt-2">
+          <div class="item-content-tilte">
+            <p>Shop name</p>
+            <p>Date of payment</p>
+            <p>Code voucher</p>
+            <p>Price</p>
+          </div>
+          <div class="item-content-item">
+            <a href="" style="color: #df2f4c"
+              ><p style="width: 100%">{{ voucherCode.voucher?.event?.store?.name }}</p></a
+            >
+            <p>
+              {{ voucherCode.order?.paymentTime?.format('DD/MM/YYYY ') }}
+            </p>
+            <p>{{ voucherCode.code }}</p>
+            <p>{{ voucherCode.voucher?.price | currency: 'VND':'symbol':'1.0-0':'vi-VN' }}</p>
+          </div>
+        </div>
+        <div class="col-lg-2 item-content-remove p-0" [ngClass]="{ 'style-available': !isAvailable(voucherCode.status?.id ?? 3) }">
+          <span class="iconify" data-icon="fluent:delete-20-regular" data-width="30" data-height="30"></span>
+          <p>{{ voucherCode.status?.id === 2 ? 'Available' : 'Not available' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination // phân trang button -->
+  <jhi-our-pagination [pagination]="voucherCodePaging" (pageChanged)="pageChangedHandler($event)"></jhi-our-pagination>
+</div>

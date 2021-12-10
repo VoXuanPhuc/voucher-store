@@ -202,8 +202,7 @@ public class MyUserResource {
     }
 
     @GetMapping("/my-users/get-userByToken")
-    public MyUserDTO geturrentUser(Authentication authentication) {
-        String userName = authentication.getName();
-        return myUserService.findByUserName(userName);
+    public MyUserDTO getcurrentUser(Authentication authentication) {
+        return myUserService.getcurrentUser(authentication);
     }
 }

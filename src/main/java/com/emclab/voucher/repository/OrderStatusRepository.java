@@ -1,7 +1,8 @@
 package com.emclab.voucher.repository;
 
 import com.emclab.voucher.domain.OrderStatus;
-import org.springframework.data.jpa.repository.*;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +10,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long> {}
+public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long> {
+    List<OrderStatus> findByName(String name);
+}

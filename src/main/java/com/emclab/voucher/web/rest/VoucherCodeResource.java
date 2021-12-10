@@ -1,6 +1,5 @@
 package com.emclab.voucher.web.rest;
 
-import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.domain.VoucherStatus;
 import com.emclab.voucher.repository.VoucherCodeRepository;
 import com.emclab.voucher.service.VoucherCodeService;
@@ -12,6 +11,7 @@ import com.emclab.voucher.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -29,6 +30,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
@@ -199,5 +201,10 @@ public class VoucherCodeResource {
         voucherStatus.setId(1l);
         voucherStatus.setName("available");
         return voucherCodeService.countVoucherCodeByVoucher(voucherMapper.toEntity(voucherDTO), voucherStatus);
+    }
+
+    @GetMapping("/voucher-codes/voucher-codes-of-currentuser")
+    public ResponseEntity<Object> getVoucherCodeOfCurrentUser(@RequestParam Map<String, Object> param, Authentication authentication) {
+        return ResponseEntity.ok(voucherCodeService.getVoucherCodeByOrderOfCurrentUser(param, authentication));
     }
 }
