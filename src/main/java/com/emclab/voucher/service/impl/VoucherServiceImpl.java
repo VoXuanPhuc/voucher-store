@@ -4,17 +4,26 @@ import com.emclab.voucher.domain.ServiceType;
 import com.emclab.voucher.domain.Voucher;
 import com.emclab.voucher.repository.ServiceTypeRepository;
 import com.emclab.voucher.repository.VoucherRepository;
+import com.emclab.voucher.service.CommonService;
 import com.emclab.voucher.service.VoucherService;
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.VoucherDTO;
 import com.emclab.voucher.service.mapper.VoucherMapper;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +41,9 @@ public class VoucherServiceImpl implements VoucherService {
     private final ServiceTypeRepository typeReponsitory;
 
     private final VoucherMapper voucherMapper;
+
+    @Autowired
+    private CommonService commonService;
 
     public VoucherServiceImpl(VoucherRepository voucherRepository, VoucherMapper voucherMapper, ServiceTypeRepository typeReponsitory) {
         this.voucherRepository = voucherRepository;
@@ -99,5 +111,61 @@ public class VoucherServiceImpl implements VoucherService {
     public void delete(Long id) {
         log.debug("Request to delete Voucher : {}", id);
         voucherRepository.deleteById(id);
+    }
+
+    @Override
+    public PaginationResponse findWithPaging(Map<String, Object> params) {
+        log.debug("Request to get all Stores with paging");
+
+        int totalItems;
+        List<Voucher> vouchers;
+
+        params = commonService.updateParam(params, 9);
+        int page = Integer.parseInt(params.get("page").toString());
+        int limit = Integer.parseInt(params.get("limit").toString());
+        Pageable pageable = PageRequest.of(page - 1, limit);
+
+        if (params.get("type") != null) {
+            long typeId = Integer.parseInt(params.get("type").toString());
+            ServiceType type = typeReponsitory.findById(typeId).get();
+            totalItems = voucherRepository.findByType(type).size();
+
+            if (params.get("sort") == null) {
+                vouchers = voucherRepository.findByType(type, pageable);
+            } else {
+                Order order = getOrder(params.get("sort").toString());
+                pageable = PageRequest.of(page - 1, limit, Sort.by(order));
+                vouchers = voucherRepository.findByType(type, pageable);
+            }
+        } else {
+            totalItems = findAll().size();
+
+            if (params.get("sort") == null) {
+                vouchers = voucherRepository.findAll(pageable).getContent();
+            } else {
+                Order order = getOrder(params.get("sort").toString());
+                pageable = PageRequest.of(page - 1, limit, Sort.by(order));
+                vouchers = voucherRepository.findAll(pageable).getContent();
+            }
+        }
+
+        List<VoucherDTO> voucherDTOs = vouchers.stream().map(voucherMapper::toDto).collect(Collectors.toCollection(LinkedList::new));
+
+        List<Object> items = new ArrayList<>(voucherDTOs);
+
+        return commonService.findWithPaging(params, totalItems, items);
+    }
+
+    public Order getOrder(String sortOrder) {
+        String[] _sort = sortOrder.split(Pattern.quote("."));
+        Sort.Direction direction = null;
+
+        if (_sort[1].equals("asc")) {
+            direction = Sort.Direction.ASC;
+        } else if (_sort[1].equals("desc")) {
+            direction = Sort.Direction.DESC;
+        }
+
+        return new Order(direction, _sort[0]);
     }
 }

@@ -2,11 +2,13 @@ package com.emclab.voucher.web.rest;
 
 import com.emclab.voucher.repository.VoucherRepository;
 import com.emclab.voucher.service.VoucherService;
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.VoucherDTO;
 import com.emclab.voucher.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -153,10 +155,16 @@ public class VoucherResource {
         return voucherService.findAll();
     }
 
-    @GetMapping(path = "vouchers", params = { "type-id" })
-    public List<VoucherDTO> getByTypeId(@RequestParam(name = "type-id") Long typeId) {
-        log.debug("REST request to get vouchers by type id: {}", typeId);
-        return voucherService.findByTypeId(typeId);
+    //    @GetMapping(path = "vouchers", params = { "type" })
+    //    public List<VoucherDTO> getByTypeId(@RequestParam(name = "type") Long typeId) {
+    //        log.debug("REST request to get vouchers by type id: {}", typeId);
+    //        return voucherService.findByTypeId(typeId);
+    //    }
+
+    @GetMapping(path = "vouchers", params = { "page" })
+    public PaginationResponse getWithPaging(@RequestParam Map<String, Object> params) {
+        log.debug("REST request to get vouchers with paging");
+        return voucherService.findWithPaging(params);
     }
 
     /**

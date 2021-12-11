@@ -1,7 +1,9 @@
 package com.emclab.voucher.service;
 
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.VoucherDTO;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +34,8 @@ public interface VoucherService {
      * @return the list of entities.
      */
     List<VoucherDTO> findAll();
+
+    PaginationResponse findWithPaging(Map<String, Object> params);
 
     List<VoucherDTO> findByTypeId(Long id);
 

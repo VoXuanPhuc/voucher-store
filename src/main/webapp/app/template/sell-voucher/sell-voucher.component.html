@@ -1,27 +1,27 @@
 <div class="main-home">
-  <!-- Part 2.1: Search filter -->
-  <jhi-voucher-sort></jhi-voucher-sort>
-  <!-- Part 2.2: Service-left and card-product-right -->
-  <div class="container main-body d-flex px-0 mt-1">
-    <!-- Part 2.2.1: Service-left -->
-    <div class="service_left">
-      <!-- item-1: list service -->
-      <jhi-voucher-service (typeChanged)="serviceTypeChangedHandler($event)"></jhi-voucher-service>
+    <!-- Part 2.1: Search filter -->
+    <jhi-voucher-sort></jhi-voucher-sort>
+    <!-- Part 2.2: Service-left and card-product-right -->
+    <div class="container main-body d-flex px-0 mt-1">
+        <!-- Part 2.2.1: Service-left -->
+        <div class="service_left">
+            <!-- item-1: list service -->
+            <jhi-voucher-service (typeChanged)="serviceTypeChangedHandler($event)"></jhi-voucher-service>
 
-      <!-- item-2: Price range -->
-      <jhi-price-range (priceRangeChanged)="priceRangeChangedHandler($event)"></jhi-price-range>
+            <!-- item-2: Price range -->
+            <jhi-price-range (priceRangeChanged)="priceRangeChangedHandler($event)"></jhi-price-range>
 
-      <!-- item-3: Province -->
-      <jhi-voucher-province (checkboxChanged)="areaChangedHandler($event)"></jhi-voucher-province>
+            <!-- item-3: Province -->
+            <jhi-voucher-province (checkboxChanged)="areaChangedHandler($event)"></jhi-voucher-province>
 
-      <!-- item-4: Ratings -->
-      <jhi-voucher-rating (checkboxChanged)="ratingChangedHandler($event)"></jhi-voucher-rating>
+            <!-- item-4: Ratings -->
+            <jhi-voucher-rating (checkboxChanged)="ratingChangedHandler($event)"></jhi-voucher-rating>
+        </div>
+
+        <!-- Part 2.2.2: Card-product-right -->
+        <div class="card_product_right">
+            <jhi-sell-voucher-item [vouchers]="vouchers" [isLoading]="isVoucherLoading"></jhi-sell-voucher-item>
+            <jhi-our-pagination [pagination]="pagination" (pageChanged)="pageChangedHandler($event)"></jhi-our-pagination>
+        </div>
     </div>
-
-    <!-- Part 2.2.2: Card-product-right -->
-    <div class="card_product_right">
-      <jhi-sell-voucher-item [vouchers]="vouchers" [isLoading]="isVoucherLoading"></jhi-sell-voucher-item>
-      <!-- <jhi-my-pagination></jhi-my-pagination> -->
-    </div>
-  </div>
 </div>

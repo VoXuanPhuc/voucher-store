@@ -134,7 +134,7 @@ public class MyUserResource {
      *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/my-users/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/my-users/{id}")
     public ResponseEntity<MyUserDTO> partialUpdateMyUser(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody MyUserDTO myUserDTO
