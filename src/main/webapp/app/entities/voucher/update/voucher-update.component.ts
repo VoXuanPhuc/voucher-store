@@ -18,173 +18,175 @@ import { IServiceType } from 'app/entities/service-type/service-type.model';
 import { ServiceTypeService } from 'app/entities/service-type/service/service-type.service';
 
 @Component({
-  selector: 'jhi-voucher-update',
-  templateUrl: './voucher-update.component.html',
+    selector: 'jhi-voucher-update',
+    templateUrl: './voucher-update.component.html',
 })
 export class VoucherUpdateComponent implements OnInit {
-  isSaving = false;
+    isSaving = false;
 
-  productsSharedCollection: IProduct[] = [];
-  eventsSharedCollection: IEvent[] = [];
-  serviceTypesSharedCollection: IServiceType[] = [];
+    productsSharedCollection: IProduct[] = [];
+    eventsSharedCollection: IEvent[] = [];
+    serviceTypesSharedCollection: IServiceType[] = [];
 
-  editForm = this.fb.group({
-    id: [],
-    name: [null, [Validators.required]],
-    price: [null, [Validators.required]],
-    quantity: [null, [Validators.required]],
-    startTime: [null, [Validators.required]],
-    expriedTime: [null, [Validators.required]],
-    products: [],
-    event: [],
-    type: [],
-  });
-
-  constructor(
-    protected voucherService: VoucherService,
-    protected productService: ProductService,
-    protected eventService: EventService,
-    protected serviceTypeService: ServiceTypeService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ voucher }) => {
-      if (voucher.id === undefined) {
-        const today = dayjs().startOf('day');
-        voucher.startTime = today;
-        voucher.expriedTime = today;
-      }
-
-      this.updateForm(voucher);
-
-      this.loadRelationshipsOptions();
+    editForm = this.fb.group({
+        id: [],
+        name: [null, [Validators.required]],
+        price: [null, [Validators.required]],
+        quantity: [null, [Validators.required]],
+        startTime: [null, [Validators.required]],
+        expriedTime: [null, [Validators.required]],
+        products: [],
+        event: [],
+        type: [],
     });
-  }
 
-  previousState(): void {
-    window.history.back();
-  }
+    constructor(
+        protected voucherService: VoucherService,
+        protected productService: ProductService,
+        protected eventService: EventService,
+        protected serviceTypeService: ServiceTypeService,
+        protected activatedRoute: ActivatedRoute,
+        protected fb: FormBuilder
+    ) {}
 
-  save(): void {
-    this.isSaving = true;
-    const voucher = this.createFromForm();
-    if (voucher.id !== undefined) {
-      this.subscribeToSaveResponse(this.voucherService.update(voucher));
-    } else {
-      this.subscribeToSaveResponse(this.voucherService.create(voucher));
+    ngOnInit(): void {
+        this.activatedRoute.data.subscribe(({ voucher }) => {
+            if (voucher.id === undefined) {
+                const today = dayjs().startOf('day');
+                voucher.startTime = today;
+                voucher.expriedTime = today;
+            }
+
+            this.updateForm(voucher);
+
+            this.loadRelationshipsOptions();
+        });
     }
-  }
 
-  trackProductById(index: number, item: IProduct): number {
-    return item.id!;
-  }
+    previousState(): void {
+        window.history.back();
+    }
 
-  trackEventById(index: number, item: IEvent): number {
-    return item.id!;
-  }
-
-  trackServiceTypeById(index: number, item: IServiceType): number {
-    return item.id!;
-  }
-
-  getSelectedProduct(option: IProduct, selectedVals?: IProduct[]): IProduct {
-    if (selectedVals) {
-      for (const selectedVal of selectedVals) {
-        if (option.id === selectedVal.id) {
-          return selectedVal;
+    save(): void {
+        this.isSaving = true;
+        const voucher = this.createFromForm();
+        if (voucher.id !== undefined) {
+            this.subscribeToSaveResponse(this.voucherService.update(voucher));
+        } else {
+            this.subscribeToSaveResponse(this.voucherService.create(voucher));
         }
-      }
     }
-    return option;
-  }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IVoucher>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
-      () => this.onSaveSuccess(),
-      () => this.onSaveError()
-    );
-  }
+    trackProductById(index: number, item: IProduct): number {
+        return item.id!;
+    }
 
-  protected onSaveSuccess(): void {
-    this.previousState();
-  }
+    trackEventById(index: number, item: IEvent): number {
+        return item.id!;
+    }
 
-  protected onSaveError(): void {
-    // Api for inheritance.
-  }
+    trackServiceTypeById(index: number, item: IServiceType): number {
+        return item.id!;
+    }
 
-  protected onSaveFinalize(): void {
-    this.isSaving = false;
-  }
+    getSelectedProduct(option: IProduct, selectedVals?: IProduct[]): IProduct {
+        if (selectedVals) {
+            for (const selectedVal of selectedVals) {
+                if (option.id === selectedVal.id) {
+                    return selectedVal;
+                }
+            }
+        }
+        return option;
+    }
 
-  protected updateForm(voucher: IVoucher): void {
-    this.editForm.patchValue({
-      id: voucher.id,
-      name: voucher.name,
-      price: voucher.price,
-      quantity: voucher.quantity,
-      startTime: voucher.startTime ? voucher.startTime.format(DATE_TIME_FORMAT) : null,
-      expriedTime: voucher.expriedTime ? voucher.expriedTime.format(DATE_TIME_FORMAT) : null,
-      products: voucher.products,
-      event: voucher.event,
-      type: voucher.type,
-    });
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IVoucher>>): void {
+        result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
+            () => this.onSaveSuccess(),
+            () => this.onSaveError()
+        );
+    }
 
-    this.productsSharedCollection = this.productService.addProductToCollectionIfMissing(
-      this.productsSharedCollection,
-      ...(voucher.products ?? [])
-    );
-    this.eventsSharedCollection = this.eventService.addEventToCollectionIfMissing(this.eventsSharedCollection, voucher.event);
-    this.serviceTypesSharedCollection = this.serviceTypeService.addServiceTypeToCollectionIfMissing(
-      this.serviceTypesSharedCollection,
-      voucher.type
-    );
-  }
+    protected onSaveSuccess(): void {
+        this.previousState();
+    }
 
-  protected loadRelationshipsOptions(): void {
-    this.productService
-      .query()
-      .pipe(map((res: HttpResponse<IProduct[]>) => res.body ?? []))
-      .pipe(
-        map((products: IProduct[]) =>
-          this.productService.addProductToCollectionIfMissing(products, ...(this.editForm.get('products')!.value ?? []))
-        )
-      )
-      .subscribe((products: IProduct[]) => (this.productsSharedCollection = products));
+    protected onSaveError(): void {
+        // Api for inheritance.
+    }
 
-    this.eventService
-      .query()
-      .pipe(map((res: HttpResponse<IEvent[]>) => res.body ?? []))
-      .pipe(map((events: IEvent[]) => this.eventService.addEventToCollectionIfMissing(events, this.editForm.get('event')!.value)))
-      .subscribe((events: IEvent[]) => (this.eventsSharedCollection = events));
+    protected onSaveFinalize(): void {
+        this.isSaving = false;
+    }
 
-    this.serviceTypeService
-      .query()
-      .pipe(map((res: HttpResponse<IServiceType[]>) => res.body ?? []))
-      .pipe(
-        map((serviceTypes: IServiceType[]) =>
-          this.serviceTypeService.addServiceTypeToCollectionIfMissing(serviceTypes, this.editForm.get('type')!.value)
-        )
-      )
-      .subscribe((serviceTypes: IServiceType[]) => (this.serviceTypesSharedCollection = serviceTypes));
-  }
+    protected updateForm(voucher: IVoucher): void {
+        this.editForm.patchValue({
+            id: voucher.id,
+            name: voucher.name,
+            price: voucher.price,
+            quantity: voucher.quantity,
+            startTime: voucher.startTime ? voucher.startTime.format(DATE_TIME_FORMAT) : null,
+            expriedTime: voucher.expriedTime ? voucher.expriedTime.format(DATE_TIME_FORMAT) : null,
+            products: voucher.products,
+            event: voucher.event,
+            type: voucher.type,
+        });
 
-  protected createFromForm(): IVoucher {
-    return {
-      ...new Voucher(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      price: this.editForm.get(['price'])!.value,
-      quantity: this.editForm.get(['quantity'])!.value,
-      startTime: this.editForm.get(['startTime'])!.value ? dayjs(this.editForm.get(['startTime'])!.value, DATE_TIME_FORMAT) : undefined,
-      expriedTime: this.editForm.get(['expriedTime'])!.value
-        ? dayjs(this.editForm.get(['expriedTime'])!.value, DATE_TIME_FORMAT)
-        : undefined,
-      products: this.editForm.get(['products'])!.value,
-      event: this.editForm.get(['event'])!.value,
-      type: this.editForm.get(['type'])!.value,
-    };
-  }
+        this.productsSharedCollection = this.productService.addProductToCollectionIfMissing(
+            this.productsSharedCollection,
+            ...(voucher.products ?? [])
+        );
+        this.eventsSharedCollection = this.eventService.addEventToCollectionIfMissing(this.eventsSharedCollection, voucher.event);
+        this.serviceTypesSharedCollection = this.serviceTypeService.addServiceTypeToCollectionIfMissing(
+            this.serviceTypesSharedCollection,
+            voucher.type
+        );
+    }
+
+    protected loadRelationshipsOptions(): void {
+        this.productService
+            .query()
+            .pipe(map((res: HttpResponse<IProduct[]>) => res.body ?? []))
+            .pipe(
+                map((products: IProduct[]) =>
+                    this.productService.addProductToCollectionIfMissing(products, ...(this.editForm.get('products')!.value ?? []))
+                )
+            )
+            .subscribe((products: IProduct[]) => (this.productsSharedCollection = products));
+
+        this.eventService
+            .query()
+            .pipe(map((res: HttpResponse<IEvent[]>) => res.body ?? []))
+            .pipe(map((events: IEvent[]) => this.eventService.addEventToCollectionIfMissing(events, this.editForm.get('event')!.value)))
+            .subscribe((events: IEvent[]) => (this.eventsSharedCollection = events));
+
+        this.serviceTypeService
+            .query()
+            .pipe(map((res: HttpResponse<IServiceType[]>) => res.body ?? []))
+            .pipe(
+                map((serviceTypes: IServiceType[]) =>
+                    this.serviceTypeService.addServiceTypeToCollectionIfMissing(serviceTypes, this.editForm.get('type')!.value)
+                )
+            )
+            .subscribe((serviceTypes: IServiceType[]) => (this.serviceTypesSharedCollection = serviceTypes));
+    }
+
+    protected createFromForm(): IVoucher {
+        return {
+            ...new Voucher(),
+            id: this.editForm.get(['id'])!.value,
+            name: this.editForm.get(['name'])!.value,
+            price: this.editForm.get(['price'])!.value,
+            quantity: this.editForm.get(['quantity'])!.value,
+            startTime: this.editForm.get(['startTime'])!.value
+                ? dayjs(this.editForm.get(['startTime'])!.value, DATE_TIME_FORMAT)
+                : undefined,
+            expriedTime: this.editForm.get(['expriedTime'])!.value
+                ? dayjs(this.editForm.get(['expriedTime'])!.value, DATE_TIME_FORMAT)
+                : undefined,
+            products: this.editForm.get(['products'])!.value,
+            event: this.editForm.get(['event'])!.value,
+            type: this.editForm.get(['type'])!.value,
+        };
+    }
 }

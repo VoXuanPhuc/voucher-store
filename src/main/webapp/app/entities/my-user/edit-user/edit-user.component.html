@@ -1,0 +1,121 @@
+<div class="right_service">
+    <form [formGroup]="editForm" (ngSubmit)="save()">
+        <div class="my-profile">
+            <div class="my-profile-heading d-flex">
+                <span class="iconify" data-icon="ant-design:user-outlined" data-width="60" data-height="60"></span>
+                <h1>Edit Profile</h1>
+            </div>
+            <button [routerLink]="['/profile']" type="button" class="btn btn-outline-danger">Back to profile</button>
+        </div>
+
+        <!--  -->
+        <div class="profile-personal">
+            <div class="personal-avt-full">
+                <div class="personal-avt">
+                    <img [src]="user?.avatar" alt="" />
+                </div>
+                <div class="personal-information">
+                    <span class="iconify" data-icon="ant-design:camera-filled" data-width="18" data-height="18"></span>
+                </div>
+            </div>
+
+            <div class="profile-personal-name">
+                <div class="personal-name-tilte">
+                    <p>First name</p>
+                    <p>Last name</p>
+                </div>
+                <div class="personal-name-item">
+                    <input type="text" name="firstName" id="" class="form-control" formControlName="firstName" />
+                    <input type="text" name="lastName" id="" class="form-control" formControlName="lastName" />
+                </div>
+            </div>
+
+            <div class="profile-personal-name">
+                <div class="personal-name-tilte">
+                    <p>Email</p>
+                    <p>Phone</p>
+                </div>
+                <div class="personal-name-item">
+                    <input type="email" name="email" id="" class="form-control" formControlName="email" />
+                    <input type="text" name="phone" id="" class="form-control" formControlName="phone" />
+                </div>
+            </div>
+
+            <div class="profile-personal-name">
+                <div class="personal-name-tilte">
+                    <p>Date of birth</p>
+                    <p>Gender</p>
+                </div>
+                <div class="personal-name-item">
+                    <input type="date" name="dob" id="" class="form-control" formControlName="dob" placeholder="dd-mm-yyyy" />
+                    <div style="margin-right: 130px">
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="gender"
+                                id="male"
+                                value="1"
+                                style="width: 20px; height: 20px; border: 0px; box-shadow: none"
+                                formControlName="gender"
+                            />
+                            <label class="form-check-label" for="inlineRadio1">Male</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input
+                                class="form-check-input"
+                                type="radio"
+                                name="gender"
+                                id="female"
+                                value="0"
+                                style="width: 20px; height: 20px; box-shadow: none"
+                                formControlName="gender"
+                            />
+                            <label class="form-check-label" for="inlineRadio2">Female</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-personal-name">
+                <div class="personal-name-tilte">
+                    <p>Province</p>
+                    <p>District</p>
+                </div>
+                <div class="personal-name-item">
+                    <select class="form-select" aria-label="Default select example" formControlName="province">
+                        <option value="0" selected>Select province</option>
+                        <option *ngFor="let province of provinces" [value]="province.id">{{ province.name }}</option>
+                    </select>
+
+                    <select class="form-select" aria-label="Default select example" formControlName="district">
+                        <option value="0" selected>Select district</option>
+                        <option *ngFor="let district of districts" [value]="district.id">{{ district.name }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="profile-personal-name">
+                <div class="personal-name-tilte">
+                    <p>Village</p>
+                    <p>Address</p>
+                </div>
+                <div class="personal-name-item">
+                    <select class="form-select" aria-label="Default select example" formControlName="village">
+                        <option value="0" selected>Select village</option>
+                        <option *ngFor="let village of villages" [value]="village.id">{{ village.name }}</option>
+                    </select>
+                    <input type="text" name="address" id="" class="form-control" formControlName="address" />
+                </div>
+            </div>
+
+            <div class="profile-personal-name">
+                <div class="personal-name-item">
+                    <div class="profile-personal-button">
+                        <button type="submit" class="btn btn-danger">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

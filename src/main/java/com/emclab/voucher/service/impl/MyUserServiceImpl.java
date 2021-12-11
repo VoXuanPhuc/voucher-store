@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import liquibase.pro.packaged.iF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,13 @@ public class MyUserServiceImpl implements MyUserService {
 
         log.debug("Request to save MyUser : {}", myUserDTO);
         MyUser myUser = myUserMapper.toEntity(myUserDTO);
+
+        if (myUser.getId() != null) {
+            myUser = myUserRepository.save(myUser);
+
+            return myUserMapper.toDto(myUser);
+        }
+
         myUser.setPassword(passwordEncoder.encode(myUser.getPassword()));
 
         myUser.getRoles().add(role);
