@@ -28,6 +28,13 @@ const router: Routes = [
                     pageTile: 'Edit Profile',
                 },
             },
+            {
+                path: 'my-voucher',
+                component: VoucherUserComponent,
+                data: {
+                    pageTile: 'My Voucher',
+                },
+            },
         ],
     },
 ];
