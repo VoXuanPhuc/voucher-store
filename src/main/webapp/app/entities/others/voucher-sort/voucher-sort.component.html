@@ -7,13 +7,18 @@
     <div class="combobox_filter d-flex">
         <span class="mt-2 mr-3">Sort by:</span>
         <div class="form-group">
-            <select class="form-control" id="exampleFormControlSelect1" style="width: 200px">
-                <option>Default sorting</option>
-                <option>Price Low to High</option>
-                <option>Price Low to High</option>
-                <option>Name A-Z</option>
-                <option>Name Z-A</option>
-                <option>Best Selling</option>
+            <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                style="width: 200px"
+                #mySelect
+                (change)="onOptionSelectedChanged(mySelect.value)"
+            >
+                <option value="0">Default sorting</option>
+                <option value="1">Price Low to High</option>
+                <option value="2">Price High to Low</option>
+                <option value="3">Name A-Z</option>
+                <option value="4">Name Z-A</option>
             </select>
         </div>
     </div>
