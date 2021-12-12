@@ -62,9 +62,12 @@ export class VoucherService {
     }
 
     findWithPaging(myFilter: IMyFilter): Observable<any> {
+        window.console.log('my filterrrrrrrrrrrr duong: ', myFilter);
+
         let params = new HttpParams();
         params = params.set('page', myFilter.page ?? 1);
         params = params.set('limit', myFilter.limit ?? 6);
+
         if (myFilter.type) {
             params = params.set('type', myFilter.type);
         }
@@ -72,7 +75,7 @@ export class VoucherService {
             params = params.set('sort', myFilter.sort);
         }
 
-        window.console.log('my filterrrrrrrrrrrr duong: ', myFilter);
+        window.console.log('Param filterrrrrrrrrrrr duong: ', params);
 
         return this.http.get<IVoucher[]>(this.resourceUrl, { params, observe: 'response' });
     }
