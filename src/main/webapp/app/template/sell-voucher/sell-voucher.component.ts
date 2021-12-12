@@ -106,4 +106,11 @@ export class SellVoucherComponent implements OnInit {
         this.ratings = [];
         items.forEach(value => this.ratings.push(value));
     }
+
+    optionSelectedChangedHandler(value: string): void {
+        if (this.myFilter?.sort != null) {
+            this.myFilter.sort = value;
+        }
+        this.loadWithPaging();
+    }
 }
