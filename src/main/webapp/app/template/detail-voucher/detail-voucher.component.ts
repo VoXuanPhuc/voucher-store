@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from 'app/entities/event/service/event.service';
-import { CartVoucher, ICartVoucher } from 'app/entities/my-cart/cartVoucher.model';
+import { CartVoucher } from 'app/entities/my-cart/CartVoucher.model';
 import { StoreService } from 'app/entities/store/service/store.service';
 import { VoucherCodeService } from 'app/entities/voucher-code/service/voucher-code.service';
 import { VoucherService } from 'app/entities/voucher/service/voucher.service';
