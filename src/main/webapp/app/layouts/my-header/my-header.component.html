@@ -81,11 +81,11 @@
 
     <ng-template #thenBlock>
         <ul [hidden]="!isDisplayLogin" class="list-group border-0 border-0 text-center" id="listview-user">
-            <li class="list-group-item">
+            <li class="list-group-item" (click)="toggleDisplayLogin()">
                 <a [routerLink]="['/user']" class="text-danger">Profile</a>
             </li>
-            <li class="list-group-item"><a href="./profileShop.html" class="text-danger">My Store</a></li>
-            <li class="list-group-item">
+            <li class="list-group-item" (click)="toggleDisplayLogin()"><a href="./profileShop.html" class="text-danger">My Store</a></li>
+            <li class="list-group-item" (click)="toggleDisplayLogin()">
                 <a (click)="logout()" class="text-danger">Log out</a>
             </li>
         </ul>
@@ -93,10 +93,10 @@
 
     <ng-template #elseBlock>
         <ul [hidden]="!isDisplayLogin" class="list-group border-0 text-center" id="listview-user">
-            <li class="list-group-item border-0">
+            <li class="list-group-item border-0" (click)="toggleDisplayLogin()">
                 <a [routerLink]="['/login']">Log In</a>
             </li>
-            <li class="list-group-item border-0">
+            <li class="list-group-item border-0" (click)="toggleDisplayLogin()">
                 <a [routerLink]="['/register']">Register</a>
             </li>
         </ul>

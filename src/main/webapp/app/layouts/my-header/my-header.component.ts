@@ -52,7 +52,7 @@ export class MyHeaderComponent implements OnInit {
 
     logout(): void {
         this.loginService.logout();
-        this.router.navigate(['/home']);
-        window.location.reload();
+        location.replace('/login');
+        // this.router.navigate(['/login']);
     }
 }
