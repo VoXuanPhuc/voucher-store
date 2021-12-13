@@ -21,7 +21,12 @@
             </div>
         </div>
         <div class="col d-flex" ngbDropdown>
-            <button onclick="openNav()" id="btn-cart" type="button" class="btn btn-danger rounded-circle py-0 my-3 mx-5 d-none d-sm-block">
+            <button
+                [routerLink]="['/cart']"
+                id="btn-cart"
+                type="button"
+                class="btn btn-danger rounded-circle py-0 my-3 mx-5 d-none d-sm-block"
+            >
                 <span class="iconify" data-icon="eva:shopping-cart-fill" style="color: white; font-size: 20px"></span>
             </button>
             <button (click)="toggleDisplayLogin()" id="btn-user02" type="button" class="btn btn-danger rounded-circle py-0 my-3 ml-3">
