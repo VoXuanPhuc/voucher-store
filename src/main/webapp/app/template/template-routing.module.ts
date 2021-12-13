@@ -51,6 +51,13 @@ const routes: Routes = [
         },
         loadChildren: () => import('./template-user/template-user.module').then(m => m.TemplateUserModule),
     },
+    {
+        path: 'cart',
+        data: {
+            pageTitle: 'Cart',
+        },
+        loadChildren: () => import('./cart-template/cart-template.module').then(m => m.CartTemplateModule),
+    },
 ];
 
 @NgModule({

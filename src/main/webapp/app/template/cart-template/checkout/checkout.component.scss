@@ -1,0 +1,24 @@
+.pay-voucher {
+    width: 90%;
+    height: 340px;
+    background-color: #ffffff;
+    margin: 0px 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#pay-voucher {
+    width: 100%;
+}
+
+#title-payvoucher {
+    width: 45%;
+}
+
+#input-voucher {
+    width: 55%;
+}
+
+#pay-voucher tr,
+td {
+    padding: 15px;
+}
