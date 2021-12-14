@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CartService } from 'app/entities/my-cart/cart.service';
-import { ICartVoucher } from 'app/entities/my-cart/CartVoucher.model';
+import { CartVoucher, ICartVoucher } from 'app/entities/my-cart/CartVoucher.model';
 import { VoucherCodeService } from 'app/entities/voucher-code/service/voucher-code.service';
 import { VoucherImageService } from 'app/entities/voucher-image/service/voucher-image.service';
 
@@ -35,13 +35,13 @@ export class VoucherListComponent implements OnInit {
     }
 
     loadVoucherCoder(): void {
+        let i = 0;
         this.CartVoucher.forEach(item => {
             this.voucherCodeService.countVoucherCode(item.voucher?.id ?? 0).subscribe(res => {
-                this.voucherCode.push(res.body ?? []);
+                this.voucherCode[i] = res.body ?? [];
+                i++;
             });
         });
-
-        window.console.log(this.voucherCode);
     }
 
     loadImage(): void {
@@ -85,5 +85,41 @@ export class VoucherListComponent implements OnInit {
         }
 
         this.outputCheckItem.emit(this.checkeditem);
+    }
+
+    addToCart(cartVoucher: CartVoucher): void {
+        let i = 0;
+        this.cartService.items.map(item => {
+            if (item.voucher?.id === cartVoucher.voucher?.id) {
+                if (this.voucherCode[i] >= item.total! + 1) {
+                    item.total = item.total! + 1;
+                } else {
+                    window.alert('Not valid');
+                }
+            }
+            i++;
+        });
+        this.cartService.saveCart();
+    }
+
+    minusToCart(cartVoucher: CartVoucher): void {
+        let i = 0;
+        this.cartService.items.map(item => {
+            if (item.voucher?.id === cartVoucher.voucher?.id) {
+                if (item.total! - 1 > 1) {
+                    item.total = item.total! - 1;
+                } else {
+                    window.console.log(item.total!);
+                    window.alert('Not valid');
+                }
+            }
+            i++;
+        });
+        this.cartService.saveCart();
+    }
+
+    deleteItem(cartVoucher: ICartVoucher): void {
+        this.cartService.deleteItem(cartVoucher);
+        this.CartVoucher = this.cartService.items;
     }
 }

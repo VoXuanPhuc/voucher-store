@@ -19,6 +19,11 @@ export class CartService {
         return this.items;
     }
 
+    deleteItem(cartVoucher: ICartVoucher): void {
+        this.items = this.items.filter(item => item !== cartVoucher);
+        this.saveCart();
+    }
+
     loadCart(): void {
         this.items = JSON.parse(localStorage.getItem('cart_items')!);
     }

@@ -34,6 +34,7 @@
                 </label>
 
                 <div class="img-voucher-description">
+                    <!-- {{cartVoucher.voucher!.voucherImages -->
                     <img src="../../../content/images/landingpage/card/img_card_01.png" alt="" />
                     <p style="font-size: 13px; margin: 0px 10px">{{ cartVoucher.voucher?.name }}</p>
                 </div>
@@ -41,11 +42,12 @@
             <td class="quantity mt-2">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-danger" type="button">
+                        <button class="btn btn-outline-danger" type="button" (click)="minusToCart(cartVoucher)">
                             <span id="icon-minus" class="iconify" data-icon="entypo:minus"></span>
                         </button>
                     </div>
                     <input
+                        disabled
                         id="input-quantity"
                         type="text"
                         class="form-control input"
@@ -55,7 +57,7 @@
                         style="font-size: 13px"
                     />
                     <div class="input-group-append">
-                        <button class="btn btn-outline-danger" type="button">
+                        <button class="btn btn-outline-danger" type="button" (click)="addToCart(cartVoucher)">
                             <span id="icon-plus" class="iconify" data-icon="entypo:plus"></span>
                         </button>
                     </div>
@@ -66,7 +68,11 @@
                     <span class="col-10 mt-2" style="font-size: 13px">
                         {{ cartVoucher.voucher?.price | currency: 'VND':'symbol':'1.0-0':'vi-VN' }}</span
                     >
-                    <button class="col-2 border-0 bg-transparent px-0" style="font-size: 15px; width: 20px; position: relative; right: 0px">
+                    <button
+                        (click)="deleteItem(cartVoucher)"
+                        class="col-2 border-0 bg-transparent px-0"
+                        style="font-size: 15px; width: 20px; position: relative; right: 0px"
+                    >
                         <span class="iconify" data-icon="iwwa:delete"></span>
                     </button>
                 </div>

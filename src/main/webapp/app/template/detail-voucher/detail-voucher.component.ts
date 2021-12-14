@@ -78,6 +78,7 @@ export class DetailVoucherComponent implements OnInit {
                 }
             });
             this.cartSerive.saveCart();
+            window.alert('Add to cart success');
         }
     }
 }
