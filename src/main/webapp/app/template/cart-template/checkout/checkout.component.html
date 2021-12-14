@@ -13,7 +13,7 @@
 
         <tr>
             <td>SubTotal :</td>
-            <td>600.0000.0000 đ</td>
+            <td>{{ total | currency: 'VND':'symbol':'1.0-0':'vi-VN' }}</td>
         </tr>
 
         <tr>
@@ -28,7 +28,7 @@
 
         <tr style="border-top: 0.7px rgb(172, 172, 172) solid">
             <td style="border-top: 0.7px rgb(172, 172, 172) solid">Total :</td>
-            <td>600.0000 đ</td>
+            <td>{{ total | currency: 'VND':'symbol':'1.0-0':'vi-VN' }}</td>
         </tr>
     </table>
     <button type="button" class="btn btn-danger w-100 mt-2" style="font-size: 13px">Pay voucher</button>
