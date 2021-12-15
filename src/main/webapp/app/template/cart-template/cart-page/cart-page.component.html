@@ -7,18 +7,12 @@
 
 <div class="container body-main">
     <!-- Part 2.1: voucher-cart  -->
-    <jhi-voucher-list
-        class="m-0"
-        (outputCheckItem)="isChangeCheckitem($event)"
-        (checkedAll)="isCheckedAllAgain($event)"
-        [CartVoucher]="cartItem"
-    >
-    </jhi-voucher-list>
+    <jhi-voucher-list class="m-0" (outputCheckItem)="isChangeCheckitem($event)" [CartVoucher]="cartItem"> </jhi-voucher-list>
 
     <!-- Part 2.2: total-cart  -->
     <div class="total-cart">
         <!-- Checkout -->
-        <jhi-checkout [checkoutIsCheckitem]="isCheckitem" [isCheckAll]="isCheckAll" [CartVoucher]="cartItem"></jhi-checkout>
+        <jhi-checkout [checkoutIsCheckitem]="isCheckitem"></jhi-checkout>
 
         <!-- discount -->
         <jhi-discount></jhi-discount>

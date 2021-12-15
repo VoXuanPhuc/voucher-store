@@ -13,7 +13,7 @@ export class VoucherListComponent implements OnInit {
     @Input() CartVoucher: ICartVoucher[];
     checkeditem: boolean[];
     isCheckedAll: boolean;
-    @Output() checkedAll = new EventEmitter<boolean>();
+    // @Output() checkedAll = new EventEmitter<boolean>();
     @Output() outputCheckItem = new EventEmitter<boolean[]>();
 
     voucherCode: any[];
@@ -70,20 +70,19 @@ export class VoucherListComponent implements OnInit {
                 break;
             }
         }
-        this.checkedAll.emit(!this.isCheckedAll);
+        // this.checkedAll.emit(!this.isCheckedAll);
         this.outputCheckItem.emit(this.checkeditem);
     }
 
     togleCheckedAll(): void {
         this.isCheckedAll = !this.isCheckedAll;
-        this.checkedAll.emit(this.isCheckedAll);
+        // this.checkedAll.emit(this.isCheckedAll);
 
         if (!this.isCheckedAll) {
             this.makenotCheckall();
         } else {
             this.makeCheckAll();
         }
-
         this.outputCheckItem.emit(this.checkeditem);
     }
 
@@ -99,6 +98,7 @@ export class VoucherListComponent implements OnInit {
             }
             i++;
         });
+        this.cartService.changeItem(2);
         this.cartService.saveCart();
     }
 
@@ -106,7 +106,7 @@ export class VoucherListComponent implements OnInit {
         let i = 0;
         this.cartService.items.map(item => {
             if (item.voucher?.id === cartVoucher.voucher?.id) {
-                if (item.total! - 1 > 1) {
+                if (item.total! - 1 >= 1) {
                     item.total = item.total! - 1;
                 } else {
                     window.console.log(item.total!);
@@ -115,11 +115,14 @@ export class VoucherListComponent implements OnInit {
             }
             i++;
         });
+        this.cartService.changeItem(3);
         this.cartService.saveCart();
     }
 
     deleteItem(cartVoucher: ICartVoucher): void {
         this.cartService.deleteItem(cartVoucher);
+        this.cartService.changeItem(4);
+
         this.CartVoucher = this.cartService.items;
     }
 }

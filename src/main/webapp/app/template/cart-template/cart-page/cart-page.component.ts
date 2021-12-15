@@ -9,12 +9,12 @@ import { ICartVoucher } from 'app/entities/my-cart/CartVoucher.model';
 })
 export class CartPageComponent implements OnInit {
     cartItem: ICartVoucher[];
-    isCheckAll: boolean;
+    // isCheckAll: boolean;
     isCheckitem: boolean[];
     constructor(private cartService: CartService) {
         this.isCheckitem = [];
         this.cartItem = [];
-        this.isCheckAll = true;
+        // this.isCheckAll = true;
     }
 
     ngOnInit(): void {
@@ -26,11 +26,12 @@ export class CartPageComponent implements OnInit {
         this.cartItem = this.cartService.getItems();
     }
 
-    isCheckedAllAgain(isCheckall: any): void {
-        this.isCheckAll = isCheckall;
-    }
+    // isCheckedAllAgain(isCheckall: any): void {
+    //     this.isCheckAll = isCheckall;
+    // }
 
     isChangeCheckitem(isCheckitem: any): void {
-        this.isCheckitem = isCheckitem;
+        this.isCheckitem = [];
+        this.isCheckitem = [...isCheckitem];
     }
 }

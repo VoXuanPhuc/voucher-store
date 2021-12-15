@@ -24,7 +24,7 @@ export class DetailVoucherComponent implements OnInit {
         private storeService: StoreService,
         private voucherCodeService: VoucherCodeService,
         private eventService: EventService,
-        private cartSerive: CartService
+        private cartService: CartService
     ) {
         this.availableVoucher = 0;
         this.selectedVoucher = 1;
@@ -66,18 +66,20 @@ export class DetailVoucherComponent implements OnInit {
     addToCart(voucher: IVoucher): void {
         const cartVoucher = new CartVoucher(this.selectedVoucher, voucher);
 
-        if (!this.cartSerive.checkItemInCart(cartVoucher)) {
-            this.cartSerive.addToCart(cartVoucher);
-            this.cartSerive.saveCart();
+        if (!this.cartService.checkItemInCart(cartVoucher)) {
+            this.cartService.addToCart(cartVoucher);
+            this.cartService.saveCart();
+            window.alert('Add to cart success');
         } else {
-            this.cartSerive.items.map(item => {
+            this.cartService.items.map(item => {
                 if (item.voucher?.id === cartVoucher.voucher?.id) {
                     if (this.availableVoucher >= item.total! + this.selectedVoucher) {
                         item.total = item.total! + this.selectedVoucher;
                     }
                 }
             });
-            this.cartSerive.saveCart();
+            this.cartService.changeItem(5);
+            this.cartService.saveCart();
             window.alert('Add to cart success');
         }
     }
