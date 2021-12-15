@@ -55,4 +55,7 @@ public interface VoucherCodeService {
     void delete(Long id);
 
     Long countVoucherCodeByVoucher(Voucher voucher, VoucherStatus voucherStatus);
+
+    //find voucher available by quantity
+    List<VoucherCodeDTO> findByStatusIdAndVoucherIdAndLimit(long statusId, long voucherId, int limit);
 }

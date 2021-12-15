@@ -1,25 +1,38 @@
 .list_service li {
-  color: #464444;
-  background-color: transparent;
-  margin-left: 10px;
-  padding-left: 40px;
-  margin-top: 1px;
+    color: #464444;
+    background-color: transparent;
+    margin-left: 10px;
+    padding-left: 40px;
+    margin-top: 1px;
 }
 .list_service li .iconify.ml-2.mr-5 {
-  color: #464444;
+    color: #464444;
 }
 .list_service li:hover .iconify.ml-2.mr-5 {
-  color: #dc3545;
+    color: #dc3545;
 }
 
 .list_service .li_active {
-  background-color: #ffdce0;
-  color: #dc3545;
-  cursor: pointer;
+    background-color: #ffdce0;
+    color: #dc3545;
+    cursor: pointer;
 }
 
 .list_service li:hover {
-  background-color: #ffdce0;
-  color: #dc3545;
-  cursor: pointer;
+    background-color: #ffdce0;
+    color: #dc3545;
+    cursor: pointer;
+}
+
+#reload {
+    color: #df4a63;
+    margin-left: 100px;
+}
+
+#reload:hover {
+    color: #bd2d45;
+    margin-left: 100px;
+    transform: scale(1.03);
+    transition: all 0.8s;
+    cursor: pointer;
 }

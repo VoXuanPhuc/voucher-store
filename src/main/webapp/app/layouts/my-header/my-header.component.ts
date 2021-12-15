@@ -14,11 +14,13 @@ export class MyHeaderComponent implements OnInit, AfterViewChecked {
     isHeaderFix = true;
     lastScrollTop = 0;
     jwtSession = '';
+    keyword?: string | null;
 
     itemInCart: number;
 
     constructor(private router: Router, private loginService: LoginService, private cartService: CartService) {
         this.itemInCart = 0;
+        this.keyword = null;
     }
 
     ngOnInit(): void {
@@ -33,6 +35,12 @@ export class MyHeaderComponent implements OnInit, AfterViewChecked {
 
     ngAfterViewChecked(): void {
         this.itemInCart = this.cartService.countTotalInCart();
+    }
+
+    closeHeader(): void {
+        this.isHeaderFix = false;
+        this.isDisplayCategory = false;
+        this.isDisplayLogin = false;
     }
 
     isLogin(): boolean {
@@ -68,5 +76,13 @@ export class MyHeaderComponent implements OnInit, AfterViewChecked {
         this.loginService.logout();
         location.replace('/login');
         // this.router.navigate(['/login']);
+    }
+
+    onSearch(key: string): void {
+        if (!key) {
+            return;
+        }
+        this.keyword = key;
+        this.router.navigate(['/vouchers', key], { skipLocationChange: true });
     }
 }

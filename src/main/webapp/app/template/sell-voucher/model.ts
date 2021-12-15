@@ -19,8 +19,15 @@ export interface IMyFilter {
     limit?: number;
     type?: number | null;
     sort?: string | null;
+    search?: string | null;
 }
 
 export class MyFilter implements IMyFilter {
-    constructor(public page?: number, public limit?: number, public type?: number | null, public sort?: string | null) {}
+    constructor(
+        public page?: number,
+        public limit?: number,
+        public type?: number | null,
+        public sort?: string | null,
+        public search?: string | null
+    ) {}
 }

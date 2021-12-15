@@ -1,12 +1,12 @@
 <div class="main-home">
     <!-- Part 2.1: Search filter -->
-    <jhi-voucher-sort (optionSelectedChanged)="optionSelectedChangedHandler($event)"></jhi-voucher-sort>
+    <jhi-voucher-sort [keyword]="myFilter?.search" (optionSelectedChanged)="optionSelectedChangedHandler($event)"> </jhi-voucher-sort>
     <!-- Part 2.2: Service-left and card-product-right -->
     <div class="container main-body d-flex px-0 mt-1">
         <!-- Part 2.2.1: Service-left -->
         <div class="service_left">
             <!-- item-1: list service -->
-            <jhi-voucher-service (typeChanged)="serviceTypeChangedHandler($event)"></jhi-voucher-service>
+            <jhi-voucher-service (typeChanged)="serviceTypeChangedHandler($event)"> </jhi-voucher-service>
 
             <!-- item-2: Price range -->
             <jhi-price-range (priceRangeChanged)="priceRangeChangedHandler($event)"></jhi-price-range>

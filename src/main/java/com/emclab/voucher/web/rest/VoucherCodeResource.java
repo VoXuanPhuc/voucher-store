@@ -129,7 +129,7 @@ public class VoucherCodeResource {
      * or with status {@code 500 (Internal Server Error)} if the voucherCodeDTO couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/voucher-codes/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/voucher-codes/{id}")
     public ResponseEntity<VoucherCodeDTO> partialUpdateVoucherCode(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody VoucherCodeDTO voucherCodeDTO
@@ -206,5 +206,16 @@ public class VoucherCodeResource {
     @GetMapping("/voucher-codes/voucher-codes-of-currentuser")
     public ResponseEntity<Object> getVoucherCodeOfCurrentUser(@RequestParam Map<String, Object> param, Authentication authentication) {
         return ResponseEntity.ok(voucherCodeService.getVoucherCodeByOrderOfCurrentUser(param, authentication));
+    }
+
+    @GetMapping(path = "/voucher-codes", params = { "voucherId", "statusId", "limit" })
+    public ResponseEntity<Object> getByStatusAndVoucher(@RequestParam Map<String, String> params) {
+        int voucherId = Integer.parseInt(params.get("voucherId"));
+        int statusId = Integer.parseInt(params.get("statusId"));
+        int limit = Integer.parseInt(params.get("limit"));
+
+        List<VoucherCodeDTO> voucherCodeDTOs = voucherCodeService.findByStatusIdAndVoucherIdAndLimit(statusId, voucherId, limit);
+
+        return ResponseEntity.ok(voucherCodeDTOs);
     }
 }

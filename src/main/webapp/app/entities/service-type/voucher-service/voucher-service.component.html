@@ -1,6 +1,11 @@
 <!-- item-1: list service -->
 <div class="list_service">
-    <p class="text-danger ml-4 mt-3"><strong>Service</strong></p>
+    <p class="text-danger ml-4 mt-3">
+        <strong>Service</strong>
+        <strong (click)="setDefaultValue()"
+            ><span id="reload" class="iconify" data-icon="mdi:refresh-circle" data-width="28" data-height="28"> </span
+        ></strong>
+    </p>
     <ul class="list-group border-0 w-100 border-0 bg-transparent" id="">
         <li
             *ngFor="let type of serviceTypes; let i = index"

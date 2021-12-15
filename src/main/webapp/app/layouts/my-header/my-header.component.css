@@ -65,14 +65,15 @@
     display: none;
 } */
 
-#listview-user-div {
+.active {
+    color: #c82333 !important;
 }
 
 #listview-user {
     width: 15%;
     position: relative;
-    margin-top: -40px;
-    right: -85%;
+    margin-top: -47px;
+    right: -81%;
 }
 
 #listview-user li {

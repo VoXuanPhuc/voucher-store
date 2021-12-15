@@ -31,4 +31,12 @@ public interface VoucherRepository extends JpaRepository<Voucher, Long> {
     List<Voucher> findByType(ServiceType type);
 
     List<Voucher> findByType(ServiceType type, Pageable pageable);
+
+    List<Voucher> findByNameContaining(String name);
+
+    List<Voucher> findByNameContaining(String name, Pageable pageable);
+
+    List<Voucher> findByTypeAndNameContaining(ServiceType type, String name);
+
+    List<Voucher> findByTypeAndNameContaining(ServiceType type, String name, Pageable pageable);
 }
