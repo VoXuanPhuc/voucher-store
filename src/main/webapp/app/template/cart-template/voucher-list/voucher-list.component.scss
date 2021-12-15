@@ -1,7 +1,7 @@
 /* Part 2.1: voucher-cart */
 .voucher-cart {
     position: relative;
-    width: 105%;
+    width: 720px;
     /* height: px; */
     background: transparent;
     margin: 0px 0px;
@@ -127,4 +127,8 @@ button {
     position: relative;
     top: -5px;
     left: -6px;
+}
+
+#input-quantity {
+    text-align: center;
 }

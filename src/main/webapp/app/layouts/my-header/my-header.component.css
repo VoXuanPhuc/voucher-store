@@ -1,61 +1,61 @@
 /* fixel header */
 * {
-  font-family: 'Varela Round', sans-serif;
-  margin: O auto;
+    font-family: 'Varela Round', sans-serif;
+    margin: O auto;
 }
 #site-header {
-  top: 0;
-  width: 100%;
-  height: 110px;
-  position: sticky;
-  transition: all 0.3s ease;
-  z-index: 100;
-  background-color: rgb(255, 255, 255);
+    top: 0;
+    width: 100%;
+    height: 110px;
+    position: sticky;
+    transition: all 0.3s ease;
+    z-index: 100;
+    background-color: rgb(255, 255, 255);
 }
 /* css for header hiding and showing */
 #site-header.hide {
-  top: -117px;
+    top: -117px;
 }
 
 .img_logo_header {
-  width: 60%;
-  height: 60%;
-  object-fit: cover;
+    width: 60%;
+    height: 60%;
+    object-fit: cover;
 }
 
 .container_input span {
-  border-radius: 30px;
+    border-radius: 30px;
 }
 
 .container_input input {
-  border-radius: 30px;
+    border-radius: 30px;
 }
 /* button category */
 /* #listview-category {
     display: none;
 } */
 #listview-category {
-  margin-left: 90px;
-  margin-top: -40px;
+    margin-left: 90px;
+    margin-top: -40px;
 }
 
 #listview-category li {
-  width: 300px;
+    width: 300px;
 }
 
 #listview-category .iconify.ml-2.mr-5 {
-  color: #e94560;
+    color: #e94560;
 }
 #listview-category li:hover .iconify.ml-2.mr-5 {
-  color: #ffffff;
+    color: #ffffff;
 }
 #listview-category li:hover {
-  color: #ffffff;
-  cursor: pointer;
+    color: #ffffff;
+    cursor: pointer;
 }
 #listview-category li:hover {
-  background-color: #db606c;
-  opacity: 1;
+    background-color: #db606c;
+    opacity: 1;
 }
 
 /* button for user */
@@ -69,84 +69,103 @@
 }
 
 #listview-user {
-  width: 15%;
-  position: relative;
-  margin-top: -40px;
-  right: -85%;
+    width: 15%;
+    position: relative;
+    margin-top: -40px;
+    right: -85%;
 }
 
 #listview-user li {
-  width: 150px;
-  border: none;
-  background: #fcd0d0;
+    width: 150px;
+    border: none;
+    background: #fcd0d0;
 }
 #listview-user li a {
-  color: #dc3545;
-  text-decoration: none;
+    color: #dc3545;
+    text-decoration: none;
 }
 #listview-user li:hover {
-  background: #f3d9d9;
+    background: #f3d9d9;
 }
 #listview-user li:hover a {
-  color: #dc3545;
-  text-decoration: none;
+    color: #dc3545;
+    text-decoration: none;
 }
 
 /* ////////// */
 
 @media only screen and (max-width: 587px) {
-  .search_bar {
-    display: none;
-  }
-  .container-fluid.header .row {
-    display: flex;
-  }
+    .search_bar {
+        display: none;
+    }
+    .container-fluid.header .row {
+        display: flex;
+    }
 }
 @media only screen and (max-width: 600px) {
-  .search_bar {
-    display: none;
-  }
-  .container-fluid.header .row {
-    display: flex;
-  }
-  #listview-user {
-    position: relative;
-    margin-top: -20px;
-    top: -30px;
-    right: -30%;
-  }
-  #listview-user1 {
-    position: relative;
-    margin-top: -20px;
-    top: -30px;
-    right: -30%;
-  }
+    .search_bar {
+        display: none;
+    }
+    .container-fluid.header .row {
+        display: flex;
+    }
+    #listview-user {
+        position: relative;
+        margin-top: -20px;
+        top: -30px;
+        right: -30%;
+    }
+    #listview-user1 {
+        position: relative;
+        margin-top: -20px;
+        top: -30px;
+        right: -30%;
+    }
 }
 
 @media only screen and (max-width: 767px) {
-  #listview-user {
-    position: relative;
-    margin-top: 10px;
-    width: 100%;
-  }
-  #listview-user1 {
-    position: relative;
-    margin-top: 10px;
-    width: 100%;
-  }
+    #listview-user {
+        position: relative;
+        margin-top: 10px;
+        width: 100%;
+    }
+    #listview-user1 {
+        position: relative;
+        margin-top: 10px;
+        width: 100%;
+    }
 }
 
 /* menu header */
 .container_menu_header ul li {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 #btn-cart,
 #btn-user02 {
-  width: 45px;
-  height: 45px;
+    width: 45px;
+    height: 45px;
 }
 
 #btn-cart:hover .iconify {
-  color: #3393ca;
+    color: #3393ca;
+}
+
+/* Thêm label cho btn cart  */
+#btn-header-right {
+    position: relative;
+}
+.btn-notification-cart {
+    font-size: 7px;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    padding: 5px 5px;
+    border: 0.5px solid #dc3545;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #dc3545;
+    font-weight: bold;
 }

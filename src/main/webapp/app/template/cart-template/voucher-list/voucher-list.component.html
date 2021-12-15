@@ -4,7 +4,14 @@
         <tr>
             <th id="voucher">
                 <label class="checkbox mx-2">
-                    <input class="mr-3" type="checkbox" id="checkbox_address_DaNang" name="horns" />
+                    <input
+                        class="mr-3"
+                        type="checkbox"
+                        [checked]="isCheckedAll"
+                        id="checkbox_address_DaNang"
+                        name="horns"
+                        (click)="togleCheckedAll()"
+                    />
                     <i class="mr-3 icon-checkbox"></i> Voucher
                 </label>
             </th>
@@ -12,22 +19,30 @@
             <th id="price">&emsp;Price</th>
         </tr>
         <!-- row1 -->
-        <tr>
+        <tr *ngFor="let cartVoucher of CartVoucher; let i = index">
             <td class="voucher">
                 <label class="checkbox mx-2">
-                    <input class="" type="checkbox" id="checkbox_address_DaNang" name="horns" />
+                    <input
+                        [checked]="checkeditem[i] === true"
+                        class=""
+                        (click)="ischeckItem(i)"
+                        type="checkbox"
+                        id="checkbox_address_DaNang"
+                        name="horns"
+                    />
                     <i class="icon-checkbox"></i>
                 </label>
 
                 <div class="img-voucher-description">
-                    <img src="../image/home/card/img_card_01.png" alt="" />
-                    <p style="font-size: 13px; margin: 0px 10px">Sản phẩm skin care</p>
+                    <!-- {{cartVoucher.voucher!.voucherImages -->
+                    <img src="../../../content/images/landingpage/card/img_card_01.png" alt="" />
+                    <p style="font-size: 13px; margin: 0px 10px">{{ cartVoucher.voucher?.name }}</p>
                 </div>
             </td>
             <td class="quantity mt-2">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <button class="btn btn-outline-danger" type="button">
+                        <button class="btn btn-outline-danger" type="button" (click)="minusToCart(cartVoucher)">
                             <span id="icon-minus" class="iconify" data-icon="entypo:minus"></span>
                         </button>
                     </div>
@@ -35,13 +50,13 @@
                         id="input-quantity"
                         type="text"
                         class="form-control input"
-                        placeholder="10"
+                        placeholder="{{ cartVoucher.total }}"
                         aria-label=""
                         aria-describedby="basic-addon1"
                         style="font-size: 13px"
                     />
                     <div class="input-group-append">
-                        <button class="btn btn-outline-danger" type="button">
+                        <button class="btn btn-outline-danger" type="button" (click)="addToCart(cartVoucher)">
                             <span id="icon-plus" class="iconify" data-icon="entypo:plus"></span>
                         </button>
                     </div>
@@ -49,192 +64,14 @@
             </td>
             <td class="price">
                 <div style="font-size: 13px; width: 100%; display: flex">
-                    <span class="col-10 mt-2" style="font-size: 13px">500.000.000 vnd</span>
-                    <button class="col-2 border-0 bg-transparent px-0" style="font-size: 15px; width: 20px; position: relative; right: 0px">
-                        <span class="iconify" data-icon="iwwa:delete"></span>
-                    </button>
-                </div>
-            </td>
-        </tr>
-
-        <!-- row1 -->
-        <tr>
-            <td class="voucher">
-                <label class="checkbox mx-2">
-                    <input class="" type="checkbox" id="checkbox_address_DaNang" name="horns" />
-                    <i class="icon-checkbox"></i>
-                </label>
-
-                <div class="img-voucher-description">
-                    <img src="../image/home/card/img_card_01.png" alt="" />
-                    <p style="font-size: 13px; margin: 0px 10px">Sản phẩm skin care</p>
-                </div>
-            </td>
-            <td class="quantity mt-2">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-minus" class="iconify" data-icon="entypo:minus"></span>
-                        </button>
-                    </div>
-                    <input
-                        id="input-quantity"
-                        type="text"
-                        class="form-control input"
-                        placeholder="10"
-                        aria-label=""
-                        aria-describedby="basic-addon1"
-                        style="font-size: 13px"
-                    />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-plus" class="iconify" data-icon="entypo:plus"></span>
-                        </button>
-                    </div>
-                </div>
-            </td>
-            <td class="price">
-                <div style="font-size: 13px; width: 100%; display: flex">
-                    <span class="col-10 mt-2" style="font-size: 13px">500.000.000 vnd</span>
-                    <button class="col-2 border-0 bg-transparent px-0" style="font-size: 15px; width: 20px; position: relative; right: 0px">
-                        <span class="iconify" data-icon="iwwa:delete"></span>
-                    </button>
-                </div>
-            </td>
-        </tr>
-
-        <!-- row1 -->
-        <tr>
-            <td class="voucher">
-                <label class="checkbox mx-2">
-                    <input class="" type="checkbox" id="checkbox_address_DaNang" name="horns" />
-                    <i class="icon-checkbox"></i>
-                </label>
-
-                <div class="img-voucher-description">
-                    <img src="../image/home/card/img_card_01.png" alt="" />
-                    <p style="font-size: 13px; margin: 0px 10px">Sản phẩm skin care</p>
-                </div>
-            </td>
-            <td class="quantity mt-2">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-minus" class="iconify" data-icon="entypo:minus"></span>
-                        </button>
-                    </div>
-                    <input
-                        id="input-quantity"
-                        type="text"
-                        class="form-control input"
-                        placeholder="10"
-                        aria-label=""
-                        aria-describedby="basic-addon1"
-                        style="font-size: 13px"
-                    />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-plus" class="iconify" data-icon="entypo:plus"></span>
-                        </button>
-                    </div>
-                </div>
-            </td>
-            <td class="price">
-                <div style="font-size: 13px; width: 100%; display: flex">
-                    <span class="col-10 mt-2" style="font-size: 13px">500.000.000 vnd</span>
-                    <button class="col-2 border-0 bg-transparent px-0" style="font-size: 15px; width: 20px; position: relative; right: 0px">
-                        <span class="iconify" data-icon="iwwa:delete"></span>
-                    </button>
-                </div>
-            </td>
-        </tr>
-
-        <!-- row1 -->
-        <tr>
-            <td class="voucher">
-                <label class="checkbox mx-2">
-                    <input class="" type="checkbox" id="checkbox_address_DaNang" name="horns" />
-                    <i class="icon-checkbox"></i>
-                </label>
-
-                <div class="img-voucher-description">
-                    <img src="../image/home/card/img_card_01.png" alt="" />
-                    <p style="font-size: 13px; margin: 0px 10px">Sản phẩm skin care</p>
-                </div>
-            </td>
-            <td class="quantity mt-2">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-minus" class="iconify" data-icon="entypo:minus"></span>
-                        </button>
-                    </div>
-                    <input
-                        id="input-quantity"
-                        type="text"
-                        class="form-control input"
-                        placeholder="10"
-                        aria-label=""
-                        aria-describedby="basic-addon1"
-                        style="font-size: 13px"
-                    />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-plus" class="iconify" data-icon="entypo:plus"></span>
-                        </button>
-                    </div>
-                </div>
-            </td>
-            <td class="price">
-                <div style="font-size: 13px; width: 100%; display: flex">
-                    <span class="col-10 mt-2" style="font-size: 13px">500.000.000 vnd</span>
-                    <button class="col-2 border-0 bg-transparent px-0" style="font-size: 15px; width: 20px; position: relative; right: 0px">
-                        <span class="iconify" data-icon="iwwa:delete"></span>
-                    </button>
-                </div>
-            </td>
-        </tr>
-
-        <!-- row1 -->
-        <tr>
-            <td class="voucher">
-                <label class="checkbox mx-2">
-                    <input class="" type="checkbox" id="checkbox_address_DaNang" name="horns" />
-                    <i class="icon-checkbox"></i>
-                </label>
-
-                <div class="img-voucher-description">
-                    <img src="../image/home/card/img_card_01.png" alt="" />
-                    <p style="font-size: 13px; margin: 0px 10px">Sản phẩm skin care</p>
-                </div>
-            </td>
-            <td class="quantity mt-2">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-minus" class="iconify" data-icon="entypo:minus"></span>
-                        </button>
-                    </div>
-                    <input
-                        id="input-quantity"
-                        type="text"
-                        class="form-control input"
-                        placeholder="10"
-                        aria-label=""
-                        aria-describedby="basic-addon1"
-                        style="font-size: 13px"
-                    />
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-danger" type="button">
-                            <span id="icon-plus" class="iconify" data-icon="entypo:plus"></span>
-                        </button>
-                    </div>
-                </div>
-            </td>
-            <td class="price">
-                <div style="font-size: 13px; width: 100%; display: flex">
-                    <span class="col-10 mt-2" style="font-size: 13px">500.000.000 vnd</span>
-                    <button class="col-2 border-0 bg-transparent px-0" style="font-size: 15px; width: 20px; position: relative; right: 0px">
+                    <span class="col-10 mt-2" style="font-size: 13px">
+                        {{ cartVoucher.voucher?.price | currency: 'VND':'symbol':'1.0-0':'vi-VN' }}</span
+                    >
+                    <button
+                        (click)="deleteItem(cartVoucher)"
+                        class="col-2 border-0 bg-transparent px-0"
+                        style="font-size: 15px; width: 20px; position: relative; right: 0px"
+                    >
                         <span class="iconify" data-icon="iwwa:delete"></span>
                     </button>
                 </div>
