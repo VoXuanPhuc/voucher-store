@@ -1,5 +1,5 @@
 import { ServiceTypeService } from './../service/service-type.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { IServiceType } from '../service-type.model';
 import { faFilm, faHeartbeat } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,11 +12,19 @@ export class VoucherServiceComponent implements OnInit {
     serviceTypes?: IServiceType[];
     isLoading = false;
     selectedIndex?: number = -1;
-    typeId?: number;
+    typeId?: number | null;
 
     @Output() typeChanged: EventEmitter<number> = new EventEmitter();
 
     constructor(private serviceTypeService: ServiceTypeService) {}
+
+    // ngOnChanges(changes: SimpleChanges): void {
+    //   for (const property in changes) {
+    //     if (property === 'typeId') {
+    //       this.selectedIndex = -1;
+    //     }
+    //   }
+    // }
 
     ngOnInit(): void {
         this.loadAll();
@@ -41,7 +49,16 @@ export class VoucherServiceComponent implements OnInit {
     }
 
     onTypeChanged(id: number): void {
+        if (this.typeId === id) {
+            this.selectedIndex = -1;
+        }
         this.typeId = id;
         this.typeChanged.emit(id);
+    }
+
+    setDefaultValue(): void {
+        this.selectedIndex = -1;
+        this.typeId = 0;
+        this.onTypeChanged(0);
     }
 }

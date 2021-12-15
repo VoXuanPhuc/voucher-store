@@ -12,8 +12,15 @@
         </div>
         <div class="col-6 col-sm-4 col-xl-6 col-lg-6 col-sm-6">
             <div class="container_input input-group my-3">
-                <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1" />
-                <div class="input-group-prepend">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    #searchName
+                />
+                <div class="input-group-prepend" (click)="onSearch(searchName.value); searchName.value = ''">
                     <span class="btn input-group-text bg-white" id="basic-addon1"
                         ><span class="iconify" data-icon="bx:bx-search-alt-2" style="color: #615757"></span
                     ></span>

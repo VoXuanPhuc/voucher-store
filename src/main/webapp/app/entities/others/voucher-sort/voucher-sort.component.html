@@ -1,9 +1,15 @@
 <!-- Part 2.1: Search filter -->
 <div class="container search_filter d-flex">
-    <div class="title d-none d-sm-block">
-        <strong>Searching for “voucher"</strong>
+    <div *ngIf="keyword; else elseBlock" class="title d-none d-sm-block">
+        <strong>Search results for “{{ keyword }}"</strong>
         <!-- <p class="m-0">30 result</p> -->
     </div>
+    <ng-template #elseBlock>
+        <div ngte class="title d-none d-sm-block">
+            <strong>Search results for all vouchers</strong>
+            <!-- <p class="m-0">30 result</p> -->
+        </div>
+    </ng-template>
     <div class="combobox_filter d-flex">
         <span class="mt-2 mr-3">Sort by:</span>
         <div class="form-group">

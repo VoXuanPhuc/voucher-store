@@ -22,9 +22,16 @@ const routes: Routes = [
             pageTitle: 'Home',
         },
     },
-
     {
         path: 'vouchers',
+        component: SellVoucherComponent,
+        data: {
+            pageTitle: 'Voucher',
+        },
+    },
+
+    {
+        path: 'vouchers/:search',
         component: SellVoucherComponent,
         data: {
             pageTitle: 'Voucher',

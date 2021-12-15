@@ -21,4 +21,6 @@ public interface VoucherCodeRepository extends JpaRepository<VoucherCode, Long> 
     Page<VoucherCode> findByOrder(MyOrder order, Pageable pageable);
 
     Page<VoucherCode> findByOrderIn(List<MyOrder> order, Pageable pageable);
+
+    List<VoucherCode> findByStatusAndVoucher(VoucherStatus status, Voucher voucher, Pageable pageable);
 }
