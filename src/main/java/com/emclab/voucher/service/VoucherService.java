@@ -39,6 +39,8 @@ public interface VoucherService {
 
     List<VoucherDTO> findByTypeId(Long id);
 
+    // List<VoucherDTO> findByTypeIdAndName(Long id, String name);
+
     /**
      * Get all the vouchers with eager load of many-to-many relationships.
      *

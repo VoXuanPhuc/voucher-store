@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
     selector: 'jhi-voucher-sort',
@@ -10,6 +10,8 @@ export class VoucherSortComponent implements OnInit {
     public PRICE_DESC = 'price.desc';
     public NAME_ASC = 'name.asc';
     public NAME_DESC = 'name.desc';
+
+    @Input() keyword?: string | null;
 
     @Output() optionSelectedChanged = new EventEmitter();
 

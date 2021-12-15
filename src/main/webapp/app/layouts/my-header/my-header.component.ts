@@ -13,8 +13,11 @@ export class MyHeaderComponent implements OnInit {
     isHeaderFix = true;
     lastScrollTop = 0;
     jwtSession = '';
+    keyword?: string | null;
 
-    constructor(private router: Router, private loginService: LoginService) {}
+    constructor(private router: Router, private loginService: LoginService) {
+        this.keyword = null;
+    }
 
     ngOnInit(): void {
         const jwt = sessionStorage.getItem('jhi-authenticationToken');
@@ -54,5 +57,13 @@ export class MyHeaderComponent implements OnInit {
         this.loginService.logout();
         location.replace('/login');
         // this.router.navigate(['/login']);
+    }
+
+    onSearch(key: string): void {
+        if (!key) {
+            return;
+        }
+        this.keyword = key;
+        this.router.navigate(['/vouchers', key], { skipLocationChange: true });
     }
 }

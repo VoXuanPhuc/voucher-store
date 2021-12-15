@@ -9,6 +9,8 @@ import com.emclab.voucher.domain.VoucherStatus;
 import com.emclab.voucher.repository.MyOrderRepository;
 import com.emclab.voucher.repository.OrderStatusRepository;
 import com.emclab.voucher.repository.VoucherCodeRepository;
+import com.emclab.voucher.repository.VoucherRepository;
+import com.emclab.voucher.repository.VoucherStatusRepository;
 import com.emclab.voucher.service.CommonService;
 import com.emclab.voucher.service.MyUserService;
 import com.emclab.voucher.service.VoucherCodeService;
@@ -46,19 +48,25 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
     private final VoucherCodeMapper voucherCodeMapper;
 
     @Autowired
-    MyUserService myUserService;
+    private MyUserService myUserService;
 
     @Autowired
-    MyUserMapper myUserMapper;
+    private MyUserMapper myUserMapper;
 
     @Autowired
-    MyOrderRepository myOrderRepository;
+    private MyOrderRepository myOrderRepository;
 
     @Autowired
-    OrderStatusRepository orderStatusRepository;
+    private OrderStatusRepository orderStatusRepository;
 
     @Autowired
-    CommonService commonService;
+    private VoucherRepository voucherReponsitory;
+
+    @Autowired
+    private VoucherStatusRepository voucherStatusRepository;
+
+    @Autowired
+    private CommonService commonService;
 
     public VoucherCodeServiceImpl(VoucherCodeRepository voucherCodeRepository, VoucherCodeMapper voucherCodeMapper) {
         this.voucherCodeRepository = voucherCodeRepository;
@@ -143,5 +151,19 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
         List<Object> result = new ArrayList<Object>(resultVoucherCodeDTOs);
 
         return commonService.findWithPaging(param, totalPage, result);
+    }
+
+    @Override
+    public List<VoucherCodeDTO> findByStatusIdAndVoucherIdAndLimit(long statusId, long voucherId, int limit) {
+        Voucher voucher = voucherReponsitory.getOne(voucherId);
+        VoucherStatus status = voucherStatusRepository.getOne(statusId);
+
+        Pageable pageable = PageRequest.of(0, limit);
+
+        return voucherCodeRepository
+            .findByStatusAndVoucher(status, voucher, pageable)
+            .stream()
+            .map(voucherCodeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 }

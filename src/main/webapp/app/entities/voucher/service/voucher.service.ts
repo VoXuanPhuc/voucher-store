@@ -74,6 +74,9 @@ export class VoucherService {
         if (myFilter.sort) {
             params = params.set('sort', myFilter.sort);
         }
+        if (myFilter.search) {
+            params = params.set('search', myFilter.search);
+        }
 
         window.console.log('Param filterrrrrrrrrrrr duong: ', params);
 

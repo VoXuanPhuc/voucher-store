@@ -117,36 +117,58 @@ public class VoucherServiceImpl implements VoucherService {
     public PaginationResponse findWithPaging(Map<String, Object> params) {
         log.debug("Request to get all Stores with paging");
 
-        int totalItems;
-        List<Voucher> vouchers;
+        int totalItems = 0;
+        List<Voucher> vouchers = null;
 
         params = commonService.updateParam(params, 9);
         int page = Integer.parseInt(params.get("page").toString());
         int limit = Integer.parseInt(params.get("limit").toString());
         Pageable pageable = PageRequest.of(page - 1, limit);
 
-        if (params.get("type") != null) {
+        if (params.get("type") == null && params.get("search") == null && params.get("sort") == null) {
+            totalItems = voucherRepository.findAll().size();
+            vouchers = voucherRepository.findAll(pageable).getContent();
+        } else if (params.get("type") == null && params.get("search") == null && params.get("sort") != null) {
+            Order order = getOrder(params.get("sort").toString());
+            pageable = PageRequest.of(page - 1, limit, Sort.by(order));
+            totalItems = voucherRepository.findAll().size();
+            vouchers = voucherRepository.findAll(pageable).getContent();
+        } else if (params.get("type") == null && params.get("search") != null && params.get("sort") == null) {
+            String name = params.get("search").toString();
+            totalItems = voucherRepository.findByNameContaining(name).size();
+            vouchers = voucherRepository.findByNameContaining(name, pageable);
+        } else if (params.get("type") == null && params.get("search") != null && params.get("sort") != null) {
+            String name = params.get("search").toString();
+            Order order = getOrder(params.get("sort").toString());
+            pageable = PageRequest.of(page - 1, limit, Sort.by(order));
+            totalItems = voucherRepository.findByNameContaining(name).size();
+            vouchers = voucherRepository.findByNameContaining(name, pageable);
+        } else if (params.get("type") != null && params.get("search") == null && params.get("sort") == null) {
             long typeId = Integer.parseInt(params.get("type").toString());
             ServiceType type = typeReponsitory.findById(typeId).get();
             totalItems = voucherRepository.findByType(type).size();
-
-            if (params.get("sort") == null) {
-                vouchers = voucherRepository.findByType(type, pageable);
-            } else {
-                Order order = getOrder(params.get("sort").toString());
-                pageable = PageRequest.of(page - 1, limit, Sort.by(order));
-                vouchers = voucherRepository.findByType(type, pageable);
-            }
-        } else {
-            totalItems = findAll().size();
-
-            if (params.get("sort") == null) {
-                vouchers = voucherRepository.findAll(pageable).getContent();
-            } else {
-                Order order = getOrder(params.get("sort").toString());
-                pageable = PageRequest.of(page - 1, limit, Sort.by(order));
-                vouchers = voucherRepository.findAll(pageable).getContent();
-            }
+            vouchers = voucherRepository.findByType(type, pageable);
+        } else if (params.get("type") != null && params.get("search") == null && params.get("sort") != null) {
+            long typeId = Integer.parseInt(params.get("type").toString());
+            ServiceType type = typeReponsitory.findById(typeId).get();
+            Order order = getOrder(params.get("sort").toString());
+            pageable = PageRequest.of(page - 1, limit, Sort.by(order));
+            totalItems = voucherRepository.findByType(type).size();
+            vouchers = voucherRepository.findByType(type, pageable);
+        } else if (params.get("type") != null && params.get("search") != null && params.get("sort") == null) {
+            long typeId = Integer.parseInt(params.get("type").toString());
+            ServiceType type = typeReponsitory.findById(typeId).get();
+            String name = params.get("search").toString();
+            totalItems = voucherRepository.findByTypeAndNameContaining(type, name).size();
+            vouchers = voucherRepository.findByTypeAndNameContaining(type, name, pageable);
+        } else if (params.get("type") != null && params.get("search") != null && params.get("sort") != null) {
+            long typeId = Integer.parseInt(params.get("type").toString());
+            ServiceType type = typeReponsitory.findById(typeId).get();
+            String name = params.get("search").toString();
+            Order order = getOrder(params.get("sort").toString());
+            pageable = PageRequest.of(page - 1, limit, Sort.by(order));
+            totalItems = voucherRepository.findByTypeAndNameContaining(type, name).size();
+            vouchers = voucherRepository.findByTypeAndNameContaining(type, name, pageable);
         }
 
         List<VoucherDTO> voucherDTOs = vouchers.stream().map(voucherMapper::toDto).collect(Collectors.toCollection(LinkedList::new));

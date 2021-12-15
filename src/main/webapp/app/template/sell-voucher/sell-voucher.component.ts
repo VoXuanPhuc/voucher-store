@@ -10,6 +10,7 @@ import { VoucherService } from 'app/entities/voucher/service/voucher.service';
 import { IVoucher } from 'app/entities/voucher/voucher.model';
 import { EntityResponseType } from './../../entities/voucher-status/service/voucher-status.service';
 import { PriceRange, IMyFilter, MyFilter } from './model';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     selector: 'jhi-sell-voucher',
@@ -31,22 +32,45 @@ export class SellVoucherComponent implements OnInit {
 
     priceRange?: PriceRange = new PriceRange(0, 1000000);
 
+    search?: string | null;
+
     myFilter?: IMyFilter = {
         page: 1,
         limit: 6,
         type: 0,
         sort: '',
+        search: '',
     };
 
     constructor(
         private voucherService: VoucherService,
         private voucherImageService: VoucherImageService,
         private eventService: EventService,
-        private storeService: StoreService
+        private storeService: StoreService,
+        private route: ActivatedRoute
     ) {}
 
     ngOnInit(): void {
+        this.route.paramMap.subscribe(params => {
+            if (params.get('search')) {
+                if (this.myFilter?.search != null) {
+                    this.myFilter.search = params.get('search');
+                }
+                this.loadWithPaging();
+            }
+        });
+
         this.loadWithPaging();
+    }
+
+    setValueDefault(): void {
+        this.myFilter = {
+            page: 1,
+            limit: 6,
+            type: 0,
+            sort: '',
+            search: '',
+        };
     }
 
     loadWithPaging(): void {
