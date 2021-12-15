@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CartService } from 'app/entities/my-cart/cart.service';
 import { LoginService } from 'app/login/login.service';
 
 @Component({
@@ -7,18 +8,31 @@ import { LoginService } from 'app/login/login.service';
     templateUrl: './my-header.component.html',
     styleUrls: ['./my-header.component.css'],
 })
-export class MyHeaderComponent implements OnInit {
+export class MyHeaderComponent implements OnInit, AfterViewChecked {
     isDisplayLogin = false;
     isDisplayCategory = false;
     isHeaderFix = true;
     lastScrollTop = 0;
     jwtSession = '';
 
-    constructor(private router: Router, private loginService: LoginService) {}
+    itemInCart: number;
+
+    constructor(private router: Router, private loginService: LoginService, private cartService: CartService) {
+        this.itemInCart = 0;
+    }
 
     ngOnInit(): void {
         const jwt = sessionStorage.getItem('jhi-authenticationToken');
         this.jwtSession = jwt !== null ? jwt : '';
+
+        this.cartService.totalItemChange.subscribe(item => {
+            window.console.log(item);
+            this.itemInCart = this.cartService.countTotalInCart();
+        });
+    }
+
+    ngAfterViewChecked(): void {
+        this.itemInCart = this.cartService.countTotalInCart();
     }
 
     isLogin(): boolean {
