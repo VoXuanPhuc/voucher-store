@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -140,7 +141,9 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
 
         // make page and page able
 
-        Pageable pageRequest = PageRequest.of(page - 1, limit);
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+
+        Pageable pageRequest = PageRequest.of(page - 1, limit, sort);
 
         Page<VoucherCode> itemPaging = voucherCodeRepository.findByOrderIn(myOrders, pageRequest);
 
