@@ -11,6 +11,7 @@ import { MyUser } from './../../../entities/my-user/my-user.model';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CartService } from 'app/entities/my-cart/cart.service';
 import { ICartVoucher } from 'app/entities/my-cart/CartVoucher.model';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'jhi-checkout',
@@ -191,7 +192,7 @@ export class CheckoutComponent implements OnChanges, OnInit {
         let order: IMyOrder = new MyOrder();
         order.user = this.user;
         order.totalCost = this.total;
-        order.status = new OrderStatus(2);
+        order.status = new OrderStatus(1);
 
         order = (await this.saveOrder(order)).body!;
 
@@ -208,7 +209,30 @@ export class CheckoutComponent implements OnChanges, OnInit {
         }
 
         this.removeCartItemIsChecked(cartItemIsChecked);
+    }
 
-        alert('Buy voucher successfully ><');
+    alerBeferCheckout(): void {
+        Swal.fire({
+            position: 'top',
+            title: 'Are you sure you want to checkout this cart?',
+            text: "You won't be able to revert this!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#02E301',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, checkout it!',
+        }).then(result => {
+            if (result.isConfirmed) {
+                this.onSaveCart();
+
+                Swal.fire({
+                    position: 'top',
+                    icon: 'success',
+                    title: 'Checkout successfully',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+            }
+        });
     }
 }

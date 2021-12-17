@@ -67,6 +67,7 @@
 
 .active {
     color: #c82333 !important;
+    font-weight: 600 !important;
 }
 
 #listview-user {

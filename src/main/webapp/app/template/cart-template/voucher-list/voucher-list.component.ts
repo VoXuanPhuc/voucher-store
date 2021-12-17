@@ -92,8 +92,6 @@ export class VoucherListComponent implements OnInit {
             if (item.voucher?.id === cartVoucher.voucher?.id) {
                 if (this.voucherCode[i] >= item.total! + 1) {
                     item.total = item.total! + 1;
-                } else {
-                    window.alert('Not valid');
                 }
             }
             i++;
@@ -108,9 +106,6 @@ export class VoucherListComponent implements OnInit {
             if (item.voucher?.id === cartVoucher.voucher?.id) {
                 if (item.total! - 1 >= 1) {
                     item.total = item.total! - 1;
-                } else {
-                    window.console.log(item.total!);
-                    window.alert('Not valid');
                 }
             }
             i++;
