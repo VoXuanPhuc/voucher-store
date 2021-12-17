@@ -1,135 +1,139 @@
 .container-fluid.hot_voucher {
-  position: relative;
-  /* top: 150px; */
-  background: #ebf2f5;
+    position: relative;
+    /* top: 150px; */
+    background: #ebf2f5;
 }
 .container-fluid.hot_voucher .row.hot_voucher {
-  background: #ebf2f5;
+    background: #ebf2f5;
 }
 /* star card */
 .card_voucher .star-widget input {
-  display: none;
+    display: none;
 }
 
 .hot_voucher .card_voucher .card-body label {
-  transition: all 0.2s ease;
+    transition: all 0.2s ease;
 }
 
 .hot_voucher .card_voucher .card-body input,
 label {
-  color: #fd4;
+    color: #fd4;
 }
 
 .hot_voucher .card_voucher .card-body input:not(:checked) ~ label:hover,
 .hot_voucher .card_voucher .card-body input:not(:checked) ~ label:hover ~ label {
-  color: #fd4;
+    color: #fd4;
 }
 .hot_voucher .card_voucher .card-body input:checked ~ label {
-  color: #fd4;
+    color: #fd4;
 }
 
 .hot_voucher {
-  height: auto;
+    height: auto;
+}
+
+.hot_voucher .card {
+    border-radius: 10px;
 }
 
 .hot_voucher .card_voucher:hover {
-  transform: scale(1.03);
-  transition: all 0.8s;
+    transform: scale(1.03);
+    transition: all 0.8s;
 }
 
 .hot_voucher .card_voucher img {
-  object-fit: cover;
-  width: 100%;
-  height: 65%;
-  padding: 15px 15px;
-  border-radius: 10%;
-  opacity: 1;
-  transition: 0.5s ease;
-  backface-visibility: hidden;
-  display: block;
+    object-fit: cover;
+    width: 100%;
+    height: 65%;
+    padding: 15px 15px;
+    border-radius: 10%;
+    opacity: 1;
+    transition: 0.5s ease;
+    backface-visibility: hidden;
+    display: block;
 }
 
 .middle {
-  transition: 0.5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  text-align: center;
+    transition: 0.5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .card-title {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .card_voucher:hover {
-  transform: scale(1.03);
-  transition: all 0.8s;
+    transform: scale(1.03);
+    transition: all 0.8s;
 }
 
 .card_voucher:hover img {
-  opacity: 0.6;
+    opacity: 0.6;
 }
 
 .card_voucher:hover .middle {
-  opacity: 1;
-  margin-top: -55px;
+    opacity: 1;
+    margin-top: -55px;
 }
 
 .text_middle {
-  background-color: #f8f8f8;
-  color: #474141;
-  font-size: 10px;
-  padding-top: 20px;
-  padding-bottom: 5px;
-  padding-left: 25px;
-  padding-right: 25px;
-  border-radius: 35px;
+    background-color: #f8f8f8;
+    color: #474141;
+    font-size: 10px;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 35px;
 }
 
 .middle .text_middle input {
-  display: none;
+    display: none;
 }
 .middle .text_middle .icon_hover,
 .icon_heart,
 .icon_cart {
-  color: #474141;
+    color: #474141;
 }
 .middle .text_middle input:not(:checked) ~ label:hover {
-  color: #e94560;
+    color: #e94560;
 }
 /* repon for card */
 @media only screen and (width: 1024px) {
-  .hot_voucher .card_voucher .card-body p {
-    font-size: 10px;
-  }
-  .hot_voucher .card_voucher .card-body .fas.fa-star {
-    font-size: 10px;
-  }
+    .hot_voucher .card_voucher .card-body p {
+        font-size: 10px;
+    }
+    .hot_voucher .card_voucher .card-body .fas.fa-star {
+        font-size: 10px;
+    }
 }
 @media only screen and (min-width: 1025px) {
-  .hot_voucher .card_voucher .card-body p {
-    font-size: 15px;
-  }
-  .fas.fa-star.mr-2.mt-1 {
-    font-size: 12px;
-  }
+    .hot_voucher .card_voucher .card-body p {
+        font-size: 15px;
+    }
+    .fas.fa-star.mr-2.mt-1 {
+        font-size: 12px;
+    }
 }
 
 @media only screen and (max-width: 768px) and (min-width: 320px) {
-  #hot_voucher_02 .card:nth-of-type(1),
-  .card:nth-of-type(2),
-  .card:nth-of-type(3),
-  .card:nth-of-type(4) {
-    display: none;
-  }
+    #hot_voucher_02 .card:nth-of-type(1),
+    .card:nth-of-type(2),
+    .card:nth-of-type(3),
+    .card:nth-of-type(4) {
+        display: none;
+    }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1023px) {
-  #hot_voucher_02 {
-    position: relative;
-    top: 450px;
-  }
+    #hot_voucher_02 {
+        position: relative;
+        top: 450px;
+    }
 }

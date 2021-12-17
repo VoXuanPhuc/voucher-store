@@ -36,7 +36,7 @@ export class SellVoucherComponent implements OnInit {
 
     myFilter?: IMyFilter = {
         page: 1,
-        limit: 6,
+        limit: 9,
         type: 0,
         sort: '',
         search: '',
