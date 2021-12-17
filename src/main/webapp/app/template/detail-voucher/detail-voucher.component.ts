@@ -69,7 +69,7 @@ export class DetailVoucherComponent implements OnInit {
         if (!this.cartService.checkItemInCart(cartVoucher)) {
             this.cartService.addToCart(cartVoucher);
             this.cartService.saveCart();
-            window.alert('Add to cart success');
+            window.alert('Add to cart successfully');
         } else {
             this.cartService.items.map(item => {
                 if (item.voucher?.id === cartVoucher.voucher?.id) {
@@ -80,7 +80,7 @@ export class DetailVoucherComponent implements OnInit {
             });
             this.cartService.changeItem(5);
             this.cartService.saveCart();
-            window.alert('Add to cart success');
+            window.alert('Add to cart successfully');
         }
     }
 }

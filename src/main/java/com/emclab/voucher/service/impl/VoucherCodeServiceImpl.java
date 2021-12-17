@@ -133,7 +133,7 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
         MyUser myUser = myUserMapper.toEntity(myUserService.getcurrentUser(authentication));
 
         // get status (đã thanh toán) of order
-        String orderStatusname = "Đã thanh toán";
+        String orderStatusname = "paid";
         OrderStatus orderStatus = orderStatusRepository.findByName(orderStatusname).get(0);
         //
         List<MyOrder> myOrders = myOrderRepository.findByUserAndStatus(myUser, orderStatus);

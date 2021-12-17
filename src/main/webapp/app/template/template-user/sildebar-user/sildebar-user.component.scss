@@ -1,86 +1,88 @@
 /* Part 2.2.1: Service-left */
 .left-service {
-  margin-top: 30px;
-  width: 320px;
-  height: 95%;
-  border-radius: 5px;
-  background-color: #ffffff;
-  box-shadow: -1px -1px 2px 1px #ccc;
-  padding: 20px 0;
+    margin-top: 30px;
+    width: 320px;
+    height: 95%;
+    border-radius: 5px;
+    background-color: #ffffff;
+    box-shadow: -1px -1px 2px 1px #ccc;
+    padding: 20px 0;
 }
 .left-service li {
-  color: #464444;
-  background-color: transparent;
+    color: #464444;
+    background-color: transparent;
+    margin-top: 1px;
 }
 .left-service li .iconify.ml-2.mr-5 {
-  color: #464444;
+    color: #464444;
 }
 
 .left-service .active {
-  background-color: #ffdce0;
-  color: #dc3545;
+    background-color: #ffdce0;
+    color: #dc3545;
 }
 
 .left-service .active .iconify.ml-2.mr-5 {
-  color: #dc3545;
+    color: #dc3545;
 }
 
 .left-service li:hover .iconify.ml-2.mr-5 {
-  color: #dc3545;
+    color: #dc3545;
 }
 .left-service li:hover {
-  background-color: #ffdce0;
-  color: #dc3545;
+    background-color: #ffdce0;
+    color: #dc3545;
+    cursor: pointer;
 }
 
 /* Reponsive content */
 /* Tablet and mobile */
 @media only screen and (max-width: 1200px) {
-  .left-service {
-    display: none;
-  }
-  .right_service {
-    width: 100%;
-    margin-left: 0;
-  }
-  .my-profile-heading .iconify {
-    width: 30px;
-    height: 30px;
-  }
-  .my-profile-heading h1 {
-    font-size: 25px;
-    margin: 10px 0 0 10px;
-  }
-  .my-profile button {
-    padding: 5px 30px;
-    margin-top: 10px;
-  }
-  .personal-information {
-    font-size: 14px;
-  }
+    .left-service {
+        display: none;
+    }
+    .right_service {
+        width: 100%;
+        margin-left: 0;
+    }
+    .my-profile-heading .iconify {
+        width: 30px;
+        height: 30px;
+    }
+    .my-profile-heading h1 {
+        font-size: 25px;
+        margin: 10px 0 0 10px;
+    }
+    .my-profile button {
+        padding: 5px 30px;
+        margin-top: 10px;
+    }
+    .personal-information {
+        font-size: 14px;
+    }
 
-  /* mobile */
+    /* mobile */
 }
 @media only screen and (max-width: 740px) {
-  .profile-personal-name,
-  .profile-personal-adress {
-    font-size: 14px;
-    display: flex;
-  }
-  .personal-name-tilte,
-  .personal-name-item,
-  .personal-adress-tilte,
-  .personal-adress-item {
-    display: block;
-    width: 50%;
-    margin-left: 0;
-  }
-  .personal-name-tilte p,
-  .personal-name-item p,
-  .personal-adress-tilte p,
-  .personal-adress-item p {
-    width: 100%;
-    height: 40px;
-    margin-left: 10px;
-  }
+    .profile-personal-name,
+    .profile-personal-adress {
+        font-size: 14px;
+        display: flex;
+    }
+    .personal-name-tilte,
+    .personal-name-item,
+    .personal-adress-tilte,
+    .personal-adress-item {
+        display: block;
+        width: 50%;
+        margin-left: 0;
+    }
+    .personal-name-tilte p,
+    .personal-name-item p,
+    .personal-adress-tilte p,
+    .personal-adress-item p {
+        width: 100%;
+        height: 40px;
+        margin-left: 10px;
+    }
 }
