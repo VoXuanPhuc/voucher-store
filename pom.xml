@@ -622,7 +622,7 @@
                         <url>jdbc:mysql://localhost:3306/voucher_hoa</url>
                         <defaultSchemaName>voucher_hoa</defaultSchemaName>
                         <username>root</username>
-                        <password>123456</password>
+                        <password>admin1234</password>
                         <referenceUrl>hibernate:spring:com.emclab.voucher.domain?dialect=org.hibernate.dialect.MySQL8Dialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
                         <verbose>true</verbose>
                         <logging>debug</logging>

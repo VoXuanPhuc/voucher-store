@@ -37,6 +37,12 @@ export class MyHeaderComponent implements OnInit, AfterViewChecked {
         this.itemInCart = this.cartService.countTotalInCart();
     }
 
+    closeHeader(): void {
+        this.isHeaderFix = false;
+        this.isDisplayCategory = false;
+        this.isDisplayLogin = false;
+    }
+
     isLogin(): boolean {
         return this.jwtSession !== '';
     }

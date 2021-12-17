@@ -8,6 +8,8 @@ import { VoucherService } from 'app/entities/voucher/service/voucher.service';
 import { IVoucher } from 'app/entities/voucher/voucher.model';
 import { CartService } from '../../entities/my-cart/cart.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
     selector: 'jhi-detail-voucher',
     templateUrl: './detail-voucher.component.html',
@@ -69,7 +71,7 @@ export class DetailVoucherComponent implements OnInit {
         if (!this.cartService.checkItemInCart(cartVoucher)) {
             this.cartService.addToCart(cartVoucher);
             this.cartService.saveCart();
-            window.alert('Add to cart successfully');
+            this.alterSuccess();
         } else {
             this.cartService.items.map(item => {
                 if (item.voucher?.id === cartVoucher.voucher?.id) {
@@ -78,9 +80,19 @@ export class DetailVoucherComponent implements OnInit {
                     }
                 }
             });
-            this.cartService.changeItem(5);
             this.cartService.saveCart();
-            window.alert('Add to cart successfully');
+            this.alterSuccess();
+            // this.cartService.changeItem(5);
         }
+    }
+
+    alterSuccess(): void {
+        Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Add to cart success',
+            showConfirmButton: false,
+            timer: 1500,
+        });
     }
 }

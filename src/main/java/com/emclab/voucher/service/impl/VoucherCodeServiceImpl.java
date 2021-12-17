@@ -30,6 +30,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -133,14 +134,16 @@ public class VoucherCodeServiceImpl implements VoucherCodeService {
         MyUser myUser = myUserMapper.toEntity(myUserService.getcurrentUser(authentication));
 
         // get status (đã thanh toán) of order
-        String orderStatusname = "Đã thanh toán";
+        String orderStatusname = "paid";
         OrderStatus orderStatus = orderStatusRepository.findByName(orderStatusname).get(0);
         //
         List<MyOrder> myOrders = myOrderRepository.findByUserAndStatus(myUser, orderStatus);
 
         // make page and page able
 
-        Pageable pageRequest = PageRequest.of(page - 1, limit);
+        Sort sort = Sort.by(Sort.Order.desc("id"));
+
+        Pageable pageRequest = PageRequest.of(page - 1, limit, sort);
 
         Page<VoucherCode> itemPaging = voucherCodeRepository.findByOrderIn(myOrders, pageRequest);
 

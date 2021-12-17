@@ -46,10 +46,14 @@
         <div class="col"></div>
         <div class="col-xl-7 col-lg-7 col-md-10 d-sm-none d-none d-md-block">
             <ul class="d-flex">
-                <li class="mx-5"><a class="text-dark" [routerLink]="['/home']">Home</a></li>
-                <li class="mr-5"><a class="text-dark" [routerLink]="['/vouchers']">Voucher</a></li>
-                <li class="mr-5"><a class="text-dark" [routerLink]="['/stores']">Store</a></li>
-                <li class="mr-5"><a class="text-dark" href="#">About us</a></li>
+                <li class="mx-5">
+                    <a style="color: #343a40" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/home']"
+                        >Home</a
+                    >
+                </li>
+                <li class="mr-5"><a style="color: #343a40" routerLinkActive="active" [routerLink]="['/vouchers']">Voucher</a></li>
+                <li class="mr-5"><a style="color: #343a40" routerLinkActive="active" [routerLink]="['/stores']">Store</a></li>
+                <li class="mr-5"><a style="color: #343a40" routerLinkActive="active" href="#">About us</a></li>
             </ul>
         </div>
     </div>
@@ -89,11 +93,11 @@
 
     <ng-template #thenBlock>
         <ul [hidden]="!isDisplayLogin" class="list-group border-0 border-0 text-center" id="listview-user">
-            <li class="list-group-item" (click)="toggleDisplayLogin()">
+            <li class="list-group-item" (click)="closeHeader()">
                 <a [routerLink]="['/user']" class="text-danger">Profile</a>
             </li>
-            <li class="list-group-item" (click)="toggleDisplayLogin()"><a href="./profileShop.html" class="text-danger">My Store</a></li>
-            <li class="list-group-item" (click)="toggleDisplayLogin()">
+            <li class="list-group-item" (click)="closeHeader()"><a href="./profileShop.html" class="text-danger">My Store</a></li>
+            <li class="list-group-item" (click)="closeHeader()">
                 <a (click)="logout()" class="text-danger">Log out</a>
             </li>
         </ul>
@@ -101,10 +105,10 @@
 
     <ng-template #elseBlock>
         <ul [hidden]="!isDisplayLogin" class="list-group border-0 text-center" id="listview-user">
-            <li class="list-group-item border-0" (click)="toggleDisplayLogin()">
+            <li class="list-group-item border-0" (click)="closeHeader()">
                 <a [routerLink]="['/login']">Log In</a>
             </li>
-            <li class="list-group-item border-0" (click)="toggleDisplayLogin()">
+            <li class="list-group-item border-0" (click)="closeHeader()">
                 <a [routerLink]="['/register']">Register</a>
             </li>
         </ul>
