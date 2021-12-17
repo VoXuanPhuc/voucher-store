@@ -31,5 +31,5 @@
             <td>{{ total | currency: 'VND':'symbol':'1.0-0':'vi-VN' }}</td>
         </tr>
     </table>
-    <button type="button" class="btn btn-danger w-100 mt-2" style="font-size: 13px">Pay voucher</button>
+    <button type="button" class="btn btn-danger w-100 mt-2" (click)="onSaveCart()" style="font-size: 13px">Pay voucher</button>
 </div>

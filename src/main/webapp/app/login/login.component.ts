@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { LoginService } from 'app/login/login.service';
 import { AccountService } from 'app/core/auth/account.service';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'jhi-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit, AfterViewInit {
         private accountService: AccountService,
         private loginService: LoginService,
         private router: Router,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private location: Location
     ) {}
 
     ngOnInit(): void {
@@ -54,6 +56,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
                     this.authenticationError = false;
                     if (!this.router.getCurrentNavigation()) {
                         // There were no routing during login (eg from navigationToStoredUrl)
+                        // this.location.back();
                         location.replace('/');
                         // this.router.navigate(['']);
                     }

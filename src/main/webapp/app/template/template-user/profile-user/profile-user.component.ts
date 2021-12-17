@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IAddress } from 'app/entities/address/address.model';
 import { AddressService } from 'app/entities/address/service/address.service';
 import { IDistrict } from 'app/entities/district/district.model';
@@ -17,6 +18,7 @@ import { IVillage } from 'app/entities/village/village.model';
 export class ProfileUserComponent implements OnInit {
     myUser: IMyUser | null = null;
     constructor(
+        private route: Router,
         private myUserService: MyUserService,
         private addressService: AddressService,
         private villageService: VillageService,
@@ -38,7 +40,8 @@ export class ProfileUserComponent implements OnInit {
                 });
             },
             () => {
-                window.alert('Ban Chua login');
+                this.route.navigate(['/login']);
+                // window.alert('Please login !!!');
             }
         );
     }

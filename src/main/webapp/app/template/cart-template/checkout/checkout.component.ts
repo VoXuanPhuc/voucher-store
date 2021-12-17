@@ -1,3 +1,13 @@
+import { OrderStatus } from './../../../entities/order-status/order-status.model';
+import { MyOrderService } from './../../../entities/my-order/service/my-order.service';
+import { IMyOrder, MyOrder } from './../../../entities/my-order/my-order.model';
+import { IVoucherCode } from './../../../entities/voucher-code/voucher-code.model';
+import { VoucherCodeService } from 'app/entities/voucher-code/service/voucher-code.service';
+import { CartVoucher } from './../../../entities/my-cart/CartVoucher.model';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { MyUserService } from './../../../entities/my-user/service/my-user.service';
+import { MyUser } from './../../../entities/my-user/my-user.model';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CartService } from 'app/entities/my-cart/cart.service';
 import { ICartVoucher } from 'app/entities/my-cart/CartVoucher.model';
@@ -10,10 +20,22 @@ import { ICartVoucher } from 'app/entities/my-cart/CartVoucher.model';
 export class CheckoutComponent implements OnChanges, OnInit {
     CartVoucher: ICartVoucher[];
     // @Input() isCheckAll: boolean;
+
     @Input() checkoutIsCheckitem: boolean[];
+
     currentChangeState: boolean[];
+
     total: number;
-    constructor(private cartService: CartService) {
+
+    user?: MyUser;
+
+    constructor(
+        private cartService: CartService,
+        private userService: MyUserService,
+        private voucherCodeService: VoucherCodeService,
+        private orderService: MyOrderService,
+        private route: Router
+    ) {
         this.currentChangeState = [];
         this.checkoutIsCheckitem = [];
         this.CartVoucher = [];
@@ -71,5 +93,122 @@ export class CheckoutComponent implements OnChanges, OnInit {
             }
             i++;
         });
+    }
+
+    //get cart items is checked
+    getCardItemIsChecked(): ICartVoucher[] {
+        this.loadCartVoucher();
+        let i = 0;
+        const list: ICartVoucher[] = [];
+        this.CartVoucher.forEach(item => {
+            if (this.currentChangeState[i]) {
+                list.push(item);
+            }
+            i++;
+        });
+        return list;
+    }
+
+    //remove cart items is checked from all cart items after save order successfully
+    removeCartItemIsChecked(removeList: ICartVoucher[]): void {
+        this.loadCartVoucher();
+
+        window.console.log('Cart: ', this.CartVoucher);
+
+        removeList.forEach(removeItem => {
+            let index = -1;
+            index = this.CartVoucher.findIndex(item => item.voucher?.id === removeItem.voucher?.id);
+
+            if (index !== -1) {
+                this.CartVoucher.splice(index, 1);
+            }
+        });
+
+        this.cartService.items = this.CartVoucher;
+
+        this.cartService.saveCart();
+    }
+
+    //get current user by jwt
+    async getCurrentUser(): Promise<void> {
+        try {
+            const myuser = await this.userService.getUserByJWT().toPromise();
+            this.user = myuser.body!;
+        } catch (error) {
+            if (error instanceof HttpErrorResponse) {
+                this.route.navigate(['login']);
+            }
+            window.console.log('Errorrrrrrrrrrrrrrrr: ', error);
+        }
+    }
+
+    //get list of voucher codes are in available status
+    async getAvailableVoucherCode(voucherId: number, quantity: number): Promise<HttpResponse<IVoucherCode[]>> {
+        const VOUCHER_CODE_AVAILABLE_STATUS = 1;
+
+        return this.voucherCodeService
+            .findByStatusIdAndVoucherIdAndQuantity(VOUCHER_CODE_AVAILABLE_STATUS, voucherId, quantity)
+            .toPromise();
+    }
+
+    //update order id and status id for voucher codes
+    updateOrderIdAndStatusId(voucherCodes: IVoucherCode[], orderId: number): void {
+        const VOUCHER_CODE_SOLD_UNUSED_STATUS = 2;
+
+        voucherCodes.forEach(voucherCode => {
+            if (voucherCode.status?.id) {
+                voucherCode.status.id = VOUCHER_CODE_SOLD_UNUSED_STATUS;
+            }
+
+            voucherCode.order = new MyOrder(orderId);
+        });
+    }
+
+    //save list of voucher codes
+    async saveVoucherCodeList(voucherCodes: IVoucherCode[]): Promise<void> {
+        window.console.log('Voucher codess: ', voucherCodes);
+
+        for (const voucherCode of voucherCodes) {
+            await this.voucherCodeService.partialUpdate(voucherCode).toPromise();
+        }
+    }
+
+    //create new order
+    async saveOrder(order: IMyOrder): Promise<HttpResponse<IMyOrder>> {
+        return await this.orderService.create(order).toPromise();
+    }
+
+    // save order and voucher codes to DB
+    async onSaveCart(): Promise<any> {
+        const cartItemIsChecked: ICartVoucher[] = this.getCardItemIsChecked();
+
+        await this.getCurrentUser();
+
+        if (!this.user) {
+            return;
+        }
+
+        let order: IMyOrder = new MyOrder();
+        order.user = this.user;
+        order.totalCost = this.total;
+        order.status = new OrderStatus(2);
+
+        order = (await this.saveOrder(order)).body!;
+
+        for (const item of cartItemIsChecked) {
+            const voucherCodes = (await this.getAvailableVoucherCode(item.voucher?.id ?? 0, item.total ?? 0)).body;
+
+            if (!voucherCodes) {
+                return;
+            }
+
+            this.updateOrderIdAndStatusId(voucherCodes, order.id ?? 0);
+
+            await this.saveVoucherCodeList(voucherCodes);
+        }
+
+        this.removeCartItemIsChecked(cartItemIsChecked);
+
+        alert('Buy voucher successfully ><');
     }
 }
