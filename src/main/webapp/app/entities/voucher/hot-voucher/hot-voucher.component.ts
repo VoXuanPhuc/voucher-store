@@ -1,9 +1,12 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'app/entities/event/service/event.service';
+import { CartService } from 'app/entities/my-cart/cart.service';
+import { CartVoucher } from 'app/entities/my-cart/CartVoucher.model';
 import { StoreService } from 'app/entities/store/service/store.service';
 import { VoucherImageService } from 'app/entities/voucher-image/service/voucher-image.service';
 import { IVoucherImage, VoucherImage } from 'app/entities/voucher-image/voucher-image.model';
+import Swal from 'sweetalert2';
 import { VoucherService } from '../service/voucher.service';
 import { IVoucher, Voucher } from '../voucher.model';
 
@@ -21,7 +24,8 @@ export class HotVoucherComponent implements OnInit {
         protected voucherService: VoucherService,
         protected voucherImageService: VoucherImageService,
         protected storeService: StoreService,
-        protected eventService: EventService
+        protected eventService: EventService,
+        private cartService: CartService
     ) {}
 
     ngOnInit(): void {
@@ -56,6 +60,34 @@ export class HotVoucherComponent implements OnInit {
         );
     }
 
+    addToCart(v: IVoucher, id: any): void {
+        window.console.log(v, id);
+        const cartVoucher = new CartVoucher(1, v);
+
+        if (!this.cartService.checkItemInCart(cartVoucher)) {
+            this.cartService.addToCart(cartVoucher);
+            this.cartService.saveCart();
+            this.alterSuccess();
+        } else {
+            this.cartService.items.map(item => {
+                if (item.voucher?.id === v.id) {
+                    this.cartService.deleteItem(item);
+                }
+            });
+
+            // this.cartService.changeItem(5);
+        }
+    }
+
+    alterSuccess(): void {
+        Swal.fire({
+            position: 'top',
+            icon: 'success',
+            title: 'Add to cart success',
+            showConfirmButton: false,
+            timer: 1000,
+        });
+    }
     trackId(index: number, item: IVoucher): number {
         return item.id!;
     }

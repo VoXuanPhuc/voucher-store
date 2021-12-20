@@ -9,6 +9,8 @@ import { IVoucher } from 'app/entities/voucher/voucher.model';
 import { CartService } from '../../entities/my-cart/cart.service';
 
 import Swal from 'sweetalert2';
+import { IVoucherImage } from 'app/entities/voucher-image/voucher-image.model';
+import { VoucherImageService } from 'app/entities/voucher-image/service/voucher-image.service';
 
 @Component({
     selector: 'jhi-detail-voucher',
@@ -17,16 +19,19 @@ import Swal from 'sweetalert2';
 })
 export class DetailVoucherComponent implements OnInit {
     Voucher!: IVoucher;
+    VoucherImages?: IVoucherImage[];
     availableVoucher: any;
     id: any;
     selectedVoucher: number;
+
     constructor(
         private voucherServie: VoucherService,
         private route: ActivatedRoute,
         private storeService: StoreService,
         private voucherCodeService: VoucherCodeService,
         private eventService: EventService,
-        private cartService: CartService
+        private cartService: CartService,
+        private voucherImageService: VoucherImageService
     ) {
         this.availableVoucher = 0;
         this.selectedVoucher = 1;
@@ -49,6 +54,9 @@ export class DetailVoucherComponent implements OnInit {
                     this.Voucher.event!.store = resStore.body;
                 });
             });
+        });
+        this.voucherImageService.queryByVoucherId(this.id).subscribe(res => {
+            this.VoucherImages = res.body ?? [];
         });
     }
 

@@ -33,6 +33,7 @@ import { TemplateUserModule } from './template-user/template-user.module';
         SharedModule,
         TemplateUserModule,
         MyUserModule,
+        OtherModule,
     ],
 })
 export class TemplateModule {}
