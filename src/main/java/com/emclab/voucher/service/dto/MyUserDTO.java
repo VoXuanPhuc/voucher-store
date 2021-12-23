@@ -16,9 +16,6 @@ public class MyUserDTO implements Serializable {
     private String username;
 
     @NotNull
-    private String password;
-
-    @NotNull
     private String firstName;
 
     @NotNull
@@ -65,20 +62,12 @@ public class MyUserDTO implements Serializable {
         this.avatar = avatar;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setDob(Date dob) {
         this.dob = dob;
     }
 
     public Date getDob() {
         return dob;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -153,7 +142,7 @@ public class MyUserDTO implements Serializable {
     // prettier-ignore
     @Override
     public String toString() {
-        return "MyUserDTO{" + "id=" + getId() + ", username='" + getUsername() + "'" + ", password='" + getPassword()
+        return "MyUserDTO{" + "id=" + getId() + ", username='" + getUsername() + "'"
                 + "'" + ", firstName='" + getFirstName() + "'" + ", lastName='" + getLastName() + "'" + ", gender='"
                 + getGender() + "'" + ", phone='" + getPhone() + "'" + ", email='" + getEmail() + "'" + ", address="
                 + getAddress() + "}";

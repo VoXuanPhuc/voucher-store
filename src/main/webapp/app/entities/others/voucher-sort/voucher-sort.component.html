@@ -1,19 +1,31 @@
 <!-- Part 2.1: Search filter -->
 <div class="container search_filter d-flex">
-  <div class="title d-none d-sm-block">
-    <strong>Searching for “voucher"</strong>
-    <!-- <p class="m-0">30 result</p> -->
-  </div>
-  <div class="combobox_filter d-flex">
-    <span class="mt-2 mr-3">Sort by:</span>
-    <div class="form-group">
-      <select class="form-control" id="exampleFormControlSelect1" style="width: 200px">
-        <option>Sort</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+    <div *ngIf="keyword; else elseBlock" class="title d-none d-sm-block">
+        <strong>Search results for “{{ keyword }}"</strong>
+        <!-- <p class="m-0">30 result</p> -->
     </div>
-  </div>
+    <ng-template #elseBlock>
+        <div ngte class="title d-none d-sm-block">
+            <strong>Search results for all vouchers</strong>
+            <!-- <p class="m-0">30 result</p> -->
+        </div>
+    </ng-template>
+    <div class="combobox_filter d-flex">
+        <span class="mt-2 mr-3">Sort by:</span>
+        <div class="form-group">
+            <select
+                class="form-control"
+                id="exampleFormControlSelect1"
+                style="width: 200px"
+                #mySelect
+                (change)="onOptionSelectedChanged(mySelect.value)"
+            >
+                <option value="0">Default sorting</option>
+                <option value="1">Price Low to High</option>
+                <option value="2">Price High to Low</option>
+                <option value="3">Name A-Z</option>
+                <option value="4">Name Z-A</option>
+            </select>
+        </div>
+    </div>
 </div>

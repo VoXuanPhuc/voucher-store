@@ -1,46 +1,61 @@
 <div class="container login">
-  <div class="row login-content p-0 m-0">
-    <div class="col-xl-7 col-lg-6 col-md-4 col-sm-12 login-content-itemone">
-      <div class="login-content-item-introduce">
-        <h3 class="content-item-heading">Please come with us</h3>
-        <p class="content-item-introduce">Manage your store effectively</p>
-        <p class="content-item-introduce">Increase your store's sales productivity</p>
-        <div class="content-img-introduce">
-          <img src="../../content/images/Login/background.png" alt="nền" class="img-introduce" />
+    <div class="row login-content p-0 m-0">
+        <div class="col-xl-7 col-lg-6 col-md-4 col-sm-12 login-content-itemone">
+            <div class="login-content-item-introduce">
+                <h3 class="content-item-heading">Please come with us</h3>
+                <p class="content-item-introduce">Manage your store effectively</p>
+                <p class="content-item-introduce">Increase your store's sales productivity</p>
+                <div class="content-img-introduce">
+                    <img src="../../content/images/Login/background.png" alt="nền" class="img-introduce" />
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 login-content-itemtwo">
-      <h3 class="content-heading-login">Log in</h3>
-      <div class="alert alert-danger alert-failed" *ngIf="authenticationError" data-cy="loginError">
-        <strong>Failed to sign in!</strong> Please check your credentials and try again.
-      </div>
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-12 login-content-itemtwo">
+            <h3 class="content-heading-login">Log in</h3>
+            <div class="alert alert-danger alert-failed" *ngIf="authenticationError" data-cy="loginError">
+                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+            </div>
 
-      <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
-        <div class="form-user">
-          <input type="text" placeholder="username" name="username" required class="form-control" formControlName="username" #username />
-          <!-- <i class="fas fa-user"></i> -->
-        </div>
-        <div class="form-pass">
-          <input type="password" placeholder="password" name="password" required class="form-control" formControlName="password" />
-          <!-- <i class="fas fa-lock"></i> -->
-        </div>
-        <div class="forgot-remeber d-flex justify-content-between">
-          <a href="" class="forgot-pass">Forgot password?</a>
-          <label>
-            <input type="checkbox" name="rememberMe" formControlName="rememberMe" />
-            Remember me
-          </label>
-        </div>
+            <form class="form" role="form" (ngSubmit)="login()" [formGroup]="loginForm">
+                <div class="form-user">
+                    <input
+                        type="text"
+                        placeholder="username"
+                        name="username"
+                        required
+                        class="form-control"
+                        formControlName="username"
+                        #username
+                    />
+                    <!-- <i class="fas fa-user"></i> -->
+                </div>
+                <div class="form-pass">
+                    <input
+                        type="password"
+                        placeholder="password"
+                        name="password"
+                        required
+                        class="form-control"
+                        formControlName="password"
+                    />
+                    <!-- <i class="fas fa-lock"></i> -->
+                </div>
+                <div class="forgot-remeber d-flex justify-content-between">
+                    <a href="" class="forgot-pass">Forgot password?</a>
+                    <label>
+                        <input type="checkbox" name="rememberMe" formControlName="rememberMe" />
+                        Remember me
+                    </label>
+                </div>
 
-        <div class="btn-login">
-          <button class="btn btn-danger btn-login-item">LOGIN</button>
+                <div class="btn-login">
+                    <button class="btn btn-danger btn-login-item">LOGIN</button>
+                </div>
+            </form>
+            <div class="d-flex">
+                <p>Do not have an account?</p>
+                <a [routerLink]="['/register']" class="sign-in mx-1">Sign up</a>
+            </div>
         </div>
-      </form>
-      <div class="d-flex">
-        <p>Do not have an account?</p>
-        <a href="" class="sign-in mx-1">Sign up</a>
-      </div>
     </div>
-  </div>
 </div>

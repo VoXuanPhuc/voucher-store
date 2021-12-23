@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IStore, getStoreIdentifier } from '../store.model';
+import { IOurPagination } from 'app/shared/our-pagination/pagination.model';
 
 export type EntityResponseType = HttpResponse<IStore>;
 export type EntityArrayResponseType = HttpResponse<IStore[]>;
@@ -35,6 +36,14 @@ export class StoreService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IStore[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  queryWithPaging(page: number, limit: number): Observable<any> {
+    let params = new HttpParams();
+    params = params.set('page', page);
+    params = params.set('limit', limit);
+
+    return this.http.get<IOurPagination>(this.resourceUrl, { params, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

@@ -1,9 +1,11 @@
 package com.emclab.voucher.service.impl;
 
 import com.emclab.voucher.domain.MyOrder;
+import com.emclab.voucher.domain.VoucherCode;
 import com.emclab.voucher.repository.MyOrderRepository;
 import com.emclab.voucher.service.MyOrderService;
 import com.emclab.voucher.service.dto.MyOrderDTO;
+import com.emclab.voucher.service.dto.VoucherCodeDTO;
 import com.emclab.voucher.service.mapper.MyOrderMapper;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,7 +37,12 @@ public class MyOrderServiceImpl implements MyOrderService {
     @Override
     public MyOrderDTO save(MyOrderDTO myOrderDTO) {
         log.debug("Request to save MyOrder : {}", myOrderDTO);
+
+        //change voucher codes status
+        //        for(VoucherCodeDTO voucherCode : myOrderDTO.g)
+
         MyOrder myOrder = myOrderMapper.toEntity(myOrderDTO);
+
         myOrder = myOrderRepository.save(myOrder);
         return myOrderMapper.toDto(myOrder);
     }

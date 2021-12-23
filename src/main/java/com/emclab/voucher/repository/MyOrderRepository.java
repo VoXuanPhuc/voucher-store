@@ -1,7 +1,10 @@
 package com.emclab.voucher.repository;
 
 import com.emclab.voucher.domain.MyOrder;
-import org.springframework.data.jpa.repository.*;
+import com.emclab.voucher.domain.MyUser;
+import com.emclab.voucher.domain.OrderStatus;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -9,4 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface MyOrderRepository extends JpaRepository<MyOrder, Long> {}
+public interface MyOrderRepository extends JpaRepository<MyOrder, Long> {
+    List<MyOrder> findByUserAndStatus(MyUser user, OrderStatus status);
+}

@@ -1,6 +1,5 @@
 package com.emclab.voucher.web.rest;
 
-import com.emclab.voucher.domain.MyUser;
 import com.emclab.voucher.repository.MyUserRepository;
 import com.emclab.voucher.service.MyUserService;
 import com.emclab.voucher.service.dto.MyUserDTO;
@@ -18,8 +17,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
@@ -126,7 +134,7 @@ public class MyUserResource {
      *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/my-users/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/my-users/{id}")
     public ResponseEntity<MyUserDTO> partialUpdateMyUser(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody MyUserDTO myUserDTO
@@ -191,5 +199,10 @@ public class MyUserResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @GetMapping("/my-users/get-userByToken")
+    public MyUserDTO getcurrentUser(Authentication authentication) {
+        return myUserService.getcurrentUser(authentication);
     }
 }

@@ -28,8 +28,7 @@ public class MyOrder extends AbstractAuditingEntity {
     @Column(name = "total_cost", nullable = false)
     private Double totalCost;
 
-    @NotNull
-    @Column(name = "payment_time", nullable = false)
+    @Column(name = "payment_time", nullable = true)
     private Instant paymentTime;
 
     @OneToMany(mappedBy = "order")
@@ -142,7 +141,8 @@ public class MyOrder extends AbstractAuditingEntity {
         this.status = orderStatus;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -157,7 +157,8 @@ public class MyOrder extends AbstractAuditingEntity {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
+        // see
+        // https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
@@ -165,9 +166,9 @@ public class MyOrder extends AbstractAuditingEntity {
     @Override
     public String toString() {
         return "MyOrder{" +
-            "id=" + getId() +
-            ", totalCost=" + getTotalCost() +
-            ", paymentTime='" + getPaymentTime() + "'" +
-            "}";
+                "id=" + getId() +
+                ", totalCost=" + getTotalCost() +
+                ", paymentTime='" + getPaymentTime() + "'" +
+                "}";
     }
 }

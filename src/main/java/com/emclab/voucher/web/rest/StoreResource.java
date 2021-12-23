@@ -1,18 +1,22 @@
 package com.emclab.voucher.web.rest;
 
 import com.emclab.voucher.repository.StoreRepository;
+import com.emclab.voucher.service.CommonService;
 import com.emclab.voucher.service.StoreService;
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.StoreDTO;
 import com.emclab.voucher.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +41,9 @@ public class StoreResource {
 
     private final StoreRepository storeRepository;
 
+    @Autowired
+    private CommonService commonService;
+
     public StoreResource(StoreService storeService, StoreRepository storeRepository) {
         this.storeService = storeService;
         this.storeRepository = storeRepository;
@@ -46,7 +53,9 @@ public class StoreResource {
      * {@code POST  /stores} : Create a new store.
      *
      * @param storeDTO the storeDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new storeDTO, or with status {@code 400 (Bad Request)} if the store has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new storeDTO, or with status {@code 400 (Bad Request)} if
+     *         the store has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/stores")
@@ -65,11 +74,14 @@ public class StoreResource {
     /**
      * {@code PUT  /stores/:id} : Updates an existing store.
      *
-     * @param id the id of the storeDTO to save.
+     * @param id       the id of the storeDTO to save.
      * @param storeDTO the storeDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated storeDTO,
-     * or with status {@code 400 (Bad Request)} if the storeDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the storeDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated storeDTO,
+     *         or with status {@code 400 (Bad Request)} if the storeDTO is not
+     *         valid,
+     *         or with status {@code 500 (Internal Server Error)} if the storeDTO
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/stores/{id}")
@@ -97,14 +109,18 @@ public class StoreResource {
     }
 
     /**
-     * {@code PATCH  /stores/:id} : Partial updates given fields of an existing store, field will ignore if it is null
+     * {@code PATCH  /stores/:id} : Partial updates given fields of an existing
+     * store, field will ignore if it is null
      *
-     * @param id the id of the storeDTO to save.
+     * @param id       the id of the storeDTO to save.
      * @param storeDTO the storeDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated storeDTO,
-     * or with status {@code 400 (Bad Request)} if the storeDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the storeDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the storeDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated storeDTO,
+     *         or with status {@code 400 (Bad Request)} if the storeDTO is not
+     *         valid,
+     *         or with status {@code 404 (Not Found)} if the storeDTO is not found,
+     *         or with status {@code 500 (Internal Server Error)} if the storeDTO
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PatchMapping(value = "/stores/{id}", consumes = "application/merge-patch+json")
@@ -135,7 +151,8 @@ public class StoreResource {
     /**
      * {@code GET  /stores} : get all the stores.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of stores in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of stores in body.
      */
     @GetMapping("/stores")
     public List<StoreDTO> getAllStores() {
@@ -143,11 +160,20 @@ public class StoreResource {
         return storeService.findAll();
     }
 
+    @GetMapping(path = "/stores", params = { "page" })
+    public ResponseEntity<Object> getAllStoresWithPaging(@RequestParam Map<String, Object> param) {
+        log.debug("REST request to get all Stores");
+
+        PaginationResponse response = storeService.findAllWithPaging(param);
+        return ResponseEntity.ok(response);
+    }
+
     /**
      * {@code GET  /stores/:id} : get the "id" store.
      *
      * @param id the id of the storeDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the storeDTO, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the storeDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/stores/{id}")
     public ResponseEntity<StoreDTO> getStore(@PathVariable Long id) {

@@ -13,136 +13,138 @@ import { IBenifitPackage } from 'app/entities/benifit-package/benifit-package.mo
 import { BenifitPackageService } from 'app/entities/benifit-package/service/benifit-package.service';
 
 @Component({
-  selector: 'jhi-store-update',
-  templateUrl: './store-update.component.html',
+    selector: 'jhi-store-update',
+    templateUrl: './store-update.component.html',
 })
 export class StoreUpdateComponent implements OnInit {
-  isSaving = false;
+    isSaving = false;
 
-  addressesCollection: IAddress[] = [];
-  benifitPackagesSharedCollection: IBenifitPackage[] = [];
+    addressesCollection: IAddress[] = [];
+    benifitPackagesSharedCollection: IBenifitPackage[] = [];
 
-  editForm = this.fb.group({
-    id: [],
-    name: [null, [Validators.required]],
-    description: [],
-    email: [null, [Validators.required]],
-    phone: [null, [Validators.required]],
-    avartar: [],
-    background: [],
-    address: [],
-    benifit: [],
-  });
-
-  constructor(
-    protected storeService: StoreService,
-    protected addressService: AddressService,
-    protected benifitPackageService: BenifitPackageService,
-    protected activatedRoute: ActivatedRoute,
-    protected fb: FormBuilder
-  ) {}
-
-  ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ store }) => {
-      this.updateForm(store);
-
-      this.loadRelationshipsOptions();
+    editForm = this.fb.group({
+        id: [],
+        name: [null, [Validators.required]],
+        description: [],
+        email: [null, [Validators.required]],
+        phone: [null, [Validators.required]],
+        avartar: [],
+        background: [],
+        address: [],
+        benifit: [],
     });
-  }
 
-  previousState(): void {
-    window.history.back();
-  }
+    constructor(
+        protected storeService: StoreService,
+        protected addressService: AddressService,
+        protected benifitPackageService: BenifitPackageService,
+        protected activatedRoute: ActivatedRoute,
+        protected fb: FormBuilder
+    ) {}
 
-  save(): void {
-    this.isSaving = true;
-    const store = this.createFromForm();
-    if (store.id !== undefined) {
-      this.subscribeToSaveResponse(this.storeService.update(store));
-    } else {
-      this.subscribeToSaveResponse(this.storeService.create(store));
+    ngOnInit(): void {
+        this.activatedRoute.data.subscribe(({ store }) => {
+            this.updateForm(store);
+
+            this.loadRelationshipsOptions();
+        });
     }
-  }
 
-  trackAddressById(index: number, item: IAddress): number {
-    return item.id!;
-  }
+    previousState(): void {
+        window.history.back();
+    }
 
-  trackBenifitPackageById(index: number, item: IBenifitPackage): number {
-    return item.id!;
-  }
+    save(): void {
+        this.isSaving = true;
+        const store = this.createFromForm();
+        if (store.id !== undefined) {
+            this.subscribeToSaveResponse(this.storeService.update(store));
+        } else {
+            this.subscribeToSaveResponse(this.storeService.create(store));
+        }
+    }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IStore>>): void {
-    result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
-      () => this.onSaveSuccess(),
-      () => this.onSaveError()
-    );
-  }
+    trackAddressById(index: number, item: IAddress): number {
+        return item.id!;
+    }
 
-  protected onSaveSuccess(): void {
-    this.previousState();
-  }
+    trackBenifitPackageById(index: number, item: IBenifitPackage): number {
+        return item.id!;
+    }
 
-  protected onSaveError(): void {
-    // Api for inheritance.
-  }
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IStore>>): void {
+        result.pipe(finalize(() => this.onSaveFinalize())).subscribe(
+            () => this.onSaveSuccess(),
+            () => this.onSaveError()
+        );
+    }
 
-  protected onSaveFinalize(): void {
-    this.isSaving = false;
-  }
+    protected onSaveSuccess(): void {
+        this.previousState();
+    }
 
-  protected updateForm(store: IStore): void {
-    this.editForm.patchValue({
-      id: store.id,
-      name: store.name,
-      description: store.description,
-      email: store.email,
-      phone: store.phone,
-      avartar: store.avartar,
-      background: store.background,
-      address: store.address,
-      benifit: store.benifit,
-    });
+    protected onSaveError(): void {
+        // Api for inheritance.
+    }
 
-    this.addressesCollection = this.addressService.addAddressToCollectionIfMissing(this.addressesCollection, store.address);
-    this.benifitPackagesSharedCollection = this.benifitPackageService.addBenifitPackageToCollectionIfMissing(
-      this.benifitPackagesSharedCollection,
-      store.benifit
-    );
-  }
+    protected onSaveFinalize(): void {
+        this.isSaving = false;
+    }
 
-  protected loadRelationshipsOptions(): void {
-    this.addressService
-      .query({ filter: 'store-is-null' })
-      .pipe(map((res: HttpResponse<IAddress[]>) => res.body ?? []))
-      .pipe(
-        map((addresses: IAddress[]) => this.addressService.addAddressToCollectionIfMissing(addresses, this.editForm.get('address')!.value))
-      )
-      .subscribe((addresses: IAddress[]) => (this.addressesCollection = addresses));
+    protected updateForm(store: IStore): void {
+        this.editForm.patchValue({
+            id: store.id,
+            name: store.name,
+            description: store.description,
+            email: store.email,
+            phone: store.phone,
+            avartar: store.avartar,
+            background: store.background,
+            address: store.address,
+            benifit: store.benifit,
+        });
 
-    this.benifitPackageService
-      .query()
-      .pipe(map((res: HttpResponse<IBenifitPackage[]>) => res.body ?? []))
-      .pipe(
-        map((benifitPackages: IBenifitPackage[]) =>
-          this.benifitPackageService.addBenifitPackageToCollectionIfMissing(benifitPackages, this.editForm.get('benifit')!.value)
-        )
-      )
-      .subscribe((benifitPackages: IBenifitPackage[]) => (this.benifitPackagesSharedCollection = benifitPackages));
-  }
+        this.addressesCollection = this.addressService.addAddressToCollectionIfMissing(this.addressesCollection, store.address);
+        this.benifitPackagesSharedCollection = this.benifitPackageService.addBenifitPackageToCollectionIfMissing(
+            this.benifitPackagesSharedCollection,
+            store.benifit
+        );
+    }
 
-  protected createFromForm(): IStore {
-    return {
-      ...new Store(),
-      id: this.editForm.get(['id'])!.value,
-      name: this.editForm.get(['name'])!.value,
-      description: this.editForm.get(['description'])!.value,
-      email: this.editForm.get(['email'])!.value,
-      phone: this.editForm.get(['phone'])!.value,
-      avartar: this.editForm.get(['avartar'])!.value,
-      background: this.editForm.get(['background'])!.value,
-      address: this.editForm.get(['address'])!.value,
-      benifit: this.editForm.get(['benifit'])!.value,
-    };
-  }
+    protected loadRelationshipsOptions(): void {
+        this.addressService
+            .query({ filter: 'store-is-null' })
+            .pipe(map((res: HttpResponse<IAddress[]>) => res.body ?? []))
+            .pipe(
+                map((addresses: IAddress[]) =>
+                    this.addressService.addAddressToCollectionIfMissing(addresses, this.editForm.get('address')!.value)
+                )
+            )
+            .subscribe((addresses: IAddress[]) => (this.addressesCollection = addresses));
+
+        this.benifitPackageService
+            .query()
+            .pipe(map((res: HttpResponse<IBenifitPackage[]>) => res.body ?? []))
+            .pipe(
+                map((benifitPackages: IBenifitPackage[]) =>
+                    this.benifitPackageService.addBenifitPackageToCollectionIfMissing(benifitPackages, this.editForm.get('benifit')!.value)
+                )
+            )
+            .subscribe((benifitPackages: IBenifitPackage[]) => (this.benifitPackagesSharedCollection = benifitPackages));
+    }
+
+    protected createFromForm(): IStore {
+        return {
+            ...new Store(),
+            id: this.editForm.get(['id'])!.value,
+            name: this.editForm.get(['name'])!.value,
+            // description: this.editForm.get(['description'])!.value,
+            email: this.editForm.get(['email'])!.value,
+            phone: this.editForm.get(['phone'])!.value,
+            avartar: this.editForm.get(['avartar'])!.value,
+            background: this.editForm.get(['background'])!.value,
+            address: this.editForm.get(['address'])!.value,
+            benifit: this.editForm.get(['benifit'])!.value,
+        };
+    }
 }

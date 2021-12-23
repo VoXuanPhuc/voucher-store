@@ -2,344 +2,351 @@ $--0-color-button: #e94560;
 $--color-gray: #7a7873;
 $--color-star: #ffcd4e;
 :root {
-  --0-color-button: #e94560;
-  --color-gray: #7a7873;
-  $--color-star: #ffcd4e;
+    --0-color-button: #e94560;
+    --color-gray: #7a7873;
+    $--color-star: #ffcd4e;
 }
 
 .button_of_this_page {
-  box-shadow: 0px 0px 12px -5px #000000;
-  border-radius: 9px;
-  font-size: 20px;
-  color: white;
-  background-color: $--0-color-button;
+    box-shadow: 0px 0px 12px -5px #000000;
+    border-radius: 9px;
+    font-size: 20px;
+    color: white;
+    background-color: $--0-color-button;
 }
 
 .color-gray {
-  color: $--color-gray;
+    color: $--color-gray;
 }
 
 .color-buttom {
-  color: $--0-color-button;
+    color: $--0-color-button;
 }
 
 /* font-size */
 
 .fs-20 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .fs-18 {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .fs-24 {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .mg_top_50 {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
 .mg_top_40 {
-  margin-top: 40px;
+    margin-top: 40px;
 }
 
 .mg_top_30 {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 .mg_top_20 {
-  margin-top: 20px;
+    margin-top: 20px;
 }
 
 .mg_top_10 {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 
 /* Text */
 
 .text_bold {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 /* abc xyz */
 
 .container-profile-voucher {
-  width: 89%;
-  margin: auto;
+    width: 89%;
+    margin: auto;
 }
 
 .path :first-child {
-  color: $--0-color-button;
+    color: $--0-color-button;
 }
 
 .path {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 /* Silde */
 .slide-left {
-  padding: 30px;
-  background-color: white;
-  height: 480px;
+    padding: 30px;
+    background-color: white;
+    height: 480px;
 }
 .carousel-item .active image {
-  height: 336px;
-  object-fit: cover;
+    height: 336px;
+    object-fit: cover;
 }
 
 .carousel-indicators li {
-  width: 90px;
+    width: 90px;
 }
 .carousel-indicators li img {
-  width: auto;
-  object-fit: cover;
+    width: auto;
+    object-fit: cover;
 }
 
 .carousel-inner {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 .carousel-indicators li img {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 /* DETAIL */
 
 #store_name {
-  font-size: 17px;
-  font-weight: bold;
+    font-size: 17px;
+    font-weight: bold;
 }
 
 #unit_price {
-  font-size: 25px;
-  color: $--0-color-button;
+    font-size: 25px;
+    color: $--0-color-button;
 }
 
 #rated {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 #rated > div {
-  width: 100%;
-  padding: px;
-  background-color: white;
-  border-radius: 4px;
+    width: 100%;
+    padding: px;
+    background-color: white;
+    border-radius: 4px;
 }
 
 #overall_review {
-  padding: 30px;
-  width: 92%;
-  background-color: #fbf3ee;
-  border-radius: 10px;
-  border: #df2f4c 1px solid;
-  margin: auto;
-  margin-top: 20px;
+    padding: 30px;
+    width: 92%;
+    background-color: #fbf3ee;
+    border-radius: 10px;
+    border: #df2f4c 1px solid;
+    margin: auto;
+    margin-top: 20px;
 }
 
 #overall_review .col-left {
-  width: 100%;
-  font-size: 34px;
-  color: #df2f4c;
-  display: inline;
+    width: 100%;
+    font-size: 34px;
+    color: #df2f4c;
+    display: inline;
 }
 
 #list-star-rated {
-  display: inline-block;
+    display: inline-block;
 }
 
 #list-star-rated #stars {
-  display: inline-block;
-  color: $--color-star;
+    display: inline-block;
+    color: $--color-star;
 }
 
 #emaining_amount {
-  font-size: 17px;
-  margin-left: 20px;
+    font-size: 17px;
+    margin-left: 20px;
 }
 
 .date-time {
-  margin-left: 15px;
-  font-size: 18px;
+    margin-left: 15px;
+    font-size: 18px;
 }
 
 #button_add_cart {
-  margin-top: 50px;
-  width: 130px;
-  font-size: 15px;
-  height: 45px;
+    margin-top: 50px;
+    width: 130px;
+    font-size: 15px;
+    height: 45px;
 }
 
 /* Mô tả ngắn */
 
 #title-voucher {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .btn_sl {
-  border-radius: 0px;
-  border: 1px solid #c4c4c4;
-  width: 35px;
-  text-align: center;
-  padding-top: 3px;
-  padding-bottom: 4px;
+    border-radius: 0px;
+    border: 1px solid #c4c4c4;
+    width: 35px;
+    text-align: center;
+    padding-top: 3px;
+    padding-bottom: 4px;
 }
 
 #cong {
-  margin-left: -5px;
+    margin-left: -5px;
 }
 #cong:hover {
-  color: #df2f4c;
+    color: #df2f4c;
 }
 #tru:hover {
-  color: #df2f4c;
+    color: #df2f4c;
 }
 #inout_quantity {
-  margin-left: -5px;
-  margin-top: 5px;
-  background-color: #fff;
-  border: 1px solid #c4c4c4;
-  width: 52px;
-  text-align: center;
-  padding-top: 2px;
-  padding-bottom: 5.5px;
+    margin-left: -5px;
+    margin-top: 5px;
+    background-color: #fff;
+    border: 1px solid #c4c4c4;
+    width: 52px;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 5.5px;
 }
 
 /* Descriptsion */
 #container_des {
-  background-color: white;
-  margin-top: 20px;
+    background-color: white;
+    margin-top: 20px;
 }
 
 #see_more {
-  font-size: 16px;
-  width: 150px;
-  height: 45px;
+    font-size: 16px;
+    width: 150px;
+    height: 45px;
 }
 .center {
-  width: 211px;
-  height: auto;
-  margin: auto;
+    width: 211px;
+    height: auto;
+    margin: auto;
 }
 
 #detail {
-  padding-left: 50px;
-  padding-right: 50px;
-  width: 100%;
-  display: block;
+    padding-left: 50px;
+    padding-right: 50px;
+    width: 100%;
+    display: block;
 }
 
 #detail-description {
-  margin-top: 20px;
-  border: #df2f4c 1px solid;
-  width: 100%;
-  padding: 10px;
-  background-color: white;
-  border-radius: 4px;
+    margin-top: 20px;
+    border: #df2f4c 1px solid;
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 4px;
 }
 
 #detail-description .event:first-child {
-  font-size: 24px;
-  color: #df2f4c;
-  font-weight: bold;
+    font-size: 24px;
+    color: #df2f4c;
+    font-weight: bold;
 }
 #detail label {
-  font-size: 20px;
-  font-weight: bold;
-  color: #000000;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
 }
 
 /* Rating */
 .col-left b {
-  color: #ffcd4e;
-  font-size: 24px;
+    color: #ffcd4e;
+    font-size: 24px;
 }
 .col-right button {
-  margin: 10px;
-  color: #df2f4c;
-  background-color: white;
-  width: 100px;
-  height: 40px;
-  font-size: 18px;
-  margin-top: 20px;
+    margin: 10px;
+    color: #df2f4c;
+    background-color: white;
+    width: 100px;
+    height: 40px;
+    font-size: 18px;
+    margin-top: 20px;
 }
 @media only screen and (max-width: 600px) {
-  body {
-    background-color: lightblue;
-  }
-  #dropdown {
-    display: block;
-  }
+    body {
+        background-color: lightblue;
+    }
+    #dropdown {
+        display: block;
+    }
 }
 
 /* short-description */
 
 .short-description {
-  padding-top: 15px;
-  padding-left: 5%;
+    padding-top: 15px;
+    padding-left: 5%;
 }
 #description {
-  width: 100%;
-  padding-left: 30px;
-  padding-bottom: 20px;
+    width: 100%;
+    padding-left: 30px;
+    padding-bottom: 20px;
 }
 
 .btn:hover {
-  color: white;
+    color: white;
 }
 
 /* COMMENT */
 #comment {
-  width: 100%;
+    width: 100%;
 }
 #comment > div {
-  width: 92%;
-  margin: auto;
+    width: 92%;
+    margin: auto;
 }
 .item-comment {
-  margin-top: 25px;
+    margin-top: 25px;
 }
 .user-name {
-  height: 30px;
-  display: inline-block;
+    height: 30px;
+    display: inline-block;
 }
 
 .rounded-circle {
-  width: 30px;
-  height: 30px;
-  overflow: hidden;
-  display: inline-block;
+    width: 30px;
+    height: 30px;
+    overflow: hidden;
+    display: inline-block;
 }
 
 .user-name .name {
-  margin-left: 10px;
-  display: inline-block;
-  height: 30px;
-  width: 100px;
-  position: relative;
+    margin-left: 10px;
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    position: relative;
 }
 .name label {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  font-weight: bold;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-weight: bold;
 }
 
 .rated_by_users {
-  margin-left: 40px;
+    margin-left: 40px;
 }
 .rated_by_users > label :first-child {
-  color: #ffcd4e;
+    color: #ffcd4e;
 }
 .date_rate {
-  margin-top: 25px;
-  font-size: 13px;
-  color: #616161;
+    margin-top: 25px;
+    font-size: 13px;
+    color: #616161;
 }
 .box-around {
-  width: 92%;
-  margin: auto;
+    width: 92%;
+    margin: auto;
+}
+
+// Duong
+.iconify {
+    color: #ffcd4e;
+    height: 25px;
+    width: 25px;
 }
