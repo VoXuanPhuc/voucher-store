@@ -19,6 +19,10 @@
     background-color: #dc3545;
     opacity: 0.8;
 } */
+* {
+  font-family: 'Varela Round', sans-serif;
+  margin: O auto;
+}
 
 .container-fluid.hot_voucher {
   position: relative;

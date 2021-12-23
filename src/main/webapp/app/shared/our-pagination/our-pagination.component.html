@@ -1,0 +1,22 @@
+<div class="container pagination d-flex" *ngIf="pagination?.totalPages">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" [ngClass]="{ disabled: pagination?.currentPage === 1 }" (click)="toPreviousPage()">
+                <a class="page-link">Previous</a>
+            </li>
+
+            <li
+                *ngFor="let key of toArray(pagination?.totalPages ?? 1)"
+                class="page-item"
+                (click)="onPageChange(key)"
+                [ngClass]="{ active: key === pagination?.currentPage }"
+            >
+                <a class="page-link">{{ key }}</a>
+            </li>
+
+            <li class="page-item" [ngClass]="{ disabled: pagination?.currentPage === pagination?.totalPages }" (click)="toNextPage()">
+                <a class="page-link">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

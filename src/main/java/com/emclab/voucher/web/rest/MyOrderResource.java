@@ -46,7 +46,9 @@ public class MyOrderResource {
      * {@code POST  /my-orders} : Create a new myOrder.
      *
      * @param myOrderDTO the myOrderDTO to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new myOrderDTO, or with status {@code 400 (Bad Request)} if the myOrder has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new myOrderDTO, or with status {@code 400 (Bad Request)} if
+     *         the myOrder has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/my-orders")
@@ -65,11 +67,14 @@ public class MyOrderResource {
     /**
      * {@code PUT  /my-orders/:id} : Updates an existing myOrder.
      *
-     * @param id the id of the myOrderDTO to save.
+     * @param id         the id of the myOrderDTO to save.
      * @param myOrderDTO the myOrderDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated myOrderDTO,
-     * or with status {@code 400 (Bad Request)} if the myOrderDTO is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the myOrderDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated myOrderDTO,
+     *         or with status {@code 400 (Bad Request)} if the myOrderDTO is not
+     *         valid,
+     *         or with status {@code 500 (Internal Server Error)} if the myOrderDTO
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/my-orders/{id}")
@@ -97,17 +102,22 @@ public class MyOrderResource {
     }
 
     /**
-     * {@code PATCH  /my-orders/:id} : Partial updates given fields of an existing myOrder, field will ignore if it is null
+     * {@code PATCH  /my-orders/:id} : Partial updates given fields of an existing
+     * myOrder, field will ignore if it is null
      *
-     * @param id the id of the myOrderDTO to save.
+     * @param id         the id of the myOrderDTO to save.
      * @param myOrderDTO the myOrderDTO to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated myOrderDTO,
-     * or with status {@code 400 (Bad Request)} if the myOrderDTO is not valid,
-     * or with status {@code 404 (Not Found)} if the myOrderDTO is not found,
-     * or with status {@code 500 (Internal Server Error)} if the myOrderDTO couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated myOrderDTO,
+     *         or with status {@code 400 (Bad Request)} if the myOrderDTO is not
+     *         valid,
+     *         or with status {@code 404 (Not Found)} if the myOrderDTO is not
+     *         found,
+     *         or with status {@code 500 (Internal Server Error)} if the myOrderDTO
+     *         couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @PatchMapping(value = "/my-orders/{id}", consumes = "application/merge-patch+json")
+    @PatchMapping(value = "/my-orders/{id}")
     public ResponseEntity<MyOrderDTO> partialUpdateMyOrder(
         @PathVariable(value = "id", required = false) final Long id,
         @NotNull @RequestBody MyOrderDTO myOrderDTO
@@ -135,7 +145,8 @@ public class MyOrderResource {
     /**
      * {@code GET  /my-orders} : get all the myOrders.
      *
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of myOrders in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of myOrders in body.
      */
     @GetMapping("/my-orders")
     public List<MyOrderDTO> getAllMyOrders() {
@@ -147,7 +158,8 @@ public class MyOrderResource {
      * {@code GET  /my-orders/:id} : get the "id" myOrder.
      *
      * @param id the id of the myOrderDTO to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the myOrderDTO, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the myOrderDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/my-orders/{id}")
     public ResponseEntity<MyOrderDTO> getMyOrder(@PathVariable Long id) {

@@ -1,0 +1,98 @@
+* {
+    font-family: 'Varela Round', sans-serif;
+    margin: 0 auto;
+}
+
+body {
+    background: #ebf2f5;
+}
+
+/* Part 2: body-main */
+.container.body-main {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    padding: 0px;
+    margin-top: 10px;
+}
+
+/* Part 2.2: total-cart */
+.total-cart {
+    width: 35%;
+    height: 690px;
+    background: #ebf2f5;
+    font-size: 14px;
+}
+
+/*reponsive*/
+@media (max-width: 930px) {
+    .container.body-main {
+        display: block;
+    }
+
+    .voucher-cart {
+        width: 100%;
+    }
+
+    .total-cart {
+        width: 100%;
+    }
+
+    .total-cart {
+        position: relative;
+        top: 50px;
+    }
+
+    .pay-voucher {
+        width: 100%;
+        height: 340px;
+        background-color: #ffffff;
+        /* border: #ebf2f5 10px solid; */
+        /* border-radius: 5%; */
+        margin: 0 auto;
+    }
+
+    .discount {
+        position: relative;
+        top: 30px;
+        /* bottom: 50px; */
+        width: 100%;
+        height: 250px;
+        background-color: #ffffff;
+        /* border: #ebf2f5 10px solid; */
+        /* border-radius: 5%; */
+        padding: 20px;
+        margin: 0px auto;
+    }
+}
+
+@media (max-width: 630px) {
+    .voucher .img-voucher-description {
+        display: block;
+        /* align-items: center; */
+    }
+
+    .voucher-cart td,
+    th {
+        border-bottom: 1px solid #dddddd;
+        text-align: left;
+        padding: 30px;
+    }
+
+    .voucher {
+        width: 40%;
+    }
+    .voucher img {
+        width: 150px;
+        height: 90px;
+        object-fit: cover;
+        border: 0.5px #dc3545 solid;
+    }
+
+    .pay-voucher {
+        width: 100%;
+        height: 340px;
+        background-color: #ffffff;
+        margin: 0 auto;
+    }
+}

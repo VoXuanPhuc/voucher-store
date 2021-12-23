@@ -1,0 +1,141 @@
+/* Right */
+/* title and button */
+.right_service {
+  width: 802px;
+  /* padding-right: 40px; */
+  margin-top: 30px;
+  margin-left: 15px;
+  background: #ebf2f5;
+  border-radius: 5px;
+  padding: 20px 0 0 0;
+}
+.my-profile {
+  margin-left: 20px;
+}
+.my-profile-heading {
+  color: #df2f4c;
+}
+
+.my-profile-heading h1 {
+  margin: 5px 0 0 10px;
+  color: #df2f4c;
+}
+
+/*  Item 1  */
+
+.my-voucher-item {
+  /* display: flex; */
+  width: 100%;
+  background: #ffffff;
+  margin: 30px 0 0 20px;
+  padding: 20px 0;
+  border-radius: 10px;
+  box-shadow: -1px -1px 1px #ccc, 1px 1px 1px #ccc;
+}
+.voucher-notavailable {
+  opacity: 0.7;
+  background: #c4c4c4;
+}
+.voucher-item-img {
+  width: 100px;
+  height: 100px;
+  float: left;
+}
+.voucher-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.voucher-item-content {
+}
+.item-content-tilte {
+  /* width: 90%;*/
+  display: flex;
+  justify-content: space-between;
+}
+.item-content-item {
+  display: flex;
+  justify-content: space-between;
+  justify-items: center;
+}
+.item-content-tilte p,
+.item-content-item p,
+.item-content-item a {
+  width: 23%;
+}
+.item-content-tilte p {
+  color: #5555;
+}
+.item-content-remove {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.style-available {
+  color: #df2f4c;
+}
+.item-content-remove .iconify {
+  margin-bottom: 12px;
+}
+
+/*Pagination // phân trang button  */
+.container.pagination.d-flex {
+  justify-content: center;
+  margin-top: 23px;
+  font-size: 15px;
+}
+
+.container.pagination .pagination li a {
+  color: #df2f4c;
+}
+
+@media only screen and (max-width: 1200px) {
+  .left-service {
+    display: none;
+  }
+  .right_service {
+    width: 100%;
+    margin-left: 0;
+  }
+  .my-profile-heading .iconify {
+    width: 30px;
+    height: 30px;
+  }
+  .my-profile-heading h1 {
+    font-size: 25px;
+    margin: 10px 0 0 10px;
+  }
+  .my-profile button {
+    padding: 5px 30px;
+    margin-top: 10px;
+  }
+  .personal-information {
+    font-size: 14px;
+  }
+
+  /* mobile */
+}
+@media only screen and (max-width: 740px) {
+  .profile-personal-name,
+  .profile-personal-adress {
+    font-size: 14px;
+    display: flex;
+  }
+  .personal-name-tilte,
+  .personal-name-item,
+  .personal-adress-tilte,
+  .personal-adress-item {
+    display: block;
+    width: 50%;
+    margin-left: 0;
+  }
+  .personal-name-tilte p,
+  .personal-name-item p,
+  .personal-adress-tilte p,
+  .personal-adress-item p {
+    width: 100%;
+    height: 40px;
+    margin-left: 10px;
+  }
+}

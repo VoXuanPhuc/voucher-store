@@ -1,7 +1,9 @@
 package com.emclab.voucher.service;
 
+import com.emclab.voucher.service.dto.PaginationResponse;
 import com.emclab.voucher.service.dto.StoreDTO;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -30,6 +32,8 @@ public interface StoreService {
      * @return the list of entities.
      */
     List<StoreDTO> findAll();
+
+    PaginationResponse findAllWithPaging(Map<String, Object> param);
 
     /**
      * Get the "id" store.

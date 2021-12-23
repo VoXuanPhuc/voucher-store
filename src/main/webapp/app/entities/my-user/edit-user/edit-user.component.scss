@@ -1,0 +1,190 @@
+/* Right */
+
+.right_service {
+    width: 800px;
+    margin-top: 30px;
+    margin-left: 15px;
+    background: #ffffff;
+    border-radius: 5px;
+}
+.my-profile {
+    margin-left: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.my-profile button {
+    /* height: 100%; */
+    padding: 10px 30px;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.my-profile-heading {
+    margin-left: 20px;
+    color: #df2f4c;
+    justify-content: center;
+    align-items: center;
+}
+.my-profile-heading span {
+    width: 50px;
+    height: 50px;
+}
+.my-profile-heading h1 {
+    margin: 20px 0 0 10px;
+    color: #df2f4c;
+}
+
+/* profile-personal */
+
+.profile-personal {
+    /* display: flex; */
+    width: 100%;
+    margin: 30px 0 0 0px;
+    padding: 20px 0 40px 0;
+    // border-radius: 10px;
+    // box-shadow: -1px -1px 1px #ccc, 1px 1px 1px #ccc;
+}
+.personal-avt-full {
+    display: flex;
+}
+.personal-avt {
+    width: 70px;
+    height: 70px;
+    margin-left: 50px;
+    /* margin-right: 20px; */
+}
+.personal-avt img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.personal-information {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #cccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0 0 -20px;
+}
+.personal-information .iconify {
+    color: #df2f4c !important;
+    font-size: 15px;
+}
+.profile-personal-name {
+    width: 100%;
+    margin: 25px 0 0 0;
+}
+.personal-name-tilte {
+    margin-left: 50px;
+    margin-right: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+.personal-name-item {
+    margin-left: 50px;
+    margin-right: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.personal-name-item input,
+.personal-name-item .form-select {
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #cccc;
+    box-shadow: -1px -1px 1px #ccc, 1px 1px 1px #ccc;
+}
+
+.personal-name-item .form-select {
+    padding: 8px 12px;
+}
+.personal-name-tilte p,
+.personal-name-item input .personal-name-item .form-select {
+    width: 40%;
+    margin-bottom: 10px;
+}
+.profile-personal-button {
+    width: 300px;
+    /* margin: 0; */
+}
+.profile-personal-button button {
+    width: 100%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .left-service {
+        display: none;
+    }
+    .right_service {
+        width: 100%;
+        margin-left: 0;
+    }
+    .personal-name-tilte {
+        margin-right: 50px;
+    }
+    .my-profile-heading .iconify {
+        width: 30px;
+        height: 30px;
+    }
+    .my-profile-heading h1 {
+        font-size: 25px;
+        margin: 10px 0 0 10px;
+    }
+    .my-profile button {
+        padding: 5px 30px;
+        margin-top: 10px;
+    }
+    .personal-information {
+        font-size: 14px;
+    }
+    .personal-name-item input,
+    .personal-name-item .form-select,
+    .personal-name-item .profile-personal-button {
+        width: 40%;
+    }
+}
+@media only screen and (max-width: 740px) {
+    .personal-avt-full {
+        margin-bottom: 20px;
+    }
+    .personal-name-tilte {
+        margin: 0 10px;
+    }
+    .profile-personal-name,
+    .profile-personal-adress {
+        font-size: 14px;
+        display: flex;
+    }
+    .personal-name-tilte,
+    .personal-name-item,
+    .personal-adress-tilte,
+    .personal-adress-item {
+        display: block;
+        margin-left: 10px;
+    }
+    .personal-name-item {
+        width: 100%;
+    }
+    .personal-name-item input,
+    .personal-name-item .form-select,
+    .personal-name-item .profile-personal-button {
+        width: 90%;
+        margin-top: 10px;
+    }
+    .personal-name-tilte {
+        width: 60%;
+        margin-left: 30px;
+    }
+    .personal-name-tilte p,
+    .personal-name-item p,
+    .personal-adress-tilte p,
+    .personal-adress-item p {
+        width: 100%;
+        height: 40px;
+    }
+    .profile-personal-name {
+        margin: 0;
+    }
+}
