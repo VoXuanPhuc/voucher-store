@@ -1,0 +1,15 @@
+<ngb-carousel #carousel [interval]="1000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)">
+    <ng-template ngbSlide *ngFor="let voucherImage of voucherImages; index as i">
+        <a href="https://www.google.fr/?q=Number+{{ i + 1 }}" target="_blank" rel="nofollow noopener noreferrer">
+            <div class="picsum-img-wrapper">
+                <img [src]="voucherImage.name" alt="My image {{ i + 1 }} description" />
+            </div>
+        </a>
+    </ng-template>
+</ngb-carousel>
+<hr />
+<ol class="carousel-indicators" style="height: 72px">
+    <li *ngFor="let voucherImage of voucherImages; index as i" data-target="#carouselExampleIndicators" data-slide-to="0" class="active">
+        <img src="{{ voucherImage.name }}" class="d-block w-100" alt="..." />
+    </li>
+</ol>

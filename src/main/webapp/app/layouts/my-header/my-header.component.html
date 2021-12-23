@@ -1,75 +1,116 @@
 <div class="container-fluid header bg-white" id="site-header" [ngClass]="!isHeaderFix ? 'hide' : ''">
-  <div class="row">
-    <div class="col container_logo_header d-flex">
-      <img
-        class="img_logo_header my-3 d-none d-lg-block d-xl-block d-md-none"
-        src="../../../content/images/header/logo_header.png"
-        alt=""
-      />
-      <button (click)="toggleDisplayCategory()" id="btn-category" type="button" class="btn btn-outline-danger px-3 py-0 my-3">
-        <span class="iconify" data-icon="bi:list-ul" style="color: #e94560; font-size: 20px"></span>
-      </button>
-    </div>
-    <div class="col-6 col-sm-4 col-xl-6 col-lg-6 col-sm-6">
-      <div class="container_input input-group my-3">
-        <div class="input-group-prepend">
-          <span class="btn input-group-text bg-white" id="basic-addon1"
-            ><span class="iconify" data-icon="bx:bx-search-alt-2" style="color: #615757"></span
-          ></span>
+    <div class="row">
+        <div class="col container_logo_header d-flex">
+            <img
+                class="img_logo_header my-3 d-none d-lg-block d-xl-block d-md-none"
+                src="../../../content/images/header/logo_header.png"
+                alt=""
+            />
+            <button (click)="toggleDisplayCategory()" id="btn-category" type="button" class="btn btn-outline-danger px-3 py-0 my-3">
+                <span class="iconify" data-icon="bi:list-ul" style="color: #e94560; font-size: 20px"></span>
+            </button>
         </div>
-        <input type="text" class="form-control" placeholder="Search" aria-label="Username" aria-describedby="basic-addon1" />
-      </div>
-    </div>
-    <div class="col d-flex" ngbDropdown>
-      <button onclick="openNav()" id="btn-cart" type="button" class="btn btn-danger rounded-circle py-0 my-3 mx-5 d-none d-sm-block">
-        <span class="iconify" data-icon="eva:shopping-cart-fill" style="color: white; font-size: 20px"></span>
-      </button>
-      <button (click)="toggleDisplayLogin()" id="btn-user02" type="button" class="btn btn-danger rounded-circle py-0 my-3 ml-3">
-        <span class="iconify" data-icon="bx:bxs-user" style="color: white; font-size: 20px"></span>
-      </button>
-    </div>
-  </div>
-  <div class="row container_menu_header">
-    <div class="col"></div>
-    <div class="col-xl-7 col-lg-7 col-md-10 d-sm-none d-none d-md-block">
-      <ul class="d-flex">
-        <li class="mx-5"><a class="text-dark" [routerLink]="['/home']">Home</a></li>
-        <li class="mr-5"><a class="text-dark" [routerLink]="['/vouchers']">Voucher</a></li>
-        <li class="mr-5"><a class="text-dark" href="#">Store</a></li>
-        <li class="mr-5"><a class="text-dark" href="#">About us</a></li>
-      </ul>
-    </div>
-  </div>
+        <div class="col-6 col-sm-4 col-xl-6 col-lg-6 col-sm-6">
+            <div class="container_input input-group my-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    #searchName
+                />
+                <div class="input-group-prepend" (click)="onSearch(searchName.value); searchName.value = ''">
+                    <span class="btn input-group-text bg-white" id="basic-addon1"
+                        ><span class="iconify" data-icon="bx:bx-search-alt-2" style="color: #615757"></span
+                    ></span>
+                </div>
+            </div>
+        </div>
+        <div class="col d-flex" ngbDropdown>
+            <div id="btn-header-right">
+                <button class="btn-notification-cart">
+                    <span class="text-btn-notification-cart">{{ itemInCart }}</span>
+                </button>
 
-  <ul
-    [hidden]="!isDisplayCategory"
-    class="list-group border-0 w-100 border-0 col-lg-4 col-xl-4 col-md-6 col-sm-12 col-12"
-    id="listview-category"
-  >
-    <li class="list-group-item py-2">
-      <span class="iconify ml-2 mr-5" data-icon="akar-icons:shopping-bag" style="font-size: 25px"></span>Fashion
-    </li>
-    <li class="list-group-item py-2"><span class="iconify ml-2 mr-5" data-icon="dashicons:food" style="font-size: 25px"></span>Food</li>
-    <li class="list-group-item py-2"><span class="iconify ml-2 mr-5" data-icon="ion:fitness" style="font-size: 27px"></span>Fitness</li>
-    <li class="list-group-item py-2"><span class="iconify ml-2 mr-5" data-icon="fa-solid:gifts" style="font-size: 23px"></span>Gifts</li>
-    <li class="list-group-item py-2">
-      <span class="iconify ml-2 mr-5" data-icon="simple-icons:yourtraveldottv" style="font-size: 25px"></span>Travel
-    </li>
-    <li class="list-group-item py-2"><span class="iconify ml-2 mr-5" data-icon="clarity:car-solid" style="font-size: 25px"></span>Bike</li>
-    <li class="list-group-item py-2">
-      <span class="iconify ml-2 mr-5" data-icon="fa-solid:headphones" style="font-size: 25px"></span>Technological
-    </li>
-    <li class="list-group-item py-2">
-      <span class="iconify ml-2 mr-5" data-icon="bx:bxs-baby-carriage" style="font-size: 25px"></span>Baby
-    </li>
-  </ul>
+                <button [routerLink]="['/cart']" id="btn-cart" type="button" class="btn btn-danger btn_cart rounded-circle my-3 mx-4">
+                    <span class="iconify" data-icon="eva:shopping-cart-fill" style="color: white; font-size: 20px"></span>
+                </button>
+            </div>
+            <button (click)="toggleDisplayLogin()" id="btn-user02" type="button" class="btn btn-danger rounded-circle py-0 my-3 ml-3">
+                <span class="iconify" data-icon="bx:bxs-user" style="color: white; font-size: 20px"></span>
+            </button>
+        </div>
+    </div>
+    <div class="row container_menu_header">
+        <div class="col"></div>
+        <div class="col-xl-7 col-lg-7 col-md-10 d-sm-none d-none d-md-block">
+            <ul class="d-flex">
+                <li class="mx-5">
+                    <a style="color: #343a40" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [routerLink]="['/home']"
+                        >Home</a
+                    >
+                </li>
+                <li class="mr-5"><a style="color: #343a40" routerLinkActive="active" [routerLink]="['/vouchers']">Voucher</a></li>
+                <li class="mr-5"><a style="color: #343a40" routerLinkActive="active" [routerLink]="['/stores']">Store</a></li>
+                <li class="mr-5"><a style="color: #343a40" routerLinkActive="active" href="#">About us</a></li>
+            </ul>
+        </div>
+    </div>
 
-  <ul [hidden]="!isDisplayLogin" class="container list-group border-0 w-100 border-0 col-md-3 offset-md-8 text-center" id="listview-user">
-    <li class="list-group-item border-0">
-      <a [routerLink]="['/login']">Log In</a>
-    </li>
-    <li class="list-group-item border-0">
-      <a [routerLink]="['/register']">Register</a>
-    </li>
-  </ul>
+    <ul
+        [hidden]="!isDisplayCategory"
+        class="list-group border-0 w-100 border-0 col-lg-4 col-xl-4 col-md-6 col-sm-12 col-12"
+        id="listview-category"
+    >
+        <li class="list-group-item py-2">
+            <span class="iconify ml-2 mr-5" data-icon="akar-icons:shopping-bag" style="font-size: 25px"></span>Fashion
+        </li>
+        <li class="list-group-item py-2"><span class="iconify ml-2 mr-5" data-icon="dashicons:food" style="font-size: 25px"></span>Food</li>
+        <li class="list-group-item py-2"><span class="iconify ml-2 mr-5" data-icon="ion:fitness" style="font-size: 27px"></span>Fitness</li>
+        <li class="list-group-item py-2">
+            <span class="iconify ml-2 mr-5" data-icon="fa-solid:gifts" style="font-size: 23px"></span>Gifts
+        </li>
+        <li class="list-group-item py-2">
+            <span class="iconify ml-2 mr-5" data-icon="simple-icons:yourtraveldottv" style="font-size: 25px"></span>Travel
+        </li>
+        <li class="list-group-item py-2">
+            <span class="iconify ml-2 mr-5" data-icon="clarity:car-solid" style="font-size: 25px"></span>Bike
+        </li>
+        <li class="list-group-item py-2">
+            <span class="iconify ml-2 mr-5" data-icon="fa-solid:headphones" style="font-size: 25px"></span>Technological
+        </li>
+        <li class="list-group-item py-2">
+            <span class="iconify ml-2 mr-5" data-icon="bx:bxs-baby-carriage" style="font-size: 25px"></span>Baby
+        </li>
+    </ul>
+
+    <div
+        class="container col-md-2 col-lg-2 col-sm-3 col-sx-3 col-5"
+        id="listview-user-div"
+        *ngIf="isLogin(); then thenBlock; else elseBlock"
+    ></div>
+
+    <ng-template #thenBlock>
+        <ul [hidden]="!isDisplayLogin" class="list-group border-0 border-0 text-center" id="listview-user">
+            <li class="list-group-item" (click)="closeHeader()">
+                <a [routerLink]="['/user']" class="text-danger">Profile</a>
+            </li>
+            <li class="list-group-item" (click)="closeHeader()"><a href="./profileShop.html" class="text-danger">My Store</a></li>
+            <li class="list-group-item" (click)="closeHeader()">
+                <a (click)="logout()" class="text-danger">Log out</a>
+            </li>
+        </ul>
+    </ng-template>
+
+    <ng-template #elseBlock>
+        <ul [hidden]="!isDisplayLogin" class="list-group border-0 text-center" id="listview-user">
+            <li class="list-group-item border-0" (click)="closeHeader()">
+                <a [routerLink]="['/login']">Log In</a>
+            </li>
+            <li class="list-group-item border-0" (click)="closeHeader()">
+                <a [routerLink]="['/register']">Register</a>
+            </li>
+        </ul>
+    </ng-template>
 </div>

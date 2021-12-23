@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -28,4 +29,14 @@ public interface VoucherRepository extends JpaRepository<Voucher, Long> {
     Optional<Voucher> findOneWithEagerRelationships(@Param("id") Long id);
 
     List<Voucher> findByType(ServiceType type);
+
+    List<Voucher> findByType(ServiceType type, Pageable pageable);
+
+    List<Voucher> findByNameContaining(String name);
+
+    List<Voucher> findByNameContaining(String name, Pageable pageable);
+
+    List<Voucher> findByTypeAndNameContaining(ServiceType type, String name);
+
+    List<Voucher> findByTypeAndNameContaining(ServiceType type, String name, Pageable pageable);
 }

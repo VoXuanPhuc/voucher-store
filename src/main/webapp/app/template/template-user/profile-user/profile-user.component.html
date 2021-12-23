@@ -1,0 +1,50 @@
+<!-- right_service -->
+<div class="right_service">
+    <!-- Title and button -->
+    <div class="my-profile">
+        <div class="my-profile-heading d-flex">
+            <span class="iconify" data-icon="ant-design:user-outlined" data-width="60" data-height="60"></span>
+            <h1>My Profile</h1>
+        </div>
+        <button type="button" class="btn btn-outline-danger" [routerLink]="['/edit-profile']">Edit profile</button>
+    </div>
+
+    <!-- Item 1 -->
+    <div class="profile-personal">
+        <div class="personal-avt">
+            <img [src]="myUser?.avatar" alt="" />
+        </div>
+        <div class="personal-information">
+            <b class="personal-name"> {{ myUser?.firstName }} </b>
+            <p class="personal-adress" style="color: rgb(114, 112, 112)">{{ myUser?.address?.number }} - {{ myUser?.address?.street }}</p>
+            <p class="personal-email" style="color: rgb(114, 112, 112)">{{ myUser?.email }}</p>
+        </div>
+    </div>
+    <!-- Item 2 -->
+    <div class="profile-personal-name">
+        <div class="personal-name-tilte">
+            <p>First name</p>
+            <p>Last name</p>
+            <p>Date of birth</p>
+            <p>Phone number</p>
+        </div>
+        <div class="personal-name-item">
+            <p>{{ myUser?.firstName }}</p>
+            <p>{{ myUser?.lastName }}</p>
+            <p>{{ myUser?.dob | dateFormat }}</p>
+            <p>{{ myUser?.phone | slice: 0:4 }} {{ myUser?.phone | slice: 4:7 }} {{ myUser?.phone | slice: 7:10 }}</p>
+        </div>
+    </div>
+    <!-- Item 3  -->
+    <div class="profile-personal-adress">
+        <div class="personal-adress-tilte">
+            <p>Address</p>
+        </div>
+        <div class="personal-adress-item">
+            <p>
+                {{ myUser?.address?.number }} {{ myUser?.address?.street }}, {{ myUser?.address?.village?.name }} -
+                {{ myUser?.address?.village?.district?.name }} - {{ myUser?.address?.village?.district?.province?.name }}
+            </p>
+        </div>
+    </div>
+</div>

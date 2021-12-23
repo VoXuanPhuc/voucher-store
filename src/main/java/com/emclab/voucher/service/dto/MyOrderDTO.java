@@ -15,7 +15,6 @@ public class MyOrderDTO implements Serializable {
     @NotNull
     private Double totalCost;
 
-    @NotNull
     private Instant paymentTime;
 
     private MyUserDTO user;
@@ -87,11 +86,11 @@ public class MyOrderDTO implements Serializable {
     @Override
     public String toString() {
         return "MyOrderDTO{" +
-            "id=" + getId() +
-            ", totalCost=" + getTotalCost() +
-            ", paymentTime='" + getPaymentTime() + "'" +
-            ", user=" + getUser() +
-            ", status=" + getStatus() +
-            "}";
+                "id=" + getId() +
+                ", totalCost=" + getTotalCost() +
+                ", paymentTime='" + getPaymentTime() + "'" +
+                ", user=" + getUser() +
+                ", status=" + getStatus() +
+                "}";
     }
 }

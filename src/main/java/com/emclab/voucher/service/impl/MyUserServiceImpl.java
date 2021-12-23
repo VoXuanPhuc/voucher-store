@@ -7,14 +7,15 @@ import com.emclab.voucher.repository.RoleRepository;
 import com.emclab.voucher.service.MyUserService;
 import com.emclab.voucher.service.dto.MyUserDTO;
 import com.emclab.voucher.service.mapper.MyUserMapper;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import liquibase.pro.packaged.iF;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,39 +44,10 @@ public class MyUserServiceImpl implements MyUserService {
         this.myUserMapper = myUserMapper;
     }
 
-    //    @Override
-    //    public MyUser save(MyUser myUser) {
-    //        MyUser newuser = new MyUser();
-    //        //    	HashSet<Role> roles = new HashSet<Role> ();
-    //
-    //        Role role = new Role();
-    //        role.setId((long) 2);
-    //        role.setName("ROLE_USER");
-    //        role.setCode("user");
-    //        //    	Role role1 = new Role();
-    //        //    	role.setId((long)2);
-    //        //    	role.setName("ROLE_ADMIN");
-    //        //    	role.setCode("admin");
-    //
-    //        //    	roles.add(role);
-    //        //    	roles.add(role1);
-    //        log.debug("Request to save MyUser : {}", myUser);
-    //
-    //        newuser.setUsername(myUser.getUsername());
-    //        newuser.setEmail(myUser.getEmail());
-    //        newuser.setPassword(myUser.getPassword());
-    //        newuser.setPhone(myUser.getPhone());
-    //        newuser.setFirstName("");
-    //        newuser.setLastName("");
-    //        newuser.setGender("");
-    //
-    //        //    	newuser.getRoles().add(role);
-    //
-    //        //    	role.getUsers().add(newuser);
-    //
-    //        MyUser user = myUserRepository.save(newuser);
-    //        return (user);
-    //    }
+    @Override
+    public MyUserDTO findByUserName(String userName) {
+        return myUserMapper.toDto(myUserRepository.findByUsername(userName).get());
+    }
 
     @Override
     public MyUserDTO save(MyUserDTO myUserDTO) {
@@ -86,6 +58,13 @@ public class MyUserServiceImpl implements MyUserService {
 
         log.debug("Request to save MyUser : {}", myUserDTO);
         MyUser myUser = myUserMapper.toEntity(myUserDTO);
+
+        if (myUser.getId() != null) {
+            myUser = myUserRepository.save(myUser);
+
+            return myUserMapper.toDto(myUser);
+        }
+
         myUser.setPassword(passwordEncoder.encode(myUser.getPassword()));
 
         myUser.getRoles().add(role);
@@ -130,5 +109,11 @@ public class MyUserServiceImpl implements MyUserService {
     public void delete(Long id) {
         log.debug("Request to delete MyUser : {}", id);
         myUserRepository.deleteById(id);
+    }
+
+    @Override
+    public MyUserDTO getcurrentUser(Authentication authentication) {
+        String userName = authentication.getName();
+        return this.findByUserName(userName);
     }
 }

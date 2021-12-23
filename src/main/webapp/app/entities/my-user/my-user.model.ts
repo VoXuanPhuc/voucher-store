@@ -7,45 +7,45 @@ import { IRole } from 'app/entities/role/role.model';
 import * as dayjs from 'dayjs';
 
 export interface IMyUser {
-  id?: number;
-  username?: string;
-  password?: string;
-  firstName?: string;
-  lastName?: string;
-  gender?: string;
-  phone?: string;
-  email?: string;
-  avatar?: string;
-  dob?: dayjs.Dayjs;
-  address?: IAddress | null;
-  storeUsers?: IStoreUser[] | null;
-  myOrders?: IMyOrder[] | null;
-  feedbacks?: IFeedback[] | null;
-  gifts?: IGift[] | null;
-  roles?: IRole[] | null;
+    id?: number;
+    username?: string | null;
+    password?: string | null;
+    firstName?: string;
+    lastName?: string;
+    gender?: string;
+    phone?: string;
+    email?: string;
+    avatar?: string | null;
+    dob?: dayjs.Dayjs;
+    address?: IAddress | null;
+    storeUsers?: IStoreUser[] | null;
+    myOrders?: IMyOrder[] | null;
+    feedbacks?: IFeedback[] | null;
+    gifts?: IGift[] | null;
+    roles?: IRole[] | null;
 }
 
 export class MyUser implements IMyUser {
-  constructor(
-    public id?: number,
-    public username?: string,
-    public password?: string,
-    public firstName?: string,
-    public lastName?: string,
-    public gender?: string,
-    public phone?: string,
-    public email?: string,
-    public avatar?: string,
-    public dob?: dayjs.Dayjs,
-    public address?: IAddress | null,
-    public storeUsers?: IStoreUser[] | null,
-    public myOrders?: IMyOrder[] | null,
-    public feedbacks?: IFeedback[] | null,
-    public gifts?: IGift[] | null,
-    public roles?: IRole[] | null
-  ) {}
+    constructor(
+        public id?: number,
+        public username?: string | null,
+        public password?: string | null,
+        public firstName?: string,
+        public lastName?: string,
+        public gender?: string,
+        public phone?: string,
+        public email?: string,
+        public avatar?: string | null,
+        public dob?: dayjs.Dayjs,
+        public address?: IAddress | null,
+        public storeUsers?: IStoreUser[] | null,
+        public myOrders?: IMyOrder[] | null,
+        public feedbacks?: IFeedback[] | null,
+        public gifts?: IGift[] | null,
+        public roles?: IRole[] | null
+    ) {}
 }
 
 export function getMyUserIdentifier(myUser: IMyUser): number | undefined {
-  return myUser.id;
+    return myUser.id;
 }
